@@ -4,51 +4,9 @@
 package com.microsoft.unifiedvos;
 
 
-import org.joda.time.DateTime;
-
-import java.util.UUID;
-
-import javax.xml.transform.stream.StreamSource;
-
-public class User extends BaseDirectoryObjectVO{
-    public Boolean accountEnabled;
-    public String city;
-    public String country;
-    public DateTime deletionTimeStamp;
-    public String department;
-    public Boolean dirSyncEnabled;
-    public String displayName;
-    public String facsimileTelephoneNumber;
-    public String givenName;
-    public String immutableId;
-    public String jobTitle;
-    public DateTime lastDirSyncTime;
-    public String mail;
-    public String mailNickName;
-    public String mobile;
-    public UUID objectId;
-    public String objectType;
-    public String onPremisesSecurityIdentifier;
-    public String[] otherMails;
-    public String passwordPolicies;
-    public PasswordProfile passwordProfile;
-    public String physicalDeliveryOfficeName;
-    public String postalCode;
-    public String preferredLanguage;
-    public String[] proxyAddresses;
-    public String sipProxyAddress;
-    public String state;
-    public String streetAddress;
-    public String surname;
-    public String telephoneNumber;
-    public StreamSource thumbnailPhoto;
-    public String usageLocation;
-    public String userPrincipalName;
-    public String userType;
-
-
-
-
+public class PasswordProfile {
+    public String password;
+    public Boolean forceChangePasswordNextLogin;
 }
 // *********************************************************
 //

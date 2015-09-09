@@ -3,10 +3,23 @@
 */
 package com.microsoft.unifiedvos;
 
+import org.joda.time.DateTime;
+
 /**
  * Created by johnaustin on 9/8/15.
  */
-public class BaseDirectoryObjectVO extends BaseVO{
+public abstract class BaseDirectoryObjectVO {
+    public DateTime deletionTimeStamp;
+    public String objectId;
+    public String objectType;
+    public BaseDirectoryObjectVO[] createdObjects;
+    public BaseDirectoryObjectVO createdOnBehalfof;
+    public BaseDirectoryObjectVO manager;
+    public BaseDirectoryObjectVO[] directReports;
+    public BaseDirectoryObjectVO[] members;
+    public BaseDirectoryObjectVO[] memberOf;
+    public BaseDirectoryObjectVO[] ownedObjects;
+    public BaseDirectoryObjectVO[] owners;
 }
 // *********************************************************
 //
