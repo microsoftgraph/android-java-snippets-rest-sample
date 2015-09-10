@@ -4,18 +4,15 @@
 package com.microsoft.unifiedapi.service;
 
 import com.microsoft.unifiedvos.Envelope;
-import com.microsoft.unifiedvos.Event;
+import com.microsoft.unifiedvos.EventVO;
 
 import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.DELETE;
 import retrofit.http.GET;
-import retrofit.http.Header;
 import retrofit.http.PATCH;
 import retrofit.http.POST;
-import retrofit.http.PUT;
 import retrofit.http.Path;
-import retrofit.http.Query;
 import retrofit.mime.TypedString;
 
 public interface UnifiedEventsService {
@@ -28,7 +25,7 @@ public interface UnifiedEventsService {
     @GET("/{version}/me/events")
     void getEvents(
             @Path("version") String version,
-            Callback<Envelope<Event>> callback
+            Callback<Envelope<EventVO>> callback
     );
 
     /**
@@ -41,7 +38,7 @@ public interface UnifiedEventsService {
     void postAcceptEvent(
             @Path("version") String version,
             @Path("eventid") String eventId,
-            Callback<Envelope<Event>> callback
+            Callback<Envelope<EventVO>> callback
     );
 
 
@@ -55,7 +52,7 @@ public interface UnifiedEventsService {
     void postTentativeAccept(
             @Path("version") String version,
             @Path("eventid") String eventId,
-            Callback<Envelope<Event>> callback
+            Callback<Envelope<EventVO>> callback
     );
 
 
@@ -69,7 +66,7 @@ public interface UnifiedEventsService {
     void postDeclineEvent(
             @Path("version") String version,
             @Path("eventid") String eventId,
-            Callback<Envelope<Event>> callback
+            Callback<Envelope<EventVO>> callback
     );
 
 
@@ -83,7 +80,7 @@ public interface UnifiedEventsService {
     void postNewEvent(
             @Path("version") String version,
             @Body TypedString body,
-            Callback<Envelope<Event>> callback
+            Callback<Envelope<EventVO>> callback
     );
 
 
@@ -99,7 +96,7 @@ public interface UnifiedEventsService {
             @Path("version") String version,
             @Path("eventid") String eventId,
             @Body TypedString body,
-            Callback<Envelope<Event>> callback
+            Callback<Envelope<EventVO>> callback
 
     );
 
@@ -113,7 +110,7 @@ public interface UnifiedEventsService {
     void deleteEvent(
             @Path("version") String version,
             @Path("eventid") String eventId,
-            Callback<Envelope<Event>> callback
+            Callback<Envelope<EventVO>> callback
     );
 
 }

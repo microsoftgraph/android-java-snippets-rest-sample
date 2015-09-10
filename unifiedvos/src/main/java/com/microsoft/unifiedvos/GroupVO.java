@@ -3,10 +3,8 @@
 */
 package com.microsoft.unifiedvos;
 
-/**
- * Created by johnaustin on 9/8/15.
- */
-public class ItemAttachment extends Attachment{
+
+public class GroupVO extends BaseDirectoryObjectVO {
 }
 // *********************************************************
 //

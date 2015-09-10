@@ -1,11 +1,12 @@
 /*
 *  Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
 */
-package com.microsoft.unifiedvos;
+package com.microsoft.unifiedapi.service;
 
-
-public class Event extends BaseOutlookVO{
-
+/**
+ * Created by johnaustin on 9/9/15.
+ */
+public class UserDeSerializer {
 }
 // *********************************************************
 //

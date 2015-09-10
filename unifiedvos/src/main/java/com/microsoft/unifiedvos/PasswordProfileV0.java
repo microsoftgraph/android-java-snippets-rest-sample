@@ -4,7 +4,9 @@
 package com.microsoft.unifiedvos;
 
 
-public class EventMessage extends  Message {
+public class PasswordProfileV0 {
+    public String password;
+    public Boolean forceChangePasswordNextLogin;
 }
 // *********************************************************
 //

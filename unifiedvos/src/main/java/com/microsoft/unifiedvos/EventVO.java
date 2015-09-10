@@ -4,9 +4,8 @@
 package com.microsoft.unifiedvos;
 
 
-public class PasswordProfile {
-    public String password;
-    public Boolean forceChangePasswordNextLogin;
+public class EventVO extends BaseOutlookVO{
+
 }
 // *********************************************************
 //

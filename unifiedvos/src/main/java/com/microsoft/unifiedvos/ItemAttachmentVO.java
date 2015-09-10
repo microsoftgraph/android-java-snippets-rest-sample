@@ -3,8 +3,10 @@
 */
 package com.microsoft.unifiedvos;
 
-
-public class Contact extends BaseDirectoryObjectVO {
+/**
+ * Created by johnaustin on 9/8/15.
+ */
+public class ItemAttachmentVO extends AttachmentVO {
 }
 // *********************************************************
 //

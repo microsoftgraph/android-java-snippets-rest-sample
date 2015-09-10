@@ -6,13 +6,11 @@ package com.microsoft.unifiedapi.service;
 import com.microsoft.unifiedvos.BaseDirectoryObjectVO;
 import com.microsoft.unifiedvos.Envelope;
 import com.microsoft.unifiedvos.Photo;
-import com.microsoft.unifiedvos.User;
-import com.squareup.okhttp.Call;
+import com.microsoft.unifiedvos.UserVO;
 
 import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.GET;
-import retrofit.http.Header;
 import retrofit.http.POST;
 import retrofit.http.Path;
 import retrofit.http.Query;
@@ -22,7 +20,7 @@ public interface UnifiedUserService {
     @GET("/{version}/me")
     void getMe(
             @Path("version") String version,
-            Callback<Envelope<User>> callback
+            Callback<Envelope<UserVO>> callback
     );
 
     @GET("/{version}/me/userPhoto")
@@ -34,19 +32,19 @@ public interface UnifiedUserService {
     @GET("/{version}/me/manager")
     void getMeManager(
             @Path("version") String version,
-            Callback<Envelope<User>> callback
+            Callback<Envelope<UserVO>> callback
     );
 
     @GET("/{version}/me/directReports")
     void getDirectReports(
             @Path("version") String version,
-            Callback<Envelope<User>> callback
+            Callback<Envelope<UserVO>> callback
     );
 
     @GET("/{version}/me/workingWith")
     void getWorkingWith(
             @Path("version") String version,
-            Callback<Envelope<User>> callback
+            Callback<Envelope<UserVO>> callback
     );
 
     @GET("/{version}/me/memberOf")
@@ -59,14 +57,14 @@ public interface UnifiedUserService {
     void getUsers(
             @Path("version") String version,
             @Query("$filter") String filter,
-            Callback<Envelope<User>> callback
+            Callback<Envelope<UserVO>> callback
     );
 
     @POST("/{version}/myOrganization/users")
     void postNewUser(
             @Path("version") String version,
             @Body TypedString body,
-            Callback<Envelope<User>> callback
+            Callback<Envelope<UserVO>> callback
     );
 }
 // *********************************************************

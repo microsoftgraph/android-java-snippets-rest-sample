@@ -4,7 +4,7 @@
 package com.microsoft.unifiedvos;
 
 
-public class Attachment extends BaseVO {
+public class EventMessageVO extends MessageVO {
 }
 // *********************************************************
 //

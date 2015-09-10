@@ -4,23 +4,18 @@
 package com.microsoft.unifiedapi.service;
 
 import com.microsoft.unifiedvos.Envelope;
-import com.microsoft.unifiedvos.Group;
+import com.microsoft.unifiedvos.GroupVO;
 
 import retrofit.Callback;
-import retrofit.http.Body;
 import retrofit.http.GET;
-import retrofit.http.Header;
-import retrofit.http.POST;
 import retrofit.http.Path;
-import retrofit.http.Query;
-import retrofit.mime.TypedString;
 
 public interface UnifiedGroupsService {
 
     @GET("/{version}/myOrganization/Groups")
     void getGroups(
             @Path("version") String version,
-            Callback<Envelope<Group>> callback
+            Callback<Envelope<GroupVO>> callback
     );
 
 
