@@ -3,8 +3,15 @@
 */
 package com.microsoft.unifiedvos;
 
+import com.google.gson.annotations.SerializedName;
 
-public class BaseOutlookVO extends BaseVO{
+public class AttendeeVO {
+    @SerializedName("EmailAddress")
+    public EmailAddressVO emailAddress;
+    @SerializedName("Status")
+    public String status;
+    @SerializedName("Type")
+    public int type;
 }
 // *********************************************************
 //

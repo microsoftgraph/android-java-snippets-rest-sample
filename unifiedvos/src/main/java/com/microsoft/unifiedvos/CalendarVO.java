@@ -5,12 +5,19 @@ package com.microsoft.unifiedvos;
 
 import com.google.gson.annotations.SerializedName;
 
-public class EventMessageVO extends MessageVO {
-    @SerializedName("Event")
-    public EventVO event;
-    @SerializedName("MeetingMessageType")
-    public int meetingMessageType;
-
+public class CalendarVO {
+    @SerializedName("Name")
+    public String name;
+    @SerializedName("ChangeKey")
+    public String changeKey;
+    @SerializedName("Color")
+    public int color;
+    @SerializedName("Id")
+    public String id;
+    @SerializedName("CalendarView")
+    public EventVO[] calendarView;
+    @SerializedName("Events")
+    public EventVO[] events;
 }
 // *********************************************************
 //

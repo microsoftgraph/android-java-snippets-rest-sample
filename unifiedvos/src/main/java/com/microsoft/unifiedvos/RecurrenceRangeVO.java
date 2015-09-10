@@ -5,9 +5,19 @@ package com.microsoft.unifiedvos;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Recipient {
-    @SerializedName("EmailAddress")
-    public EmailAddressVO emailAddress;
+import org.joda.time.DateTime;
+
+import java.util.Date;
+
+public class RecurrenceRangeVO {
+    @SerializedName("Type")
+    public int type;
+    @SerializedName("StartDate")
+    public DateTime startDate;
+    @SerializedName("EndDate")
+    public DateTime endDate;
+    @SerializedName("NumberOfOccurences")
+    public int numberOfOccurences;
 }
 // *********************************************************
 //

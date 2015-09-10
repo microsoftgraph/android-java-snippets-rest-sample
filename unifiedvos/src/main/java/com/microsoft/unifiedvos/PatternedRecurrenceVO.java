@@ -5,12 +5,11 @@ package com.microsoft.unifiedvos;
 
 import com.google.gson.annotations.SerializedName;
 
-public class EventMessageVO extends MessageVO {
-    @SerializedName("Event")
-    public EventVO event;
-    @SerializedName("MeetingMessageType")
-    public int meetingMessageType;
-
+public class PatternedRecurrenceVO {
+    @SerializedName("Pattern")
+    public RecurrencePatternVO pattern;
+    @SerializedName("Range")
+    public RecurrenceRangeVO range;
 }
 // *********************************************************
 //

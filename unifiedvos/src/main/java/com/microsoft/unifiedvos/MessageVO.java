@@ -7,33 +7,25 @@ import com.google.gson.annotations.SerializedName;
 
 import org.joda.time.DateTime;
 
-public class MessageVO {
+public class MessageVO extends OutlookItemVO{
     @SerializedName("Attachments")
     public BaseAttachmentVO[] attachments;
     @SerializedName("BccRecipients")
-    public Recipient[] bccRecipients;
+    public RecipientVO[] bccRecipients;
     @SerializedName("Body")
     public ItemBodyVO body;
     @SerializedName("BodyPreview")
     public String bodyPreview;
-    @SerializedName("Categories")
-    public String[] categories;
     @SerializedName("CcRecipients")
-    public Recipient[] ccRecipients;
-    @SerializedName("ChangeKey")
-    public String changeKey;
+    public RecipientVO[] ccRecipients;
     @SerializedName("ConversationId")
     public String conversationId;
-    @SerializedName("DateTimeCreated")
-    public DateTime dateTimeCreated;
-    @SerializedName("DateTimeLastModified")
-    public DateTime dateTimeLastModified;
     @SerializedName("DateTimeReceived")
     public DateTime dateTimeReceived;
     @SerializedName("DateTimeSent")
     public DateTime dateTimeSent;
     @SerializedName("From")
-    public Recipient from;
+    public RecipientVO from;
     @SerializedName("HasAttachments")
     public Boolean hasAttachments;
     @SerializedName("Importance")
@@ -51,15 +43,15 @@ public class MessageVO {
     @SerializedName("ParentFolderId")
     public String parentFolderId;
     @SerializedName("ReplyTo")
-    public Recipient[] replyTo;
+    public RecipientVO[] replyTo;
     @SerializedName("Sender")
-    public Recipient sender;
+    public RecipientVO sender;
     @SerializedName("SingleValueExtendedProperties")
     public Object[] singleValueExtendedProperties;
     @SerializedName("Subject")
     public String subject;
     @SerializedName("ToRecipients")
-    public Recipient[] toRecipients;
+    public RecipientVO[] toRecipients;
     @SerializedName("UniqueBody")
     public ItemBodyVO uniqueBody;
     @SerializedName("WebLink")

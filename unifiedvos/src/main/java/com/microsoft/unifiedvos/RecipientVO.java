@@ -5,12 +5,9 @@ package com.microsoft.unifiedvos;
 
 import com.google.gson.annotations.SerializedName;
 
-public class EventMessageVO extends MessageVO {
-    @SerializedName("Event")
-    public EventVO event;
-    @SerializedName("MeetingMessageType")
-    public int meetingMessageType;
-
+public class RecipientVO {
+    @SerializedName("EmailAddress")
+    public EmailAddressVO emailAddress;
 }
 // *********************************************************
 //

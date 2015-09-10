@@ -5,12 +5,21 @@ package com.microsoft.unifiedvos;
 
 import com.google.gson.annotations.SerializedName;
 
-public class EventMessageVO extends MessageVO {
-    @SerializedName("Event")
-    public EventVO event;
-    @SerializedName("MeetingMessageType")
-    public int meetingMessageType;
-
+public class RecurrencePatternVO {
+    @SerializedName("Type")
+    public int type;
+    @SerializedName("Interval")
+    public int interval;
+    @SerializedName("DayOfMonth")
+    public int dayOfMonth;
+    @SerializedName("Month")
+    public int month;
+    @SerializedName("DaysOfWeek")
+    public int[] daysOfWeek;
+    @SerializedName("FirstDayOfWeek")
+    public int firstDayOfWeek;
+    @SerializedName("Index")
+    public int index;
 }
 // *********************************************************
 //
