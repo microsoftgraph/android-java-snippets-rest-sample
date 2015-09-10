@@ -21,4 +21,7 @@ android {
 dependencies {
     //Joda-Time for calendar time
     compile 'joda-time:joda-time:2.7'
+
+    //Retrofit
+    compile 'com.squareup.retrofit:retrofit:1.9.0'
 }
