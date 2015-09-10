@@ -4,13 +4,11 @@
 package com.microsoft.unifiedvos;
 
 import com.google.gson.annotations.SerializedName;
-
-public class ItemAttachmentVO extends BaseAttachmentVO {
-
-    //Can be type Message or type Event
-    @SerializedName("Item")
-    public OutlookItemVO item;
-
+public class ItemBodyVO {
+    @SerializedName("ContentType")
+    public String contentType;
+    @SerializedName("Content")
+    public String content;
 }
 // *********************************************************
 //

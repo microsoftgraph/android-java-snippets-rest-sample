@@ -4,7 +4,23 @@
 package com.microsoft.unifiedvos;
 
 
-public class BaseMessageVO extends BaseVO{
+import org.joda.time.DateTime;
+import com.google.gson.annotations.SerializedName;
+
+public class BaseAttachmentVO {
+
+    @SerializedName("ContentType")
+    public String contentType;
+    @SerializedName("DateTimeLastModified")
+    public DateTime dateTimeLastModified;
+    @SerializedName("Id")
+    public String id;
+    @SerializedName("IsInline")
+    public Boolean isInline;
+    @SerializedName("Name")
+    public String name;
+    @SerializedName("Size")
+    public int size;
 }
 // *********************************************************
 //

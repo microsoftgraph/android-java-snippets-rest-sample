@@ -3,14 +3,19 @@
 */
 package com.microsoft.unifiedvos;
 
+import android.util.Base64;
+
 import com.google.gson.annotations.SerializedName;
 
-public class ItemAttachmentVO extends BaseAttachmentVO {
-
-    //Can be type Message or type Event
-    @SerializedName("Item")
-    public OutlookItemVO item;
-
+public class FileAttachmentVO extends BaseAttachmentVO{
+    @SerializedName("ContentBytes")
+    public Base64 contentBytes;
+    @SerializedName("ContentId")
+    public String contentId;
+    @SerializedName("ContentLocation")
+    public String contentLocation;
+    @SerializedName("IsContactPhoto")
+    public Boolean isContactPhoto;
 }
 // *********************************************************
 //

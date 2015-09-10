@@ -3,8 +3,68 @@
 */
 package com.microsoft.unifiedvos;
 
+import com.google.gson.annotations.SerializedName;
 
-public class MessageVO extends BaseOutlookVO {
+import org.joda.time.DateTime;
+
+public class MessageVO {
+    @SerializedName("Attachments")
+    public BaseAttachmentVO[] attachments;
+    @SerializedName("BccRecipients")
+    public Recipient[] bccRecipients;
+    @SerializedName("Body")
+    public ItemBodyVO body;
+    @SerializedName("BodyPreview")
+    public String bodyPreview;
+    @SerializedName("Categories")
+    public String[] categories;
+    @SerializedName("CcRecipients")
+    public Recipient[] ccRecipients;
+    @SerializedName("ChangeKey")
+    public String changeKey;
+    @SerializedName("ConversationId")
+    public String conversationId;
+    @SerializedName("DateTimeCreated")
+    public DateTime dateTimeCreated;
+    @SerializedName("DateTimeLastModified")
+    public DateTime dateTimeLastModified;
+    @SerializedName("DateTimeReceived")
+    public DateTime dateTimeReceived;
+    @SerializedName("DateTimeSent")
+    public DateTime dateTimeSent;
+    @SerializedName("From")
+    public Recipient from;
+    @SerializedName("HasAttachments")
+    public Boolean hasAttachments;
+    @SerializedName("Importance")
+    public String importance;
+    @SerializedName("IsDeliveryReceiptRequested")
+    public Boolean isDeliveryReceiptRequested;
+    @SerializedName("IsDraft")
+    public Boolean isDraft;
+    @SerializedName("IsRead")
+    public Boolean isRead;
+    @SerializedName("IsReadReceiptRequested")
+    public Boolean isReadReceiptRequested;
+    @SerializedName("MultiValueExtendedProperties")
+    public Object[] multiValueExtendedProperties;
+    @SerializedName("ParentFolderId")
+    public String parentFolderId;
+    @SerializedName("ReplyTo")
+    public Recipient[] replyTo;
+    @SerializedName("Sender")
+    public Recipient sender;
+    @SerializedName("SingleValueExtendedProperties")
+    public Object[] singleValueExtendedProperties;
+    @SerializedName("Subject")
+    public String subject;
+    @SerializedName("ToRecipients")
+    public Recipient[] toRecipients;
+    @SerializedName("UniqueBody")
+    public ItemBodyVO uniqueBody;
+    @SerializedName("WebLink")
+    public String webLink;
+
 }
 // *********************************************************
 //

@@ -3,8 +3,21 @@
 */
 package com.microsoft.unifiedvos;
 
+import com.google.gson.annotations.SerializedName;
 
-public class AttachmentVO extends BaseVO {
+import org.joda.time.DateTime;
+
+public class OutlookItemVO {
+    @SerializedName("Categories")
+    public String[] categories;
+    @SerializedName("ChangeKey")
+    public String changeKey;
+    @SerializedName("DateTimeCreated")
+    public DateTime dateTimeCreated;
+    @SerializedName("DateTimeLastModified")
+    public DateTime dateTimeLastModified;
+    @SerializedName("Id")
+    public String id;
 }
 // *********************************************************
 //
