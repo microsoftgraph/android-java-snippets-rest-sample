@@ -22,6 +22,9 @@ public class BaseActivity extends AzureAppCompatActivity {
 //
 // O365-Android-Unified-API-Snippets, https://github.com/OfficeDev/O365-Android-Unified-API-Snippets
 //
+// Android-REST-API-Explorer, https://github.com/OneNoteDev/Android-REST-API-Explorer
+>>>>>>> 4c42c8840619450c75c3a6ae57c1f82c75905282
+//
 // Copyright (c) Microsoft Corporation
 // All rights reserved.
 //

@@ -1,26 +1,34 @@
 /*
 *  Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
 */
-package com.microsoft.o365_android_unified_api_snippets.inject;
+package com.microsoft.o365_android_unified_api_snippets.util;
 
-import com.microsoft.o365_auth.AzureADModule;
-import com.microsoft.o365_android_unified_api_snippets.SignInActivity;
-import com.microsoft.o365_android_unified_api_snippets.SnippetListActivity;
+import android.content.Context;
+import android.content.SharedPreferences;
 
-import dagger.Module;
+import com.microsoft.aad.adal.AuthenticationResult;
+import com.microsoft.o365_android_unified_api_snippets.application.SnippetApp;
+import com.microsoft.o365_android_unified_api_snippets.inject.AppModule;
 
-@Module(includes = AzureADModule.class,
-        complete = false,
-        injects = {
-                SignInActivity.class,
-                SnippetListActivity.class,
-        }
-)
-public class AzureModule {
+public class SharedPrefsUtil {
+
+    public static final String PREF_AUTH_TOKEN = "PREF_AUTH_TOKEN";
+
+    public static SharedPreferences getSharedPreferences() {
+        return SnippetApp.getApp().getSharedPreferences(AppModule.PREFS, Context.MODE_PRIVATE);
+    }
+
+    public static void persistAuthToken(AuthenticationResult result) {
+        setAccessToken(result.getAccessToken());
+    }
+
+    private static void setAccessToken(String accessToken) {
+        getSharedPreferences().edit().putString(PREF_AUTH_TOKEN, accessToken).commit();
+    }
 }
 // *********************************************************
 //
-// O365-Android-Unified-API-Snippets, https://github.com/OfficeDev/O365-Android-Unified-API-Snippets
+// Android-REST-API-Explorer, https://github.com/OneNoteDev/Android-REST-API-Explorer
 //
 // Copyright (c) Microsoft Corporation
 // All rights reserved.

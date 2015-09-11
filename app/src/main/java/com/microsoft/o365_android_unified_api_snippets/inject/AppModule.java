@@ -1,11 +1,15 @@
 /*
 *  Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
 */
+
 package com.microsoft.o365_android_unified_api_snippets.inject;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.microsoft.o365_android_unified_api_snippets.ServiceConstants;
+import com.microsoft.o365_android_unified_api_snippets.application.SnippetApp;
+import com.microsoft.o365_android_unified_api_snippets.util.SharedPrefsUtil;
 import com.microsoft.o365_android_unified_api_snippets.application.SnippetApp;
 import com.microsoft.unifiedapi.service.GsonDateTime;
 
@@ -23,6 +27,18 @@ public class AppModule {
     @Provides
     public String providesRestEndpoint() {
         return "https://www.onenote.com/api";
+@Module(library = true,
+        injects = {
+                SnippetApp.class
+        }
+)
+public class AppModule {
+
+    public static final String PREFS = "com.microsoft.o365_android_unified_API_REST_snippets";
+
+    @Provides
+    public String providesRestEndpoint() {
+        return ServiceConstants.AUTHENTICATION_RESOURCE_ID;
     }
 
     @Provides
@@ -46,6 +62,7 @@ public class AppModule {
                         = SnippetApp.getApp().getSharedPreferences(PREFS, Context.MODE_PRIVATE);
                 final String token =
                         preferences.getString(SignInActivity.PREF_AUTH_TOKEN, null);
+                        preferences.getString(SharedPrefsUtil.PREF_AUTH_TOKEN, null);
                 if (null != token) {
                     request.addHeader("Authorization", "Bearer " + token);
                 }

@@ -1,6 +1,7 @@
 /*
 *  Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
 */
+
 package com.microsoft.o365_android_unified_api_snippets.application;
 
 import android.app.Application;
@@ -16,7 +17,7 @@ import retrofit.RestAdapter;
 import retrofit.converter.Converter;
 import timber.log.Timber;
 
-public class SnippetApp extends Application{
+public class SnippetApp extends Application {
     /**
      * The {@link dagger.ObjectGraph} used by Dagger to fulfill <code>@inject</code> annotations
      *
@@ -39,6 +40,7 @@ public class SnippetApp extends Application{
 
     @Inject
     protected RequestInterceptor requestInterceptor;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -62,8 +64,6 @@ public class SnippetApp extends Application{
                 .setRequestInterceptor(requestInterceptor)
                 .build();
     }
-
-
 }
 // *********************************************************
 //

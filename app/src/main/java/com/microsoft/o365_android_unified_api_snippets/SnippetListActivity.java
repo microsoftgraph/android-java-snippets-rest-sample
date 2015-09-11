@@ -1,7 +1,7 @@
 package com.microsoft.o365_android_unified_api_snippets;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
