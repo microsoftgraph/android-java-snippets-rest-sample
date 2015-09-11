@@ -7,6 +7,7 @@ package com.microsoft.o365_android_unified_api_snippets.inject;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.microsoft.o365_android_unified_api_snippets.ServiceConstants;
 import com.microsoft.o365_android_unified_api_snippets.application.SnippetApp;
 import com.microsoft.o365_android_unified_api_snippets.util.SharedPrefsUtil;
 
@@ -23,6 +24,11 @@ import retrofit.RestAdapter;
 public class AppModule {
 
     public static final String PREFS = "com.microsoft.o365_android_unified_API_REST_snippets";
+
+    @Provides
+    public String providesRestEndpoint() {
+        return ServiceConstants.AUTHENTICATION_RESOURCE_ID;
+    }
 
     @Provides
     public RestAdapter.LogLevel providesLogLevel() {

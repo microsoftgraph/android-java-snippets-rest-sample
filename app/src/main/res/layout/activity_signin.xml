@@ -12,12 +12,6 @@
         style="@style/detail_section"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/microsoft_acct" />
-
-    <TextView
-        style="@style/detail_section"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/org_acct" />
 
