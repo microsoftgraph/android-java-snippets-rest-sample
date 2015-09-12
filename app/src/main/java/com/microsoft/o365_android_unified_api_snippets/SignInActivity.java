@@ -25,7 +25,11 @@ public class SignInActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
-            mAuthenticationManager.connect(this);
+
+        //I don't think it is a good idea for us to try to connect
+        //the user on create. Better to wait until user clicks the connect button
+       //     mAuthenticationManager.connect(this);
+
         ButterKnife.inject(this);
     }
 
@@ -70,17 +74,22 @@ public class SignInActivity
     @Override
     public void onError(Exception e) {
         e.printStackTrace();
+
+        //Show the localized message supplied with the exception or
+        //or a default message from the string resources if a
+        //localized message cannot be obtained
         String msg;
         if (null == (msg = e.getLocalizedMessage())) {
             msg = getString(R.string.signin_err);
         }
+
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
 }
 // *********************************************************
 //
-// Android-REST-API-Explorer, https://github.com/OneNoteDev/Android-REST-API-Explorer
+// O365-Android-Unified-API-Snippets, https://github.com/OfficeDev/O365-Android-Unified-API-Snippets
 //
 // Copyright (c) Microsoft Corporation
 // All rights reserved.

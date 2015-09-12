@@ -11,7 +11,7 @@ public interface ObjectGraphInjector {
 }
 // *********************************************************
 //
-// Android-REST-API-Explorer, https://github.com/OneNoteDev/Android-REST-API-Explorer
+// O365-Android-Unified-API-Snippets, https://github.com/OfficeDev/O365-Android-Unified-API-Snippets
 //
 // Copyright (c) Microsoft Corporation
 // All rights reserved.
