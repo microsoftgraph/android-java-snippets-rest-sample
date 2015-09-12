@@ -3,7 +3,7 @@
 */
 package com.microsoft.o365_android_unified_api_snippets.inject;
 
-import com.microsoft.o365_auth.AzureADModule;
+import com.microsoft.O365_auth.AzureADModule;
 import com.microsoft.o365_android_unified_api_snippets.SignInActivity;
 import com.microsoft.o365_android_unified_api_snippets.SnippetListActivity;
 
@@ -20,7 +20,7 @@ public class AzureModule {
 }
 // *********************************************************
 //
-// O365-Android-Unified-API-Snippets, https://github.com/OfficeDev/O365-Android-Unified-API-Snippets
+// Android-REST-API-Explorer, https://github.com/OneNoteDev/Android-REST-API-Explorer
 //
 // Copyright (c) Microsoft Corporation
 // All rights reserved.

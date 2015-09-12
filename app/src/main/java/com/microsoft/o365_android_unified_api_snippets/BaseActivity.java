@@ -1,29 +1,51 @@
 /*
 *  Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
 */
+
 package com.microsoft.o365_android_unified_api_snippets;
 
+import com.microsoft.O365_auth.AzureADModule;
+import com.microsoft.O365_auth.AzureAppCompatActivity;
+import com.microsoft.o365_android_unified_api_snippets.application.SnippetApp;
+import com.microsoft.o365_android_unified_api_snippets.inject.AzureModule;
+import com.microsoft.o365_android_unified_api_snippets.inject.ObjectGraphInjector;
 
-import com.microsoft.o365_auth.AzureADModule;
-import com.microsoft.o365_auth.AzureAppCompatActivity;
+import dagger.ObjectGraph;
 
-public class BaseActivity extends AzureAppCompatActivity {
- @Override
- protected AzureADModule getAzureADModule() {
-  return null;
- }
+public abstract class BaseActivity
+        extends AzureAppCompatActivity
+        implements ObjectGraphInjector {
 
- @Override
- protected Object[] getModules() {
-  return new Object[0];
- }
+    @Override
+    protected AzureADModule getAzureADModule() {
+        AzureADModule.Builder builder = new AzureADModule.Builder(this);
+        builder.validateAuthority(true)
+                .skipBroker(true)
+                .authenticationResourceId(ServiceConstants.AUTHENTICATION_RESOURCE_ID)
+                .authorityUrl(ServiceConstants.AUTHORITY_URL)
+                .redirectUri(ServiceConstants.REDIRECT_URI)
+                .clientId(ServiceConstants.CLIENT_ID);
+        return builder.build();
+    }
+
+    @Override
+    protected Object[] getModules() {
+        return new Object[]{new AzureModule()};
+    }
+
+    @Override
+    protected ObjectGraph getRootGraph() {
+        return SnippetApp.getApp().mObjectGraph;
+    }
+
+    @Override
+    public void inject(Object target) {
+        mObjectGraph.inject(target);
+    }
 }
 // *********************************************************
 //
-// O365-Android-Unified-API-Snippets, https://github.com/OfficeDev/O365-Android-Unified-API-Snippets
-//
 // Android-REST-API-Explorer, https://github.com/OneNoteDev/Android-REST-API-Explorer
->>>>>>> 4c42c8840619450c75c3a6ae57c1f82c75905282
 //
 // Copyright (c) Microsoft Corporation
 // All rights reserved.

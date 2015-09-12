@@ -10,23 +10,12 @@ import android.content.SharedPreferences;
 import com.microsoft.o365_android_unified_api_snippets.ServiceConstants;
 import com.microsoft.o365_android_unified_api_snippets.application.SnippetApp;
 import com.microsoft.o365_android_unified_api_snippets.util.SharedPrefsUtil;
-import com.microsoft.o365_android_unified_api_snippets.application.SnippetApp;
-import com.microsoft.unifiedapi.service.GsonDateTime;
 
 import dagger.Module;
 import dagger.Provides;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
-import retrofit.converter.Converter;
-import retrofit.converter.GsonConverter;
-@Module(library = true,
-        injects = {SnippetApp.class})
-public class AppModule {
-    public static final String PREFS = "com.microsoft.o365_android_onenote_rest";
 
-    @Provides
-    public String providesRestEndpoint() {
-        return "https://www.onenote.com/api";
 @Module(library = true,
         injects = {
                 SnippetApp.class
@@ -47,12 +36,6 @@ public class AppModule {
     }
 
     @Provides
-    public Converter providesConverter() {
-        return new GsonConverter(GsonDateTime.getOneNoteBuilder()
-                .create());
-    }
-
-    @Provides
     public RequestInterceptor providesRequestInterceptor() {
         return new RequestInterceptor() {
             @Override
@@ -61,7 +44,6 @@ public class AppModule {
                 final SharedPreferences preferences
                         = SnippetApp.getApp().getSharedPreferences(PREFS, Context.MODE_PRIVATE);
                 final String token =
-                        preferences.getString(SignInActivity.PREF_AUTH_TOKEN, null);
                         preferences.getString(SharedPrefsUtil.PREF_AUTH_TOKEN, null);
                 if (null != token) {
                     request.addHeader("Authorization", "Bearer " + token);
@@ -73,7 +55,7 @@ public class AppModule {
 }
 // *********************************************************
 //
-// O365-Android-Unified-API-Snippets, https://github.com/OfficeDev/O365-Android-Unified-API-Snippets
+// Android-REST-API-Explorer, https://github.com/OneNoteDev/Android-REST-API-Explorer
 //
 // Copyright (c) Microsoft Corporation
 // All rights reserved.

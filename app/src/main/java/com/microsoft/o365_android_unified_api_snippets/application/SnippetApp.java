@@ -14,7 +14,6 @@ import javax.inject.Inject;
 import dagger.ObjectGraph;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
-import retrofit.converter.Converter;
 import timber.log.Timber;
 
 public class SnippetApp extends Application {
@@ -31,9 +30,6 @@ public class SnippetApp extends Application {
 
     @Inject
     protected String endpoint;
-
-    @Inject
-    protected Converter converter;
 
     @Inject
     protected RestAdapter.LogLevel logLevel;
@@ -60,14 +56,13 @@ public class SnippetApp extends Application {
         return new RestAdapter.Builder()
                 .setEndpoint(endpoint)
                 .setLogLevel(logLevel)
-                .setConverter(converter)
                 .setRequestInterceptor(requestInterceptor)
                 .build();
     }
 }
 // *********************************************************
 //
-// O365-Android-Unified-API-Snippets, https://github.com/OfficeDev/O365-Android-Unified-API-Snippets
+// Android-REST-API-Explorer, https://github.com/OneNoteDev/Android-REST-API-Explorer
 //
 // Copyright (c) Microsoft Corporation
 // All rights reserved.
