@@ -3,7 +3,7 @@
 */
 package com.microsoft.o365_android_unified_api_snippets.inject;
 
-import com.microsoft.O365_auth.AzureADModule;
+import com.microsoft.o365_auth.AzureADModule;
 import com.microsoft.o365_android_unified_api_snippets.SignInActivity;
 import com.microsoft.o365_android_unified_api_snippets.SnippetListActivity;
 
