@@ -2,7 +2,7 @@
  *  Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license.
  *  See full license at the bottom of this file.
  */
-package com.microsoft.O365_auth;
+package com.microsoft.o365_auth;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
