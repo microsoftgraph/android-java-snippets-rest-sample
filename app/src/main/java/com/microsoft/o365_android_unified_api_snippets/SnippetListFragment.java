@@ -12,9 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
-/**
- * Created by johnaustin on 9/14/15.
- */
 public class SnippetListFragment extends ListFragment {
 
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
