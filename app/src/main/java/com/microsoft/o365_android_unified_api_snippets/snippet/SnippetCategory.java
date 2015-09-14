@@ -5,12 +5,18 @@ package com.microsoft.o365_android_unified_api_snippets.snippet;
 
 import com.microsoft.o365_android_unified_api_snippets.application.SnippetApp;
 import com.microsoft.unifiedapi.service.UnifiedContactService;
+import com.microsoft.unifiedapi.service.UnifiedGroupsService;
+
 import static com.microsoft.o365_android_unified_api_snippets.R.string.section_contacts;
+import static com.microsoft.o365_android_unified_api_snippets.R.string.section_groups;
 
 public class SnippetCategory<T> {
     static final SnippetCategory<UnifiedContactService> contactSnippetCategory
             = new SnippetCategory<>(section_contacts, create(UnifiedContactService.class));
 
+
+    static final SnippetCategory<UnifiedGroupsService> groupSnippetCategory
+            = new SnippetCategory<>(section_groups, create(UnifiedGroupsService.class));
 
     final String mSection;
     final T mService;
