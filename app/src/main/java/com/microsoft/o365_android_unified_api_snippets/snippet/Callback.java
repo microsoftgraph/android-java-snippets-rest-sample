@@ -1,27 +1,13 @@
 /*
 *  Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
 */
-package com.microsoft.unifiedapi.service;
+package com.microsoft.o365_android_unified_api_snippets.snippet;
 
-import com.microsoft.unifiedvos.ContactVO;
-import com.microsoft.unifiedvos.Envelope;
+import java.util.Map;
 
-import retrofit.Callback;
-import retrofit.http.GET;
-import retrofit.http.Path;
+public interface Callback<T> extends retrofit.Callback<T> {
 
-public interface UnifiedContactService {
-
-    /**
-     * Get the connected user's contacts.
-     * @param version
-     * @param callback
-     */
-    @GET("/{version}/me/contacts")
-    void getContacts(
-            @Path("version") String version,
-            Callback<String> callback
-    );
+    Map<String, String> getParams();
 }
 // *********************************************************
 //

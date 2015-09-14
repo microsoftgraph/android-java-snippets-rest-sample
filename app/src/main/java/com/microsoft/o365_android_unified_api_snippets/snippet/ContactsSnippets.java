@@ -1,27 +1,50 @@
 /*
 *  Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
 */
-package com.microsoft.unifiedapi.service;
+package com.microsoft.o365_android_unified_api_snippets.snippet;
 
-import com.microsoft.unifiedvos.ContactVO;
-import com.microsoft.unifiedvos.Envelope;
+import com.microsoft.unifiedapi.service.UnifiedContactService;
 
 import retrofit.Callback;
-import retrofit.http.GET;
-import retrofit.http.Path;
 
-public interface UnifiedContactService {
+import static com.microsoft.o365_android_unified_api_snippets.R.array.get_all_contacts;
 
-    /**
-     * Get the connected user's contacts.
-     * @param version
-     * @param callback
-     */
-    @GET("/{version}/me/contacts")
-    void getContacts(
-            @Path("version") String version,
-            Callback<String> callback
-    );
+public abstract class ContactsSnippets<Result> extends AbstractSnippet<UnifiedContactService, Result> {
+
+    public ContactsSnippets(Integer descriptionArray) {
+        super(SnippetCategory.contactSnippetCategory, descriptionArray);
+    }
+
+
+    static ContactsSnippets[] getContactsSnippets() {
+        return new ContactsSnippets[]{
+                // Marker element
+                new ContactsSnippets(null) {
+                    @Override
+                    public void request(UnifiedContactService service, Callback callback) {
+                        // Not implemented
+                    }
+                },
+                // Snippets
+
+                /**
+                 * Gets all of the user's notebooks
+                 */
+                new ContactsSnippets(get_all_contacts) {
+                    @Override
+                    public void request(UnifiedContactService service, Callback callback) {
+                        service.getContacts(
+                                getVersion(),
+                                callback);
+                    }
+                }
+        };
+    }
+
+    @Override
+    public abstract void request(UnifiedContactService service, Callback<Result> callback);
+
+
 }
 // *********************************************************
 //

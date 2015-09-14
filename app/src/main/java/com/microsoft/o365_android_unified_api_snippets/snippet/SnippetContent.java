@@ -1,27 +1,28 @@
 /*
 *  Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
 */
-package com.microsoft.unifiedapi.service;
+package com.microsoft.o365_android_unified_api_snippets.snippet;
 
-import com.microsoft.unifiedvos.ContactVO;
-import com.microsoft.unifiedvos.Envelope;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import static com.microsoft.o365_android_unified_api_snippets.snippet.ContactsSnippets.getContactsSnippets;
 
-import retrofit.Callback;
-import retrofit.http.GET;
-import retrofit.http.Path;
+public class SnippetContent {
 
-public interface UnifiedContactService {
 
-    /**
-     * Get the connected user's contacts.
-     * @param version
-     * @param callback
-     */
-    @GET("/{version}/me/contacts")
-    void getContacts(
-            @Path("version") String version,
-            Callback<String> callback
-    );
+    public static List<AbstractSnippet<?, ?>> ITEMS = new ArrayList<>();
+
+    static {
+        AbstractSnippet<?, ?>[][] baseSnippets = new AbstractSnippet<?, ?>[][]{
+                getContactsSnippets(),
+        };
+
+        for (AbstractSnippet<?, ?>[] snippetArray : baseSnippets) {
+            Collections.addAll(ITEMS, snippetArray);
+        }
+    }
+
 }
 // *********************************************************
 //
