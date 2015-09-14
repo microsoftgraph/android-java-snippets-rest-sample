@@ -30,9 +30,9 @@ public abstract class ContactsSnippets<Result> extends AbstractSnippet<UnifiedCo
                 /**
                  * Gets all of the user's notebooks
                  */
-                new ContactsSnippets(get_all_contacts) {
+                new ContactsSnippets<Void>(get_all_contacts) {
                     @Override
-                    public void request(UnifiedContactService service, Callback callback) {
+                    public void request(UnifiedContactService service, Callback<Void> callback) {
                         service.getContacts(
                                 getVersion(),
                                 callback);

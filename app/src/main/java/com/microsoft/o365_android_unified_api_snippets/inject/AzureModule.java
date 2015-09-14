@@ -3,6 +3,8 @@
 */
 package com.microsoft.o365_android_unified_api_snippets.inject;
 
+import com.microsoft.o365_android_unified_api_snippets.SnippetDetailActivity;
+import com.microsoft.o365_android_unified_api_snippets.SnippetDetailActivityFragment;
 import com.microsoft.o365_auth.AzureADModule;
 import com.microsoft.o365_android_unified_api_snippets.SignInActivity;
 import com.microsoft.o365_android_unified_api_snippets.SnippetListActivity;
@@ -13,7 +15,9 @@ import dagger.Module;
         complete = false,
         injects = {
                 SignInActivity.class,
+                SnippetDetailActivity.class,
                 SnippetListActivity.class,
+                SnippetDetailActivityFragment.class
         }
 )
 public class AzureModule {

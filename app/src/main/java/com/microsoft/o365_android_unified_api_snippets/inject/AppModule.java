@@ -17,9 +17,7 @@ import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 
 @Module(library = true,
-        injects = {
-                SnippetApp.class
-        }
+        injects = {SnippetApp.class}
 )
 public class AppModule {
 

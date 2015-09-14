@@ -17,10 +17,10 @@ public interface UnifiedContactService {
      * @param version
      * @param callback
      */
-    @GET("/{version}/me/contacts")
+    @GET("/{version}/myOrganization/contacts")
     void getContacts(
             @Path("version") String version,
-            Callback<String> callback
+            Callback<Void> callback
     );
 }
 // *********************************************************
