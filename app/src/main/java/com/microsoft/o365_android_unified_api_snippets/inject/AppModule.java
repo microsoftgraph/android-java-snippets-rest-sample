@@ -8,10 +8,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.microsoft.o365_android_unified_api_snippets.ServiceConstants;
-import com.microsoft.o365_android_unified_api_snippets.SignInActivity;
-import com.microsoft.o365_android_unified_api_snippets.SnippetDetailActivity;
-import com.microsoft.o365_android_unified_api_snippets.SnippetDetailActivityFragment;
-import com.microsoft.o365_android_unified_api_snippets.SnippetListActivity;
 import com.microsoft.o365_android_unified_api_snippets.application.SnippetApp;
 import com.microsoft.o365_android_unified_api_snippets.util.SharedPrefsUtil;
 
