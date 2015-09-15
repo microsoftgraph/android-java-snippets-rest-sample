@@ -4,22 +4,16 @@
 package com.microsoft.o365_android_unified_api_snippets.snippet;
 
 
-import android.util.Log;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.microsoft.unifiedapi.service.UnifiedGroupsService;
 import com.microsoft.unifiedvos.GroupVO;
-import com.squareup.okhttp.Call;
-import com.squareup.okhttp.Response;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.UUID;
 
-import retrofit.*;
 import retrofit.mime.TypedInput;
 import retrofit.mime.TypedString;
 
@@ -115,8 +109,7 @@ public abstract class GroupsSnippets <Result> extends AbstractSnippet<UnifiedGro
                         exec.start();
                         try {
                             exec.join();
-                            String groupID = parseForValue("groupId",
-                                    stash.resp);
+                            String groupID = getObjectId(stash.resp);
                             service.patchGroup(
                                     getVersion(),
                                     groupID,
@@ -164,22 +157,21 @@ public abstract class GroupsSnippets <Result> extends AbstractSnippet<UnifiedGro
             }
         };
     }
-    protected String parseForValue(String jsonKey, retrofit.client.Response json)
+    protected String getObjectId(retrofit.client.Response json)
     {
         String groupID = null;
-        TypedInput body = json.getBody();
         try {
-            BufferedReader r = new BufferedReader(new InputStreamReader(body.in()));
+            BufferedReader r = new BufferedReader(
+                    new InputStreamReader(
+                            json.getBody().in()));
             StringBuilder total = new StringBuilder();
             String line;
             while ((line = r.readLine()) != null) {
                 total.append(line);
             }
-            Log.i("response", total.toString());
             Gson gson = new Gson();
             GroupVO group = gson.fromJson(total.toString(), GroupVO.class);
             groupID = group.objectId;
-            Log.i("group id ", group.objectId);
         }
         catch (IOException ex){}
         return groupID;
