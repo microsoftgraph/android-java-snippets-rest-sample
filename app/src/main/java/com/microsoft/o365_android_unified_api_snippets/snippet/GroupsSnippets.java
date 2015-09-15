@@ -1,22 +1,48 @@
 /*
 *  Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
 */
-package com.microsoft.unifiedapi.service;
+package com.microsoft.o365_android_unified_api_snippets.snippet;
 
-import com.microsoft.unifiedvos.Envelope;
-import com.microsoft.unifiedvos.GroupVO;
 
-import retrofit.Callback;
-import retrofit.http.GET;
-import retrofit.http.Path;
+import com.microsoft.unifiedapi.service.UnifiedGroupsService;
 
-public interface UnifiedGroupsService {
+import retrofit.*;
 
-    @GET("/{version}/myOrganization/Groups")
-    void getGroups(
-            @Path("version") String version,
-            Callback<Void> callback
-    );
+import static com.microsoft.o365_android_unified_api_snippets.R.array.get_all_groups;
+
+public abstract class GroupsSnippets <Result> extends AbstractSnippet<UnifiedGroupsService, Result> {
+
+    public GroupsSnippets(Integer descriptionArray) {
+        super(SnippetCategory.groupSnippetCategory, descriptionArray);
+    }
+
+    static GroupsSnippets[] getGroupsSnippets() {
+        return new GroupsSnippets[]{
+                // Marker element
+                new GroupsSnippets(null) {
+                    @Override
+                    public void request(UnifiedGroupsService service, retrofit.Callback callback) {
+                        // Not implemented
+                    }
+                },
+                // Snippets
+
+                /**
+                 * Gets all of the user's notebooks
+                 */
+                new GroupsSnippets<Void>(get_all_groups) {
+                    @Override
+                    public void request(UnifiedGroupsService service, retrofit.Callback<Void> callback) {
+                        service.getGroups(
+                                getVersion(),
+                                callback);
+                    }
+                }
+        };
+    }
+
+    @Override
+    public abstract void request(UnifiedGroupsService service, retrofit.Callback<Result> callback);
 
 
 }
