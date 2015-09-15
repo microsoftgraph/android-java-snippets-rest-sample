@@ -5,10 +5,16 @@ package com.microsoft.unifiedapi.service;
 
 import com.microsoft.unifiedvos.Envelope;
 import com.microsoft.unifiedvos.GroupVO;
+import com.squareup.okhttp.Call;
+import com.squareup.okhttp.Response;
 
 import retrofit.Callback;
+import retrofit.http.Body;
 import retrofit.http.GET;
+import retrofit.http.PATCH;
+import retrofit.http.POST;
 import retrofit.http.Path;
+import retrofit.mime.TypedString;
 
 public interface UnifiedGroupsService {
 
@@ -18,6 +24,33 @@ public interface UnifiedGroupsService {
             Callback<Void> callback
     );
 
+    @GET("/{version}/myOrganization/Groups/{groupId}")
+    void getGroup(
+            @Path("version") String version,
+            @Path("groupId") String groupId,
+            Callback<Void> callback
+    );
+    @POST("/{version}/myOrganization/Groups/")
+    void insertGroupAsync(
+            @Path("version") String version,
+            @Body TypedString content,
+            Callback<Void> callback
+    );
+
+
+    @POST("/{version}/myOrganization/Groups/")
+    retrofit.client.Response insertGroup(
+            @Path("version") String version,
+            @Body TypedString content
+    );
+
+    @PATCH("/{version}/myOrganization/Groups/{groupId}")
+    void patchGroup(
+            @Path("version") String version,
+            @Path("groupId") String groupId,
+            @Body TypedString content,
+            Callback<Void> callback
+    );
 
 }
 // *********************************************************
