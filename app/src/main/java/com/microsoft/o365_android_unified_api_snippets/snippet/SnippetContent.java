@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import static com.microsoft.o365_android_unified_api_snippets.snippet.ContactsSnippets.getContactsSnippets;
+import static com.microsoft.o365_android_unified_api_snippets.snippet.GroupsSnippets.getGroupsSnippets;
 
 public class SnippetContent {
 
@@ -16,6 +17,7 @@ public class SnippetContent {
     static {
         AbstractSnippet<?, ?>[][] baseSnippets = new AbstractSnippet<?, ?>[][]{
                 getContactsSnippets(),
+                getGroupsSnippets()
         };
 
         for (AbstractSnippet<?, ?>[] snippetArray : baseSnippets) {
