@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The name of this section-->
+    <string name="section_events">/events</string>
+
+    <string-array name="get_user_events">
+        <item>GET: All user\'s events</item>
+        <item>Gets the signed-in user\'s events from Exchange Online.</item>
+        <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event</item>
+        <item>beta</item>
+    </string-array>
+
+</resources>

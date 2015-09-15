@@ -5,6 +5,7 @@ package com.microsoft.o365_android_unified_api_snippets.snippet;
 
 import com.microsoft.o365_android_unified_api_snippets.application.SnippetApp;
 import com.microsoft.unifiedapi.service.UnifiedContactService;
+import com.microsoft.unifiedapi.service.UnifiedEventsService;
 
 import retrofit.Callback;
 
