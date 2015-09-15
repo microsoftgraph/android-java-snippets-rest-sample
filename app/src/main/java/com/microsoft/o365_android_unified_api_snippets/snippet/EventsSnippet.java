@@ -30,10 +30,10 @@ public abstract class EventsSnippet<Result> extends AbstractSnippet<UnifiedEvent
                  * HTTP POST https://www.onenote.com/api/beta/me/notes/sections/{id}/pages
                  * @see http://dev.onenote.com/docs#/reference/post-pages
                  */
-                new EventsSnippet<String>(get_user_events) {
+                new EventsSnippet<Void>(get_user_events) {
 
                     @Override
-                    public void request(UnifiedEventsService unifiedEventsService, retrofit.Callback<String> callback) {
+                    public void request(UnifiedEventsService unifiedEventsService, retrofit.Callback<Void> callback) {
                         unifiedEventsService.getEvents(getVersion(), callback);
                     }
 

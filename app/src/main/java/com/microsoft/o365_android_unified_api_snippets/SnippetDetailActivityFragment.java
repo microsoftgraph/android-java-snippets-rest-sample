@@ -51,11 +51,8 @@ import static android.R.layout.simple_spinner_dropdown_item;
 import static android.R.layout.simple_spinner_item;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
-import static com.microsoft.o365_android_unified_api_snippets.R.id.btn_launch_browser;
 import static com.microsoft.o365_android_unified_api_snippets.R.id.btn_run;
 import static com.microsoft.o365_android_unified_api_snippets.R.id.progressbar;
-import static com.microsoft.o365_android_unified_api_snippets.R.id.quick_link_btn_layout;
-import static com.microsoft.o365_android_unified_api_snippets.R.id.quick_link_header;
 import static com.microsoft.o365_android_unified_api_snippets.R.id.spinner;
 import static com.microsoft.o365_android_unified_api_snippets.R.id.txt_desc;
 import static com.microsoft.o365_android_unified_api_snippets.R.id.txt_hyperlink;
@@ -117,16 +114,6 @@ public class SnippetDetailActivityFragment <T, Result>
 
     @InjectView(btn_run)
     protected Button mRunButton;
-
-    @InjectView(quick_link_header)
-    protected TextView mQuickLinkHeader;
-
-    @InjectView(quick_link_btn_layout)
-    protected View mQuickLinkLayout;
-
-
-    @InjectView(btn_launch_browser)
-    protected Button mLaunchBroswer;
 
     @OnClick(txt_request_url)
     public void onRequestUrlClicked(TextView tv) {

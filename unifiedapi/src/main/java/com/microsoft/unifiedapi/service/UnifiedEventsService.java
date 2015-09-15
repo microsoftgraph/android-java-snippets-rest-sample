@@ -25,7 +25,7 @@ public interface UnifiedEventsService {
     @GET("/{version}/me/events")
     void getEvents(
             @Path("version") String version,
-            Callback<String> callback
+            Callback<Void> callback
     );
 
     /**
