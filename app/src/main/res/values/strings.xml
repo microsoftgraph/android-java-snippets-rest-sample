@@ -26,4 +26,6 @@
     <string name="userPrincipalName">userPrincipalName</string>
     <string name="memberOf">memberOf</string>
     <string name="userPhoto">userPhoto</string>
+    <string name="mailBody">You can send an email by making a POST request to /me/sendMail.</string>
+    <string name="mailSubject">Unified API snippets</string>
 </resources>
