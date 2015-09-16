@@ -20,4 +20,10 @@
     <string name="response_body">Response Body</string>
     <string name="clippy">copied to clipboard</string>
     <string name="beta">BETA</string>
+    <string name="directReports">directReports</string>
+    <string name="manager">manager</string>
+    <string name="meResposibility">AboutMe,Responsibilities,Tags</string>
+    <string name="userPrincipalName">userPrincipalName</string>
+    <string name="memberOf">memberOf</string>
+    <string name="userPhoto">userPhoto</string>
 </resources>

@@ -7,6 +7,7 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.microsoft.o365_android_unified_api_snippets.R;
 import com.microsoft.o365_android_unified_api_snippets.application.SnippetApp;
 import com.microsoft.o365_android_unified_api_snippets.inject.AppModule;
 import com.microsoft.o365_android_unified_api_snippets.util.SharedPrefsUtil;
@@ -91,7 +92,8 @@ public abstract class ContactsSnippets<Result> extends AbstractSnippet<UnifiedCo
 
         String randomName = UUID.randomUUID().toString();
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("userPrincipalName", "Contact: " + randomName + '@' + tenant);
+        jsonObject.addProperty(SnippetApp.getApp().getString(R.string.userPrincipalName),
+                "Contact: " + randomName + '@' + tenant);
         jsonObject.addProperty("displayName", "Contact: " + randomName);
         jsonObject.addProperty("accountEnabled", false);
         jsonObject.addProperty("mailNickname", UUID.randomUUID().toString());
