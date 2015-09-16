@@ -1,4 +1,4 @@
-# O365-Android-Unified-API-Snippets
+# O365-Android-Unified-API-REST-Snippets
 
 **Table of contents**
 
@@ -7,6 +7,7 @@
 * [Prerequisites](#prerequisites)
 * [Azure client application registration](#Azure-client-application-registration)
 * [Configure the project](#configure-the-project)
+* [How the project affects your tenant data](#How-the-project-affects-your-tenant-data)
 * [Run the project](#run-the-project)
 * [Understand the code](#understand-the-code)
 * [Contributing](#contributing)
@@ -85,6 +86,7 @@ To use the Office 365 unified API REST snippets project, you need the following:
 * A registered Microsoft application with a client id.
     
 ##Azure client application registration
+//TODO update with unified API permissions
 1.	Sign in to the [Azure Management Portal](https://manage.windowsazure.com), using your Azure AD credentials.
 2.	Click **Active Directory** on the left menu, then select the directory for your Office 365 developer site.
 3.	On the top menu, click **Applications**.
@@ -110,95 +112,69 @@ To use the Office 365 unified API REST snippets project, you need the following:
 14.	Click **Save** in the bottom menu.
 
 
-##Microsoft account application registration
-1. Go to the [Windows Live application management site](http://go.microsoft.com/fwlink/?LinkID=144070).
-
-2. Sign in by using your Windows Live ID.
-	>Note: If this is your first visit to this site, you will see several pages that configure your Windows Live ID for use with the site. 
-
-3. Click **Create application**.
-4. Enter a unique application name. If you agree to the terms, click **Accept**.
-5. There are many settings for your app, but to make it work with this sample, you need to make the following changes:
-	1. On **API Settings**, set the **Mobile or desktop client app** field to **Yes**.
-	2. On **API Settings**, set the **Redirect URLs** field to a valid URL. The URL does not need to reference an actual location, but it must be a valid URL.
-3. Once you are satisfied with your app settings, click **Save**.
-4. Click **App Settings**. This will display a page with your client id. You will use this value later when configuring your project.
-
 ##Configure the project
 
-1. Download or clone the [OneNote REST API Explorer for Android](https://github.com/OneNoteDev/Android-REST-API-Explorer).
+1. Download or clone the [Android Unified API REST Snippets sample](https://github.com/OfficeDev/O365-Android-Unified-API-REST-Snippets).
 2. Start Android Studio.
 3. From the **Welcome to Android Studio** dialog box, choose **Import project (Eclipse ADT, Gradle, etc)**.
-4. Select the **settings.gradle** file in the **Android-REST-API-Explorer** folder and click **OK**.
+4. Select the **settings.gradle** file in the **
+O365-Android-Unified-API-REST-Snippets** folder and click **OK**.
 5. Respond to the dialog ("Gradle Sync: Gradle settings for this project are not configured yet. Would you like the project to use the Gradle wrapper? ") by clicking the **OK** button to use the Gradle wrapper. 
-6. Open the ServiceConstants.java file in the com.microsoft.o365_android_onenote_rest.conf package.
+6. Open the ServiceConstants.java file in the com.microsoft.o365_android_unified_api_snippets.snippet package.
 7. Find the ```CLIENT_ID``` string and set its value to the client id you registered in Azure.
 8. Find the ```REDIRECT_URI``` string and set its value to the redirect URI you registered in Azure.
-9. Find the ```MSA_CLIENT_ID``` string and set its value to the client id you registered for your app in your Microsoft Account.
+
+##How the project affects your tenant data
+The project runs REST commands that create, read, update, or delete data. When performing destructive commands, such as delete, the project creates fake entries, so that your actual tenant data is unaffected. For example, if you choose to run the delete group snippet, it first creates a fake group, and then deletes it, and displays the REST call information about the delete operation. The project may leave behind fake entries on your tenant as part of this process.
 
 ##Run the project
-Once you've built the REST Explorer project you can run it on an emulator or device.
+Once you've built the project you can run it on an emulator or device.
 
 1. Run the project.
-2. Click the authentication account that you want to sign in to.
+2. Click on the **Organizational Account** icon to sign in to Office 365.
 3. Enter your credentials.
 4. Click a REST operation in the main activity to show operation details.
-	>Note: Some operations require input before they will run. For example, to update a page, you must first select a page to update. On these operations there will be a spinner, or text box, to select or enter required input for an operation.
-
-7. Click the run button to start the REST operation and wait for the operation to finish.
-8. Click in the Response Headers or Response Body text boxes to copy the box contents to the emulator/device clipboard.
-9. Click the Back button on the REST Explorer toolbar to return to the REST operation list.
-10. (Optional) Click the overflow menu to get the Disconnect menu option.
+5. Click the **RUN** button to start the REST operation and wait for the operation to finish.
+6. Click in the **Response Headers** or **Response Body** text boxes to copy the box contents to the emulator/device clipboard.
+7. Click the back button on the REST Explorer toolbar to return to the REST operation list.
+8. (Optional) Click the overflow menu to get the Disconnect menu option.
 
 ##Understand the code
-The REST API Explorer project uses these classes to manage interactions with OneNote for Enterprise and consumer OneNote:
+The REST API Explorer project uses these classes to manage interactions with the unified API on Office 365:
 ###Sample project organization
-The REST API explorer project is comprised of four modules. The modular design allows you to add authentication and OneNote REST API support to your app by importing modules from REST API Explorer into your app. After you've imported the modules, use the code in the REST API Explorer [app](https://github.com/OneNoteDev/Android-REST-API-Explorer/tree/master/app) module as an example of how to call methods in the other sample modules.
-###REST API Explorer modules
-* [```O365-Auth```](https://github.com/OneNoteDev/Android-REST-API-Explorer/tree/master/O365-auth). This module contains the library calls to authenticate a user with Office 365.
-* [```onenoteapi```](https://github.com/OneNoteDev/Android-REST-API-Explorer/tree/master/onenoteapi). This module encapsulates the Retrofit REST operations used for the OneNote (enterprise and consumer) endpoints.
-* [```onenotevos```](https://github.com/OneNoteDev/Android-REST-API-Explorer/tree/master/onenotevos). This module provides the value objects that wrap deserialized JSON REST response payloads. Use the value objects in your app logic to get the metadata and content of OneDrive notebooks, sections, and pages returned by the API.
-* [```app```](https://github.com/OneNoteDev/Android-REST-API-Explorer/tree/master/app). The REST API explorer UI and business logic module. REST API Explorer consumes the **api** and **vo** modules from the logic in the app module. REST operations are started in the snippet classes in this module.
+The REST API explorer project is comprised of three modules. The modular design enables you to build a new app based off of this sample by importing the modules into your app. After you've imported the modules, use the code in the Android Unified API REST Snippets [app](https://github.com/OfficeDev/O365-Android-Unified-API-REST-Snippets/tree/master/app) module as an example of how to call methods in the other sample modules.
+
+###Modules in the Android unified API REST snippets sample
+* [```o365-Auth```](https://github.com/OfficeDev/O365-Android-Unified-API-REST-Snippets/tree/master/o365-auth). This module contains the library calls to authenticate a user with Office 365.
+* [```unifiedapi```](https://github.com/OfficeDev/O365-Android-Unified-API-REST-Snippets/tree/master/unifiedapi). This module encapsulates the Retrofit REST operations used for the Office 365 unified API endpoint.
+* [```app```](https://github.com/OfficeDev/O365-Android-Unified-API-REST-Snippets/tree/master/app). The UI and business logic module. REST operations are started in the snippet classes in this module.
 
 ###Snippet classes
-A snippet runs a single REST operation and returns the results. Snippets are found in the [app](https://github.com/OneNoteDev/Android-REST-API-Explorer/tree/master/app) module. Snippets set the state required to make the calls on the OneNote service classes described below. Where necessary, a snippet class gets the notebooks, sections, or pages to load the spinner control shown on the snippet detail fragment for a given REST operation.
-* [```NotebookSnippet```](https://github.com/OneNoteDev/Android-REST-API-Explorer/blob/master/app/src/main/java/com/microsoft/o365_android_onenote_rest/snippet/NotebookSnippet.java)
-* [```SectionGroupSnippet```](https://github.com/OneNoteDev/Android-REST-API-Explorer/blob/master/app/src/main/java/com/microsoft/o365_android_onenote_rest/snippet/SectionGroupSnippet.java)
-* [```SectionSnippet```](https://github.com/OneNoteDev/Android-REST-API-Explorer/blob/master/app/src/main/java/com/microsoft/o365_android_onenote_rest/snippet/SectionSnippet.java)
-* [```PagesSnippet```](https://github.com/OneNoteDev/Android-REST-API-Explorer/blob/master/app/src/main/java/com/microsoft/o365_android_onenote_rest/snippet/PagesSnippet.java)
-* [```AbstractSnippet```](https://github.com/OneNoteDev/Android-REST-API-Explorer/blob/master/app/src/main/java/com/microsoft/o365_android_onenote_rest/snippet/AbstractSnippet.java)
+A snippet runs a single REST operation and returns the results. Snippets are found in the [app](https://github.com/OfficeDev/O365-Android-Unified-API-REST-Snippets/tree/master/app) module. Snippets set the state required to make the calls on the unified API service classes described below.
+* [```ContactsSnippets```](https://github.com/OfficeDev/O365-Android-Unified-API-REST-Snippets/blob/master/app/src/main/java/com/microsoft/o365_android_unified_api_snippets/snippet/ContactsSnippets.java)
+* [```EventsSnippets```](https://github.com/OfficeDev/O365-Android-Unified-API-REST-Snippets/blob/master/app/src/main/java/com/microsoft/o365_android_unified_api_snippets/snippet/EventsSnippet.java)
+* [```GroupsSnippets```](https://github.com/OfficeDev/O365-Android-Unified-API-REST-Snippets/blob/master/app/src/main/java/com/microsoft/o365_android_unified_api_snippets/snippet/GroupsSnippets.java)
+* [```AbstractSnippet```](https://github.com/OfficeDev/O365-Android-Unified-API-REST-Snippets/blob/master/app/src/main/java/com/microsoft/o365_android_unified_api_snippets/snippet/AbstractSnippet.java)
 
 
 
-###OneNote API service classes
-These classes are found in the [onenoteapi](https://github.com/OneNoteDev/Android-REST-API-Explorer/tree/master/onenoteapi) module and make the Retrofit library calls that generate the REST queries and handle operation results. These service classes are consumed by the snippets.
-* [```NotebooksService```](https://github.com/OneNoteDev/Android-REST-API-Explorer/blob/master/onenoteapi/src/main/java/com/microsoft/onenoteapi/service/NotebooksService.java)
-* [```SectionGroupsService```](https://github.com/OneNoteDev/Android-REST-API-Explorer/blob/master/onenoteapi/src/main/java/com/microsoft/onenoteapi/service/SectionGroupsService.java)
-* [```SectionsService```](https://github.com/OneNoteDev/Android-REST-API-Explorer/blob/master/onenoteapi/src/main/java/com/microsoft/onenoteapi/service/SectionsService.java)
-* [```PagesService```](https://github.com/OneNoteDev/Android-REST-API-Explorer/blob/master/onenoteapi/src/main/java/com/microsoft/onenoteapi/service/PagesService.java)
-
-###Value object classes
-These classes are found in the [onenotevos](https://github.com/OneNoteDev/Android-REST-API-Explorer/tree/master/onenotevos) module. The value object classes describe JSON payloads as objects.
-
-* [```BaseVO```](https://github.com/OneNoteDev/Android-REST-API-Explorer/blob/master/onenotevos/src/main/java/com/microsoft/onenotevos/BaseVO.java). The superclass for other value objects. 
-* [```Envelope```](https://github.com/OneNoteDev/Android-REST-API-Explorer/blob/master/onenotevos/src/main/java/com/microsoft/onenotevos/Envelope.java). A collection of individual notebook, section, section group, or page objects returned in  GET request.
-* [```Links```](https://github.com/OneNoteDev/Android-REST-API-Explorer/blob/master/onenotevos/src/main/java/com/microsoft/onenotevos/Links.java). The collection of URLs returned in the body of a notebook, section, or page.
-* [```Notebook```](https://github.com/OneNoteDev/Android-REST-API-Explorer/blob/master/onenotevos/src/main/java/com/microsoft/onenotevos/Notebook.java). A OneNote notebook.
-* [```Page```](https://github.com/OneNoteDev/Android-REST-API-Explorer/blob/master/onenotevos/src/main/java/com/microsoft/onenotevos/Page.java). A OneNote page.
-* [```Section```](https://github.com/OneNoteDev/Android-REST-API-Explorer/blob/master/onenotevos/src/main/java/com/microsoft/onenotevos/Section.java). A OneNote section.
-* [```SectionGroup```](https://github.com/OneNoteDev/Android-REST-API-Explorer/blob/master/onenotevos/src/main/java/com/microsoft/onenotevos/SectionGroup.java). A OneNote section group.
+###Unified API service classes
+These classes are found in the [unifiedapi](https://github.com/OfficeDev/O365-Android-Unified-API-REST-Snippets/tree/master/unifiedapi) module and make the Retrofit library calls that generate the REST queries and handle operation results. These service classes are consumed by the snippets.
+* [```UnifiedContactService```](https://github.com/OfficeDev/O365-Android-Unified-API-REST-Snippets/blob/master/unifiedapi/src/main/java/com/microsoft/unifiedapi/service/UnifiedContactService.java)
+* [```UnifiedEventsService```](https://github.com/OfficeDev/O365-Android-Unified-API-REST-Snippets/blob/master/unifiedapi/src/main/java/com/microsoft/unifiedapi/service/UnifiedEventsService.java)
+* [```UnifiedGroupsService```](https://github.com/OfficeDev/O365-Android-Unified-API-REST-Snippets/blob/master/unifiedapi/src/main/java/com/microsoft/unifiedapi/service/UnifiedGroupsService.java)
+* [```UnifiedMailService```](https://github.com/OfficeDev/O365-Android-Unified-API-REST-Snippets/blob/master/unifiedapi/src/main/java/com/microsoft/unifiedapi/service/UnifiedMailService.java)
+* [```UnifiedUserService```](https://github.com/OfficeDev/O365-Android-Unified-API-REST-Snippets/blob/master/unifiedapi/src/main/java/com/microsoft/unifiedapi/service/UnifiedUserService.java)
 
 ###Authentication classes for Office 365 business accounts
-The authentication classes are found in the [O365-Auth](https://github.com/OneNoteDev/Android-REST-API-Explorer/tree/master/O365-auth) module. These classes use the [Microsoft Azure Active Directory Library (ADAL) for Android](https://github.com/AzureAD/azure-activedirectory-library-for-android) to connect to a business version of Office 365 such as Office 365 Enterprise. 
+The authentication classes are found in the [o365-Auth](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/tree/master/o365-auth) module. These classes use the [Microsoft Azure Active Directory Library (ADAL) for Android](https://github.com/AzureAD/azure-activedirectory-library-for-android) to connect to a business version of Office 365 such as Office 365 Enterprise. 
 
-* [```AuthenticationManager```](https://github.com/OneNoteDev/Android-REST-API-Explorer/blob/master/O365-auth/src/main/java/com/microsoft/AuthenticationManager.java). Encapsulates user connect and disconnect logic in addition to Azure app authorization.
-* [```AzureADModule```](https://github.com/OneNoteDev/Android-REST-API-Explorer/blob/master/O365-auth/src/main/java/com/microsoft/AzureADModule.java). Authentication helper class. 
-* [```AzureAppCompatActivity```](https://github.com/OneNoteDev/Android-REST-API-Explorer/blob/master/O365-auth/src/main/java/com/microsoft/AzureAppCompatActivity.java). Dependency injection helper.
-
-### Authentication for Office 365 personal accounts
-Authentication for logging in with a Microsoft Account to a personal version of Office 365 such as Office 365 Home is handled by the [MSA Auth for Android](https://github.com/MSOpenTech/msa-auth-for-android) library. The app uses the [LiveAuthClient](https://github.com/MSOpenTech/msa-auth-for-android/blob/dev/src/main/java/com/microsoft/services/msa/LiveAuthClient.java) class to connect and disconnect.
+* [```AuthenticationManager```](https://github.com/OfficeDev/O365-Android-Unified-API-REST-Snippets/blob/master/o365-auth/src/main/java/com/microsoft/o365_auth/AuthenticationManager.java). Encapsulates user connect and disconnect logic in addition to Azure app authorization.
+* [```AzureADModule```](https://github.com/OfficeDev/O365-Android-Unified-API-REST-Snippets/blob/master/o365-auth/src/main/java/com/microsoft/o365_auth/AzureADModule.java). Authentication helper class. 
+* [```AzureAppCompatActivity```](https://github.com/OfficeDev/O365-Android-Unified-API-REST-Snippets/blob/master/o365-auth/src/main/java/com/microsoft/o365_auth/AzureAppCompatActivity.java). Dependency injection helper.
 
 ### Screenshots
+//TODO update to reflect latest sample
 Login|REST Call List
 :-:|:-:
 ![](/readme-images/login.png)|![](/readme-images/list.png)
@@ -208,7 +184,7 @@ REST Call Detail|Create Page
 ![](/readme-images/detail.png)|![](/readme-images/create_page.png)
 
 ## Questions and comments
-We'd love to get your feedback about the OneNote REST API Explorer for Android sample. You can send your feedback to us in the [Issues](https://github.com/OneNoteDev/Android-REST-API-Explorer/issues) section of this repository. <br/>
+We'd love to get your feedback about the Android Unified API REST Snippets sample. You can send your feedback to us in the [Issues](https://github.com/OfficeDev/O365-Android-Unified-API-REST-Snippets/issues) section of this repository. <br/>
 General questions about Office 365 development should be posted to [Stack Overflow](http://stackoverflow.com/questions/tagged/Office365+API). Make sure that your questions are tagged with [Office365] and [API].
 
 ## Contributing
@@ -216,8 +192,7 @@ You will need to sign a [Contributor License Agreement](https://cla.microsoft.co
 
 ## Additional resources
 
-* [OneNote APIs documentation](https://msdn.microsoft.com/en-us/library/office/dn575420.aspx)
-* [OneNote developer center](http://dev.onenote.com/)
+* [Office 365 Unified API documentation]()
 * [Microsoft Office 365 API Tools](https://visualstudiogallery.msdn.microsoft.com/a15b85e6-69a7-4fdf-adda-a38066bb5155)
 * [Office Dev Center](http://dev.office.com/)
 * [Office 365 APIs starter projects and code samples](http://msdn.microsoft.com/en-us/office/office365/howto/starter-projects-and-code-samples)
