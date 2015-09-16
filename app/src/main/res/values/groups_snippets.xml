@@ -33,5 +33,17 @@
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Group</item>
         <item>beta</item>
     </string-array>
+    <string-array name="get_group_members">
+        <item>GET: get members of a group</item>
+        <item>Gets the members of a group.</item>
+        <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_members</item>
+        <item>beta</item>
+    </string-array>
+    <string-array name="get_group_owners">
+        <item>GET: get owners of a group</item>
+        <item>Gets the owners of a group.</item>
+        <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_owners</item>
+        <item>beta</item>
+    </string-array>
 
 </resources>

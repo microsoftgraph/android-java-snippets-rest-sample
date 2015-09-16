@@ -10,6 +10,7 @@ import com.squareup.okhttp.Response;
 
 import retrofit.Callback;
 import retrofit.http.Body;
+import retrofit.http.DELETE;
 import retrofit.http.GET;
 import retrofit.http.PATCH;
 import retrofit.http.POST;
@@ -30,6 +31,15 @@ public interface UnifiedGroupsService {
             @Path("groupId") String groupId,
             Callback<Void> callback
     );
+
+    @GET("/{version}/myOrganization/Groups/{groupId}/{entity}")
+    void getGroupEntities(
+            @Path("version") String version,
+            @Path("groupId") String groupId,
+            @Path("entity") String entity,
+            Callback<Void> callback
+    );
+
     @POST("/{version}/myOrganization/Groups/")
     void insertGroupAsync(
             @Path("version") String version,
@@ -49,6 +59,13 @@ public interface UnifiedGroupsService {
             @Path("version") String version,
             @Path("groupId") String groupId,
             @Body TypedString content,
+            Callback<Void> callback
+    );
+
+    @DELETE("/{version}/myOrganization/Groups/{groupId}")
+    void deleteGroup(
+            @Path("version") String version,
+            @Path("groupId") String groupId,
             Callback<Void> callback
     );
 
