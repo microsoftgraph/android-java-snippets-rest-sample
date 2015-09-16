@@ -3,8 +3,8 @@
     <!-- The name of this section-->
     <string name="section_messages">/messages</string>
 
-    <string-array name="get_user_events">
-        <item>GET: get user's messages</item>
+    <string-array name="get_user_messages">
+        <item>GET: get user\'s messages</item>
         <item>Gets the signed-in user\'s emails.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_Messages</item>
         <item>beta</item>
