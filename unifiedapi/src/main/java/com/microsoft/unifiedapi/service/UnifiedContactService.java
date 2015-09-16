@@ -7,8 +7,11 @@ import com.microsoft.unifiedvos.ContactVO;
 import com.microsoft.unifiedvos.Envelope;
 
 import retrofit.Callback;
+import retrofit.http.Body;
 import retrofit.http.GET;
+import retrofit.http.POST;
 import retrofit.http.Path;
+import retrofit.mime.TypedString;
 
 public interface UnifiedContactService {
 
@@ -20,6 +23,13 @@ public interface UnifiedContactService {
     @GET("/{version}/myOrganization/contacts")
     void getContacts(
             @Path("version") String version,
+            Callback<Void> callback
+    );
+
+    @POST("/{version}/myOrganization/contacts")
+    void insertContact(
+            @Path("version") String version,
+            @Body TypedString body,
             Callback<Void> callback
     );
 }

@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.ClipboardManager;
@@ -34,9 +33,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -174,6 +171,10 @@ public class SnippetDetailActivityFragment <T, Result>
         mResponseBody.setText("");
         displayStatusCode("", getResources().getColor(R.color.transparent));
         mProgressbar.setVisibility(VISIBLE);
+
+        SnippetDetailActivity activity = (SnippetDetailActivity)getActivity();
+
+
         mItem.request(mItem.mService, this);
 
 

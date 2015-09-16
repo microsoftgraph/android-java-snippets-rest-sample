@@ -63,6 +63,9 @@ public class SignInActivity
     public void onSuccess(AuthenticationResult authenticationResult) {
         finish();
         SharedPrefsUtil.persistAuthToken(authenticationResult);
+        int at = authenticationResult.getUserInfo().getDisplayableId().indexOf("@");
+        String tenant = authenticationResult.getUserInfo().getDisplayableId().substring(at + 1);
+        SharedPrefsUtil.persistUserTenant(tenant);
         start();
     }
 

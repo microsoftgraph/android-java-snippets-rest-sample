@@ -13,18 +13,24 @@ import com.microsoft.o365_android_unified_api_snippets.inject.AppModule;
 public class SharedPrefsUtil {
 
     public static final String PREF_AUTH_TOKEN = "PREF_AUTH_TOKEN";
+    public static final String PREF_USER_TENANT = "PREF_USER_TENANT";
 
     public static SharedPreferences getSharedPreferences() {
         return SnippetApp.getApp().getSharedPreferences(AppModule.PREFS, Context.MODE_PRIVATE);
     }
 
+
     public static void persistAuthToken(AuthenticationResult result) {
         setAccessToken(result.getAccessToken());
     }
 
+    public static void persistUserTenant(String tenant){
+        getSharedPreferences().edit().putString(PREF_USER_TENANT,tenant).commit();
+    }
     private static void setAccessToken(String accessToken) {
         getSharedPreferences().edit().putString(PREF_AUTH_TOKEN, accessToken).commit();
     }
+
 }
 // *********************************************************
 //
