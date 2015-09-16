@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The name of this section-->
+    <string name="section_messages">/messages</string>
+
+    <string-array name="get_user_events">
+        <item>GET: get user's messages</item>
+        <item>Gets the signed-in user\'s emails.</item>
+        <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_Messages</item>
+        <item>beta</item>
+    </string-array>
+    <string-array name="send_an_email_message">
+        <item>POST me/messages/sendMail</item>
+        <item>Sends an email message as the signed-in user and saves a copy to their Sent Items folder.</item>
+        <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_action_user_sendMail</item>
+        <item>beta</item>
+    </string-array>
+</resources>

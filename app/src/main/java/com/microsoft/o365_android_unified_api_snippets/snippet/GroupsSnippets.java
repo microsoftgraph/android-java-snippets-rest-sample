@@ -71,7 +71,7 @@ public abstract class GroupsSnippets <Result> extends AbstractSnippet<UnifiedGro
                                     groupID,
                                     callback);
 
-                            DeleteSnippetGroup(service, callback, stash, task);
+                            DeleteSnippetGroup(service, null, stash, task);
 
                         }
                         catch (InterruptedException e) {
@@ -84,7 +84,7 @@ public abstract class GroupsSnippets <Result> extends AbstractSnippet<UnifiedGro
                 // Snippets
 
                 /**
-                 * Gets all of a group's members
+                 * Gets all of the members of the first organization group
                  */
                 new GroupsSnippets<Void>(get_group_members) {
                     @Override
@@ -94,6 +94,8 @@ public abstract class GroupsSnippets <Result> extends AbstractSnippet<UnifiedGro
                         Runnable task = new Runnable() {
                             @Override
                             public void run() {
+
+                                //TODO make this a get all groups call
                                 retrofit.client.Response response = service.insertGroup(
                                         getVersion(),
                                         createNewGroup());
@@ -110,7 +112,7 @@ public abstract class GroupsSnippets <Result> extends AbstractSnippet<UnifiedGro
                             //Get the inserted group
                             service.getGroupEntities(
                                     getVersion(),
-                                    groupID,
+                                    groupID, //TODO get the id of the first group in the collection
                                     "members",
                                     callback);
 
@@ -137,6 +139,7 @@ public abstract class GroupsSnippets <Result> extends AbstractSnippet<UnifiedGro
                         Runnable task = new Runnable() {
                             @Override
                             public void run() {
+                                //TODO make this a get all groups call
                                 retrofit.client.Response response = service.insertGroup(
                                         getVersion(),
                                         createNewGroup());
@@ -153,7 +156,7 @@ public abstract class GroupsSnippets <Result> extends AbstractSnippet<UnifiedGro
                             //Get the inserted group
                             service.getGroupEntities(
                                     getVersion(),
-                                    groupID,
+                                    groupID, //TODO get the id of the first group in the collection
                                     "owners",
                                     callback);
 

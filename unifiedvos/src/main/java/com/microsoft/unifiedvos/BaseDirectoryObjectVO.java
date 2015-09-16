@@ -5,9 +5,6 @@ package com.microsoft.unifiedvos;
 
 import org.joda.time.DateTime;
 
-/**
- * Created by johnaustin on 9/8/15.
- */
 public abstract class BaseDirectoryObjectVO {
     public DateTime deletionTimeStamp;
     public String objectId;
