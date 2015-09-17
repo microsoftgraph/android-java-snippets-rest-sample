@@ -52,7 +52,7 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<UnifiedUserS
                     public void request(
                             UnifiedUserService unifiedUserService,
                             retrofit.Callback<Void> callback) {
-                        unifiedUserService.getFilterdUsers(getVersion(), "eq 'United States'", callback);
+                        unifiedUserService.getFilterdUsers(getVersion(), "country eq 'United States'", callback);
                     }
                 },
 
