@@ -24,19 +24,5 @@ item 5: is admin account required to run snippet (true/false)
         <item>beta</item>
         <item>false</item>
     </string-array>
-    <string-array name="update_event">
-        <item>PATCH: Update an event</item>
-        <item>Adds an event to the signed-in user\'s calendar, then updates the subject of the event.</item>
-        <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event</item>
-        <item>beta</item>
-        <item>false</item>
-    </string-array>
-    <string-array name="delete_event">
-        <item>DELETE: Delete an event</item>
-        <item>Adds an event to the signed-in user\'s calendar, then deletes the event.</item>
-        <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event</item>
-        <item>beta</item>
-        <item>false</item>
-    </string-array>
 
 </resources>

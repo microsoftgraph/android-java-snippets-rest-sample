@@ -47,8 +47,6 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
                             retrofit.Callback<Void> callback) {
                         unifiedEventsService.getEvents(getVersion(), callback);
                     }
-
-
                 },
 
                 /*
@@ -108,41 +106,8 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
                         unifiedEventsService.postNewEvent(getVersion(), body, callback);
                     }
 
-                },
-                 /*
-                 * PATCH update an event
-                 * HTTP PATCH
-                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event
-                 */
-                new EventsSnippets<Void>(update_event) {
-
-                    @Override
-                    public void request(
-                            UnifiedEventsService unifiedEventsService,
-                            retrofit.Callback<Void> callback) {
-
-                        //TODO create JSON body of event update to make
-                        unifiedEventsService.getEvents(getVersion(), callback);
-                    }
-
-
-                },
-                 /*
-                 * DELETE delete an event
-                 * HTTP DELETE
-                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event
-                 */
-                new EventsSnippets<Void>(delete_event) {
-
-                    @Override
-                    public void request(
-                            UnifiedEventsService unifiedEventsService,
-                            retrofit.Callback<Void> callback) {
-                        unifiedEventsService.getEvents(getVersion(), callback);
-                    }
-
-
                 }
+
         };
     }
 
