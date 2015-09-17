@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.microsoft.o365_auth.AuthenticationManager;
+
 public class SnippetDetailActivity extends BaseActivity {
 
     @Override
@@ -27,6 +29,10 @@ public class SnippetDetailActivity extends BaseActivity {
                     .commit();
         }}
 
+
+    protected AuthenticationManager getAuthenticationManager(){
+        return mAuthenticationManager;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

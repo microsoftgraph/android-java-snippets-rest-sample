@@ -23,7 +23,7 @@ public interface UnifiedMailService {
     @GET("/{version}/me/messages")
     void getMail(
             @Path("version") String version,
-            Callback<Envelope<MessageVO>> callback
+            Callback<Void> callback
     );
 
     /**
@@ -36,7 +36,7 @@ public interface UnifiedMailService {
     void postNewMail(
          @Path("version") String version,
             @Body TypedString body,
-            Callback<Envelope<MessageVO>> callback
+            Callback<Void> callback
     );
 }
 // *********************************************************

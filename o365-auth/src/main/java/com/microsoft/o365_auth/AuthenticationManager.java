@@ -90,7 +90,8 @@ public class AuthenticationManager {
                                 if (Succeeded == authenticationResult.getStatus()) {
                                     setUserId(authenticationResult.getUserInfo().getUserId());
                                     authenticationCallback.onSuccess(authenticationResult);
-                                } else {
+                                }
+                                else {
                                     onError(
                                             new AuthenticationException(ADALError.AUTH_FAILED,
                                                     authenticationResult.getErrorCode()));
@@ -128,6 +129,7 @@ public class AuthenticationManager {
     private boolean isConnected() {
         return getSharedPreferences().contains(USER_ID_VAR_NAME);
     }
+
 
     private String getUserId() {
         return getSharedPreferences().getString(USER_ID_VAR_NAME, "");

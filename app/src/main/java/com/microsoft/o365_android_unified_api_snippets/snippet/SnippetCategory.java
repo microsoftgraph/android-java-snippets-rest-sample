@@ -8,10 +8,14 @@ import com.microsoft.unifiedapi.service.UnifiedContactService;
 import com.microsoft.unifiedapi.service.UnifiedEventsService;
 
 import com.microsoft.unifiedapi.service.UnifiedGroupsService;
+import com.microsoft.unifiedapi.service.UnifiedMailService;
+import com.microsoft.unifiedapi.service.UnifiedUserService;
 
 import static com.microsoft.o365_android_unified_api_snippets.R.string.section_contacts;
 import static com.microsoft.o365_android_unified_api_snippets.R.string.section_events;
 import static com.microsoft.o365_android_unified_api_snippets.R.string.section_groups;
+import static com.microsoft.o365_android_unified_api_snippets.R.string.section_me;
+import static com.microsoft.o365_android_unified_api_snippets.R.string.section_messages;
 
 public class SnippetCategory<T> {
     static final SnippetCategory<UnifiedContactService> contactSnippetCategory
@@ -22,6 +26,12 @@ public class SnippetCategory<T> {
 
     static final SnippetCategory<UnifiedGroupsService> groupSnippetCategory
             = new SnippetCategory<>(section_groups, create(UnifiedGroupsService.class));
+
+    static final SnippetCategory<UnifiedUserService> userSnippetCategory
+            = new SnippetCategory<>(section_me, create(UnifiedUserService.class));
+
+    static final SnippetCategory<UnifiedMailService> mailSnippetCategory
+            = new SnippetCategory<>(section_messages, create(UnifiedMailService.class));
 
     final String mSection;
     final T mService;
