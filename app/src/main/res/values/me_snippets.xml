@@ -11,42 +11,42 @@ item 5: is admin account required to run snippet (true/false)
     <!-- The name of this section-->
     <string name="section_me">/me</string>
     <string-array name="get_me">
-        <item>GET: get me information</item>
+        <item>GET: Get user\'s information</item>
         <item>Gets information about the signed-in user.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_User</item>
         <item>beta</item>
         <item>false</item>
     </string-array>
     <string-array name="get_me_responsibilities">
-        <item>GET: get the responsibilities of me</item>
-        <item>Gets select information about the signed-in user, using $select.</item>
+        <item>GET: Get user\'s responsibilities.</item>
+        <item>Gets responsibilities of the signed-in user by using $select.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_User</item>
         <item>beta</item>
         <item>false</item>
     </string-array>
     <string-array name="get_me_manager">
-        <item>GET: get user\'s manager</item>
+        <item>GET: Get user\'s manager</item>
         <item>Gets the signed-in user\'s manager.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_manager</item>
         <item>beta</item>
         <item>false</item>
     </string-array>
     <string-array name="get_me_direct_reports">
-        <item>GET: get user\'s direct reports</item>
+        <item>GET: Get user\'s direct reports</item>
         <item>Gets the signed-in user\'s direct reports.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_directReports</item>
         <item>beta</item>
         <item>false</item>
     </string-array>
     <string-array name="get_me_photo">
-        <item>GET: get user\'s photo</item>
+        <item>GET: Get user\'s photo</item>
         <item>Gets the signed-in user\'s photo.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_UserPhoto</item>
         <item>beta</item>
         <item>false</item>
     </string-array>
     <string-array name="get_me_group_membership">
-        <item>GET groups user is a member of</item>
+        <item>GET: Get groups user is member of</item>
         <item>Gets the groups that the signed-in user is a member of.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_memberOf</item>
         <item>beta</item>

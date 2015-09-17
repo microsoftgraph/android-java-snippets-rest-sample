@@ -11,28 +11,28 @@ item 5: is admin account required to run snippet (true/false)
     <string name="section_events">/events</string>
 
     <string-array name="get_user_events">
-        <item>GET: All user\'s events</item>
-        <item>Gets the signed-in user\'s events from Exchange Online.</item>
+        <item>GET: user\'s events</item>
+        <item>Gets the signed-in user\'s calendar events.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event</item>
         <item>beta</item>
         <item>false</item>
     </string-array>
     <string-array name="create_event">
-        <item>POST: insert event</item>
+        <item>POST: Add an event</item>
         <item>Adds an event to the signed-in user\'s calendar.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event</item>
         <item>beta</item>
         <item>false</item>
     </string-array>
     <string-array name="update_event">
-        <item>PATCH update an event</item>
+        <item>PATCH: Update an event</item>
         <item>Adds an event to the signed-in user\'s calendar, then updates the subject of the event.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event</item>
         <item>beta</item>
         <item>false</item>
     </string-array>
     <string-array name="delete_event">
-        <item>DELETE delete an event</item>
+        <item>DELETE: Delete an event</item>
         <item>Adds an event to the signed-in user\'s calendar, then deletes the event.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event</item>
         <item>beta</item>

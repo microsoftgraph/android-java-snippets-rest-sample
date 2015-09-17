@@ -12,15 +12,15 @@ item 5: is admin account required to run snippet (true/false)
     <string name="section_contacts">/contacts</string>
 
     <string-array name="get_all_contacts">
-        <item>GET: List of all contacts</item>
-        <item>Queries for all organization contacts and returns a list</item>
+        <item>GET: Gets all contacts</item>
+        <item>Queries for all organization contacts and returns a list.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Contact</item>
         <item>beta</item>
         <item>false</item>
     </string-array>
     <string-array name="insert_a_contact">
-        <item>POST: insert a contact</item>
-        <item>Adds a contact to your tenant\'s directory.</item>
+        <item>POST: Create a new contact</item>
+        <item>Adds a contact to your tenant\'s directory with a UUID random name.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_contacts</item>
         <item>beta</item>
         <item>false</item>
