@@ -7,7 +7,6 @@ package com.microsoft.o365_android_unified_api_snippets.snippet;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.microsoft.unifiedapi.service.UnifiedGroupsService;
-import com.microsoft.unifiedvos.BaseDirectoryObjectVO;
 import com.microsoft.unifiedvos.GroupVO;
 
 import java.io.BufferedReader;
@@ -20,12 +19,12 @@ import retrofit.mime.TypedString;
 import static com.microsoft.o365_android_unified_api_snippets.R.array.delete_a_group;
 import static com.microsoft.o365_android_unified_api_snippets.R.array.get_a_group;
 import static com.microsoft.o365_android_unified_api_snippets.R.array.get_all_groups;
-import static com.microsoft.o365_android_unified_api_snippets.R.array.insert_a_group;
-import static com.microsoft.o365_android_unified_api_snippets.R.array.update_a_group;
 import static com.microsoft.o365_android_unified_api_snippets.R.array.get_group_members;
 import static com.microsoft.o365_android_unified_api_snippets.R.array.get_group_owners;
+import static com.microsoft.o365_android_unified_api_snippets.R.array.insert_a_group;
+import static com.microsoft.o365_android_unified_api_snippets.R.array.update_a_group;
 
-public abstract class GroupsSnippets <Result> extends AbstractSnippet<UnifiedGroupsService, Result> {
+public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGroupsService, Result> {
 
     public GroupsSnippets(Integer descriptionArray) {
         super(SnippetCategory.groupSnippetCategory, descriptionArray);
@@ -47,7 +46,7 @@ public abstract class GroupsSnippets <Result> extends AbstractSnippet<UnifiedGro
                  */
                 new GroupsSnippets<Void>(get_a_group) {
                     @Override
-                    public void request(final UnifiedGroupsService service, retrofit.Callback<Void> callback)  {
+                    public void request(final UnifiedGroupsService service, retrofit.Callback<Void> callback) {
 
                         final PlaceToStash stash = new PlaceToStash();
                         Runnable task = new Runnable() {
@@ -73,8 +72,7 @@ public abstract class GroupsSnippets <Result> extends AbstractSnippet<UnifiedGro
 
                             DeleteSnippetGroup(service, null, stash, task);
 
-                        }
-                        catch (InterruptedException e) {
+                        } catch (InterruptedException e) {
                             // report this error back to our callback
                             e.printStackTrace();
                         }
@@ -88,7 +86,7 @@ public abstract class GroupsSnippets <Result> extends AbstractSnippet<UnifiedGro
                  */
                 new GroupsSnippets<Void>(get_group_members) {
                     @Override
-                    public void request(final UnifiedGroupsService service, retrofit.Callback<Void> callback)  {
+                    public void request(final UnifiedGroupsService service, retrofit.Callback<Void> callback) {
 
                         final PlaceToStash stash = new PlaceToStash();
                         Runnable task = new Runnable() {
@@ -118,8 +116,7 @@ public abstract class GroupsSnippets <Result> extends AbstractSnippet<UnifiedGro
 
                             DeleteSnippetGroup(service, callback, stash, task);
 
-                        }
-                        catch (InterruptedException e) {
+                        } catch (InterruptedException e) {
                             // report this error back to our callback
                             e.printStackTrace();
                         }
@@ -133,7 +130,7 @@ public abstract class GroupsSnippets <Result> extends AbstractSnippet<UnifiedGro
                  */
                 new GroupsSnippets<Void>(get_group_owners) {
                     @Override
-                    public void request(final UnifiedGroupsService service, retrofit.Callback<Void> callback)  {
+                    public void request(final UnifiedGroupsService service, retrofit.Callback<Void> callback) {
 
                         final PlaceToStash stash = new PlaceToStash();
                         Runnable task = new Runnable() {
@@ -162,8 +159,7 @@ public abstract class GroupsSnippets <Result> extends AbstractSnippet<UnifiedGro
 
                             DeleteSnippetGroup(service, callback, stash, task);
 
-                        }
-                        catch (InterruptedException e) {
+                        } catch (InterruptedException e) {
                             // report this error back to our callback
                             e.printStackTrace();
                         }
@@ -209,8 +205,7 @@ public abstract class GroupsSnippets <Result> extends AbstractSnippet<UnifiedGro
                         try {
                             exec.join();
                             DeleteSnippetGroup(service, callback, stash, task);
-                        }
-                        catch (InterruptedException e) {
+                        } catch (InterruptedException e) {
                             // report this error back to our callback
                             e.printStackTrace();
                         }
@@ -226,10 +221,10 @@ public abstract class GroupsSnippets <Result> extends AbstractSnippet<UnifiedGro
 
 
                     @Override
-                    public void request(final UnifiedGroupsService service, retrofit.Callback<Void> callback)  {
-                         class PlaceToStash {
-                             public retrofit.client.Response resp;
-                             public IOException wentWrong;
+                    public void request(final UnifiedGroupsService service, retrofit.Callback<Void> callback) {
+                        class PlaceToStash {
+                            public retrofit.client.Response resp;
+                            public IOException wentWrong;
                         }
 
                         final PlaceToStash stash = new PlaceToStash();
@@ -237,9 +232,9 @@ public abstract class GroupsSnippets <Result> extends AbstractSnippet<UnifiedGro
                             @Override
                             public void run() {
                                 retrofit.client.Response response = service.insertGroup(
-                                            getVersion(),
-                                            createNewGroup());
-                                    stash.resp = response;
+                                        getVersion(),
+                                        createNewGroup());
+                                stash.resp = response;
                             }
                         };
                         Thread exec = new Thread(task);
@@ -259,8 +254,7 @@ public abstract class GroupsSnippets <Result> extends AbstractSnippet<UnifiedGro
                                     groupID,
                                     null);
 
-                        }
-                        catch (InterruptedException e) {
+                        } catch (InterruptedException e) {
                             // report this error back to our callback
                             e.printStackTrace();
                         }
@@ -275,7 +269,7 @@ public abstract class GroupsSnippets <Result> extends AbstractSnippet<UnifiedGro
 
 
                     @Override
-                    public void request(final UnifiedGroupsService service, retrofit.Callback<Void> callback)  {
+                    public void request(final UnifiedGroupsService service, retrofit.Callback<Void> callback) {
 
                         final PlaceToStash stash = new PlaceToStash();
                         Runnable task = new Runnable() {
@@ -292,8 +286,7 @@ public abstract class GroupsSnippets <Result> extends AbstractSnippet<UnifiedGro
                         try {
                             exec.join();
                             DeleteSnippetGroup(service, callback, stash, task);
-                        }
-                        catch (InterruptedException e) {
+                        } catch (InterruptedException e) {
                             // report this error back to our callback
                             e.printStackTrace();
                         }
@@ -309,6 +302,7 @@ public abstract class GroupsSnippets <Result> extends AbstractSnippet<UnifiedGro
     /**
      * Creates a Json payload for a POST operation to
      * insert a new group
+     *
      * @return TypedString. The Json body
      */
     protected TypedString createNewGroup() {
@@ -328,9 +322,10 @@ public abstract class GroupsSnippets <Result> extends AbstractSnippet<UnifiedGro
 
     /**
      * Creates a Json object for the body of a PATCH operation
+     *
      * @return
      */
-    protected  TypedString createUpdateBody() {
+    protected TypedString createUpdateBody() {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("name", UUID.randomUUID().toString());
         jsonObject.addProperty("mailEnabled", false);
@@ -347,11 +342,11 @@ public abstract class GroupsSnippets <Result> extends AbstractSnippet<UnifiedGro
     /**
      * Gets the directory object id from the HTTP response object
      * returned from a group REST call
+     *
      * @param json
      * @return String object id
      */
-    protected String getObjectId(retrofit.client.Response json)
-    {
+    protected String getObjectId(retrofit.client.Response json) {
         if (json == null)
             return "";
 
@@ -371,10 +366,11 @@ public abstract class GroupsSnippets <Result> extends AbstractSnippet<UnifiedGro
                     GroupVO.class);
 
             groupID = group.objectId;
+        } catch (IOException ex) {
         }
-        catch (IOException ex){}
         return groupID;
     }
+
     protected void DeleteSnippetGroup(
             UnifiedGroupsService service,
             retrofit.Callback<Void> callback,
@@ -395,8 +391,7 @@ public abstract class GroupsSnippets <Result> extends AbstractSnippet<UnifiedGro
                     groupID,
                     callback);
 
-        }
-        catch (InterruptedException e) {
+        } catch (InterruptedException e) {
             // report this error back to our callback
             e.printStackTrace();
         }

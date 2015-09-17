@@ -15,17 +15,6 @@ import android.widget.ListView;
 public class SnippetListFragment extends ListFragment {
 
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
-
-    private Callbacks mCallbacks = sDummyCallbacks;
-
-    private int mActivatedPosition = ListView.INVALID_POSITION;
-
-    public interface Callbacks {
-        void onItemSelected(int position);
-
-        void onDisconnectClicked();
-    }
-
     private static Callbacks sDummyCallbacks = new Callbacks() {
         @Override
         public void onItemSelected(int position) {
@@ -35,6 +24,8 @@ public class SnippetListFragment extends ListFragment {
         public void onDisconnectClicked() {
         }
     };
+    private Callbacks mCallbacks = sDummyCallbacks;
+    private int mActivatedPosition = ListView.INVALID_POSITION;
 
     public SnippetListFragment() {
     }
@@ -123,6 +114,12 @@ public class SnippetListFragment extends ListFragment {
         }
 
         mActivatedPosition = position;
+    }
+
+    public interface Callbacks {
+        void onItemSelected(int position);
+
+        void onDisconnectClicked();
     }
 }
 // *********************************************************

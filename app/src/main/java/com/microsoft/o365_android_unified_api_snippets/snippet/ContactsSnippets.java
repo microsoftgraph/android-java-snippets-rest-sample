@@ -67,7 +67,7 @@ public abstract class ContactsSnippets<Result> extends AbstractSnippet<UnifiedCo
                                 .getSharedPreferences(
                                         AppModule.PREFS,
                                         Context.MODE_PRIVATE)
-                                .getString(SharedPrefsUtil.PREF_USER_TENANT,"");
+                                .getString(SharedPrefsUtil.PREF_USER_TENANT, "");
 
                         TypedString bla = createNewContact(tenant);
                         service.insertContact(
@@ -85,6 +85,7 @@ public abstract class ContactsSnippets<Result> extends AbstractSnippet<UnifiedCo
     /**
      * Creates a Json payload for a POST operation to
      * insert a new group
+     *
      * @return TypedString. The Json body
      */
     protected TypedString createNewContact(String tenant) {
@@ -108,9 +109,10 @@ public abstract class ContactsSnippets<Result> extends AbstractSnippet<UnifiedCo
 
     /**
      * Creates a Json object for the body of a PATCH operation
+     *
      * @return
      */
-    protected  TypedString createUpdateBody() {
+    protected TypedString createUpdateBody() {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("name", UUID.randomUUID().toString());
         jsonObject.addProperty("mailEnabled", false);
@@ -127,11 +129,11 @@ public abstract class ContactsSnippets<Result> extends AbstractSnippet<UnifiedCo
     /**
      * Gets the directory object id from the HTTP response object
      * returned from a group REST call
+     *
      * @param json
      * @return String object id
      */
-    protected String getObjectId(retrofit.client.Response json)
-    {
+    protected String getObjectId(retrofit.client.Response json) {
         if (json == null)
             return "";
 
@@ -151,8 +153,8 @@ public abstract class ContactsSnippets<Result> extends AbstractSnippet<UnifiedCo
                     ContactVO.class);
 
             contactId = contact.objectId;
+        } catch (IOException ex) {
         }
-        catch (IOException ex){}
         return contactId;
     }
 

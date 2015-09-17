@@ -20,7 +20,7 @@ public class SharedPrefsUtil {
         return SnippetApp.getApp().getSharedPreferences(AppModule.PREFS, Context.MODE_PRIVATE);
     }
 
-    public static void persistUserID(AuthenticationResult result){
+    public static void persistUserID(AuthenticationResult result) {
         setPreference(PREF_USER_ID, result.getUserInfo().getDisplayableId());
     }
 
@@ -28,9 +28,10 @@ public class SharedPrefsUtil {
         setPreference(PREF_AUTH_TOKEN, result.getAccessToken());
     }
 
-    public static void persistUserTenant(String tenant){
-        getSharedPreferences().edit().putString(PREF_USER_TENANT,tenant).commit();
+    public static void persistUserTenant(String tenant) {
+        getSharedPreferences().edit().putString(PREF_USER_TENANT, tenant).commit();
     }
+
     private static void setPreference(String key, String accessToken) {
         getSharedPreferences().edit().putString(key, accessToken).commit();
     }

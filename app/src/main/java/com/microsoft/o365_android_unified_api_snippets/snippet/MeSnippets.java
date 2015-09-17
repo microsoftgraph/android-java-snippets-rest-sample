@@ -15,7 +15,7 @@ import static com.microsoft.o365_android_unified_api_snippets.R.array.get_me_man
 import static com.microsoft.o365_android_unified_api_snippets.R.array.get_me_photo;
 import static com.microsoft.o365_android_unified_api_snippets.R.array.get_me_responsibilities;
 
-public abstract  class MeSnippets <Result> extends AbstractSnippet<UnifiedUserService, Result>{
+public abstract class MeSnippets<Result> extends AbstractSnippet<UnifiedUserService, Result> {
     /**
      * Snippet constructor
      *
@@ -24,6 +24,7 @@ public abstract  class MeSnippets <Result> extends AbstractSnippet<UnifiedUserSe
     public MeSnippets(Integer descriptionArray) {
         super(SnippetCategory.userSnippetCategory, descriptionArray);
     }
+
     static MeSnippets[] getMeSnippets() {
         return new MeSnippets[]{
                 // Marker element
@@ -121,7 +122,6 @@ public abstract  class MeSnippets <Result> extends AbstractSnippet<UnifiedUserSe
 
     @Override
     public abstract void request(UnifiedUserService service, retrofit.Callback<Result> callback);
-
 
 
 }

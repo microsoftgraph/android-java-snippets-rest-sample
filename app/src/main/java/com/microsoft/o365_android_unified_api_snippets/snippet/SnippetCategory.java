@@ -6,7 +6,6 @@ package com.microsoft.o365_android_unified_api_snippets.snippet;
 import com.microsoft.o365_android_unified_api_snippets.application.SnippetApp;
 import com.microsoft.unifiedapi.service.UnifiedContactService;
 import com.microsoft.unifiedapi.service.UnifiedEventsService;
-
 import com.microsoft.unifiedapi.service.UnifiedGroupsService;
 import com.microsoft.unifiedapi.service.UnifiedMailService;
 import com.microsoft.unifiedapi.service.UnifiedUserService;

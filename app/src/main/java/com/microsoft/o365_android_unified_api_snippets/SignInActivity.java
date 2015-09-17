@@ -28,7 +28,7 @@ public class SignInActivity
 
         //I don't think it is a good idea for us to try to connect
         //the user on create. Better to wait until user clicks the connect button
-       //     mAuthenticationManager.connect(this);
+        //     mAuthenticationManager.connect(this);
 
         ButterKnife.inject(this);
     }

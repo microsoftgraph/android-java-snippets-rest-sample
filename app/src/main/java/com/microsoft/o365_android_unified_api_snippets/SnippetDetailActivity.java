@@ -1,8 +1,8 @@
 package com.microsoft.o365_android_unified_api_snippets;
 
 import android.content.Intent;
-import android.support.v4.app.NavUtils;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -26,10 +26,11 @@ public class SnippetDetailActivity extends BaseActivity {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.snippet_detail_container, fragment)
                     .commit();
-        }}
+        }
+    }
 
 
-    protected AuthenticationManager getAuthenticationManager(){
+    protected AuthenticationManager getAuthenticationManager() {
         return mAuthenticationManager;
     }
 

@@ -28,6 +28,7 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<UnifiedMai
     public MessageSnippets(Integer descriptionArray) {
         super(SnippetCategory.mailSnippetCategory, descriptionArray);
     }
+
     static MessageSnippets[] getMessageSnippets() {
         return new MessageSnippets[]{
                 // Marker element
@@ -64,7 +65,7 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<UnifiedMai
                                         SnippetApp.getApp().getString(R.string.mailSubject),
                                         SnippetApp.getApp().getString(R.string.mailBody),
                                         SnippetApp.getApp().getSharedPreferences(AppModule.PREFS,
-                                                Context.MODE_PRIVATE).getString(SharedPrefsUtil.PREF_USER_ID,"")),
+                                                Context.MODE_PRIVATE).getString(SharedPrefsUtil.PREF_USER_ID, "")),
                                 callback);
                     }
                 }
@@ -93,19 +94,20 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<UnifiedMai
 
 
         JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("Subject",subject);
+        jsonObject.addProperty("Subject", subject);
         jsonObject.add("Body", jsonObject_Body);
         jsonObject.add("ToRecipients", toRecipients);
 
         JsonObject messageObject = new JsonObject();
         messageObject.add("Message", jsonObject);
         messageObject.addProperty("SaveToSentItems", true);
-        return new TypedString(messageObject.toString()){
+        return new TypedString(messageObject.toString()) {
             @Override
-            public String mimeType() {return "application/json";}
+            public String mimeType() {
+                return "application/json";
+            }
         };
     }
-
 
 
 }
