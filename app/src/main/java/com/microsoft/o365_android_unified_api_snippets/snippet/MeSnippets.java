@@ -6,6 +6,7 @@ package com.microsoft.o365_android_unified_api_snippets.snippet;
 
 import com.microsoft.o365_android_unified_api_snippets.R;
 import com.microsoft.o365_android_unified_api_snippets.application.SnippetApp;
+import com.microsoft.unifiedapi.service.UnifiedMeService;
 import com.microsoft.unifiedapi.service.UnifiedUserService;
 
 import static com.microsoft.o365_android_unified_api_snippets.R.array.get_me;
@@ -15,14 +16,14 @@ import static com.microsoft.o365_android_unified_api_snippets.R.array.get_me_man
 import static com.microsoft.o365_android_unified_api_snippets.R.array.get_me_photo;
 import static com.microsoft.o365_android_unified_api_snippets.R.array.get_me_responsibilities;
 
-public abstract class MeSnippets<Result> extends AbstractSnippet<UnifiedUserService, Result> {
+public abstract class MeSnippets<Result> extends AbstractSnippet<UnifiedMeService, Result> {
     /**
      * Snippet constructor
      *
      * @param descriptionArray The String array for the specified snippet
      */
     public MeSnippets(Integer descriptionArray) {
-        super(SnippetCategory.userSnippetCategory, descriptionArray);
+        super(SnippetCategory.meSnippetCategory, descriptionArray);
     }
 
     static MeSnippets[] getMeSnippets() {
@@ -30,7 +31,7 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<UnifiedUserServ
                 // Marker element
                 new MeSnippets(null) {
                     @Override
-                    public void request(UnifiedUserService service, retrofit.Callback callback) {
+                    public void request(UnifiedMeService service, retrofit.Callback callback) {
                         // Not implemented
                     }
                 },
@@ -41,7 +42,7 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<UnifiedUserServ
                  */
                 new MeSnippets<Void>(get_me) {
                     @Override
-                    public void request(UnifiedUserService service, retrofit.Callback<Void> callback) {
+                    public void request(UnifiedMeService service, retrofit.Callback<Void> callback) {
                         service.getMe(
                                 getVersion(),
                                 callback);
@@ -54,7 +55,7 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<UnifiedUserServ
                  */
                 new MeSnippets<Void>(get_me_responsibilities) {
                     @Override
-                    public void request(UnifiedUserService service, retrofit.Callback<Void> callback) {
+                    public void request(UnifiedMeService service, retrofit.Callback<Void> callback) {
                         service.getMeResponsibilities(
                                 getVersion(),
                                 SnippetApp.getApp().getString(R.string.meResposibility),
@@ -68,7 +69,7 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<UnifiedUserServ
                  */
                 new MeSnippets<Void>(get_me_manager) {
                     @Override
-                    public void request(UnifiedUserService service, retrofit.Callback<Void> callback) {
+                    public void request(UnifiedMeService service, retrofit.Callback<Void> callback) {
                         service.getMeEntities(
                                 getVersion(),
                                 SnippetApp.getApp().getString(R.string.manager),
@@ -82,7 +83,7 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<UnifiedUserServ
                  */
                 new MeSnippets<Void>(get_me_direct_reports) {
                     @Override
-                    public void request(UnifiedUserService service, retrofit.Callback<Void> callback) {
+                    public void request(UnifiedMeService service, retrofit.Callback<Void> callback) {
                         service.getMeEntities(
                                 getVersion(),
                                 SnippetApp.getApp().getString(R.string.directReports),
@@ -96,7 +97,7 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<UnifiedUserServ
                  */
                 new MeSnippets<Void>(get_me_group_membership) {
                     @Override
-                    public void request(UnifiedUserService service, retrofit.Callback<Void> callback) {
+                    public void request(UnifiedMeService service, retrofit.Callback<Void> callback) {
                         service.getMeEntities(
                                 getVersion(),
                                 SnippetApp.getApp().getString(R.string.memberOf),
@@ -110,7 +111,7 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<UnifiedUserServ
                  */
                 new MeSnippets<Void>(get_me_photo) {
                     @Override
-                    public void request(UnifiedUserService service, retrofit.Callback<Void> callback) {
+                    public void request(UnifiedMeService service, retrofit.Callback<Void> callback) {
                         service.getMeEntities(
                                 getVersion(),
                                 SnippetApp.getApp().getString(R.string.userPhoto),
@@ -121,7 +122,7 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<UnifiedUserServ
     }
 
     @Override
-    public abstract void request(UnifiedUserService service, retrofit.Callback<Result> callback);
+    public abstract void request(UnifiedMeService service, retrofit.Callback<Result> callback);
 
 
 }

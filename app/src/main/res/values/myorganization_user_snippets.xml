@@ -17,7 +17,6 @@ item 5: is admin account required to run snippet (true/false)
         <item>beta</item>
         <item>true</item>
     </string-array>
-    <string name="section_filter_user_list">/myOrganization</string>
     <string-array name="get_organization_filtered_users">
         <item>GET: get organization users with country filter</item>
         <item>Gets all of the users in your tenant\'s directory who are from the United States, using $filter.</item>
@@ -25,7 +24,6 @@ item 5: is admin account required to run snippet (true/false)
         <item>beta</item>
         <item>true</item>
     </string-array>
-    <string name="section_insert_user">/myOrganization</string>
     <string-array name="insert_organization_user">
         <item>POST: insert a user</item>
         <item>Adds a new user to the tenant\'s directory.</item>
