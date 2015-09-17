@@ -12,6 +12,7 @@ import static com.microsoft.o365_android_unified_api_snippets.snippet.EventsSnip
 import static com.microsoft.o365_android_unified_api_snippets.snippet.GroupsSnippets.getGroupsSnippets;
 import static com.microsoft.o365_android_unified_api_snippets.snippet.MeSnippets.getMeSnippets;
 import static com.microsoft.o365_android_unified_api_snippets.snippet.MessageSnippets.getMessageSnippets;
+import static com.microsoft.o365_android_unified_api_snippets.snippet.UsersSnippets.getUsersSnippets;
 
 
 public class SnippetContent {
@@ -25,7 +26,8 @@ public class SnippetContent {
                 getGroupsSnippets(),
                 getEventsSnippets(),
                 getMeSnippets(),
-                getMessageSnippets()
+                getMessageSnippets(),
+                getUsersSnippets()
         };
 
         for (AbstractSnippet<?, ?>[] snippetArray : baseSnippets) {

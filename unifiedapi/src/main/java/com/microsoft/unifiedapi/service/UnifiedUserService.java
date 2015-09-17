@@ -68,11 +68,18 @@ public interface UnifiedUserService {
     );
 
     @GET("/{version}/myOrganization/users")
-    void getUsers(
+    void getFilterdUsers(
             @Path("version") String version,
             @Query("$filter") String filter,
             Callback<Void> callback
     );
+
+    @GET("/{version}/myOrganization/users")
+    void getUsers(
+            @Path("version") String version,
+            Callback<Void> callback
+    );
+
 
     @POST("/{version}/myOrganization/users")
     void postNewUser(

@@ -17,7 +17,9 @@ public abstract class AbstractSnippet<Service, Result> {
     private final int mDescIndex = 1;
     private final int mUrlIndex = 2;
     private final int mO365VersionIndex = 3;
+    private final int mIsAdminRequiredIndex = 4;
     private String mName, mDesc, mSection, mUrl, mO365Version;
+    boolean mIsAdminRequired;
 
 
     /**
@@ -54,6 +56,13 @@ public abstract class AbstractSnippet<Service, Result> {
                 mDesc = params[mDescIndex];
                 mUrl = params[mUrlIndex];
                 mO365Version = params[mO365VersionIndex];
+                String isAdminRequired = params[mIsAdminRequiredIndex];
+                if (isAdminRequired.equalsIgnoreCase("true")){
+                    mIsAdminRequired=true;
+                }
+                else{
+                    mIsAdminRequired=false;
+                }
             } catch (IndexOutOfBoundsException ex) {
                 throw new RuntimeException(
                         "Invalid array in "
@@ -101,8 +110,8 @@ public abstract class AbstractSnippet<Service, Result> {
         return mUrl;
     }
 
-    public String getSection() {
-        return mSection;
+    public boolean getIsAdminRequiredAdmin() {
+        return mIsAdminRequired;
     }
 
     public abstract void request(Service service, Callback<Result> callback);

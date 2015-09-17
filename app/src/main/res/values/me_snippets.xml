@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Format for each section
+item 1: Title of snippet
+item 2: Description of snippet
+item 3: Documentation link for more info on snippet
+item 4: version endpoint (beta, v1, v2, etc..)
+item 5: is admin account required to run snippet (true/false)
+-->
+
 <resources>
     <!-- The name of this section-->
     <string name="section_me">/me</string>
@@ -7,35 +15,41 @@
         <item>Gets information about the signed-in user.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_User</item>
         <item>beta</item>
+        <item>false</item>
     </string-array>
     <string-array name="get_me_responsibilities">
         <item>GET: get the responsibilities of me</item>
         <item>Gets select information about the signed-in user, using $select.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_User</item>
         <item>beta</item>
+        <item>false</item>
     </string-array>
     <string-array name="get_me_manager">
         <item>GET: get user\'s manager</item>
         <item>Gets the signed-in user\'s manager.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_manager</item>
         <item>beta</item>
+        <item>false</item>
     </string-array>
     <string-array name="get_me_direct_reports">
         <item>GET: get user\'s direct reports</item>
         <item>Gets the signed-in user\'s direct reports.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_directReports</item>
         <item>beta</item>
+        <item>false</item>
     </string-array>
     <string-array name="get_me_photo">
         <item>GET: get user\'s photo</item>
         <item>Gets the signed-in user\'s photo.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_UserPhoto</item>
         <item>beta</item>
+        <item>false</item>
     </string-array>
     <string-array name="get_me_group_membership">
         <item>GET groups user is a member of</item>
         <item>Gets the groups that the signed-in user is a member of.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_memberOf</item>
         <item>beta</item>
+        <item>false</item>
     </string-array>
 </resources>

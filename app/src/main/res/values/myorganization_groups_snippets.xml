@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Format for each section
+item 1: Title of snippet
+item 2: Description of snippet
+item 3: Documentation link for more info on snippet
+item 4: version endpoint (beta, v1, v2, etc..)
+item 5: is admin account required to run snippet (true/false)
+-->
+
 <resources>
     <!-- The name of this section-->
     <string name="section_groups">/groups</string>
@@ -8,42 +16,49 @@
         <item>Returns all of the groups in your tenant\'s directory.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_groups</item>
         <item>beta</item>
+        <item>false</item>
     </string-array>
     <string-array name="insert_a_group">
         <item>POST: Insert a group</item>
         <item>Adds a new security group to the tenant.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_groups</item>
         <item>beta</item>
+        <item>false</item>
     </string-array>
     <string-array name="get_a_group">
         <item>GET: get a group by id</item>
         <item>Gets information about a specific group in the tenant by ID.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_groups</item>
         <item>beta</item>
+        <item>false</item>
     </string-array>
     <string-array name="update_a_group">
         <item>PATCH: update the description of a group</item>
         <item>Creates a new group in the tenant and then updates the description of that group.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Group</item>
         <item>beta</item>
+        <item>false</item>
     </string-array>
     <string-array name="delete_a_group">
         <item>DELETE: delete a group</item>
         <item>Creates a new group in the tenant and then deletes that group.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Group</item>
         <item>beta</item>
+        <item>false</item>
     </string-array>
     <string-array name="get_group_members">
         <item>GET: get members of a group</item>
         <item>Gets the members of a group.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_members</item>
         <item>beta</item>
+        <item>false</item>
     </string-array>
     <string-array name="get_group_owners">
         <item>GET: get owners of a group</item>
         <item>Gets the owners of a group.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_owners</item>
         <item>beta</item>
+        <item>false</item>
     </string-array>
 
 </resources>
