@@ -7,9 +7,6 @@ package com.microsoft.o365_android_unified_api_snippets;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.microsoft.o365_android_unified_api_snippets.inject.AppModule;
 
@@ -45,8 +42,8 @@ public class SnippetListActivity extends BaseActivity
             // adding or replacing the detail fragment using a
             // fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putInt(SnippetDetailActivityFragment.ARG_ITEM_ID, position);
-            SnippetDetailActivityFragment fragment = new SnippetDetailActivityFragment();
+            arguments.putInt(SnippetDetailFragment.ARG_ITEM_ID, position);
+            SnippetDetailFragment fragment = new SnippetDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.snippet_detail_container, fragment)
@@ -55,7 +52,7 @@ public class SnippetListActivity extends BaseActivity
             // In single-pane mode, simply start the detail activity
             // for the selected item ID.
             Intent detailIntent = new Intent(this, SnippetDetailActivity.class);
-            detailIntent.putExtra(SnippetDetailActivityFragment.ARG_ITEM_ID, position);
+            detailIntent.putExtra(SnippetDetailFragment.ARG_ITEM_ID, position);
             startActivity(detailIntent);
         }
     }

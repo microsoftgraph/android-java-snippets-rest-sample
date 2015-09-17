@@ -2,7 +2,6 @@ package com.microsoft.o365_android_unified_api_snippets;
 
 import android.content.Intent;
 import android.support.v4.app.NavUtils;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,9 +19,9 @@ public class SnippetDetailActivity extends BaseActivity {
         }
         if (savedInstanceState == null) {
             Bundle arguments = new Bundle();
-            arguments.putInt(SnippetDetailActivityFragment.ARG_ITEM_ID,
-                    getIntent().getIntExtra(SnippetDetailActivityFragment.ARG_ITEM_ID, 0));
-            SnippetDetailActivityFragment fragment = new SnippetDetailActivityFragment();
+            arguments.putInt(SnippetDetailFragment.ARG_ITEM_ID,
+                    getIntent().getIntExtra(SnippetDetailFragment.ARG_ITEM_ID, 0));
+            SnippetDetailFragment fragment = new SnippetDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.snippet_detail_container, fragment)

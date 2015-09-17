@@ -67,7 +67,7 @@ import static com.microsoft.o365_android_unified_api_snippets.R.string.clippy;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class SnippetDetailActivityFragment <T, Result>
+public class SnippetDetailFragment<T, Result>
         extends BaseFragment implements Callback<Result> {
 
     public static final String ARG_ITEM_ID = "item_id";
@@ -79,7 +79,7 @@ public class SnippetDetailActivityFragment <T, Result>
 
     private AbstractSnippet<T, Result> mItem;
 
-    public SnippetDetailActivityFragment() {
+    public SnippetDetailFragment() {
     }
 
     @InjectView(txt_status_code)
