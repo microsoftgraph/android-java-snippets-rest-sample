@@ -69,6 +69,12 @@ public interface UnifiedGroupsService {
             Callback<Void> callback
     );
 
+    @DELETE("/{version}/myOrganization/Groups/{groupId}")
+    retrofit.client.Response deleteGroup(
+            @Path("version") String version,
+            @Path("groupId") String groupId
+    );
+
 }
 // *********************************************************
 //

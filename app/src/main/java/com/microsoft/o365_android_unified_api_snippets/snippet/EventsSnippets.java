@@ -12,9 +12,7 @@ import retrofit.Callback;
 import retrofit.mime.TypedString;
 
 import static com.microsoft.o365_android_unified_api_snippets.R.array.create_event;
-import static com.microsoft.o365_android_unified_api_snippets.R.array.delete_event;
 import static com.microsoft.o365_android_unified_api_snippets.R.array.get_user_events;
-import static com.microsoft.o365_android_unified_api_snippets.R.array.update_event;
 
 
 public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEventsService, Result> {

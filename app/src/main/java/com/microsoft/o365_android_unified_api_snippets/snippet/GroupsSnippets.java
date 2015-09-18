@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.UUID;
 
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 import retrofit.mime.TypedString;
 
 import static com.microsoft.o365_android_unified_api_snippets.R.array.delete_a_group;
@@ -41,9 +43,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                 },
                 // Snippets
 
-                /**
-                 * Gets all of the user's notebooks
-                 */
+
                 new GroupsSnippets<Void>(get_a_group) {
                     @Override
                     public void request(final UnifiedGroupsService service, retrofit.Callback<Void> callback) {
@@ -70,7 +70,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                                     groupID,
                                     callback);
 
-                            DeleteSnippetGroup(service, null, stash, task);
+                            DeleteSnippetGroup(service, stash, task);
 
                         } catch (InterruptedException e) {
                             // report this error back to our callback
@@ -114,7 +114,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                                     "members",
                                     callback);
 
-                            DeleteSnippetGroup(service, callback, stash, task);
+                           // DeleteSnippetGroup(service, callback, stash, task);
 
                         } catch (InterruptedException e) {
                             // report this error back to our callback
@@ -157,7 +157,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                                     "owners",
                                     callback);
 
-                            DeleteSnippetGroup(service, callback, stash, task);
+                            DeleteSnippetGroup(service, stash, task);
 
                         } catch (InterruptedException e) {
                             // report this error back to our callback
@@ -204,7 +204,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                         exec.start();
                         try {
                             exec.join();
-                            DeleteSnippetGroup(service, callback, stash, task);
+                            DeleteSnippetGroup(service, stash, task);
                         } catch (InterruptedException e) {
                             // report this error back to our callback
                             e.printStackTrace();
@@ -285,7 +285,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                         exec.start();
                         try {
                             exec.join();
-                            DeleteSnippetGroup(service, callback, stash, task);
+                            DeleteSnippetGroup(service, stash, task);
                         } catch (InterruptedException e) {
                             // report this error back to our callback
                             e.printStackTrace();
@@ -373,7 +373,6 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
 
     protected void DeleteSnippetGroup(
             UnifiedGroupsService service,
-            retrofit.Callback<Void> callback,
             PlaceToStash stash,
             Runnable task) {
         if (stash.resp == null)
@@ -386,11 +385,10 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
             String groupID = getObjectId(stash.resp);
 
             //Delete the inserted group
-            service.deleteGroup(
+            retrofit.client.Response response = service.deleteGroup(
                     getVersion(),
-                    groupID,
-                    callback);
-
+                    groupID);
+            int status = response.getStatus();
         } catch (InterruptedException e) {
             // report this error back to our callback
             e.printStackTrace();
