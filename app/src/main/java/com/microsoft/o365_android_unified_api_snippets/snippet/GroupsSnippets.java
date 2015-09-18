@@ -17,6 +17,7 @@ import java.util.UUID;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 import retrofit.mime.TypedString;
+import timber.log.Timber;
 
 import static com.microsoft.o365_android_unified_api_snippets.R.array.delete_a_group;
 import static com.microsoft.o365_android_unified_api_snippets.R.array.get_a_group;
@@ -384,13 +385,26 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
             exec.join();
             String groupID = getObjectId(stash.resp);
 
+            //Create lightweight callback for delete group call
+            retrofit.Callback<Void> callback = new retrofit.Callback<Void>(){
+                @Override
+                public void success(Void aVoid, Response response) {
+                    //Not Implemented
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    Timber.e("Error occurred deleting group: "+error.getMessage());
+                }
+            };
+
             //Delete the inserted group
-            retrofit.client.Response response = service.deleteGroup(
+            service.deleteGroup(
                     getVersion(),
-                    groupID);
-            int status = response.getStatus();
+                    groupID,
+                    callback);
         } catch (InterruptedException e) {
-            // report this error back to our callback
+            Timber.e(e.getMessage());
             e.printStackTrace();
         }
     }
