@@ -16,6 +16,8 @@
 
 Looking to build cool apps that help people work with their Office 365 data? Explore, learn, and understand the unified REST APIs by using the Android Unified API REST Snippets sample. This sample lets you view and run the REST APIs that send email, work with contacts, manage groups, and perform other activites with Office 365 data.
 
+**Note: If possible, please use this sample with a developer account or other non-production account in Office 365. The current version of this sample does not clean up any items that it creates in your mailbox, calendar, and contacts. It also does not remove users that it creates in Microsoft Azure Active Directory. When running operations that create items, you'll have to manually remove those items later.**
+
 You can explore the following operations for Office 365:
 
 **Users**
