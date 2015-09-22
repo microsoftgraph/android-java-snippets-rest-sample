@@ -4,24 +4,20 @@
 package com.microsoft.o365_android_unified_api_snippets.snippet;
 
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 import com.microsoft.unifiedapi.service.UnifiedGroupsService;
-import com.microsoft.unifiedvos.Envelope;
-import com.microsoft.unifiedvos.GroupVO;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.UUID;
 
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 import retrofit.mime.TypedString;
-import timber.log.Timber;
 
 import static com.microsoft.o365_android_unified_api_snippets.R.array.delete_a_group;
 import static com.microsoft.o365_android_unified_api_snippets.R.array.get_a_group;
@@ -202,7 +198,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                         exec.start();
                         try {
                             exec.join();
-                            String groupID = getObjectId(stash.resp);
+                            String groupID = getGroupId(stash.resp);
 
                             //update the group we created
                             service.patchGroup(
@@ -240,7 +236,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                         exec.start();
                         try {
                             exec.join();
-                            String groupID = getObjectId(stash.resp);
+                            String groupID = getGroupId(stash.resp);
                             //delete the group we created earlier
                             service.deleteGroup(
                                     getVersion(),
@@ -299,66 +295,60 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
     }
 
     /**
-     * Gets the directory object id from the HTTP response object
-     * returned from a group REST call
+     * Gets the group object id from the HTTP response object
+     * returned from a group REST call. Method expects that the JSON is a single
+     * group object.
      *
-     * @param json
-     * @return String object id
+     * @param json The JSON to parse. Expected to be a single group object
+     * @return The group id (objectID) of the first group found in the array.
      */
-    protected String getObjectId(retrofit.client.Response json) {
-        if (json == null)
-            return "";
-
-        String groupID = null;
-        Gson gson = new Gson();
-        GroupVO group = gson.fromJson(
-                getStringFromResponse(json),
-                GroupVO.class);
-        groupID = group.objectId;
-
-        return groupID;
-    }
-
-    protected String getFirstGroupId(retrofit.client.Response json){
+    protected String getGroupId(retrofit.client.Response json) {
         if (json == null)
             return "";
 
         String groupID;
 
-        JsonElement responseElement = new JsonParser().parse(getStringFromResponse(json));
-        JsonObject responseObject = responseElement.getAsJsonObject();
-        JsonArray valueArray = responseObject.getAsJsonArray("value");
-        JsonObject groupObject = valueArray.get(0).getAsJsonObject();
-        groupID = groupObject.get("objectId").getAsString();
-
-        return groupID;
-    }
-
-    protected String getStringFromResponse(retrofit.client.Response json){
-        if (json == null)
-            return "";
-
         try {
-            BufferedReader r = new BufferedReader(
-                    new InputStreamReader(
-                            json.getBody().in()));
-            StringBuilder total = new StringBuilder();
-            String line;
-            while ((line = r.readLine()) != null) {
-                total.append(line);
-            }
-            return total.toString();
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
+            JsonReader reader = new JsonReader(new InputStreamReader(json.getBody().in(),"UTF-8"));
+            JsonElement responseElement = new JsonParser().parse(reader);
+            JsonObject responseObject = responseElement.getAsJsonObject();
+            groupID = responseObject.get("objectId").getAsString();
+            return groupID;
+        } catch (IOException e) {
+            e.printStackTrace();
             return "";
         }
     }
 
+    /**
+     * Gets the first group object id found from the HTTP response object
+     * returned from a group REST call. Method expects that the JSON is an array
+     *  of group objects.
+     *
+     * @param json The JSON to parse. This is expected to be an array of group objects.
+     * @return The group id (objectID) of the first group found in the array.
+     */
+    protected String getFirstGroupId(retrofit.client.Response json){
+        if (json == null)
+            return "";
+
+        String groupID;
+        try {
+            JsonReader reader = new JsonReader(new InputStreamReader(json.getBody().in(),"UTF-8"));
+            JsonElement responseElement = new JsonParser().parse(reader);
+            JsonObject responseObject = responseElement.getAsJsonObject();
+            JsonArray valueArray = responseObject.getAsJsonArray("value");
+            JsonObject groupObject = valueArray.get(0).getAsJsonObject();
+            groupID = groupObject.get("objectId").getAsString();
+            return groupID;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
 
     class PlaceToStash {
         public retrofit.client.Response resp;
-        public IOException wentWrong;
     }
 
 }

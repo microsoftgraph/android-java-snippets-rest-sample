@@ -3,8 +3,6 @@ package com.microsoft.o365_android_unified_api_snippets.snippet;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.microsoft.unifiedapi.service.UnifiedEventsService;
-import com.microsoft.unifiedvos.Envelope;
-import com.microsoft.unifiedvos.EventVO;
 
 import org.joda.time.DateTime;
 
@@ -52,12 +50,12 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
                  * HTTP POST https://graph.microsoft.com/beta/me/events
                  * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event
                  */
-                new EventsSnippets<EventVO>(create_event) {
+                new EventsSnippets<Void>(create_event) {
 
                     @Override
                     public void request(
                             UnifiedEventsService unifiedEventsService,
-                            retrofit.Callback<EventVO> callback) {
+                            retrofit.Callback<Void> callback) {
                         //Create body defining the new event
                         DateTime start = new DateTime().now();
                         DateTime end = start.plusHours(1);

@@ -3,9 +3,6 @@
 */
 package com.microsoft.unifiedapi.service;
 
-import com.microsoft.unifiedvos.Envelope;
-import com.microsoft.unifiedvos.MessageVO;
-
 import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.GET;

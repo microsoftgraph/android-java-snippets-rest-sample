@@ -3,8 +3,6 @@
 */
 package com.microsoft.unifiedapi.service;
 
-import com.microsoft.unifiedvos.Envelope;
-import com.microsoft.unifiedvos.GroupVO;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Response;
 

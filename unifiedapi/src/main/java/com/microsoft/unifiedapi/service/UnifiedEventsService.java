@@ -3,9 +3,6 @@
 */
 package com.microsoft.unifiedapi.service;
 
-import com.microsoft.unifiedvos.Envelope;
-import com.microsoft.unifiedvos.EventVO;
-
 import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.DELETE;
@@ -29,48 +26,6 @@ public interface UnifiedEventsService {
     );
 
     /**
-     * Accepts an event for the connected user
-     * @param version
-     * @param eventId
-     * @param callback
-     */
-    @POST("/{version}/me/events/{eventid}/Accept")
-    void postAcceptEvent(
-            @Path("version") String version,
-            @Path("eventid") String eventId,
-            Callback<Envelope<EventVO>> callback
-    );
-
-
-    /**
-     * Tentatively accepts an event for the connected user
-     * @param version
-     * @param eventId
-     * @param callback
-     */
-    @POST("/{version}/me/events/{eventid}/TentativeAccept")
-    void postTentativeAccept(
-            @Path("version") String version,
-            @Path("eventid") String eventId,
-            Callback<Envelope<EventVO>> callback
-    );
-
-
-    /**
-     * Declines an event for the connected user
-     * @param version
-     * @param eventId
-     * @param callback
-     */
-    @POST("/{version}/me/events/{eventid}/Decline")
-    void postDeclineEvent(
-            @Path("version") String version,
-            @Path("eventid") String eventId,
-            Callback<Envelope<EventVO>> callback
-    );
-
-
-    /**
      * Creates a new event for the connected user
      * @param version
      * @param body
@@ -80,9 +35,8 @@ public interface UnifiedEventsService {
     void postNewEvent(
             @Path("version") String version,
             @Body TypedString body,
-            Callback<EventVO> callback
+            Callback<Void> callback
     );
-
 
     /**
      * Updates an event owned by the connected user
@@ -96,7 +50,7 @@ public interface UnifiedEventsService {
             @Path("version") String version,
             @Path("eventid") String eventId,
             @Body TypedString body,
-            Callback<Envelope<EventVO>> callback
+            Callback<Void> callback
 
     );
 
@@ -110,7 +64,7 @@ public interface UnifiedEventsService {
     void deleteEvent(
             @Path("version") String version,
             @Path("eventid") String eventId,
-            Callback<Envelope<EventVO>> callback
+            Callback<Void> callback
     );
 
 }

@@ -6,13 +6,16 @@ package com.microsoft.o365_android_unified_api_snippets.snippet;
 import android.content.Context;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 import com.microsoft.o365_android_unified_api_snippets.R;
 import com.microsoft.o365_android_unified_api_snippets.application.SnippetApp;
 import com.microsoft.o365_android_unified_api_snippets.inject.AppModule;
 import com.microsoft.o365_android_unified_api_snippets.util.SharedPrefsUtil;
 import com.microsoft.unifiedapi.service.UnifiedContactService;
-import com.microsoft.unifiedvos.ContactVO;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -106,63 +109,6 @@ public abstract class ContactsSnippets<Result> extends AbstractSnippet<UnifiedCo
             }
         };
     }
-
-    /**
-     * Creates a Json object for the body of a PATCH operation
-     *
-     * @return
-     */
-    protected TypedString createUpdateBody() {
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("name", UUID.randomUUID().toString());
-        jsonObject.addProperty("mailEnabled", false);
-        jsonObject.addProperty("mailNickname", UUID.randomUUID().toString());
-        jsonObject.addProperty("securityEnabled", true);
-        return new TypedString(jsonObject.toString()) {
-            @Override
-            public String mimeType() {
-                return "application/json";
-            }
-        };
-    }
-
-    /**
-     * Gets the directory object id from the HTTP response object
-     * returned from a group REST call
-     *
-     * @param json
-     * @return String object id
-     */
-    protected String getObjectId(retrofit.client.Response json) {
-        if (json == null)
-            return "";
-
-        String contactId = null;
-        try {
-            BufferedReader r = new BufferedReader(
-                    new InputStreamReader(
-                            json.getBody().in()));
-            StringBuilder total = new StringBuilder();
-            String line;
-            while ((line = r.readLine()) != null) {
-                total.append(line);
-            }
-            Gson gson = new Gson();
-            ContactVO contact = gson.fromJson(
-                    total.toString(),
-                    ContactVO.class);
-
-            contactId = contact.objectId;
-        } catch (IOException ex) {
-        }
-        return contactId;
-    }
-
-    class PlaceToStash {
-        public retrofit.client.Response resp;
-        public IOException wentWrong;
-    }
-
 }
 // *********************************************************
 //
