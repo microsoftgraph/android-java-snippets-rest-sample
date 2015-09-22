@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="15dp">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -12,19 +12,21 @@
             android:id="@+id/txt_snippet_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="Get all pages" />
 
         <TextView
-            android:id="@+id/beta_indicator"
+            android:id="@+id/admin_indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/txt_snippet_name"
-            android:layout_toEndOf="@+id/txt_snippet_name"
-            android:layout_toRightOf="@+id/txt_snippet_name"
+            android:layout_below="@+id/txt_snippet_name"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="2dp"
             android:fontFamily="sans-serif-condensed"
             android:paddingLeft="3dp"
             android:paddingRight="3dp"
-            android:text="@string/beta"
+            android:text="@string/admin"
             android:textColor="#A32800"
             android:textSize="12sp" />
     </RelativeLayout>

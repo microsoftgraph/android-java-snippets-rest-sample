@@ -12,21 +12,19 @@ import retrofit.Callback;
 import retrofit.mime.TypedString;
 
 import static com.microsoft.o365_android_unified_api_snippets.R.array.create_event;
-import static com.microsoft.o365_android_unified_api_snippets.R.array.delete_event;
 import static com.microsoft.o365_android_unified_api_snippets.R.array.get_user_events;
-import static com.microsoft.o365_android_unified_api_snippets.R.array.update_event;
 
 
-public abstract class EventsSnippet<Result> extends AbstractSnippet<UnifiedEventsService, Result> {
+public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEventsService, Result> {
 
-    public EventsSnippet(Integer descriptionArray) {
+    public EventsSnippets(Integer descriptionArray) {
         super(SnippetCategory.eventsSnippetCategory, descriptionArray);
     }
 
-    static EventsSnippet[] getEventsSnippets() {
-        return new EventsSnippet[]{
+    static EventsSnippets[] getEventsSnippets() {
+        return new EventsSnippets[]{
                 // Marker element
-                new EventsSnippet(null) {
+                new EventsSnippets(null) {
 
                     @Override
                     public void request(UnifiedEventsService o, Callback callback) {
@@ -39,7 +37,7 @@ public abstract class EventsSnippet<Result> extends AbstractSnippet<UnifiedEvent
                  * HTTP GET https://graph.microsoft.com/beta/me/events
                  * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event
                  */
-                new EventsSnippet<Void>(get_user_events) {
+                new EventsSnippets<Void>(get_user_events) {
 
                     @Override
                     public void request(
@@ -54,7 +52,7 @@ public abstract class EventsSnippet<Result> extends AbstractSnippet<UnifiedEvent
                  * HTTP POST https://graph.microsoft.com/beta/me/events
                  * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event
                  */
-                new EventsSnippet<EventVO>(create_event) {
+                new EventsSnippets<EventVO>(create_event) {
 
                     @Override
                     public void request(
@@ -63,6 +61,7 @@ public abstract class EventsSnippet<Result> extends AbstractSnippet<UnifiedEvent
                         //Create body defining the new event
                         DateTime start = new DateTime().now();
                         DateTime end = start.plusHours(1);
+
 
                         //create body
                         JsonObject newEvent = new JsonObject();
@@ -104,39 +103,9 @@ public abstract class EventsSnippet<Result> extends AbstractSnippet<UnifiedEvent
                         //Call service to POST the new event
                         unifiedEventsService.postNewEvent(getVersion(), body, callback);
                     }
-                },
 
-                 /*
-                 * PATCH update an event
-                 * HTTP PATCH
-                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event
-                 */
-                new EventsSnippet<Void>(update_event) {
-
-                    @Override
-                    public void request(
-                            UnifiedEventsService unifiedEventsService,
-                            retrofit.Callback<Void> callback) {
-
-                        //TODO create JSON body of event update to make
-                        unifiedEventsService.getEvents(getVersion(), callback);
-                    }
-                },
-
-                 /*
-                 * DELETE delete an event
-                 * HTTP DELETE
-                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event
-                 */
-                new EventsSnippet<Void>(delete_event) {
-
-                    @Override
-                    public void request(
-                            UnifiedEventsService unifiedEventsService,
-                            retrofit.Callback<Void> callback) {
-                        unifiedEventsService.getEvents(getVersion(), callback);
-                    }
                 }
+
         };
     }
 

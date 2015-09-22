@@ -17,6 +17,7 @@ import retrofit.RestAdapter;
 import timber.log.Timber;
 
 public class SnippetApp extends Application {
+    private static SnippetApp sSnippetApp;
     /**
      * The {@link dagger.ObjectGraph} used by Dagger to fulfill <code>@inject</code> annotations
      *
@@ -25,9 +26,6 @@ public class SnippetApp extends Application {
      * @see javax.inject.Singleton
      */
     public ObjectGraph mObjectGraph;
-
-    private static SnippetApp sSnippetApp;
-
     @Inject
     protected String endpoint;
 
@@ -36,6 +34,10 @@ public class SnippetApp extends Application {
 
     @Inject
     protected RequestInterceptor requestInterceptor;
+
+    public static SnippetApp getApp() {
+        return sSnippetApp;
+    }
 
     @Override
     public void onCreate() {
@@ -46,10 +48,6 @@ public class SnippetApp extends Application {
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
         }
-    }
-
-    public static SnippetApp getApp() {
-        return sSnippetApp;
     }
 
     public RestAdapter getRestAdapter() {

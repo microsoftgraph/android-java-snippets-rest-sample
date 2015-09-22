@@ -56,17 +56,26 @@ public class SnippetListAdapter extends BaseAdapter {
         TextView name = (TextView) convertView.findViewById(R.id.txt_snippet_name);
         name.setText(clickedSnippet.getName());
 
+        //Set text to indicate if Admin account is required to run the snippet
         if (!isSegment) {
-            // TODO determine beta status??
-            View betaIndicator = convertView.findViewById(R.id.beta_indicator);
-            betaIndicator.setVisibility(View.GONE);
+            TextView adminIndicator = (TextView) convertView.findViewById(R.id.admin_indicator);
+            if (adminIndicator != null) {
+                if (clickedSnippet.getIsAdminRequiredAdmin()) {
+                    //Admin account required
+                    adminIndicator.setText(R.string.admin);
+                    adminIndicator.setVisibility(View.VISIBLE);
+                } else {
+                    //Admin account not required
+                    adminIndicator.setVisibility(View.GONE);
+                }
+            }
         }
 
         return convertView;
     }
 
     private boolean isWrongViewType(boolean isSegment, View convertView) {
-        View v = convertView.findViewById(R.id.beta_indicator);
+        View v = convertView.findViewById(R.id.admin_indicator);
         return !isSegment && null == v || (isSegment && null != v);
     }
 

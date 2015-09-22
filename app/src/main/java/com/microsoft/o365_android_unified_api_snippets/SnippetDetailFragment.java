@@ -6,8 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
-import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.ClipboardManager;
 import android.view.LayoutInflater;
@@ -20,12 +20,11 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import org.apache.commons.io.IOUtils;
-
 
 import com.microsoft.o365_android_unified_api_snippets.snippet.AbstractSnippet;
 import com.microsoft.o365_android_unified_api_snippets.snippet.SnippetContent;
 
+import org.apache.commons.io.IOUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -59,58 +58,46 @@ import static com.microsoft.o365_android_unified_api_snippets.R.id.txt_response_
 import static com.microsoft.o365_android_unified_api_snippets.R.id.txt_response_headers;
 import static com.microsoft.o365_android_unified_api_snippets.R.id.txt_status_code;
 import static com.microsoft.o365_android_unified_api_snippets.R.id.txt_status_color;
+import static com.microsoft.o365_android_unified_api_snippets.R.string.clippy;
 import static com.microsoft.o365_android_unified_api_snippets.R.string.req_url;
 import static com.microsoft.o365_android_unified_api_snippets.R.string.response_body;
 import static com.microsoft.o365_android_unified_api_snippets.R.string.response_headers;
-import static com.microsoft.o365_android_unified_api_snippets.R.string.clippy;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class SnippetDetailActivityFragment <T, Result>
+public class SnippetDetailFragment<T, Result>
         extends BaseFragment implements Callback<Result> {
 
     public static final String ARG_ITEM_ID = "item_id";
     public static final String ARG_TEXT_INPUT = "TextInput";
     public static final String ARG_SPINNER_SELECTION = "SpinnerSelection";
     public static final int UNSET = -1;
-
-    boolean setupDidRun = false;
-
-    private AbstractSnippet<T, Result> mItem;
-
-    public SnippetDetailActivityFragment() {
-    }
-
     @InjectView(txt_status_code)
     protected TextView mStatusCode;
-
     @InjectView(txt_status_color)
     protected View mStatusColor;
-
     @InjectView(txt_desc)
     protected TextView mSnippetDescription;
-
     @InjectView(txt_request_url)
     protected TextView mRequestUrl;
-
     @InjectView(txt_response_headers)
     protected TextView mResponseHeaders;
-
     @InjectView(txt_response_body)
     protected TextView mResponseBody;
-
     @InjectView(spinner)
     protected Spinner mSpinner;
-
     @InjectView(txt_input)
     protected EditText mEditText;
-
     @InjectView(progressbar)
     protected ProgressBar mProgressbar;
-
     @InjectView(btn_run)
     protected Button mRunButton;
+    boolean setupDidRun = false;
+    private AbstractSnippet<T, Result> mItem;
+
+    public SnippetDetailFragment() {
+    }
 
     @OnClick(txt_request_url)
     public void onRequestUrlClicked(TextView tv) {
@@ -172,7 +159,7 @@ public class SnippetDetailActivityFragment <T, Result>
         displayStatusCode("", getResources().getColor(R.color.transparent));
         mProgressbar.setVisibility(VISIBLE);
 
-        SnippetDetailActivity activity = (SnippetDetailActivity)getActivity();
+        SnippetDetailActivity activity = (SnippetDetailActivity) getActivity();
 
 
         mItem.request(mItem.mService, this);
@@ -201,7 +188,7 @@ public class SnippetDetailActivityFragment <T, Result>
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_snippet_detail, container, false);
         ButterKnife.inject(this, rootView);
         mSnippetDescription.setText(mItem.getDescription());
@@ -222,11 +209,11 @@ public class SnippetDetailActivityFragment <T, Result>
     @Override
     public void onResume() {
         super.onResume();
-            if (!setupDidRun) {
-                setupDidRun = true;
-                mProgressbar.setVisibility(View.VISIBLE);
-                mItem.setUp(AbstractSnippet.sServices, getSetUpCallback());
-            }
+        if (!setupDidRun) {
+            setupDidRun = true;
+            mProgressbar.setVisibility(View.VISIBLE);
+            mItem.setUp(AbstractSnippet.sServices, getSetUpCallback());
+        }
     }
 
     private retrofit.Callback<String[]> getSetUpCallback() {

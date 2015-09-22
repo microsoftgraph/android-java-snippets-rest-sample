@@ -5,27 +5,27 @@ package com.microsoft.o365_android_unified_api_snippets.snippet;
 
 import com.microsoft.o365_android_unified_api_snippets.application.SnippetApp;
 import com.microsoft.unifiedapi.service.UnifiedContactService;
-import com.microsoft.unifiedapi.service.UnifiedEventsService;
 
 import retrofit.Callback;
 
 
-public abstract class AbstractSnippet <Service, Result> {
+public abstract class AbstractSnippet<Service, Result> {
 
     public static final Services sServices = new Services();
-
-    private String mName, mDesc, mSection, mUrl, mO365Version;
     public final Service mService;
-
     private final int mNameIndex = 0;
     private final int mDescIndex = 1;
     private final int mUrlIndex = 2;
     private final int mO365VersionIndex = 3;
+    private final int mIsAdminRequiredIndex = 4;
+    private String mName, mDesc, mSection, mUrl, mO365Version;
+    boolean mIsAdminRequired;
 
 
     /**
      * Snippet constructor
-     * @param category Snippet category (Notebook, sectionGroup, section, page)
+     *
+     * @param category         Snippet category (Notebook, sectionGroup, section, page)
      * @param descriptionArray The String array for the specified snippet
      */
     public AbstractSnippet(
@@ -43,6 +43,7 @@ public abstract class AbstractSnippet <Service, Result> {
     /**
      * Gets the items from the specified snippet XML string array and stores the values
      * in private class fields
+     *
      * @param category
      * @param descriptionArray
      */
@@ -50,36 +51,32 @@ public abstract class AbstractSnippet <Service, Result> {
         if (null != descriptionArray) {
             String[] params = SnippetApp.getApp().getResources().getStringArray(descriptionArray);
 
-            try{
+            try {
                 mName = params[mNameIndex];
                 mDesc = params[mDescIndex];
                 mUrl = params[mUrlIndex];
                 mO365Version = params[mO365VersionIndex];
-            }
-            catch (IndexOutOfBoundsException ex){
+                String isAdminRequired = params[mIsAdminRequiredIndex];
+                if (isAdminRequired.equalsIgnoreCase("true")){
+                    mIsAdminRequired=true;
+                }
+                else{
+                    mIsAdminRequired=false;
+                }
+            } catch (IndexOutOfBoundsException ex) {
                 throw new RuntimeException(
                         "Invalid array in "
                                 + category.mSection
-                                +" snippet XML file"
+                                + " snippet XML file"
                         , ex);
             }
-        }
-        else {
+        } else {
             mName = category.mSection;
             mDesc = mUrl = null;
             mO365Version = null;
 
         }
         mSection = category.mSection;
-    }
-
-    protected static class Services {
-
-        public final UnifiedContactService mUnifiedContactService;
-
-        Services() {
-            mUnifiedContactService = SnippetCategory.contactSnippetCategory.mService;
-        }
     }
 
     @SuppressWarnings("unused")
@@ -101,20 +98,32 @@ public abstract class AbstractSnippet <Service, Result> {
         return mO365Version;
     }
 
-
-    public  String getName(){
+    public String getName() {
         return mName;
     }
-    public String getDescription(){
+
+    public String getDescription() {
         return mDesc;
     }
-    public String getUrl(){
+
+    public String getUrl() {
         return mUrl;
     }
-    public String getSection(){
-        return mSection;
+
+    public boolean getIsAdminRequiredAdmin() {
+        return mIsAdminRequired;
     }
+
     public abstract void request(Service service, Callback<Result> callback);
+
+    protected static class Services {
+
+        public final UnifiedContactService mUnifiedContactService;
+
+        Services() {
+            mUnifiedContactService = SnippetCategory.contactSnippetCategory.mService;
+        }
+    }
 
 }
 // *********************************************************

@@ -3,11 +3,6 @@
 */
 package com.microsoft.unifiedapi.service;
 
-import com.microsoft.unifiedvos.BaseDirectoryObjectVO;
-import com.microsoft.unifiedvos.Envelope;
-import com.microsoft.unifiedvos.Photo;
-import com.microsoft.unifiedvos.UserVO;
-
 import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -15,64 +10,22 @@ import retrofit.http.POST;
 import retrofit.http.Path;
 import retrofit.http.Query;
 import retrofit.mime.TypedString;
+
 public interface UnifiedUserService {
 
-    @GET("/{version}/me")
-    void getMe(
+    @GET("/{version}/myOrganization/users")
+    void getFilterdUsers(
             @Path("version") String version,
-            Callback<Void> callback
-    );
-
-    @GET("/{version}/me")
-    void getMeResponsibilities(
-            @Path("version") String version,
-            @Query("$select") String select,
-            Callback<Void> callback
-    );
-
-    @GET("/{version}/me/{entity}")
-    void getMeEntities(
-            @Path("version") String version,
-            @Path("entity") String entity,
-            Callback<Void> callback
-    );
-
-    @GET("/{version}/me/userPhoto")
-    void getMePhoto(
-            @Path("version") String version,
-            Callback<Void> callback
-    );
-
-    @GET("/{version}/me/manager")
-    void getMeManager(
-            @Path("version") String version,
-            Callback<Void> callback
-    );
-
-    @GET("/{version}/me/directReports")
-    void getDirectReports(
-            @Path("version") String version,
-            Callback<Void> callback
-    );
-
-    @GET("/{version}/me/workingWith")
-    void getWorkingWith(
-            @Path("version") String version,
-            Callback<Void> callback
-    );
-
-    @GET("/{version}/me/memberOf")
-    void getMemberOf(
-            @Path("version") String version,
+            @Query("$filter") String filter,
             Callback<Void> callback
     );
 
     @GET("/{version}/myOrganization/users")
     void getUsers(
             @Path("version") String version,
-            @Query("$filter") String filter,
             Callback<Void> callback
     );
+
 
     @POST("/{version}/myOrganization/users")
     void postNewUser(

@@ -4,11 +4,11 @@
 
 package com.microsoft.o365_android_unified_api_snippets;
 
-import com.microsoft.o365_auth.AzureADModule;
-import com.microsoft.o365_auth.AzureAppCompatActivity;
 import com.microsoft.o365_android_unified_api_snippets.application.SnippetApp;
 import com.microsoft.o365_android_unified_api_snippets.inject.AzureModule;
 import com.microsoft.o365_android_unified_api_snippets.inject.ObjectGraphInjector;
+import com.microsoft.o365_auth.AzureADModule;
+import com.microsoft.o365_auth.AzureAppCompatActivity;
 
 import dagger.ObjectGraph;
 

@@ -1,31 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Format for each section
+item 1: Title of snippet
+item 2: Description of snippet
+item 3: Documentation link for more info on snippet
+item 4: version endpoint (beta, v1, v2, etc..)
+item 5: is admin account required to run snippet (true/false)
+-->
 <resources>
     <!-- The name of this section-->
     <string name="section_events">/events</string>
 
     <string-array name="get_user_events">
-        <item>GET: All user\'s events</item>
-        <item>Gets the signed-in user\'s events from Exchange Online.</item>
+        <item>GET: user\'s events</item>
+        <item>Gets the signed-in user\'s calendar events.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event</item>
         <item>beta</item>
+        <item>false</item>
     </string-array>
     <string-array name="create_event">
-        <item>POST: insert event</item>
+        <item>POST: Add an event</item>
         <item>Adds an event to the signed-in user\'s calendar.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event</item>
         <item>beta</item>
-    </string-array>
-    <string-array name="update_event">
-        <item>PATCH update an event</item>
-        <item>Adds an event to the signed-in user\'s calendar, then updates the subject of the event.</item>
-        <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event</item>
-        <item>beta</item>
-    </string-array>
-    <string-array name="delete_event">
-        <item>DELETE delete an event</item>
-        <item>Adds an event to the signed-in user\'s calendar, then deletes the event.</item>
-        <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event</item>
-        <item>beta</item>
+        <item>false</item>
     </string-array>
 
 </resources>

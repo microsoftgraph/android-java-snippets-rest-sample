@@ -15,6 +15,7 @@ import retrofit.http.GET;
 import retrofit.http.PATCH;
 import retrofit.http.POST;
 import retrofit.http.Path;
+import retrofit.http.Query;
 import retrofit.mime.TypedString;
 
 public interface UnifiedGroupsService {
@@ -23,6 +24,18 @@ public interface UnifiedGroupsService {
     void getGroups(
             @Path("version") String version,
             Callback<Void> callback
+    );
+
+    @GET("/{version}/myOrganization/Groups")
+    retrofit.client.Response getTopGroups(
+            @Path("version") String version,
+            @Query("$top") String top
+    );
+
+
+    @GET("/{version}/myOrganization/Groups")
+    retrofit.client.Response getGroups(
+            @Path("version") String version
     );
 
     @GET("/{version}/myOrganization/Groups/{groupId}")
@@ -49,10 +62,18 @@ public interface UnifiedGroupsService {
 
 
     @POST("/{version}/myOrganization/Groups/")
-    retrofit.client.Response insertGroup(
+    void insertGroup(
+            @Path("version") String version,
+            @Body TypedString content,
+            Callback<Void> callback
+    );
+
+    @POST("/{version}/myOrganization/Groups/")
+    retrofit.client.Response insertGroupSynchronous(
             @Path("version") String version,
             @Body TypedString content
     );
+
 
     @PATCH("/{version}/myOrganization/Groups/{groupId}")
     void patchGroup(
