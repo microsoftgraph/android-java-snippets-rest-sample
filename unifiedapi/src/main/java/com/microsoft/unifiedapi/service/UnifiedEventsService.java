@@ -80,7 +80,7 @@ public interface UnifiedEventsService {
     void postNewEvent(
             @Path("version") String version,
             @Body TypedString body,
-            Callback<Envelope<EventVO>> callback
+            Callback<EventVO> callback
     );
 
 

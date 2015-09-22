@@ -5,62 +5,60 @@ package com.microsoft.unifiedvos;
 
 import com.google.gson.annotations.SerializedName;
 
-import org.joda.time.DateTime;
-
 import java.util.UUID;
 
 public class EventVO extends OutlookItemVO{
-    @SerializedName("Attachments")
-    public BaseAttachmentVO[] attachments;
-    @SerializedName("Attendees")
-    public AttendeeVO[] attendees;
-    @SerializedName("ItemBody")
-    public ItemBodyVO itemBody;
-    @SerializedName("BodyPreview")
-    public String bodyPreview;
-    @SerializedName("Calendar")
-    public CalendarVO calendar;
-    @SerializedName("End")
-    public DateTime end;
-    @SerializedName("EndTimeZone")
-    public String endTimeZone;
-    @SerializedName("HasAttachments")
-    public Boolean hasAttachments;
-    @SerializedName("Importance")
-    public int importance;
-    @SerializedName("Instances")
-    public EventVO[] instances;
-    public UUID iCalUID;
-    @SerializedName("IsAllDay")
-    public Boolean isAllDay;
-    @SerializedName("IsCancelled")
-    public Boolean isCancelled;
-    @SerializedName("IsOrganizer")
-    public Boolean isOrganizer;
-    @SerializedName("Location")
-    public LocationVO location;
-    @SerializedName("Organizer")
-    public RecipientVO organizer;
-    @SerializedName("Recurrence")
-    public PatternedRecurrenceVO recurrence;
-    @SerializedName("ResponseRequested")
-    public Boolean responseRequested;
-    @SerializedName("ResponseStatus")
-    public String responseStatus;
-    @SerializedName("SeriesMasterId")
-    public String seriesMasterId;
-    @SerializedName("ShowAs")
-    public int showAs;
-    @SerializedName("Start")
-    public DateTime start;
-    @SerializedName("StartTimeZone")
-    public String startTimeZone;
-    @SerializedName("Subject")
-    public String subject;
-    @SerializedName("Type")
-    public int type;
-    @SerializedName("WebLink")
-    public String webLink;
+//    @SerializedName("Attachments")
+//    public BaseAttachmentVO[] attachments;
+//    @SerializedName("Attendees")
+//    public AttendeeVO[] attendees;
+//    @SerializedName("ItemBody")
+//    public ItemBodyVO itemBody;
+//    @SerializedName("BodyPreview")
+//    public String bodyPreview;
+//    @SerializedName("Calendar")
+//    public CalendarVO calendar;
+////    @SerializedName("End")
+////    public DateTime end;
+//    @SerializedName("EndTimeZone")
+//    public String endTimeZone;
+//    @SerializedName("HasAttachments")
+//    public Boolean hasAttachments;
+//    @SerializedName("Importance")
+//    public int importance;
+//    @SerializedName("Instances")
+//    public EventVO[] instances;
+//    public UUID iCalUID;
+//    @SerializedName("IsAllDay")
+//    public Boolean isAllDay;
+//    @SerializedName("IsCancelled")
+//    public Boolean isCancelled;
+//    @SerializedName("IsOrganizer")
+//    public Boolean isOrganizer;
+//    @SerializedName("Location")
+//    public LocationVO location;
+//    @SerializedName("Organizer")
+//    public RecipientVO organizer;
+//    @SerializedName("Recurrence")
+//    public PatternedRecurrenceVO recurrence;
+//    @SerializedName("ResponseRequested")
+//    public Boolean responseRequested;
+////    @SerializedName("ResponseStatus")
+////    public String responseStatus;
+//    @SerializedName("SeriesMasterId")
+//    public String seriesMasterId;
+//    @SerializedName("ShowAs")
+//    public int showAs;
+////    @SerializedName("Start")
+////    public DateTime start;
+//    @SerializedName("StartTimeZone")
+//    public String startTimeZone;
+//    @SerializedName("Subject")
+//    public String subject;
+//    @SerializedName("Type")
+//    public int type;
+//    @SerializedName("WebLink")
+//    public String webLink;
 
 }
 // *********************************************************

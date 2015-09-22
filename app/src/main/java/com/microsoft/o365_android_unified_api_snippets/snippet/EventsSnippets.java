@@ -28,13 +28,13 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
 
                     @Override
                     public void request(UnifiedEventsService o, Callback callback) {
-
+                        //No implementation
                     }
                 },
 
                 /*
                  * GET all events for the signed in user.
-                 * HTTP POST
+                 * HTTP GET https://graph.microsoft.com/beta/me/events
                  * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event
                  */
                 new EventsSnippets<Void>(get_user_events) {
@@ -52,12 +52,12 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
                  * HTTP POST https://graph.microsoft.com/beta/me/events
                  * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event
                  */
-                new EventsSnippets<Envelope<EventVO>>(create_event) {
+                new EventsSnippets<EventVO>(create_event) {
 
                     @Override
                     public void request(
                             UnifiedEventsService unifiedEventsService,
-                            retrofit.Callback<Envelope<EventVO>> callback) {
+                            retrofit.Callback<EventVO> callback) {
                         //Create body defining the new event
                         DateTime start = new DateTime().now();
                         DateTime end = start.plusHours(1);
@@ -108,7 +108,6 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
 
         };
     }
-
 
     public abstract void request(UnifiedEventsService unifiedEventsService, Callback<Result> callback);
 }
