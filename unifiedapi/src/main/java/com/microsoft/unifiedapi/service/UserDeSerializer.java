@@ -3,9 +3,6 @@
 */
 package com.microsoft.unifiedapi.service;
 
-/**
- * Created by johnaustin on 9/9/15.
- */
 public class UserDeSerializer {
 }
 // *********************************************************
