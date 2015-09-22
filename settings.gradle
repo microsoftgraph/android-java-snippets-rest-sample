@@ -1,1 +1,1 @@
-include ':app', ':o365-auth', ':unifiedapi', ':unifiedvos'
+include ':app', ':o365-auth', ':unifiedapi'
