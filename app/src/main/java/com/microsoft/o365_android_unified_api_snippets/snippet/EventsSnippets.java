@@ -136,7 +136,6 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
                                     updateBody,
                                     callback);
                         } catch (InterruptedException e) {
-                            // report this error back to our callback
                             e.printStackTrace();
                         }
                     }
@@ -150,12 +149,41 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
 
                     @Override
                     public void request(
-                            UnifiedEventsService unifiedEventsService,
+                            final UnifiedEventsService unifiedEventsService,
                             retrofit.Callback<Void> callback) {
-                        unifiedEventsService.getEvents(getVersion(), callback);
+                        final PlaceToStash stash = new PlaceToStash();
+                        final JsonObject newEvent = createNewEventJsonBody();
+                        Runnable task = new Runnable() {
+                            @Override
+                            public void run() {
+                                TypedString body = new TypedString(newEvent.toString()) {
+                                    @Override
+                                    public String mimeType() {
+                                        return "application/json";
+                                    }
+                                };
+                                //insert an event that we will delete later
+                                retrofit.client.Response responseNewEvent = unifiedEventsService.postNewEventSynchronous(
+                                        getVersion(),
+                                        body);
+                                stash.resp=responseNewEvent;
+                            }
+                        };
+                        Thread exec = new Thread(task);
+                        exec.start();
+                        try {
+                            exec.join();
+                            String groupID = getGroupId(stash.resp);
+
+                            //Delete the group we created
+                            unifiedEventsService.deleteEvent(
+                                    getVersion(),
+                                    groupID,
+                                    callback);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
-
-
                 }
 
         };
