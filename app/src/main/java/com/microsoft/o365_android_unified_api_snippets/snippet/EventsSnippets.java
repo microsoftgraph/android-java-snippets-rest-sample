@@ -107,10 +107,9 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
                                     }
                                 };
                                 //insert an event that we will update later
-                                retrofit.client.Response responseNewEvent = unifiedEventsService.postNewEventSynchronous(
+                                stash.resp = unifiedEventsService.postNewEventSynchronous(
                                         getVersion(),
                                         body);
-                                stash.resp = responseNewEvent;
                             }
                         };
                         Thread exec = new Thread(task);
@@ -163,10 +162,9 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
                                     }
                                 };
                                 //insert an event that we will delete later
-                                retrofit.client.Response responseNewEvent = unifiedEventsService.postNewEventSynchronous(
+                                stash.resp = unifiedEventsService.postNewEventSynchronous(
                                         getVersion(),
                                         body);
-                                stash.resp = responseNewEvent;
                             }
                         };
                         Thread exec = new Thread(task);

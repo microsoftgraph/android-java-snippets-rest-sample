@@ -38,15 +38,6 @@ public interface UnifiedGroupsService {
             @Query("$top") String top
     );
 
-    /**
-     *
-     * @param version The version of the API to use (beta, v1, etc...)
-     * @return The response from the REST operation
-     */
-    @GET("/{version}/myOrganization/Groups")
-    retrofit.client.Response getGroups(
-            @Path("version") String version
-    );
 
     /**
      *

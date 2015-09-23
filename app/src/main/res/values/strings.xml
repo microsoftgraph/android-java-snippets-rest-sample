@@ -28,4 +28,7 @@
     <string name="userPhoto">userPhoto</string>
     <string name="mailBody">You can send an email by making a POST request to /me/sendMail.</string>
     <string name="mailSubject">Unified API snippets</string>
+    <string name="fragment_snippet_textview_description">Description of the Snippet here</string>
+    <string name="txt_snippet_name_text">Get all pages</string>
+    <string name="list_segment_snippet_name">PAGES</string>
 </resources>

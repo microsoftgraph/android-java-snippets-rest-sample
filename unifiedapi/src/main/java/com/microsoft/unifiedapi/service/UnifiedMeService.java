@@ -46,61 +46,6 @@ public interface UnifiedMeService {
             @Path("entity") String entity,
             Callback<Void> callback
     );
-
-    /**
-     *
-     * @param version The version of the API to use (beta, v1, etc...)
-     * @param callback will be called with results of REST operation
-     */
-    @GET("/{version}/me/userPhoto")
-    void getMePhoto(
-            @Path("version") String version,
-            Callback<Void> callback
-    );
-
-    /**
-     *
-     * @param version The version of the API to use (beta, v1, etc...)
-     * @param callback will be called with results of REST operation
-     */
-    @GET("/{version}/me/manager")
-    void getMeManager(
-            @Path("version") String version,
-            Callback<Void> callback
-    );
-
-    /**
-     *
-     * @param version The version of the API to use (beta, v1, etc...)
-     * @param callback will be called with results of REST operation
-     */
-    @GET("/{version}/me/directReports")
-    void getDirectReports(
-            @Path("version") String version,
-            Callback<Void> callback
-    );
-
-    /**
-     *
-     * @param version The version of the API to use (beta, v1, etc...)
-     * @param callback will be called with results of REST operation
-     */
-    @GET("/{version}/me/workingWith")
-    void getWorkingWith(
-            @Path("version") String version,
-            Callback<Void> callback
-    );
-
-    /**
-     *
-     * @param version The version of the API to use (beta, v1, etc...)
-     * @param callback will be called with results of REST operation
-     */
-    @GET("/{version}/me/memberOf")
-    void getMemberOf(
-            @Path("version") String version,
-            Callback<Void> callback
-    );
 }
 // *********************************************************
 //

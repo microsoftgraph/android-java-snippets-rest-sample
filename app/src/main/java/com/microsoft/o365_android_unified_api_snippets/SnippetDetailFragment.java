@@ -70,8 +70,6 @@ public class SnippetDetailFragment<T, Result>
         extends BaseFragment implements Callback<Result> {
 
     public static final String ARG_ITEM_ID = "item_id";
-    public static final String ARG_TEXT_INPUT = "TextInput";
-    public static final String ARG_SPINNER_SELECTION = "SpinnerSelection";
     public static final int UNSET = -1;
     @InjectView(txt_status_code)
     protected TextView mStatusCode;
@@ -87,8 +85,6 @@ public class SnippetDetailFragment<T, Result>
     protected TextView mResponseBody;
     @InjectView(spinner)
     protected Spinner mSpinner;
-    @InjectView(txt_input)
-    protected EditText mEditText;
     @InjectView(progressbar)
     protected ProgressBar mProgressbar;
     @InjectView(btn_run)
@@ -159,13 +155,7 @@ public class SnippetDetailFragment<T, Result>
         mResponseBody.setText("");
         displayStatusCode("", getResources().getColor(R.color.transparent));
         mProgressbar.setVisibility(VISIBLE);
-
-        SnippetDetailActivity activity = (SnippetDetailActivity) getActivity();
-
-
         mItem.request(mItem.mService, this);
-
-
     }
 
     @OnClick(txt_hyperlink)

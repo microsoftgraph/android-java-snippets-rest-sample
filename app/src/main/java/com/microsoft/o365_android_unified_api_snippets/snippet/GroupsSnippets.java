@@ -56,8 +56,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                             @Override
                             public void run() {
                                 //Get the first group to obtain an ID later
-                                retrofit.client.Response response = service.getTopGroups(getVersion(), "1");
-                                stash.resp = response;
+                                stash.resp = service.getTopGroups(getVersion(), "1");
                             }
                         };
                         Thread exec = new Thread(task);
@@ -93,8 +92,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                             @Override
                             public void run() {
                                 //Get first group
-                                retrofit.client.Response response = service.getTopGroups(getVersion(), "1");
-                                stash.resp = response;
+                                stash.resp = service.getTopGroups(getVersion(), "1");
                             }
                         };
 
@@ -131,8 +129,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                             @Override
                             public void run() {
                                 //Get first group
-                                retrofit.client.Response response = service.getTopGroups(getVersion(), "1");
-                                stash.resp = response;
+                                stash.resp = service.getTopGroups(getVersion(), "1");
                             }
                         };
 
@@ -192,10 +189,9 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                             @Override
                             public void run() {
                                 //insert a group that we will update later
-                                retrofit.client.Response response = service.insertGroupSynchronous(
+                                stash.resp = service.insertGroupSynchronous(
                                         getVersion(),
                                         createNewGroup());
-                                stash.resp = response;
                             }
                         };
                         Thread exec = new Thread(task);
@@ -230,10 +226,9 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                             @Override
                             public void run() {
                                 //create a group that we can delete
-                                retrofit.client.Response response = service.insertGroupSynchronous(
+                                stash.resp = service.insertGroupSynchronous(
                                         getVersion(),
                                         createNewGroup());
-                                stash.resp = response;
                             }
                         };
                         Thread exec = new Thread(task);
@@ -281,7 +276,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
     /**
      * Creates a Json object for the body of a PATCH operation
      *
-     * @return
+     * @return TypedString version of the JSON body
      */
     protected TypedString createUpdateBody() {
         JsonObject jsonObject = new JsonObject();

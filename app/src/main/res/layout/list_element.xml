@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Get all pages" />
+            android:text="@string/txt_snippet_name_text" />
 
         <TextView
             android:id="@+id/admin_indicator"
