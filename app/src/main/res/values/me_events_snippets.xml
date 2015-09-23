@@ -38,5 +38,4 @@ item 5: is admin account required to run snippet (true/false)
         <item>beta</item>
         <item>false</item>
     </string-array>
-
 </resources>

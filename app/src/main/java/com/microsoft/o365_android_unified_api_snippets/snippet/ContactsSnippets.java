@@ -3,30 +3,11 @@
 */
 package com.microsoft.o365_android_unified_api_snippets.snippet;
 
-import android.content.Context;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonReader;
-import com.microsoft.o365_android_unified_api_snippets.R;
-import com.microsoft.o365_android_unified_api_snippets.application.SnippetApp;
-import com.microsoft.o365_android_unified_api_snippets.inject.AppModule;
-import com.microsoft.o365_android_unified_api_snippets.util.SharedPrefsUtil;
 import com.microsoft.unifiedapi.service.UnifiedContactService;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.UUID;
-
 import retrofit.Callback;
-import retrofit.mime.TypedString;
 
 import static com.microsoft.o365_android_unified_api_snippets.R.array.get_all_contacts;
-import static com.microsoft.o365_android_unified_api_snippets.R.array.insert_a_contact;
 
 public abstract class ContactsSnippets<Result> extends AbstractSnippet<UnifiedContactService, Result> {
 
@@ -56,28 +37,6 @@ public abstract class ContactsSnippets<Result> extends AbstractSnippet<UnifiedCo
                                 getVersion(),
                                 callback);
                     }
-                },
-                // Snippets
-
-                /**
-                 * Inserts a contact into the organization
-                 */
-                new ContactsSnippets<Void>(insert_a_contact) {
-                    @Override
-                    public void request(UnifiedContactService service, Callback<Void> callback) {
-                        String tenant = SnippetApp
-                                .getApp()
-                                .getSharedPreferences(
-                                        AppModule.PREFS,
-                                        Context.MODE_PRIVATE)
-                                .getString(SharedPrefsUtil.PREF_USER_TENANT, "");
-
-                        TypedString bla = createNewContact(tenant);
-                        service.insertContact(
-                                getVersion(),
-                                bla,
-                                callback);
-                    }
                 }
         };
     }
@@ -85,30 +44,6 @@ public abstract class ContactsSnippets<Result> extends AbstractSnippet<UnifiedCo
     @Override
     public abstract void request(UnifiedContactService service, Callback<Result> callback);
 
-    /**
-     * Creates a Json payload for a POST operation to
-     * insert a new group
-     *
-     * @return TypedString. The Json body
-     */
-    protected TypedString createNewContact(String tenant) {
-
-
-        String randomName = UUID.randomUUID().toString();
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty(SnippetApp.getApp().getString(R.string.userPrincipalName),
-                "Contact: " + randomName + '@' + tenant);
-        jsonObject.addProperty("displayName", "Contact: " + randomName);
-        jsonObject.addProperty("accountEnabled", false);
-        jsonObject.addProperty("mailNickname", UUID.randomUUID().toString());
-        jsonObject.addProperty("securityEnabled", true);
-        return new TypedString(jsonObject.toString()) {
-            @Override
-            public String mimeType() {
-                return "application/json";
-            }
-        };
-    }
 }
 // *********************************************************
 //

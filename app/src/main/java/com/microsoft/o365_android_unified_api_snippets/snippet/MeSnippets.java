@@ -15,6 +15,7 @@ import static com.microsoft.o365_android_unified_api_snippets.R.array.get_me_gro
 import static com.microsoft.o365_android_unified_api_snippets.R.array.get_me_manager;
 import static com.microsoft.o365_android_unified_api_snippets.R.array.get_me_photo;
 import static com.microsoft.o365_android_unified_api_snippets.R.array.get_me_responsibilities;
+import static com.microsoft.o365_android_unified_api_snippets.R.array.get_me_drive;
 
 public abstract class MeSnippets<Result> extends AbstractSnippet<UnifiedMeService, Result> {
     /**
@@ -117,7 +118,19 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<UnifiedMeServic
                                 SnippetApp.getApp().getString(R.string.userPhoto),
                                 callback);
                     }
+                },
+                /**
+                 * Get the user's drive
+                 */
+                new MeSnippets<Void>(get_me_drive) {
+                    @Override
+                    public void request(UnifiedMeService service, retrofit.Callback<Void> callback) {
+                        service.getDrive(
+                                getVersion(),
+                                callback);
+                    }
                 }
+
         };
     }
 

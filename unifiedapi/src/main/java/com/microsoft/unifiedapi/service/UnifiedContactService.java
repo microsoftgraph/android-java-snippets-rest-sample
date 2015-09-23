@@ -23,12 +23,6 @@ public interface UnifiedContactService {
             Callback<Void> callback
     );
 
-    @POST("/{version}/myOrganization/contacts")
-    void insertContact(
-            @Path("version") String version,
-            @Body TypedString body,
-            Callback<Void> callback
-    );
 }
 // *********************************************************
 //
