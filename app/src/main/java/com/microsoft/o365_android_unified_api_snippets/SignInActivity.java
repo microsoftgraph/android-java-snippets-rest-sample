@@ -26,7 +26,7 @@ public class SignInActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
 
-        //I don't think it is a good idea for us to try to connect
+        //TODO I don't think it is a good idea for us to try to connect
         //the user on create. Better to wait until user clicks the connect button
         //     mAuthenticationManager.connect(this);
 

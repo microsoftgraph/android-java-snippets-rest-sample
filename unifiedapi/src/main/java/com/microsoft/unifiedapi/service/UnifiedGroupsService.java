@@ -15,24 +15,45 @@ import retrofit.mime.TypedString;
 
 public interface UnifiedGroupsService {
 
+    /**
+     *
+     * @param version The version of the API to use (beta, v1, etc...)
+     * @param callback will be called with results of REST operation
+     */
     @GET("/{version}/myOrganization/Groups")
     void getGroups(
             @Path("version") String version,
             Callback<Void> callback
     );
 
+    /**
+     *
+     * @param version The version of the API to use (beta, v1, etc...)
+     * @param top Specifies number of results to return
+     * @return The response from the REST operation
+     */
     @GET("/{version}/myOrganization/Groups")
     retrofit.client.Response getTopGroups(
             @Path("version") String version,
             @Query("$top") String top
     );
 
-
+    /**
+     *
+     * @param version The version of the API to use (beta, v1, etc...)
+     * @return The response from the REST operation
+     */
     @GET("/{version}/myOrganization/Groups")
     retrofit.client.Response getGroups(
             @Path("version") String version
     );
 
+    /**
+     *
+     * @param version The version of the API to use (beta, v1, etc...)
+     * @param groupId Id of the group to return
+     * @param callback will be called with results of REST operation
+     */
     @GET("/{version}/myOrganization/Groups/{groupId}")
     void getGroup(
             @Path("version") String version,
@@ -40,6 +61,13 @@ public interface UnifiedGroupsService {
             Callback<Void> callback
     );
 
+    /**
+     *
+     * @param version The version of the API to use (beta, v1, etc...)
+     * @param groupId The Id of the group being queries
+     * @param entity Which entity to retrieve (members, owners, etc...)
+     * @param callback will be called with results of REST operation
+     */
     @GET("/{version}/myOrganization/Groups/{groupId}/{entity}")
     void getGroupEntities(
             @Path("version") String version,
@@ -48,14 +76,12 @@ public interface UnifiedGroupsService {
             Callback<Void> callback
     );
 
-    @POST("/{version}/myOrganization/Groups/")
-    void insertGroupAsync(
-            @Path("version") String version,
-            @Body TypedString content,
-            Callback<Void> callback
-    );
-
-
+    /**
+     *
+     * @param version The version of the API to use (beta, v1, etc...)
+     * @param content JSON describing the properties of the new group
+     * @param callback will be called with results of REST operation
+     */
     @POST("/{version}/myOrganization/Groups/")
     void insertGroup(
             @Path("version") String version,
@@ -63,13 +89,25 @@ public interface UnifiedGroupsService {
             Callback<Void> callback
     );
 
+    /**
+     *
+     * @param version The version of the API to use (beta, v1, etc...)
+     * @param content JSON describing the properties of the new group
+     * @return The response from the REST operation
+     */
     @POST("/{version}/myOrganization/Groups/")
     retrofit.client.Response insertGroupSynchronous(
             @Path("version") String version,
             @Body TypedString content
     );
 
-
+    /**
+     *
+     * @param version The version of the API to use (beta, v1, etc...)
+     * @param groupId Id of the group to update
+     * @param content JSON describing properties of the updated group
+     * @param callback will be called with results of REST operation
+     */
     @PATCH("/{version}/myOrganization/Groups/{groupId}")
     void patchGroup(
             @Path("version") String version,
@@ -78,6 +116,12 @@ public interface UnifiedGroupsService {
             Callback<Void> callback
     );
 
+    /**
+     *
+     * @param version The version of the API to use (beta, v1, etc...)
+     * @param groupId Id of the group to delete
+     * @param callback will be called with results of REST operation
+     */
     @DELETE("/{version}/myOrganization/Groups/{groupId}")
     void deleteGroup(
             @Path("version") String version,

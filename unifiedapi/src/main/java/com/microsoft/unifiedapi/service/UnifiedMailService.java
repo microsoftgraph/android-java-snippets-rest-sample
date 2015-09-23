@@ -15,8 +15,8 @@ public interface UnifiedMailService {
     /**
      * Gets the connected users mail messages
      *
-     * @param version
-     * @param callback
+     * @param version The version of the API to use (beta, v1, etc...)
+     * @param callback will be called with results of REST operation
      */
     @GET("/{version}/me/messages")
     void getMail(
@@ -27,9 +27,9 @@ public interface UnifiedMailService {
     /**
      * Sends a mail message for the connected user
      *
-     * @param version
-     * @param body
-     * @param callback
+     * @param version The version of the API to use (beta, v1, etc...)
+     * @param body JSON describing the propeties of the message to send
+     * @param callback will be called with results of REST operation
      */
     @POST("/{version}/me/sendMail")
     void postNewMail(

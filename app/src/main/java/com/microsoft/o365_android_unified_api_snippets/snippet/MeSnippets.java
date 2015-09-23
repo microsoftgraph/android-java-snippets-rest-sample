@@ -36,8 +36,8 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<UnifiedMeServic
                 },
                 // Snippets
 
-                /**
-                 * Gets me (signed in user)
+                /* Get information about signed in user
+                 * HTTP GET https://graph.microsoft.com/{version}/me
                  */
                 new MeSnippets<Void>(get_me) {
                     @Override
@@ -47,10 +47,9 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<UnifiedMeServic
                                 callback);
                     }
                 },
-                // Snippets
 
-                /**
-                 * Gets my responsibilities
+                /* Get responsibilities of signed in user
+                 * HTTP GET https://graph.microsoft.com/{version}/me?$select=AboutMe,Responsibilities,Tags
                  */
                 new MeSnippets<Void>(get_me_responsibilities) {
                     @Override
@@ -61,10 +60,9 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<UnifiedMeServic
                                 callback);
                     }
                 },
-                // Snippets
 
-                /**
-                 * Gets a user's manager
+                /* Get the user's manager
+                 * HTTP GET https://graph.microsoft.com/{version}/me/manager
                  */
                 new MeSnippets<Void>(get_me_manager) {
                     @Override
@@ -75,10 +73,9 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<UnifiedMeServic
                                 callback);
                     }
                 },
-                // Snippets
 
-                /**
-                 * Gets a user's direct reports
+                /* Get the user's direct reports
+                 * HTTP GET https://graph.microsoft.com/{version}/me/directReports
                  */
                 new MeSnippets<Void>(get_me_direct_reports) {
                     @Override
@@ -89,10 +86,9 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<UnifiedMeServic
                                 callback);
                     }
                 },
-                // Snippets
 
-                /**
-                 * Gets the group membership of a user
+                /* Get the group membership of the user
+                 * HTTP GET https://graph.microsoft.com/{version}/me/memberOf
                  */
                 new MeSnippets<Void>(get_me_group_membership) {
                     @Override
@@ -103,10 +99,9 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<UnifiedMeServic
                                 callback);
                     }
                 },
-                // Snippets
 
-                /**
-                 * Gets the photo of a user
+                /* Get the photo of the user
+                 * HTTP GET https://graph.microsoft.com/{version}/me/userPhoto
                  */
                 new MeSnippets<Void>(get_me_photo) {
                     @Override

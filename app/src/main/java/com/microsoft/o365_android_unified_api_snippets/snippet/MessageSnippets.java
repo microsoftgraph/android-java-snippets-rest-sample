@@ -40,8 +40,8 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<UnifiedMai
                 },
                 // Snippets
 
-                /**
-                 * Gets me messages (signed in user)
+                /* Get messages from mailbox for signed in user
+                 * HTTP GET https://graph.microsoft.com/{version}/me/messages
                  */
                 new MessageSnippets<Void>(get_user_messages) {
                     @Override
@@ -51,10 +51,9 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<UnifiedMai
                                 callback);
                     }
                 },
-                // Snippets
 
-                /**
-                 * Sends an email message on behalf of the signed in user
+                /* Sends an email message on behalf of the signed in user
+                 * HTTP POST https://graph.microsoft.com/{version}/me/messages/sendMail
                  */
                 new MessageSnippets<Void>(send_an_email_message) {
                     @Override

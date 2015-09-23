@@ -32,8 +32,8 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<UnifiedUserS
                 },
 
                 /*
-                 * GET Gets all of the users in your tenant\'s directory.
-                 * HTTP GET https://graph.microsoft.com/beta/myOrganization/users
+                 * Gets all of the users in your tenant\'s directory.
+                 * HTTP GET https://graph.microsoft.com/{version}/myOrganization/users
                  * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_User
                  */
                 new UsersSnippets<Void>(get_organization_users) {
@@ -46,8 +46,8 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<UnifiedUserS
                 },
 
                 /*
-                 * GET Gets all of the users in your tenant's directory who are from the United States, using $filter.
-                 * HTTP GET https://graph.microsoft.com/beta/myOrganization/users?$filter=country eq \'United States\'
+                 * Gets all of the users in your tenant's directory who are from the United States, using $filter.
+                 * HTTP GET https://graph.microsoft.com/{version}/myOrganization/users?$filter=country eq \'United States\'
                  * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_User
                  */
                 new UsersSnippets<Void>(get_organization_filtered_users) {
@@ -60,8 +60,8 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<UnifiedUserS
                 },
 
                  /*
-                 * POST Adds a new user to the tenant's directory
-                 * HTTP POST https://graph.microsoft.com/beta/myOrganization/users
+                 * Adds a new user to the tenant's directory
+                 * HTTP POST https://graph.microsoft.com/{version}/myOrganization/users
                  * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_User
                  */
                 new UsersSnippets<Void>(insert_organization_user) {

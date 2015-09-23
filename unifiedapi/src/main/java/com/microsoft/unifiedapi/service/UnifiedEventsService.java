@@ -17,8 +17,8 @@ public interface UnifiedEventsService {
     /**
      * Gets events for the connected user
      *
-     * @param version
-     * @param callback
+     * @param version The version of the API to use (beta, v1, etc...)
+     * @param callback will be called with results of REST operation
      */
     @GET("/{version}/me/events")
     void getEvents(
@@ -29,9 +29,9 @@ public interface UnifiedEventsService {
     /**
      * Creates a new event for the connected user
      *
-     * @param version
-     * @param body
-     * @param callback
+     * @param version The version of the API to use (beta, v1, etc...)
+     * @param body JSON describing the properties of the new event to craete
+     * @param callback will be called with results of REST operation
      */
     @POST("/{version}/me/events")
     void postNewEvent(
@@ -43,8 +43,8 @@ public interface UnifiedEventsService {
     /**
      * Creates a new event for the connected user synchronously
      *
-     * @param version
-     * @param body
+     * @param version The version of the API to use (beta, v1, etc...)
+     * @param body JSON describing the properties of the new event to craete
      */
     @POST("/{version}/me/events")
     retrofit.client.Response postNewEventSynchronous(
@@ -56,10 +56,10 @@ public interface UnifiedEventsService {
     /**
      * Updates an event owned by the connected user
      *
-     * @param version
-     * @param eventId
-     * @param body
-     * @param callback
+     * @param version The version of the API to use (beta, v1, etc...)
+     * @param eventId Id of the event to update
+     * @param body JSON describing the properties of the updated event to apply with patch
+     * @param callback will be called with results of REST operation
      */
     @PATCH("/{version}/me/events/{eventid}")
     void patchEvent(
@@ -71,11 +71,11 @@ public interface UnifiedEventsService {
     );
 
     /**
-     * Deletes a connnected users event
+     * Deletes a connected users event
      *
-     * @param version
-     * @param eventId
-     * @param callback
+     * @param version The version of the API to use (beta, v1, etc...)
+     * @param eventId Id of the event to delete
+     * @param callback will be called with results of REST operation
      */
     @DELETE("/{version}/me/events/{eventid}")
     void deleteEvent(

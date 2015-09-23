@@ -28,8 +28,9 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
                 },
                 //Snippets
 
-                /**
-                 * Get the user's drive
+                /* Get the user's drive
+                 * HTTP GET https://graph.microsoft.com/{version}/me/drive
+                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_drives
                  */
                 new DrivesSnippets<Void>(get_me_drive) {
                     @Override
@@ -40,8 +41,9 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
                     }
                 },
 
-                /**
-                 * Get all of the drives in your tenant
+                 /* Get all of the drives in your tenant
+                 * HTTP GET https://graph.microsoft.com/{version}/myOrganization/drives
+                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_drives
                  */
                 new DrivesSnippets<Void>(get_organization_drives) {
                     @Override

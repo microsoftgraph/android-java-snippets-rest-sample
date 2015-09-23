@@ -13,6 +13,12 @@ import retrofit.mime.TypedString;
 
 public interface UnifiedUserService {
 
+    /**
+     *
+     * @param version The version of the API to use (beta, v1, etc...)
+     * @param filter An expression specifying criteria for which set of results should be returned
+     * @param callback will be called with results of REST operation
+     */
     @GET("/{version}/myOrganization/users")
     void getFilteredUsers(
             @Path("version") String version,
@@ -20,13 +26,23 @@ public interface UnifiedUserService {
             Callback<Void> callback
     );
 
+    /**
+     *
+     * @param version The version of the API to use (beta, v1, etc...)
+     * @param callback will be called with results of REST operation
+     */
     @GET("/{version}/myOrganization/users")
     void getUsers(
             @Path("version") String version,
             Callback<Void> callback
     );
 
-
+    /**
+     *
+     * @param version The version of the API to use (beta, v1, etc...)
+     * @param body JSON describing properties of the new user
+     * @param callback will be called with results of REST operation
+     */
     @POST("/{version}/myOrganization/users")
     void postNewUser(
             @Path("version") String version,

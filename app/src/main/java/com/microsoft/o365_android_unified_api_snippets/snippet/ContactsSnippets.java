@@ -27,8 +27,9 @@ public abstract class ContactsSnippets<Result> extends AbstractSnippet<UnifiedCo
                 },
                 // Snippets
 
-                /**
-                 * Gets all of the user's contacts
+                 /* Get all of the user's contacts
+                 * HTTP GET https://graph.microsoft.com/{version}/myOrganization/contacts
+                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_contacts
                  */
                 new ContactsSnippets<Void>(get_all_contacts) {
                     @Override

@@ -25,7 +25,7 @@ public abstract class AbstractSnippet<Service, Result> {
     /**
      * Snippet constructor
      *
-     * @param category         Snippet category (Notebook, sectionGroup, section, page)
+     * @param category         Snippet category as corresponds to UI displayed sections (organization, me, groups, etc...)
      * @param descriptionArray The String array for the specified snippet
      */
     public AbstractSnippet(
@@ -44,8 +44,8 @@ public abstract class AbstractSnippet<Service, Result> {
      * Gets the items from the specified snippet XML string array and stores the values
      * in private class fields
      *
-     * @param category
-     * @param descriptionArray
+     * @param category Snippet category as corresponds to UI displayed sections (organization, me, groups, etc...)
+     * @param descriptionArray The String array for the specified snippet
      */
     private void getSnippetArrayContent(SnippetCategory<Service> category, Integer descriptionArray) {
         if (null != descriptionArray) {
@@ -86,14 +86,11 @@ public abstract class AbstractSnippet<Service, Result> {
 
     /**
      * Returns the version segment of the endpoint url with input from
-     * XML snippet description and authentication method (O365, MSA)
+     * XML snippet description
      *
-     * @return
+     * @return Which version of the endpoint to use (beta, v1, etc...)
      */
     protected String getVersion() {
-        //TODO get authentication location logic
-        //and condition returned value on result
-        //At the moment, return the O365 version
         return mO365Version;
     }
 

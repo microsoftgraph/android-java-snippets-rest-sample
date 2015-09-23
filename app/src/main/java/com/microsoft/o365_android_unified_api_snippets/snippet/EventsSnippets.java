@@ -44,8 +44,8 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
                 //Snippets
 
                 /*
-                 * GET all events for the signed in user.
-                 * HTTP GET https://graph.microsoft.com/beta/me/events
+                 * Get all events for the signed in user.
+                 * HTTP GET https://graph.microsoft.com/{version}/me/events
                  * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event
                  */
                 new EventsSnippets<Void>(get_user_events) {
@@ -59,8 +59,8 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
                 },
 
                 /*
-                 * POST Adds an event to the signed-in user\'s calendar.
-                 * HTTP POST https://graph.microsoft.com/beta/me/events
+                 * Adds an event to the signed-in user\'s calendar.
+                 * HTTP POST https://graph.microsoft.com/{version}/me/events
                  * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event
                  */
                 new EventsSnippets<Void>(create_event) {
@@ -85,8 +85,8 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
 
                 },
                  /*
-                 * PATCH Update an event
-                 * HTTP PATCH https://graph.microsoft.com/beta/me/events/{Event.Id}
+                 * Update an event
+                 * HTTP PATCH https://graph.microsoft.com/{version}/me/events/{Event.Id}
                  * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event
                  */
                 new EventsSnippets<Void>(update_event) {
@@ -141,8 +141,8 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
                     }
                 },
                  /*
-                 * DELETE delete an event
-                 * HTTP DELETE https://graph.microsoft.com/beta/me/events/{Event.Id}
+                 * Delete an event
+                 * HTTP DELETE https://graph.microsoft.com/{version}/me/events/{Event.Id}
                  * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event
                  */
                 new EventsSnippets<Void>(delete_event) {

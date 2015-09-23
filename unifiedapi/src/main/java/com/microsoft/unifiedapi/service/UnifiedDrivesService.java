@@ -8,12 +8,23 @@ import retrofit.http.GET;
 import retrofit.http.Path;
 
 public interface UnifiedDrivesService {
+
+    /**
+     *
+     * @param version The version of the API to use (beta, v1, etc...)
+     * @param callback will be called with results of REST operation
+     */
     @GET("/{version}/me/drive")
     void getDrive(
             @Path("version") String version,
             Callback<Void> callback
     );
 
+    /**
+     *
+     * @param version The version of the API to use (beta, v1, etc...)
+     * @param callback will be called with results of REST operation
+     */
     @GET("/{version}/myOrganization/drives")
     void getOrganizationDrives(
             @Path("version") String version,

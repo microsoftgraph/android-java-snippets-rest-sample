@@ -12,8 +12,8 @@ public interface UnifiedContactService {
     /**
      * Get the connected user's contacts.
      *
-     * @param version
-     * @param callback
+     * @param version The version of the API to use (beta, v1, etc...)
+     * @param callback will be called with results of REST operation
      */
     @GET("/{version}/myOrganization/contacts")
     void getContacts(

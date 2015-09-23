@@ -147,6 +147,7 @@ public class SnippetDetailFragment<T, Result>
         android.content.ClipboardManager clipboardManager =
                 (android.content.ClipboardManager) getActivity()
                         .getSystemService(Context.CLIPBOARD_SERVICE);
+        //TODO replace onenote text with correct text
         ClipData clipData = ClipData.newPlainText("OneNote", tv.getText());
         clipboardManager.setPrimaryClip(clipData);
     }
