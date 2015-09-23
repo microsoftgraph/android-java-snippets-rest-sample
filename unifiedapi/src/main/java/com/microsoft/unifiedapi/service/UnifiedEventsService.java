@@ -39,6 +39,18 @@ public interface UnifiedEventsService {
     );
 
     /**
+     * Creates a new event for the connected user synchronously
+     * @param version
+     * @param body
+     */
+    @POST("/{version}/me/events")
+    retrofit.client.Response postNewEventSynchronous(
+            @Path("version") String version,
+            @Body TypedString body
+    );
+
+
+    /**
      * Updates an event owned by the connected user
      * @param version
      * @param eventId
@@ -46,7 +58,7 @@ public interface UnifiedEventsService {
      * @param callback
      */
     @PATCH("/{version}/me/events/{eventid}")
-    void putUpdatedEvent(
+    void patchEvent(
             @Path("version") String version,
             @Path("eventid") String eventId,
             @Body TypedString body,
