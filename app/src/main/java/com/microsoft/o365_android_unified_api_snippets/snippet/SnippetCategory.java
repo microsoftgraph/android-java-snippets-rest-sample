@@ -13,12 +13,12 @@ import com.microsoft.unifiedapi.service.UnifiedMeService;
 import com.microsoft.unifiedapi.service.UnifiedUserService;
 
 import static com.microsoft.o365_android_unified_api_snippets.R.string.section_contacts;
+import static com.microsoft.o365_android_unified_api_snippets.R.string.section_drives;
 import static com.microsoft.o365_android_unified_api_snippets.R.string.section_events;
 import static com.microsoft.o365_android_unified_api_snippets.R.string.section_groups;
 import static com.microsoft.o365_android_unified_api_snippets.R.string.section_me;
 import static com.microsoft.o365_android_unified_api_snippets.R.string.section_messages;
 import static com.microsoft.o365_android_unified_api_snippets.R.string.section_user;
-import static com.microsoft.o365_android_unified_api_snippets.R.string.section_drives;
 
 public class SnippetCategory<T> {
     static final SnippetCategory<UnifiedContactService> contactSnippetCategory

@@ -90,8 +90,7 @@ public class AuthenticationManager {
                                 if (Succeeded == authenticationResult.getStatus()) {
                                     setUserId(authenticationResult.getUserInfo().getUserId());
                                     authenticationCallback.onSuccess(authenticationResult);
-                                }
-                                else {
+                                } else {
                                     onError(
                                             new AuthenticationException(ADALError.AUTH_FAILED,
                                                     authenticationResult.getErrorCode()));

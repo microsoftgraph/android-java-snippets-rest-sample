@@ -14,6 +14,7 @@ public interface UnifiedMailService {
 
     /**
      * Gets the connected users mail messages
+     *
      * @param version
      * @param callback
      */
@@ -25,13 +26,14 @@ public interface UnifiedMailService {
 
     /**
      * Sends a mail message for the connected user
+     *
      * @param version
      * @param body
      * @param callback
      */
     @POST("/{version}/me/sendMail")
     void postNewMail(
-         @Path("version") String version,
+            @Path("version") String version,
             @Body TypedString body,
             Callback<Void> callback
     );

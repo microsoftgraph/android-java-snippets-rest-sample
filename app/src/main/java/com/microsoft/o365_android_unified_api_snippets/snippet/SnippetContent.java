@@ -8,12 +8,12 @@ import java.util.Collections;
 import java.util.List;
 
 import static com.microsoft.o365_android_unified_api_snippets.snippet.ContactsSnippets.getContactsSnippets;
+import static com.microsoft.o365_android_unified_api_snippets.snippet.DrivesSnippets.getDrivesSnippets;
 import static com.microsoft.o365_android_unified_api_snippets.snippet.EventsSnippets.getEventsSnippets;
 import static com.microsoft.o365_android_unified_api_snippets.snippet.GroupsSnippets.getGroupsSnippets;
 import static com.microsoft.o365_android_unified_api_snippets.snippet.MeSnippets.getMeSnippets;
 import static com.microsoft.o365_android_unified_api_snippets.snippet.MessageSnippets.getMessageSnippets;
 import static com.microsoft.o365_android_unified_api_snippets.snippet.UsersSnippets.getUsersSnippets;
-import static com.microsoft.o365_android_unified_api_snippets.snippet.DrivesSnippets.getDrivesSnippets;
 
 public class SnippetContent {
 

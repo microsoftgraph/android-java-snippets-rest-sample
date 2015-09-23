@@ -18,8 +18,8 @@ public abstract class AbstractSnippet<Service, Result> {
     private final int mUrlIndex = 2;
     private final int mO365VersionIndex = 3;
     private final int mIsAdminRequiredIndex = 4;
-    private String mName, mDesc, mSection, mUrl, mO365Version;
     boolean mIsAdminRequired;
+    private String mName, mDesc, mSection, mUrl, mO365Version;
 
 
     /**
@@ -57,11 +57,10 @@ public abstract class AbstractSnippet<Service, Result> {
                 mUrl = params[mUrlIndex];
                 mO365Version = params[mO365VersionIndex];
                 String isAdminRequired = params[mIsAdminRequiredIndex];
-                if (isAdminRequired.equalsIgnoreCase("true")){
-                    mIsAdminRequired=true;
-                }
-                else{
-                    mIsAdminRequired=false;
+                if (isAdminRequired.equalsIgnoreCase("true")) {
+                    mIsAdminRequired = true;
+                } else {
+                    mIsAdminRequired = false;
                 }
             } catch (IndexOutOfBoundsException ex) {
                 throw new RuntimeException(

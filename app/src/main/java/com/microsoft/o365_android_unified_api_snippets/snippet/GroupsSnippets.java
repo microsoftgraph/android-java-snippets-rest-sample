@@ -11,10 +11,8 @@ import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 import com.microsoft.unifiedapi.service.UnifiedGroupsService;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.UUID;
 
 import retrofit.mime.TypedString;
@@ -54,7 +52,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                             @Override
                             public void run() {
                                 //Get the first group to obtain an ID later
-                                retrofit.client.Response response = service.getTopGroups(getVersion(),"1");
+                                retrofit.client.Response response = service.getTopGroups(getVersion(), "1");
                                 stash.resp = response;
                             }
                         };
@@ -90,7 +88,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                             @Override
                             public void run() {
                                 //Get first group
-                                retrofit.client.Response response = service.getTopGroups(getVersion(),"1");
+                                retrofit.client.Response response = service.getTopGroups(getVersion(), "1");
                                 stash.resp = response;
                             }
                         };
@@ -128,7 +126,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                             @Override
                             public void run() {
                                 //Get first group
-                                retrofit.client.Response response = service.getTopGroups(getVersion(),"1");
+                                retrofit.client.Response response = service.getTopGroups(getVersion(), "1");
                                 stash.resp = response;
                             }
                         };
@@ -169,10 +167,10 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
 
                     @Override
                     public void request(final UnifiedGroupsService service, retrofit.Callback<Void> callback) {
-                                service.insertGroup(
-                                        getVersion(),
-                                        createNewGroup(),
-                                        callback);
+                        service.insertGroup(
+                                getVersion(),
+                                createNewGroup(),
+                                callback);
                     }
                 },
 
@@ -309,7 +307,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
         String groupID;
 
         try {
-            JsonReader reader = new JsonReader(new InputStreamReader(json.getBody().in(),"UTF-8"));
+            JsonReader reader = new JsonReader(new InputStreamReader(json.getBody().in(), "UTF-8"));
             JsonElement responseElement = new JsonParser().parse(reader);
             JsonObject responseObject = responseElement.getAsJsonObject();
             groupID = responseObject.get("objectId").getAsString();
@@ -323,18 +321,18 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
     /**
      * Gets the first group object id found from the HTTP response object
      * returned from a group REST call. Method expects that the JSON is an array
-     *  of group objects.
+     * of group objects.
      *
      * @param json The JSON to parse. This is expected to be an array of group objects.
      * @return The group id (objectID) of the first group found in the array.
      */
-    protected String getFirstGroupId(retrofit.client.Response json){
+    protected String getFirstGroupId(retrofit.client.Response json) {
         if (json == null)
             return "";
 
         String groupID;
         try {
-            JsonReader reader = new JsonReader(new InputStreamReader(json.getBody().in(),"UTF-8"));
+            JsonReader reader = new JsonReader(new InputStreamReader(json.getBody().in(), "UTF-8"));
             JsonElement responseElement = new JsonParser().parse(reader);
             JsonObject responseObject = responseElement.getAsJsonObject();
             JsonArray valueArray = responseObject.getAsJsonArray("value");

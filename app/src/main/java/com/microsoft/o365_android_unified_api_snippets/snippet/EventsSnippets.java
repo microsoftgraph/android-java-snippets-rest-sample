@@ -21,9 +21,9 @@ import retrofit.Callback;
 import retrofit.mime.TypedString;
 
 import static com.microsoft.o365_android_unified_api_snippets.R.array.create_event;
+import static com.microsoft.o365_android_unified_api_snippets.R.array.delete_event;
 import static com.microsoft.o365_android_unified_api_snippets.R.array.get_user_events;
 import static com.microsoft.o365_android_unified_api_snippets.R.array.update_event;
-import static com.microsoft.o365_android_unified_api_snippets.R.array.delete_event;
 
 public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEventsService, Result> {
 
@@ -110,7 +110,7 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
                                 retrofit.client.Response responseNewEvent = unifiedEventsService.postNewEventSynchronous(
                                         getVersion(),
                                         body);
-                                stash.resp=responseNewEvent;
+                                stash.resp = responseNewEvent;
                             }
                         };
                         Thread exec = new Thread(task);
@@ -122,7 +122,7 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
                             //update the group we created
                             JsonObject updateEvent = newEvent;
                             updateEvent.remove("Subject");
-                            updateEvent.addProperty("Subject","Sync of the Week");
+                            updateEvent.addProperty("Subject", "Sync of the Week");
 
                             TypedString updateBody = new TypedString(updateEvent.toString()) {
                                 @Override
@@ -166,7 +166,7 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
                                 retrofit.client.Response responseNewEvent = unifiedEventsService.postNewEventSynchronous(
                                         getVersion(),
                                         body);
-                                stash.resp=responseNewEvent;
+                                stash.resp = responseNewEvent;
                             }
                         };
                         Thread exec = new Thread(task);
@@ -244,7 +244,7 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
         String groupID;
 
         try {
-            JsonReader reader = new JsonReader(new InputStreamReader(json.getBody().in(),"UTF-8"));
+            JsonReader reader = new JsonReader(new InputStreamReader(json.getBody().in(), "UTF-8"));
             JsonElement responseElement = new JsonParser().parse(reader);
             JsonObject responseObject = responseElement.getAsJsonObject();
             groupID = responseObject.get("Id").getAsString();

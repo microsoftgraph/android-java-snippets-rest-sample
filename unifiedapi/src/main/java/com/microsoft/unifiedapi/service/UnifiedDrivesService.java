@@ -6,7 +6,6 @@ package com.microsoft.unifiedapi.service;
 import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.Path;
-import retrofit.http.Query;
 
 public interface UnifiedDrivesService {
     @GET("/{version}/me/drive")

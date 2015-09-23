@@ -4,16 +4,14 @@
 package com.microsoft.unifiedapi.service;
 
 import retrofit.Callback;
-import retrofit.http.Body;
 import retrofit.http.GET;
-import retrofit.http.POST;
 import retrofit.http.Path;
-import retrofit.mime.TypedString;
 
 public interface UnifiedContactService {
 
     /**
      * Get the connected user's contacts.
+     *
      * @param version
      * @param callback
      */

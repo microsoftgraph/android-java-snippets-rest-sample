@@ -7,7 +7,6 @@ package com.microsoft.o365_android_unified_api_snippets.snippet;
 import com.microsoft.o365_android_unified_api_snippets.R;
 import com.microsoft.o365_android_unified_api_snippets.application.SnippetApp;
 import com.microsoft.unifiedapi.service.UnifiedMeService;
-import com.microsoft.unifiedapi.service.UnifiedUserService;
 
 import static com.microsoft.o365_android_unified_api_snippets.R.array.get_me;
 import static com.microsoft.o365_android_unified_api_snippets.R.array.get_me_direct_reports;
@@ -15,7 +14,6 @@ import static com.microsoft.o365_android_unified_api_snippets.R.array.get_me_gro
 import static com.microsoft.o365_android_unified_api_snippets.R.array.get_me_manager;
 import static com.microsoft.o365_android_unified_api_snippets.R.array.get_me_photo;
 import static com.microsoft.o365_android_unified_api_snippets.R.array.get_me_responsibilities;
-import static com.microsoft.o365_android_unified_api_snippets.R.array.get_me_drive;
 
 public abstract class MeSnippets<Result> extends AbstractSnippet<UnifiedMeService, Result> {
     /**

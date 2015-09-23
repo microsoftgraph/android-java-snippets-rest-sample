@@ -3,9 +3,6 @@
 */
 package com.microsoft.unifiedapi.service;
 
-import com.squareup.okhttp.Call;
-import com.squareup.okhttp.Response;
-
 import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.DELETE;

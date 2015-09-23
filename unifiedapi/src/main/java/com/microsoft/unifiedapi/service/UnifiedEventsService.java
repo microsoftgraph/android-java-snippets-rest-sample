@@ -16,6 +16,7 @@ public interface UnifiedEventsService {
 
     /**
      * Gets events for the connected user
+     *
      * @param version
      * @param callback
      */
@@ -27,6 +28,7 @@ public interface UnifiedEventsService {
 
     /**
      * Creates a new event for the connected user
+     *
      * @param version
      * @param body
      * @param callback
@@ -40,6 +42,7 @@ public interface UnifiedEventsService {
 
     /**
      * Creates a new event for the connected user synchronously
+     *
      * @param version
      * @param body
      */
@@ -52,6 +55,7 @@ public interface UnifiedEventsService {
 
     /**
      * Updates an event owned by the connected user
+     *
      * @param version
      * @param eventId
      * @param body
@@ -68,6 +72,7 @@ public interface UnifiedEventsService {
 
     /**
      * Deletes a connnected users event
+     *
      * @param version
      * @param eventId
      * @param callback

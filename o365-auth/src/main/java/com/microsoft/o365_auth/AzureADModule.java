@@ -25,6 +25,34 @@ public class AzureADModule {
         mBuilder = builder;
     }
 
+    public static void skipBroker(boolean shouldSkip) {
+        AuthenticationSettings.INSTANCE.setSkipBroker(shouldSkip);
+    }
+
+    @Provides
+    public AuthenticationContext providesAuthenticationContext() {
+        try {
+            return new AuthenticationContext(
+                    mBuilder.mActivity,
+                    mBuilder.mAuthorityUrl,
+                    mBuilder.mValidateAuthority);
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Provides
+    public AuthenticationManager providesAuthenticationManager(
+            AuthenticationContext authenticationContext) {
+        return new AuthenticationManager(
+                mBuilder.mActivity,
+                authenticationContext,
+                mBuilder.mAuthenticationResourceId,
+                mBuilder.mSharedPreferencesFilename,
+                mBuilder.mClientId,
+                mBuilder.mRedirectUri);
+    }
+
     public static class Builder {
 
         private static final String SHARED_PREFS_DEFAULT_NAME = "AzureAD_Preferences";
@@ -98,34 +126,6 @@ public class AzureADModule {
             return new AzureADModule(this);
         }
 
-    }
-
-    public static void skipBroker(boolean shouldSkip) {
-        AuthenticationSettings.INSTANCE.setSkipBroker(shouldSkip);
-    }
-
-    @Provides
-    public AuthenticationContext providesAuthenticationContext() {
-        try {
-            return new AuthenticationContext(
-                    mBuilder.mActivity,
-                    mBuilder.mAuthorityUrl,
-                    mBuilder.mValidateAuthority);
-        } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Provides
-    public AuthenticationManager providesAuthenticationManager(
-            AuthenticationContext authenticationContext) {
-        return new AuthenticationManager(
-                mBuilder.mActivity,
-                authenticationContext,
-                mBuilder.mAuthenticationResourceId,
-                mBuilder.mSharedPreferencesFilename,
-                mBuilder.mClientId,
-                mBuilder.mRedirectUri);
     }
 
 }

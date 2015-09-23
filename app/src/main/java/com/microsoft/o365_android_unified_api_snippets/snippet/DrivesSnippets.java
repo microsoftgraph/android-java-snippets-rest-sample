@@ -4,10 +4,7 @@
 package com.microsoft.o365_android_unified_api_snippets.snippet;
 
 import com.microsoft.unifiedapi.service.UnifiedDrivesService;
-import com.microsoft.unifiedapi.service.UnifiedEventsService;
-import com.microsoft.unifiedapi.service.UnifiedMeService;
 
-import retrofit.*;
 import retrofit.Callback;
 
 import static com.microsoft.o365_android_unified_api_snippets.R.array.get_me_drive;
