@@ -143,8 +143,7 @@ public class SnippetDetailFragment<T, Result>
         android.content.ClipboardManager clipboardManager =
                 (android.content.ClipboardManager) getActivity()
                         .getSystemService(Context.CLIPBOARD_SERVICE);
-        //TODO replace onenote text with correct text
-        ClipData clipData = ClipData.newPlainText("OneNote", tv.getText());
+        ClipData clipData = ClipData.newPlainText("RESTSnippets", tv.getText());
         clipboardManager.setPrimaryClip(clipData);
     }
 
@@ -220,7 +219,6 @@ public class SnippetDetailFragment<T, Result>
 
             @Override
             public void failure(RetrofitError error) {
-                // TODO show an error and disable the run button
                 if (isAdded()) {
                     displayThrowable(error.getCause());
                     mProgressbar.setVisibility(View.GONE);
