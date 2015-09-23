@@ -62,6 +62,11 @@ You can explore the following operations for Office 365:
 * Get a group's members.
 * Get a group's owners.
 
+**Drives**
+
+* Gets the signed-in user's drive.
+* Gets  all of the drives in your tenant.
+
 ##Change History
 September 2015
 * Initial release
@@ -79,18 +84,18 @@ To use the Office 365 unified API REST snippets project, you need the following:
 * A registered Azure application with a client id and redirect URI value. See [Grant permissions to the Snippets application in Azure] for details on how to create the correct permissions.
 
 ##Azure client application registration
-//TODO update with unified API permissions
-1.	Sign in to the [Azure Management Portal](https://manage.windowsazure.com), using your Azure AD credentials.
+1. Sign in to the [Azure Management Portal](https://manage.windowsazure.com), using your Azure AD credentials.
 2.	Click **Active Directory** on the left menu, then select the directory for your Office 365 developer site.
 3.	On the top menu, click **Applications**.
 4.	Click **Add** from the bottom menu.
 5.	On the **What do you want to do page**, click **Add an application my organization is developing**.
 6.	On the **Tell us about your application page**, specify **Android Snippet Sample** for the application name and select **NATIVE CLIENT APPLICATION** for type.
 7.	Click the arrow icon on the bottom-right corner of the page.
-8.	On the **Application information** page, specify a **Redirect URI**, for this example, you can specify http://localhost/androidsnippets, and then select the checkbox in the lower-right hand corner of the page. Remember this value for the below section **Getting the ClientID and RedirectUri into the project**.
+8.	On the **Application information** page, specify a **Redirect URI**, for this example, you can specify http://localhost/androidsnippets, and then select the checkbox in the lower-right hand corner of the page.
 9.	Once the application has been successfully added, you will be taken to the **Quick Start** page for the application. From here, select **Configure** in the top menu.
-10.	In the permissions to other applications section, add the Office 365 unified API (preview) application.
-11.	For the Office 365 unified API (preview) application add the following permissions: ◦Read sign-in user's files
+10. In the permissions to other applications section, add the Office 365 unified API (preview) application.
+11. For the Office 365 unified API (preview) application add the following permissions:
+   - Read signed-in user's files
    - Read and write sign-in user's calendars
    - Send mail as signed-in user
    - Read signed-in user's mail 
@@ -99,8 +104,8 @@ To use the Office 365 unified API REST snippets project, you need the following:
    - Read and write signed-in user's profile
    - Read signed-in user's contacts
    - Access directory as the signed-in user.
-13.	Copy the value specified for **Client ID** on the **Configure** page. Remember this value for the below section **Getting the ClientID and RedirectUri into the project**.
-14.	Click **Save** in the bottom menu.
+13. Click **Save** in the bottom menu.
+14. Note the values specified for **Client ID** on the **Configure** page. You will need these later when you configure the project.
 
 ##Configure the project
 
@@ -160,16 +165,6 @@ The authentication classes are found in the [o365-Auth](https://github.com/Offic
 * [```AuthenticationManager```](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/o365-auth/src/main/java/com/microsoft/o365_auth/AuthenticationManager.java). Encapsulates user connect and disconnect logic in addition to Azure app authorization.
 * [```AzureADModule```](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/o365-auth/src/main/java/com/microsoft/o365_auth/AzureADModule.java). Authentication helper class. 
 * [```AzureAppCompatActivity```](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/o365-auth/src/main/java/com/microsoft/o365_auth/AzureAppCompatActivity.java). Dependency injection helper.
-
-### Screenshots
-//TODO update to reflect latest sample
-Login|REST Call List
-:-:|:-:
-![](/readme-images/login.png)|![](/readme-images/list.png)
-
-REST Call Detail|Create Page
-:-:|:-:
-![](/readme-images/detail.png)|![](/readme-images/create_page.png)
 
 ## Questions and comments
 We'd love to get your feedback about the Android Unified API REST Snippets sample. You can send your feedback to us in the [Issues](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/issues) section of this repository. <br/>
