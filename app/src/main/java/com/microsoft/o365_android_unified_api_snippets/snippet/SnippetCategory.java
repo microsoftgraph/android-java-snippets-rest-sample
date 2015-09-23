@@ -5,6 +5,7 @@ package com.microsoft.o365_android_unified_api_snippets.snippet;
 
 import com.microsoft.o365_android_unified_api_snippets.application.SnippetApp;
 import com.microsoft.unifiedapi.service.UnifiedContactService;
+import com.microsoft.unifiedapi.service.UnifiedDrivesService;
 import com.microsoft.unifiedapi.service.UnifiedEventsService;
 import com.microsoft.unifiedapi.service.UnifiedGroupsService;
 import com.microsoft.unifiedapi.service.UnifiedMailService;
@@ -17,13 +18,14 @@ import static com.microsoft.o365_android_unified_api_snippets.R.string.section_g
 import static com.microsoft.o365_android_unified_api_snippets.R.string.section_me;
 import static com.microsoft.o365_android_unified_api_snippets.R.string.section_messages;
 import static com.microsoft.o365_android_unified_api_snippets.R.string.section_user;
+import static com.microsoft.o365_android_unified_api_snippets.R.string.section_drives;
 
 public class SnippetCategory<T> {
     static final SnippetCategory<UnifiedContactService> contactSnippetCategory
             = new SnippetCategory<>(section_contacts, create(UnifiedContactService.class));
+
     static final SnippetCategory<UnifiedEventsService> eventsSnippetCategory
             = new SnippetCategory<>(section_events, create(UnifiedEventsService.class));
-
 
     static final SnippetCategory<UnifiedGroupsService> groupSnippetCategory
             = new SnippetCategory<>(section_groups, create(UnifiedGroupsService.class));
@@ -36,6 +38,9 @@ public class SnippetCategory<T> {
 
     static final SnippetCategory<UnifiedMeService> meSnippetCategory
             = new SnippetCategory<>(section_me, create(UnifiedMeService.class));
+
+    static final SnippetCategory<UnifiedDrivesService> drivesSnippetCategory
+            = new SnippetCategory<>(section_drives, create(UnifiedDrivesService.class));
 
     final String mSection;
     final T mService;

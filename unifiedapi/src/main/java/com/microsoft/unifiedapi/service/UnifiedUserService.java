@@ -14,7 +14,7 @@ import retrofit.mime.TypedString;
 public interface UnifiedUserService {
 
     @GET("/{version}/myOrganization/users")
-    void getFilterdUsers(
+    void getFilteredUsers(
             @Path("version") String version,
             @Query("$filter") String filter,
             Callback<Void> callback

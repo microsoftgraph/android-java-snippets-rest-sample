@@ -1,41 +1,25 @@
 /*
 *  Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
 */
-package com.microsoft.o365_android_unified_api_snippets.snippet;
+package com.microsoft.unifiedapi.service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import retrofit.Callback;
+import retrofit.http.GET;
+import retrofit.http.Path;
+import retrofit.http.Query;
 
-import static com.microsoft.o365_android_unified_api_snippets.snippet.ContactsSnippets.getContactsSnippets;
-import static com.microsoft.o365_android_unified_api_snippets.snippet.EventsSnippets.getEventsSnippets;
-import static com.microsoft.o365_android_unified_api_snippets.snippet.GroupsSnippets.getGroupsSnippets;
-import static com.microsoft.o365_android_unified_api_snippets.snippet.MeSnippets.getMeSnippets;
-import static com.microsoft.o365_android_unified_api_snippets.snippet.MessageSnippets.getMessageSnippets;
-import static com.microsoft.o365_android_unified_api_snippets.snippet.UsersSnippets.getUsersSnippets;
-import static com.microsoft.o365_android_unified_api_snippets.snippet.DrivesSnippets.getDrivesSnippets;
+public interface UnifiedDrivesService {
+    @GET("/{version}/me/drive")
+    void getDrive(
+            @Path("version") String version,
+            Callback<Void> callback
+    );
 
-public class SnippetContent {
-
-
-    public static List<AbstractSnippet<?, ?>> ITEMS = new ArrayList<>();
-
-    static {
-        AbstractSnippet<?, ?>[][] baseSnippets = new AbstractSnippet<?, ?>[][]{
-                getContactsSnippets(),
-                getGroupsSnippets(),
-                getEventsSnippets(),
-                getMeSnippets(),
-                getMessageSnippets(),
-                getUsersSnippets(),
-                getDrivesSnippets()
-        };
-
-        for (AbstractSnippet<?, ?>[] snippetArray : baseSnippets) {
-            Collections.addAll(ITEMS, snippetArray);
-        }
-    }
-
+    @GET("/{version}/myOrganization/drives")
+    void getOrganizationDrives(
+            @Path("version") String version,
+            Callback<Void> callback
+    );
 }
 // *********************************************************
 //

@@ -118,19 +118,7 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<UnifiedMeServic
                                 SnippetApp.getApp().getString(R.string.userPhoto),
                                 callback);
                     }
-                },
-                /**
-                 * Get the user's drive
-                 */
-                new MeSnippets<Void>(get_me_drive) {
-                    @Override
-                    public void request(UnifiedMeService service, retrofit.Callback<Void> callback) {
-                        service.getDrive(
-                                getVersion(),
-                                callback);
-                    }
                 }
-
         };
     }
 

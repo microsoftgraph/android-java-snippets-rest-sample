@@ -59,12 +59,6 @@ public interface UnifiedMeService {
             @Path("version") String version,
             Callback<Void> callback
     );
-
-    @GET("/{version}/me/drive")
-    void getDrive(
-            @Path("version") String version,
-            Callback<Void> callback
-    );
 }
 // *********************************************************
 //
