@@ -4,6 +4,7 @@
 package com.microsoft.o365_android_unified_api_snippets.snippet;
 
 
+import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -15,6 +16,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.UUID;
 
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 import retrofit.mime.TypedString;
 
 import static com.microsoft.o365_android_unified_api_snippets.R.array.delete_a_group;
@@ -49,32 +53,25 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                  */
                 new GroupsSnippets<Void>(get_a_group) {
                     @Override
-                    public void request(final UnifiedGroupsService service, retrofit.Callback<Void> callback) {
+                    public void request(final UnifiedGroupsService service, final retrofit.Callback<Void> callback) {
+                        //Get first group
+                        service.getGroups(getVersion(), ImmutableMap.of("$top", "1"), new Callback<Void>() {
 
-                        final PlaceToStash stash = new PlaceToStash();
-                        Runnable task = new Runnable() {
                             @Override
-                            public void run() {
-                                //Get the first group to obtain an ID later
-                                stash.resp = service.getTopGroups(getVersion(), "1");
+                            public void success(Void aVoid, Response response) {
+                                //Get the group by its ID
+                                service.getGroup(
+                                        getVersion(),
+                                        getGroupId(response),
+                                        callback);
                             }
-                        };
-                        Thread exec = new Thread(task);
-                        exec.start();
-                        try {
-                            exec.join();
-                            String groupID = getFirstGroupId(stash.resp);
 
-                            //Get the group by its ID
-                            service.getGroup(
-                                    getVersion(),
-                                    groupID,
-                                    callback);
-
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-
+                            @Override
+                            public void failure(RetrofitError error) {
+                                //pass along error to original callback
+                                callback.failure(error);
+                            }
+                        });
                     }
                 },
 
@@ -85,34 +82,26 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                  */
                 new GroupsSnippets<Void>(get_group_members) {
                     @Override
-                    public void request(final UnifiedGroupsService service, retrofit.Callback<Void> callback) {
+                    public void request(final UnifiedGroupsService service, final retrofit.Callback<Void> callback) {
+                        //Get first group
+                        service.getGroups(getVersion(), ImmutableMap.of("$top", "1"), new Callback<Void>() {
 
-                        final PlaceToStash stash = new PlaceToStash();
-                        Runnable task = new Runnable() {
                             @Override
-                            public void run() {
-                                //Get first group
-                                stash.resp = service.getTopGroups(getVersion(), "1");
+                            public void success(Void aVoid, Response response) {
+                                //Get members from the group
+                                service.getGroupEntities(
+                                        getVersion(),
+                                        getGroupId(response),
+                                        "members",
+                                        callback);
                             }
-                        };
 
-                        Thread exec = new Thread(task);
-                        exec.start();
-                        try {
-                            exec.join();
-                            String groupID = getFirstGroupId(stash.resp);
-
-                            //Get members from the group
-                            service.getGroupEntities(
-                                    getVersion(),
-                                    groupID,
-                                    "members",
-                                    callback);
-
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-
+                            @Override
+                            public void failure(RetrofitError error) {
+                                //pass along error to original callback
+                                callback.failure(error);
+                            }
+                        });
                     }
                 },
 
@@ -122,33 +111,26 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                  */
                 new GroupsSnippets<Void>(get_group_owners) {
                     @Override
-                    public void request(final UnifiedGroupsService service, retrofit.Callback<Void> callback) {
+                    public void request(final UnifiedGroupsService service, final retrofit.Callback<Void> callback) {
+                        //Get first group
+                        service.getGroups(getVersion(), ImmutableMap.of("$top", "1"), new Callback<Void>() {
 
-                        final PlaceToStash stash = new PlaceToStash();
-                        Runnable task = new Runnable() {
                             @Override
-                            public void run() {
-                                //Get first group
-                                stash.resp = service.getTopGroups(getVersion(), "1");
+                            public void success(Void aVoid, Response response) {
+                                //Update the group we created
+                                service.patchGroup(
+                                        getVersion(),
+                                        getGroupId(response),
+                                        createUpdateBody(),
+                                        callback);
                             }
-                        };
 
-                        Thread exec = new Thread(task);
-                        exec.start();
-                        try {
-                            exec.join();
-                            String groupID = getFirstGroupId(stash.resp);
-
-                            //Get owners of the specified group ID
-                            service.getGroupEntities(
-                                    getVersion(),
-                                    groupID,
-                                    "owners",
-                                    callback);
-
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                            @Override
+                            public void failure(RetrofitError error) {
+                                //pass along error to original callback
+                                callback.failure(error);
+                            }
+                        });
                     }
                 },
 
@@ -157,6 +139,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                     public void request(UnifiedGroupsService service, retrofit.Callback<Void> callback) {
                         service.getGroups(
                                 getVersion(),
+                                null,
                                 callback);
                     }
                 },
@@ -183,32 +166,26 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                 new GroupsSnippets<Void>(update_a_group) {
 
                     @Override
-                    public void request(final UnifiedGroupsService service, retrofit.Callback<Void> callback) {
-                        final PlaceToStash stash = new PlaceToStash();
-                        Runnable task = new Runnable() {
-                            @Override
-                            public void run() {
-                                //insert a group that we will update later
-                                stash.resp = service.insertGroupSynchronous(
-                                        getVersion(),
-                                        createNewGroup());
-                            }
-                        };
-                        Thread exec = new Thread(task);
-                        exec.start();
-                        try {
-                            exec.join();
-                            String groupID = getGroupId(stash.resp);
+                    public void request(final UnifiedGroupsService service, final retrofit.Callback<Void> callback) {
+                        //Create a group that we will delete
+                        service.insertGroup(getVersion(), createNewGroup(), new Callback<Void>() {
 
-                            //update the group we created
-                            service.patchGroup(
-                                    getVersion(),
-                                    groupID,
-                                    createUpdateBody(),
-                                    callback);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                            @Override
+                            public void success(Void aVoid, Response response) {
+                                //Update the group we created
+                                service.patchGroup(
+                                        getVersion(),
+                                        getGroupId(response),
+                                        createUpdateBody(),
+                                        callback);
+                            }
+
+                            @Override
+                            public void failure(RetrofitError error) {
+                                //pass along error to original callback
+                                callback.failure(error);
+                            }
+                        });
                     }
                 },
 
@@ -219,31 +196,25 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                 new GroupsSnippets<Void>(delete_a_group) {
 
                     @Override
-                    public void request(final UnifiedGroupsService service, retrofit.Callback<Void> callback) {
+                    public void request(final UnifiedGroupsService service, final retrofit.Callback<Void> callback) {
+                        //Create a group that we will delete
+                        service.insertGroup(getVersion(), createNewGroup(), new Callback<Void>() {
 
-                        final PlaceToStash stash = new PlaceToStash();
-                        Runnable task = new Runnable() {
                             @Override
-                            public void run() {
-                                //create a group that we can delete
-                                stash.resp = service.insertGroupSynchronous(
+                            public void success(Void aVoid, Response response) {
+                                //Delete the group we created
+                                service.deleteGroup(
                                         getVersion(),
-                                        createNewGroup());
+                                        getGroupId(response),
+                                        callback);
                             }
-                        };
-                        Thread exec = new Thread(task);
-                        exec.start();
-                        try {
-                            exec.join();
-                            String groupID = getGroupId(stash.resp);
-                            //delete the group we created earlier
-                            service.deleteGroup(
-                                    getVersion(),
-                                    groupID,
-                                    callback);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+
+                            @Override
+                            public void failure(RetrofitError error) {
+                                //pass along error to original callback
+                                callback.failure(error);
+                            }
+                        });
                     }
                 }
         };
@@ -344,11 +315,6 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
             return "";
         }
     }
-
-    class PlaceToStash {
-        public retrofit.client.Response resp;
-    }
-
 }
 // *********************************************************
 //

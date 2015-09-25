@@ -3,6 +3,8 @@
 */
 package com.microsoft.unifiedapi.service;
 
+import java.util.Map;
+
 import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.DELETE;
@@ -11,6 +13,7 @@ import retrofit.http.PATCH;
 import retrofit.http.POST;
 import retrofit.http.Path;
 import retrofit.http.Query;
+import retrofit.http.QueryMap;
 import retrofit.mime.TypedString;
 
 public interface UnifiedGroupsService {
@@ -23,21 +26,9 @@ public interface UnifiedGroupsService {
     @GET("/{version}/myOrganization/Groups")
     void getGroups(
             @Path("version") String version,
+            @QueryMap Map<String,String> filters,
             Callback<Void> callback
     );
-
-    /**
-     *
-     * @param version The version of the API to use (beta, v1, etc...)
-     * @param top Specifies number of results to return
-     * @return The response from the REST operation
-     */
-    @GET("/{version}/myOrganization/Groups")
-    retrofit.client.Response getTopGroups(
-            @Path("version") String version,
-            @Query("$top") String top
-    );
-
 
     /**
      *
@@ -78,18 +69,6 @@ public interface UnifiedGroupsService {
             @Path("version") String version,
             @Body TypedString content,
             Callback<Void> callback
-    );
-
-    /**
-     *
-     * @param version The version of the API to use (beta, v1, etc...)
-     * @param content JSON describing the properties of the new group
-     * @return The response from the REST operation
-     */
-    @POST("/{version}/myOrganization/Groups/")
-    retrofit.client.Response insertGroupSynchronous(
-            @Path("version") String version,
-            @Body TypedString content
     );
 
     /**

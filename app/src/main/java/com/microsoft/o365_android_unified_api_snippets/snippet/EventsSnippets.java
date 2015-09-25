@@ -96,50 +96,46 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
                     @Override
                     public void request(
                             final UnifiedEventsService unifiedEventsService,
-                            retrofit.Callback<Void> callback) {
-                        final PlaceToStash stash = new PlaceToStash();
+                            final retrofit.Callback<Void> callback) {
                         final JsonObject newEvent = createNewEventJsonBody();
-                        Runnable task = new Runnable() {
+                        TypedString body = new TypedString(newEvent.toString()) {
                             @Override
-                            public void run() {
-                                TypedString body = new TypedString(newEvent.toString()) {
+                            public String mimeType() {
+                                return "application/json";
+                            }
+                        };
+                        unifiedEventsService.postNewEvent(getVersion(), body, new Callback<Void>() {
+
+                            @Override
+                            public void success(Void aVoid, Response response) {
+                                String groupID = getGroupId(response);
+
+                                //update the group we created
+                                JsonObject updateEvent = newEvent;
+                                updateEvent.remove("Subject");
+                                updateEvent.addProperty("Subject", "Sync of the Week");
+
+                                TypedString updateBody = new TypedString(updateEvent.toString()) {
                                     @Override
                                     public String mimeType() {
                                         return "application/json";
                                     }
                                 };
-                                //insert an event that we will update later
-                                stash.resp = unifiedEventsService.postNewEventSynchronous(
+                                unifiedEventsService.patchEvent(
                                         getVersion(),
-                                        body);
+                                        groupID,
+                                        updateBody,
+                                        callback);
                             }
-                        };
-                        Thread exec = new Thread(task);
-                        exec.start();
-                        try {
-                            exec.join();
-                            String groupID = getGroupId(stash.resp);
 
-                            //update the group we created
-                            JsonObject updateEvent = newEvent;
-                            updateEvent.remove("Subject");
-                            updateEvent.addProperty("Subject", "Sync of the Week");
-
-                            TypedString updateBody = new TypedString(updateEvent.toString()) {
-                                @Override
-                                public String mimeType() {
-                                    return "application/json";
-                                }
-                            };
-                            unifiedEventsService.patchEvent(
-                                    getVersion(),
-                                    groupID,
-                                    updateBody,
-                                    callback);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                            @Override
+                            public void failure(RetrofitError error) {
+                                //pass along error to original callback
+                                callback.failure(error);
+                            }
+                        });
                     }
+
                 },
                  /*
                  * Delete an event
@@ -248,11 +244,6 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
             return "";
         }
     }
-
-    class PlaceToStash {
-        public retrofit.client.Response resp;
-    }
-
 }
 // *********************************************************
 //
