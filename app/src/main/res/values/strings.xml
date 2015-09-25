@@ -1,9 +1,8 @@
 <resources>
     <string name="app_name">O365-Android-Unified-API-Snippets</string>
 
-    <string name="hello_world">Hello world!</string>
+    <!--<string name="microsoft_acct">Microsoft Account</string>-->
     <string name="action_settings">Settings</string>
-    <string name="microsoft_acct">Microsoft Account</string>
     <string name="org_acct">Organizational Account</string>
     <string name="signin_err">An error signing in has occurred. Check LogCat for details.</string>
     <string name="o365_hint">Sign in with the account provided by your work or school to use with Office 365 or other Microsoft services</string>
@@ -14,8 +13,8 @@
     <string name="req_url">Request URL</string>
     <string name="response">Response</string>
     <string name="status_code">HTTP Status Code</string>
-    <string name="quick_links">Quick Links</string>
-    <string name="launch_browser">Open in browser</string>
+    <!--<string name="quick_links">Quick Links</string>-->
+    <!--<string name="launch_browser">Open in browser</string>-->
     <string name="response_headers">Response Headers</string>
     <string name="response_body">Response Body</string>
     <string name="clippy">copied to clipboard</string>
@@ -23,7 +22,7 @@
     <string name="directReports">directReports</string>
     <string name="manager">manager</string>
     <string name="meResposibility">AboutMe,Responsibilities,Tags</string>
-    <string name="userPrincipalName">userPrincipalName</string>
+    <!--<string name="userPrincipalName">userPrincipalName</string>-->
     <string name="memberOf">memberOf</string>
     <string name="userPhoto">userPhoto</string>
     <string name="mailBody">You can send an email by making a POST request to /me/sendMail.</string>
