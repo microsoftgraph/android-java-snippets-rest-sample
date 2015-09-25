@@ -41,19 +41,6 @@ public interface UnifiedEventsService {
     );
 
     /**
-     * Creates a new event for the connected user synchronously
-     *
-     * @param version The version of the API to use (beta, v1, etc...)
-     * @param body JSON describing the properties of the new event to craete
-     */
-    @POST("/{version}/me/events")
-    retrofit.client.Response postNewEventSynchronous(
-            @Path("version") String version,
-            @Body TypedString body
-    );
-
-
-    /**
      * Updates an event owned by the connected user
      *
      * @param version The version of the API to use (beta, v1, etc...)

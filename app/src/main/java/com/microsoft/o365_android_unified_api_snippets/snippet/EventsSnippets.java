@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 import retrofit.mime.TypedString;
 
 import static com.microsoft.o365_android_unified_api_snippets.R.array.create_event;
@@ -149,38 +151,32 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
                     @Override
                     public void request(
                             final UnifiedEventsService unifiedEventsService,
-                            retrofit.Callback<Void> callback) {
-                        final PlaceToStash stash = new PlaceToStash();
+                            final retrofit.Callback<Void> callback) {
                         final JsonObject newEvent = createNewEventJsonBody();
-                        Runnable task = new Runnable() {
+                        TypedString body = new TypedString(newEvent.toString()) {
                             @Override
-                            public void run() {
-                                TypedString body = new TypedString(newEvent.toString()) {
-                                    @Override
-                                    public String mimeType() {
-                                        return "application/json";
-                                    }
-                                };
-                                //insert an event that we will delete later
-                                stash.resp = unifiedEventsService.postNewEventSynchronous(
-                                        getVersion(),
-                                        body);
+                            public String mimeType() {
+                                return "application/json";
                             }
                         };
-                        Thread exec = new Thread(task);
-                        exec.start();
-                        try {
-                            exec.join();
-                            String groupID = getGroupId(stash.resp);
+                        unifiedEventsService.postNewEvent(getVersion(),body,new Callback<Void>(){
 
-                            //Delete the group we created
-                            unifiedEventsService.deleteEvent(
-                                    getVersion(),
-                                    groupID,
-                                    callback);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                            @Override
+                            public void success(Void aVoid, Response response) {
+                                //Delete the event we created
+                                String groupID = getGroupId(response);
+                                unifiedEventsService.deleteEvent(
+                                        getVersion(),
+                                        groupID,
+                                        callback);
+                            }
+
+                            @Override
+                            public void failure(RetrofitError error) {
+                                //pass along error to original callback
+                                callback.failure(error);
+                            }
+                        });
                     }
                 }
 
