@@ -62,7 +62,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                                 //Get the group by its ID
                                 service.getGroup(
                                         getVersion(),
-                                        getGroupId(response),
+                                        getFirstGroupId(response),
                                         callback);
                             }
 
@@ -91,7 +91,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                                 //Get members from the group
                                 service.getGroupEntities(
                                         getVersion(),
-                                        getGroupId(response),
+                                        getFirstGroupId(response),
                                         "members",
                                         callback);
                             }
@@ -120,7 +120,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                                 //Update the group we created
                                 service.patchGroup(
                                         getVersion(),
-                                        getGroupId(response),
+                                        getFirstGroupId(response),
                                         createUpdateBody(),
                                         callback);
                             }
