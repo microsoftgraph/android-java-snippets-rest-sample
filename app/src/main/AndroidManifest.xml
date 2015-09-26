@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.microsoft.o365_android_unified_api_snippets">
+    package="com.microsoft.office365.unifiedsnippetapp">
 
     <application
         android:name=".application.SnippetApp"

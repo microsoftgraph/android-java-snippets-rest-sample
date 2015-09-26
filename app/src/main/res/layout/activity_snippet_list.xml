@@ -1,7 +1,7 @@
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/snippet_list"
-    android:name="com.microsoft.o365_android_unified_api_snippets.SnippetListFragment"
+    android:name="com.microsoft.office365.unifiedsnippetapp.SnippetListFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
