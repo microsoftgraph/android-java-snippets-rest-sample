@@ -3,7 +3,7 @@
 */
 package com.microsoft.office365.unifiedsnippetapp.snippet;
 
-import com.microsoft.office365.unifiedsnippetapp.services.UnifiedDrivesService;
+import com.microsoft.office365.unifiedapiservices.UnifiedDrivesService;
 import retrofit.Callback;
 
 import static com.microsoft.office365.unifiedsnippetapp.R.array.get_me_drive;

@@ -4,7 +4,7 @@
 package com.microsoft.office365.unifiedsnippetapp.snippet;
 
 import com.google.gson.JsonObject;
-import com.microsoft.office365.unifiedsnippetapp.services.UnifiedUserService;
+import com.microsoft.office365.unifiedapiservices.UnifiedUserService;
 import com.microsoft.office365.unifiedsnippetapp.util.SharedPrefsUtil;
 
 import java.util.UUID;
@@ -96,7 +96,7 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<UnifiedUserS
                         };
 
                         //Call service to POST the new user
-                        unifiedUserService.postNewUser(getVersion(), body, callback);
+                        unifiedUserService.createNewUser(getVersion(), body, callback);
                     }
                 }
         };

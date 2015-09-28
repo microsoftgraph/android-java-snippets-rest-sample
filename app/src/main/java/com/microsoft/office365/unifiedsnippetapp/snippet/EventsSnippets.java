@@ -10,7 +10,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
-import com.microsoft.office365.unifiedsnippetapp.services.UnifiedEventsService;
+import com.microsoft.office365.unifiedapiservices.UnifiedEventsService;
 
 import org.joda.time.DateTime;
 
@@ -82,7 +82,7 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
                         };
 
                         //Call service to POST the new event
-                        unifiedEventsService.postNewEvent(getVersion(), body, callback);
+                        unifiedEventsService.createNewEvent(getVersion(), body, callback);
                     }
 
                 },
@@ -104,7 +104,7 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
                                 return "application/json";
                             }
                         };
-                        unifiedEventsService.postNewEvent(getVersion(), body, new Callback<Void>() {
+                        unifiedEventsService.createNewEvent(getVersion(), body, new Callback<Void>() {
 
                             @Override
                             public void success(Void aVoid, Response response) {
@@ -121,7 +121,7 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
                                         return "application/json";
                                     }
                                 };
-                                unifiedEventsService.patchEvent(
+                                unifiedEventsService.updateEvent(
                                         getVersion(),
                                         groupID,
                                         updateBody,
@@ -155,7 +155,7 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
                                 return "application/json";
                             }
                         };
-                        unifiedEventsService.postNewEvent(getVersion(),body,new Callback<Void>(){
+                        unifiedEventsService.createNewEvent(getVersion(),body,new Callback<Void>(){
 
                             @Override
                             public void success(Void aVoid, Response response) {

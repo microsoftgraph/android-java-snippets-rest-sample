@@ -10,7 +10,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.microsoft.office365.unifiedsnippetapp.application.SnippetApp;
 import com.microsoft.office365.unifiedsnippetapp.inject.AppModule;
-import com.microsoft.office365.unifiedsnippetapp.services.UnifiedMailService;
+import com.microsoft.office365.unifiedapiservices.UnifiedMailService;
 import com.microsoft.office365.unifiedsnippetapp.util.SharedPrefsUtil;
 
 import retrofit.mime.TypedString;
@@ -58,7 +58,7 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<UnifiedMai
                 new MessageSnippets<Void>(send_an_email_message) {
                     @Override
                     public void request(UnifiedMailService service, retrofit.Callback<Void> callback) {
-                        service.postNewMail(
+                        service.createNewMail(
                                 getVersion(),
                                 createMailPayload(
                                         SnippetApp.getApp().getString(R.string.mailSubject),

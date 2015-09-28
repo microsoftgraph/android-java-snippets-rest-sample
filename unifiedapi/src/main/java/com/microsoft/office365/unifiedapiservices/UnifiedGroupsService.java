@@ -1,7 +1,7 @@
 /*
 *  Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
 */
-package com.microsoft.office365.unifiedservices;
+package com.microsoft.office365.unifiedapiservices;
 
 import java.util.Map;
 
@@ -12,7 +12,6 @@ import retrofit.http.GET;
 import retrofit.http.PATCH;
 import retrofit.http.POST;
 import retrofit.http.Path;
-import retrofit.http.Query;
 import retrofit.http.QueryMap;
 import retrofit.mime.TypedString;
 

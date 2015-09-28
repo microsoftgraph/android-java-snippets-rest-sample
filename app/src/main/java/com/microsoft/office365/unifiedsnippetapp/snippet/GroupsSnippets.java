@@ -10,7 +10,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
-import com.microsoft.office365.unifiedsnippetapp.services.UnifiedGroupsService;
+import com.microsoft.office365.unifiedapiservices.UnifiedGroupsService;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -120,7 +120,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                             @Override
                             public void success(Void aVoid, Response response) {
                                 //Update the group we created
-                                service.patchGroup(
+                                service.updateGroup(
                                         getVersion(),
                                         getFirstGroupId(response),
                                         createUpdateBody(),
@@ -154,7 +154,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
 
                     @Override
                     public void request(final UnifiedGroupsService service, retrofit.Callback<Void> callback) {
-                        service.insertGroup(
+                        service.createGroup(
                                 getVersion(),
                                 createNewGroup(),
                                 callback);
@@ -170,12 +170,12 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                     @Override
                     public void request(final UnifiedGroupsService service, final retrofit.Callback<Void> callback) {
                         //Create a group that we will delete
-                        service.insertGroup(getVersion(), createNewGroup(), new Callback<Void>() {
+                        service.createGroup(getVersion(), createNewGroup(), new Callback<Void>() {
 
                             @Override
                             public void success(Void aVoid, Response response) {
                                 //Update the group we created
-                                service.patchGroup(
+                                service.updateGroup(
                                         getVersion(),
                                         getGroupId(response),
                                         createUpdateBody(),
@@ -200,7 +200,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                     @Override
                     public void request(final UnifiedGroupsService service, final retrofit.Callback<Void> callback) {
                         //Create a group that we will delete
-                        service.insertGroup(getVersion(), createNewGroup(), new Callback<Void>() {
+                        service.createGroup(getVersion(), createNewGroup(), new Callback<Void>() {
 
                             @Override
                             public void success(Void aVoid, Response response) {

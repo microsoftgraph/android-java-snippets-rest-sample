@@ -6,7 +6,7 @@ package com.microsoft.office365.unifiedsnippetapp.snippet;
 
 import com.microsoft.office365.unifiedsnippetapp.R;
 import com.microsoft.office365.unifiedsnippetapp.application.SnippetApp;
-import com.microsoft.office365.unifiedsnippetapp.services.UnifiedMeService;
+import com.microsoft.office365.unifiedapiservices.UnifiedMeService;
 
 import static com.microsoft.office365.unifiedsnippetapp.R.array.get_me;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.get_me_direct_reports;

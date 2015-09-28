@@ -5,7 +5,7 @@ package com.microsoft.office365.unifiedsnippetapp.snippet;
 
 
 import com.microsoft.office365.unifiedsnippetapp.application.SnippetApp;
-import com.microsoft.office365.unifiedsnippetapp.services.UnifiedContactService;
+import com.microsoft.office365.unifiedapiservices.UnifiedContactService;
 
 import retrofit.Callback;
 

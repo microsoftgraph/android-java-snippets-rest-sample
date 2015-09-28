@@ -1,38 +1,22 @@
 /*
 *  Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
 */
-package com.microsoft.office365.unifiedservices;
+package com.microsoft.office365.unifiedapiservices;
 
 import retrofit.Callback;
-import retrofit.http.Body;
 import retrofit.http.GET;
-import retrofit.http.POST;
 import retrofit.http.Path;
 import retrofit.http.Query;
-import retrofit.mime.TypedString;
 
-public interface UnifiedUserService {
-
-    /**
-     *
-     * @param version The version of the API to use (beta, v1, etc...)
-     * @param filter An expression specifying criteria for which set of results should be returned
-     * @param callback will be called with results of REST operation
-     */
-    @GET("/{version}/myOrganization/users")
-    void getFilteredUsers(
-            @Path("version") String version,
-            @Query("$filter") String filter,
-            Callback<Void> callback
-    );
+public interface UnifiedMeService {
 
     /**
      *
      * @param version The version of the API to use (beta, v1, etc...)
      * @param callback will be called with results of REST operation
      */
-    @GET("/{version}/myOrganization/users")
-    void getUsers(
+    @GET("/{version}/me")
+    void getMe(
             @Path("version") String version,
             Callback<Void> callback
     );
@@ -40,13 +24,26 @@ public interface UnifiedUserService {
     /**
      *
      * @param version The version of the API to use (beta, v1, etc...)
-     * @param body JSON describing properties of the new user
+     * @param select A set of names specifying which properties to return in results
      * @param callback will be called with results of REST operation
      */
-    @POST("/{version}/myOrganization/users")
-    void createNewUser(
+    @GET("/{version}/me")
+    void getMeResponsibilities(
             @Path("version") String version,
-            @Body TypedString body,
+            @Query("$select") String select,
+            Callback<Void> callback
+    );
+
+    /**
+     *
+     * @param version The version of the API to use (beta, v1, etc...)
+     * @param entity Which entity to retrieve (manager, direct reports, etc...)
+     * @param callback will be called with results of REST operation
+     */
+    @GET("/{version}/me/{entity}")
+    void getMeEntities(
+            @Path("version") String version,
+            @Path("entity") String entity,
             Callback<Void> callback
     );
 }
