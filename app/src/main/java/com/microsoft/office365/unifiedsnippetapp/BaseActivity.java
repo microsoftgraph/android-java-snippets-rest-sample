@@ -4,8 +4,8 @@
 
 package com.microsoft.office365.unifiedsnippetapp;
 
-import com.microsoft.o365_auth.AzureADModule;
-import com.microsoft.o365_auth.AzureAppCompatActivity;
+import com.microsoft.auth.AzureADModule;
+import com.microsoft.auth.AzureAppCompatActivity;
 import com.microsoft.office365.unifiedsnippetapp.application.SnippetApp;
 import com.microsoft.office365.unifiedsnippetapp.inject.AzureModule;
 import com.microsoft.office365.unifiedsnippetapp.inject.ObjectGraphInjector;

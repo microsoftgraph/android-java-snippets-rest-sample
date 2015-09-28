@@ -1,7 +1,7 @@
 /*
 *  Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
 */
-package com.microsoft.office365.unifiedsnippetapp.services;
+package com.microsoft.office365.unifiedservices;
 
 import java.util.Map;
 
@@ -65,7 +65,7 @@ public interface UnifiedGroupsService {
      * @param callback will be called with results of REST operation
      */
     @POST("/{version}/myOrganization/Groups/")
-    void insertGroup(
+    void createGroup(
             @Path("version") String version,
             @Body TypedString content,
             Callback<Void> callback
@@ -79,7 +79,7 @@ public interface UnifiedGroupsService {
      * @param callback will be called with results of REST operation
      */
     @PATCH("/{version}/myOrganization/Groups/{groupId}")
-    void patchGroup(
+    void updateGroup(
             @Path("version") String version,
             @Path("groupId") String groupId,
             @Body TypedString content,

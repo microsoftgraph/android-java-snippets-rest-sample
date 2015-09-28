@@ -3,7 +3,7 @@
 */
 package com.microsoft.office365.unifiedsnippetapp.inject;
 
-import com.microsoft.o365_auth.AzureADModule;
+import com.microsoft.auth.AzureADModule;
 import com.microsoft.office365.unifiedsnippetapp.SignInActivity;
 import com.microsoft.office365.unifiedsnippetapp.SnippetDetailActivity;
 import com.microsoft.office365.unifiedsnippetapp.SnippetDetailFragment;

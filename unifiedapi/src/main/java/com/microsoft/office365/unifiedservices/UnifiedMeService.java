@@ -1,76 +1,51 @@
 /*
 *  Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
 */
-package com.microsoft.office365.unifiedsnippetapp.services;
+package com.microsoft.office365.unifiedservices;
 
 import retrofit.Callback;
-import retrofit.http.Body;
-import retrofit.http.DELETE;
 import retrofit.http.GET;
-import retrofit.http.PATCH;
-import retrofit.http.POST;
 import retrofit.http.Path;
-import retrofit.mime.TypedString;
+import retrofit.http.Query;
 
-public interface UnifiedEventsService {
+public interface UnifiedMeService {
 
     /**
-     * Gets events for the connected user
      *
      * @param version The version of the API to use (beta, v1, etc...)
      * @param callback will be called with results of REST operation
      */
-    @GET("/{version}/me/events")
-    void getEvents(
+    @GET("/{version}/me")
+    void getMe(
             @Path("version") String version,
             Callback<Void> callback
     );
 
     /**
-     * Creates a new event for the connected user
      *
      * @param version The version of the API to use (beta, v1, etc...)
-     * @param body JSON describing the properties of the new event to craete
+     * @param select A set of names specifying which properties to return in results
      * @param callback will be called with results of REST operation
      */
-    @POST("/{version}/me/events")
-    void postNewEvent(
+    @GET("/{version}/me")
+    void getMeResponsibilities(
             @Path("version") String version,
-            @Body TypedString body,
+            @Query("$select") String select,
             Callback<Void> callback
     );
 
     /**
-     * Updates an event owned by the connected user
      *
      * @param version The version of the API to use (beta, v1, etc...)
-     * @param eventId Id of the event to update
-     * @param body JSON describing the properties of the updated event to apply with patch
+     * @param entity Which entity to retrieve (manager, direct reports, etc...)
      * @param callback will be called with results of REST operation
      */
-    @PATCH("/{version}/me/events/{eventid}")
-    void patchEvent(
+    @GET("/{version}/me/{entity}")
+    void getMeEntities(
             @Path("version") String version,
-            @Path("eventid") String eventId,
-            @Body TypedString body,
-            Callback<Void> callback
-
-    );
-
-    /**
-     * Deletes a connected users event
-     *
-     * @param version The version of the API to use (beta, v1, etc...)
-     * @param eventId Id of the event to delete
-     * @param callback will be called with results of REST operation
-     */
-    @DELETE("/{version}/me/events/{eventid}")
-    void deleteEvent(
-            @Path("version") String version,
-            @Path("eventid") String eventId,
+            @Path("entity") String entity,
             Callback<Void> callback
     );
-
 }
 // *********************************************************
 //

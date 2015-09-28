@@ -1,42 +1,26 @@
 /*
 *  Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
 */
-package com.microsoft.office365.unifiedsnippetapp.services;
+package com.microsoft.office365.unifiedservices;
 
 import retrofit.Callback;
-import retrofit.http.Body;
 import retrofit.http.GET;
-import retrofit.http.POST;
 import retrofit.http.Path;
-import retrofit.mime.TypedString;
 
-public interface UnifiedMailService {
+public interface UnifiedContactService {
 
     /**
-     * Gets the connected users mail messages
+     * Get the connected user's contacts.
      *
      * @param version The version of the API to use (beta, v1, etc...)
      * @param callback will be called with results of REST operation
      */
-    @GET("/{version}/me/messages")
-    void getMail(
+    @GET("/{version}/myOrganization/contacts")
+    void getContacts(
             @Path("version") String version,
             Callback<Void> callback
     );
 
-    /**
-     * Sends a mail message for the connected user
-     *
-     * @param version The version of the API to use (beta, v1, etc...)
-     * @param body JSON describing the propeties of the message to send
-     * @param callback will be called with results of REST operation
-     */
-    @POST("/{version}/me/sendMail")
-    void postNewMail(
-            @Path("version") String version,
-            @Body TypedString body,
-            Callback<Void> callback
-    );
 }
 // *********************************************************
 //

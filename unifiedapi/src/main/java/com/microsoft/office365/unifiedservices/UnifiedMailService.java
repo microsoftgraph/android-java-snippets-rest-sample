@@ -1,50 +1,38 @@
 /*
 *  Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
 */
-package com.microsoft.office365.unifiedsnippetapp.services;
+package com.microsoft.office365.unifiedservices;
 
 import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Path;
-import retrofit.http.Query;
 import retrofit.mime.TypedString;
 
-public interface UnifiedUserService {
+public interface UnifiedMailService {
 
     /**
-     *
-     * @param version The version of the API to use (beta, v1, etc...)
-     * @param filter An expression specifying criteria for which set of results should be returned
-     * @param callback will be called with results of REST operation
-     */
-    @GET("/{version}/myOrganization/users")
-    void getFilteredUsers(
-            @Path("version") String version,
-            @Query("$filter") String filter,
-            Callback<Void> callback
-    );
-
-    /**
+     * Gets the connected users mail messages
      *
      * @param version The version of the API to use (beta, v1, etc...)
      * @param callback will be called with results of REST operation
      */
-    @GET("/{version}/myOrganization/users")
-    void getUsers(
+    @GET("/{version}/me/messages")
+    void getMail(
             @Path("version") String version,
             Callback<Void> callback
     );
 
     /**
+     * Sends a mail message for the connected user
      *
      * @param version The version of the API to use (beta, v1, etc...)
-     * @param body JSON describing properties of the new user
+     * @param body JSON describing the propeties of the message to send
      * @param callback will be called with results of REST operation
      */
-    @POST("/{version}/myOrganization/users")
-    void postNewUser(
+    @POST("/{version}/me/sendMail")
+    void createNewMail(
             @Path("version") String version,
             @Body TypedString body,
             Callback<Void> callback

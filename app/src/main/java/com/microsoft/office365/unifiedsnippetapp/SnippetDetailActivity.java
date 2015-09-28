@@ -9,8 +9,6 @@ import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.microsoft.o365_auth.AuthenticationManager;
-
 public class SnippetDetailActivity extends BaseActivity {
 
     @Override
