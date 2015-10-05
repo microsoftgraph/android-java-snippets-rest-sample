@@ -108,6 +108,7 @@
             <TextView
                 android:id="@+id/txt_status_code"
                 android:layout_width="wrap_content"
+                android:freezesText="true"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="5dp"

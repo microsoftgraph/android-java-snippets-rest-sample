@@ -15,12 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import com.microsoft.office365.unifiedsnippetapp.snippet.AbstractSnippet;
 import com.microsoft.office365.unifiedsnippetapp.snippet.SnippetContent;
@@ -48,21 +46,20 @@ import static android.R.layout.simple_spinner_dropdown_item;
 import static android.R.layout.simple_spinner_item;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
-
+import static com.microsoft.office365.unifiedsnippetapp.R.id.btn_run;
+import static com.microsoft.office365.unifiedsnippetapp.R.id.progressbar;
+import static com.microsoft.office365.unifiedsnippetapp.R.id.spinner;
 import static com.microsoft.office365.unifiedsnippetapp.R.id.txt_desc;
-import static com.microsoft.office365.unifiedsnippetapp.R.id.txt_status_code;
+import static com.microsoft.office365.unifiedsnippetapp.R.id.txt_hyperlink;
 import static com.microsoft.office365.unifiedsnippetapp.R.id.txt_request_url;
 import static com.microsoft.office365.unifiedsnippetapp.R.id.txt_response_body;
 import static com.microsoft.office365.unifiedsnippetapp.R.id.txt_response_headers;
+import static com.microsoft.office365.unifiedsnippetapp.R.id.txt_status_code;
 import static com.microsoft.office365.unifiedsnippetapp.R.id.txt_status_color;
-import static com.microsoft.office365.unifiedsnippetapp.R.id.spinner;
-import static com.microsoft.office365.unifiedsnippetapp.R.id.progressbar;
-import static com.microsoft.office365.unifiedsnippetapp.R.id.btn_run;
+import static com.microsoft.office365.unifiedsnippetapp.R.string.clippy;
 import static com.microsoft.office365.unifiedsnippetapp.R.string.req_url;
 import static com.microsoft.office365.unifiedsnippetapp.R.string.response_body;
 import static com.microsoft.office365.unifiedsnippetapp.R.string.response_headers;
-import static com.microsoft.office365.unifiedsnippetapp.R.string.clippy;
-import static com.microsoft.office365.unifiedsnippetapp.R.id.txt_hyperlink;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -71,25 +68,36 @@ public class SnippetDetailFragment<T, Result>
         extends BaseFragment implements Callback<Result> {
 
     public static final String ARG_ITEM_ID = "item_id";
-    public static final int UNSET = -1;
+    private static final int UNSET = -1;
+    private static final String STATUS_COLOR = "STATUS_COLOR";
+
     @InjectView(txt_status_code)
     protected TextView mStatusCode;
+
     @InjectView(txt_status_color)
     protected View mStatusColor;
+
     @InjectView(txt_desc)
     protected TextView mSnippetDescription;
+
     @InjectView(txt_request_url)
     protected TextView mRequestUrl;
+
     @InjectView(txt_response_headers)
     protected TextView mResponseHeaders;
+
     @InjectView(txt_response_body)
     protected TextView mResponseBody;
+
     @InjectView(spinner)
     protected Spinner mSpinner;
+
     @InjectView(progressbar)
     protected ProgressBar mProgressbar;
+
     @InjectView(btn_run)
     protected Button mRunButton;
+
     boolean setupDidRun = false;
     private AbstractSnippet<T, Result> mItem;
 
@@ -187,12 +195,27 @@ public class SnippetDetailFragment<T, Result>
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (null != mStatusColor.getTag()) {
+            outState.putInt(STATUS_COLOR, (Integer) mStatusColor.getTag());
+        }
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (null != getActivity() && getActivity() instanceof AppCompatActivity) {
             AppCompatActivity activity = (AppCompatActivity) getActivity();
             if (null != activity.getSupportActionBar()) {
                 activity.getSupportActionBar().setTitle(mItem.getName());
+            }
+        }
+        if (null != savedInstanceState && savedInstanceState.containsKey(STATUS_COLOR)) {
+            int statusColor = savedInstanceState.getInt(STATUS_COLOR, UNSET);
+            if (UNSET != statusColor) {
+                mStatusColor.setBackgroundColor(statusColor);
+                mStatusColor.setTag(statusColor);
             }
         }
     }
@@ -250,8 +273,7 @@ public class SnippetDetailFragment<T, Result>
 
     private void displayResponse(Response response) {
         int color = getColor(response);
-        displayStatusCode(Integer.valueOf(response.getStatus())
-                .toString(), getResources().getColor(color));
+        displayStatusCode(Integer.toString(response.getStatus()), getResources().getColor(color));
         displayRequestUrl(response);
         maybeDisplayResponseHeaders(response);
         maybeDisplayResponseBody(response);
@@ -304,6 +326,7 @@ public class SnippetDetailFragment<T, Result>
     private void displayStatusCode(String text, int color) {
         mStatusCode.setText(text);
         mStatusColor.setBackgroundColor(color);
+        mStatusColor.setTag(color);
     }
 
     private void displayThrowable(Throwable t) {

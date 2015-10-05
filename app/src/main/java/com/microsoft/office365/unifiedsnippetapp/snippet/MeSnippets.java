@@ -4,9 +4,9 @@
 package com.microsoft.office365.unifiedsnippetapp.snippet;
 
 
+import com.microsoft.office365.unifiedapiservices.UnifiedMeService;
 import com.microsoft.office365.unifiedsnippetapp.R;
 import com.microsoft.office365.unifiedsnippetapp.application.SnippetApp;
-import com.microsoft.office365.unifiedapiservices.UnifiedMeService;
 
 import static com.microsoft.office365.unifiedsnippetapp.R.array.get_me;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.get_me_direct_reports;
@@ -14,7 +14,6 @@ import static com.microsoft.office365.unifiedsnippetapp.R.array.get_me_group_mem
 import static com.microsoft.office365.unifiedsnippetapp.R.array.get_me_manager;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.get_me_photo;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.get_me_responsibilities;
-
 
 
 public abstract class MeSnippets<Result> extends AbstractSnippet<UnifiedMeService, Result> {

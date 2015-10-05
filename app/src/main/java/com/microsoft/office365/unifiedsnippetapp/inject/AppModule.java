@@ -6,7 +6,6 @@ package com.microsoft.office365.unifiedsnippetapp.inject;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-
 import com.microsoft.office365.unifiedsnippetapp.ServiceConstants;
 import com.microsoft.office365.unifiedsnippetapp.application.SnippetApp;
 import com.microsoft.office365.unifiedsnippetapp.util.SharedPrefsUtil;

@@ -116,8 +116,8 @@ To use the Office 365 unified API REST snippets project, you need the following:
 O365-Android-Unified-API-Snippets** folder and click **OK**.
 5. Respond to the dialog ("Gradle Sync: Gradle settings for this project are not configured yet. Would you like the project to use the Gradle wrapper? ") by clicking the **OK** button to use the Gradle wrapper. 
 6. Open the ServiceConstants.java file in the com.microsoft.o365_android_unified_api_snippets.snippet package.
-7. Find the ```CLIENT_ID``` string and set its value to the client id you registered in Azure.
-8. Find the ```REDIRECT_URI``` string and set its value to the redirect URI you registered in Azure.
+7. Find the [`CLIENT_ID`](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/ServiceConstants.java#L10) string and set its value to the client id you registered in Azure.
+8. Find the [`REDIRECT_URI`](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/ServiceConstants.java#L9) string and set its value to the redirect URI you registered in Azure.
 
 ##How the project affects your tenant data
 The project runs REST commands that create, read, update, or delete data. When performing destructive commands, such as delete, the project creates fake entries, so that your actual tenant data is unaffected. For example, if you choose to run the delete group snippet, it first creates a fake group, and then deletes it, and displays the REST call information about the delete operation. The project may leave behind fake entries on your tenant as part of this process.
@@ -140,31 +140,31 @@ The Office 365 Android unified API snippets project uses these classes to manage
 The Office 365 Android unified API snippets project is comprised of three modules. The modular design enables you to build a new app based off of this sample by importing the modules into your app. After you've imported the modules, use the code in the Office 365 Android unified API snippets [app](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/tree/master/app) module as an example of how to call methods in the other sample modules.
 
 ###Modules in the Office 365 Android unified API snippets project
-* [```o365-Auth```](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/tree/master/o365-auth). This module contains the library calls to authenticate a user with Office 365.
-* [```unifiedapi```](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/tree/master/unifiedapi). This module encapsulates the Retrofit REST operations used for the Office 365 unified API endpoint.
-* [```app```](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/tree/master/app). The UI and business logic module. REST operations are started in the snippet classes in this module.
+* [`o365-Auth`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/tree/master/o365-auth). This module contains the library calls to authenticate a user with Office 365.
+* [`unifiedapi`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/tree/master/unifiedapi). This module encapsulates the Retrofit REST operations used for the Office 365 unified API endpoint.
+* [`app`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/tree/master/app). The UI and business logic module. REST operations are started in the snippet classes in this module.
 
 ###Snippet classes
 A snippet runs a single REST operation and returns the results. Snippets are found in the [app](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/tree/master/app) module. Snippets set the state required to make the calls on the unified API service classes described below.
-* [```ContactsSnippets```](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/app/src/main/java/com/microsoft/o365_android_unified_api_snippets/snippet/ContactsSnippets.java)
-* [```EventsSnippets```](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/app/src/main/java/com/microsoft/o365_android_unified_api_snippets/snippet/EventsSnippet.java)
-* [```GroupsSnippets```](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/app/src/main/java/com/microsoft/o365_android_unified_api_snippets/snippet/GroupsSnippets.java)
-* [```AbstractSnippet```](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/app/src/main/java/com/microsoft/o365_android_unified_api_snippets/snippet/AbstractSnippet.java)
+* [`ContactsSnippets`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/app/src/main/java/com/microsoft/o365_android_unified_api_snippets/snippet/ContactsSnippets.java)
+* [`EventsSnippets`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/app/src/main/java/com/microsoft/o365_android_unified_api_snippets/snippet/EventsSnippet.java)
+* [`GroupsSnippets`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/app/src/main/java/com/microsoft/o365_android_unified_api_snippets/snippet/GroupsSnippets.java)
+* [`AbstractSnippet`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/app/src/main/java/com/microsoft/o365_android_unified_api_snippets/snippet/AbstractSnippet.java)
 
 ###Unified API service classes
 These classes are found in the [unifiedapi](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/tree/master/unifiedapi) module and make the Retrofit library calls that generate the REST queries and handle operation results. These service classes are consumed by the snippets.
-* [```UnifiedContactService```](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/unifiedapi/src/main/java/com/microsoft/unifiedapi/service/UnifiedContactService.java)
-* [```UnifiedEventsService```](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/unifiedapi/src/main/java/com/microsoft/unifiedapi/service/UnifiedEventsService.java)
-* [```UnifiedGroupsService```](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/unifiedapi/src/main/java/com/microsoft/unifiedapi/service/UnifiedGroupsService.java)
-* [```UnifiedMailService```](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/unifiedapi/src/main/java/com/microsoft/unifiedapi/service/UnifiedMailService.java)
-* [```UnifiedUserService```](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/unifiedapi/src/main/java/com/microsoft/unifiedapi/service/UnifiedUserService.java)
+* [`UnifiedContactService`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/unifiedapi/src/main/java/com/microsoft/unifiedapi/service/UnifiedContactService.java)
+* [`UnifiedEventsService`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/unifiedapi/src/main/java/com/microsoft/unifiedapi/service/UnifiedEventsService.java)
+* [`UnifiedGroupsService`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/unifiedapi/src/main/java/com/microsoft/unifiedapi/service/UnifiedGroupsService.java)
+* [`UnifiedMailService`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/unifiedapi/src/main/java/com/microsoft/unifiedapi/service/UnifiedMailService.java)
+* [`UnifiedUserService`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/unifiedapi/src/main/java/com/microsoft/unifiedapi/service/UnifiedUserService.java)
 
 ###Authentication classes for Office 365 business accounts
 The authentication classes are found in the [o365-Auth](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/tree/master/o365-auth) module. These classes use the [Microsoft Azure Active Directory Library (ADAL) for Android](https://github.com/AzureAD/azure-activedirectory-library-for-android) to connect to a business version of Office 365 such as Office 365 Enterprise. 
 
-* [```AuthenticationManager```](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/o365-auth/src/main/java/com/microsoft/o365_auth/AuthenticationManager.java). Encapsulates user connect and disconnect logic in addition to Azure app authorization.
-* [```AzureADModule```](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/o365-auth/src/main/java/com/microsoft/o365_auth/AzureADModule.java). Authentication helper class. 
-* [```AzureAppCompatActivity```](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/o365-auth/src/main/java/com/microsoft/o365_auth/AzureAppCompatActivity.java). Dependency injection helper.
+* [`AuthenticationManager`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/o365-auth/src/main/java/com/microsoft/o365_auth/AuthenticationManager.java). Encapsulates user connect and disconnect logic in addition to Azure app authorization.
+* [`AzureADModule`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/o365-auth/src/main/java/com/microsoft/o365_auth/AzureADModule.java). Authentication helper class. 
+* [`AzureAppCompatActivity`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/o365-auth/src/main/java/com/microsoft/o365_auth/AzureAppCompatActivity.java). Dependency injection helper.
 
 ## Questions and comments
 We'd love to get your feedback about the Android Unified API REST Snippets sample. You can send your feedback to us in the [Issues](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/issues) section of this repository. <br/>
@@ -183,4 +183,3 @@ You will need to sign a [Contributor License Agreement](https://cla.microsoft.co
 
 ## Copyright
 Copyright (c) 2015 Microsoft. All rights reserved.
-

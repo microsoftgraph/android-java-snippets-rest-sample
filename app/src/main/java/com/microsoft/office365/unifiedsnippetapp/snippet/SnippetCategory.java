@@ -4,7 +4,6 @@
 package com.microsoft.office365.unifiedsnippetapp.snippet;
 
 
-import com.microsoft.office365.unifiedsnippetapp.application.SnippetApp;
 import com.microsoft.office365.unifiedapiservices.UnifiedContactService;
 import com.microsoft.office365.unifiedapiservices.UnifiedDrivesService;
 import com.microsoft.office365.unifiedapiservices.UnifiedEventsService;
@@ -12,6 +11,7 @@ import com.microsoft.office365.unifiedapiservices.UnifiedGroupsService;
 import com.microsoft.office365.unifiedapiservices.UnifiedMailService;
 import com.microsoft.office365.unifiedapiservices.UnifiedMeService;
 import com.microsoft.office365.unifiedapiservices.UnifiedUserService;
+import com.microsoft.office365.unifiedsnippetapp.application.SnippetApp;
 
 import static com.microsoft.office365.unifiedsnippetapp.R.string.section_contacts;
 import static com.microsoft.office365.unifiedsnippetapp.R.string.section_drives;

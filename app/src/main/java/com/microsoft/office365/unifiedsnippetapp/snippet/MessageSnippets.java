@@ -8,16 +8,16 @@ import android.content.Context;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.microsoft.office365.unifiedapiservices.UnifiedMailService;
+import com.microsoft.office365.unifiedsnippetapp.R;
 import com.microsoft.office365.unifiedsnippetapp.application.SnippetApp;
 import com.microsoft.office365.unifiedsnippetapp.inject.AppModule;
-import com.microsoft.office365.unifiedapiservices.UnifiedMailService;
 import com.microsoft.office365.unifiedsnippetapp.util.SharedPrefsUtil;
 
 import retrofit.mime.TypedString;
 
 import static com.microsoft.office365.unifiedsnippetapp.R.array.get_user_messages;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.send_an_email_message;
-import com.microsoft.office365.unifiedsnippetapp.R;
 
 public abstract class MessageSnippets<Result> extends AbstractSnippet<UnifiedMailService, Result> {
     /**

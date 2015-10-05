@@ -18,7 +18,7 @@ import static com.microsoft.office365.unifiedsnippetapp.snippet.UsersSnippets.ge
 public class SnippetContent {
 
 
-    public static List<AbstractSnippet<?, ?>> ITEMS = new ArrayList<>();
+    public static final List<AbstractSnippet<?, ?>> ITEMS = new ArrayList<>();
 
     static {
         AbstractSnippet<?, ?>[][] baseSnippets = new AbstractSnippet<?, ?>[][]{

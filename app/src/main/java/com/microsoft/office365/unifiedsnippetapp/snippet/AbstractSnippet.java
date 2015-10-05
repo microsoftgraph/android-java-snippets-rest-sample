@@ -4,8 +4,8 @@
 package com.microsoft.office365.unifiedsnippetapp.snippet;
 
 
-import com.microsoft.office365.unifiedsnippetapp.application.SnippetApp;
 import com.microsoft.office365.unifiedapiservices.UnifiedContactService;
+import com.microsoft.office365.unifiedsnippetapp.application.SnippetApp;
 
 import retrofit.Callback;
 
@@ -13,15 +13,15 @@ import retrofit.Callback;
 public abstract class AbstractSnippet<Service, Result> {
 
     public static final Services sServices = new Services();
+    private static final int mNameIndex = 0;
+    private static final int mDescIndex = 1;
+    private static final int mUrlIndex = 2;
+    private static final int mO365VersionIndex = 3;
+    private static final int mIsAdminRequiredIndex = 4;
+
     public final Service mService;
-    private final int mNameIndex = 0;
-    private final int mDescIndex = 1;
-    private final int mUrlIndex = 2;
-    private final int mO365VersionIndex = 3;
-    private final int mIsAdminRequiredIndex = 4;
     boolean mIsAdminRequired;
     private String mName, mDesc, mUrl, mO365Version;
-
 
     /**
      * Snippet constructor
@@ -45,7 +45,7 @@ public abstract class AbstractSnippet<Service, Result> {
      * Gets the items from the specified snippet XML string array and stores the values
      * in private class fields
      *
-     * @param category Snippet category as corresponds to UI displayed sections (organization, me, groups, etc...)
+     * @param category         Snippet category as corresponds to UI displayed sections (organization, me, groups, etc...)
      * @param descriptionArray The String array for the specified snippet
      */
     private void getSnippetArrayContent(SnippetCategory<Service> category, Integer descriptionArray) {

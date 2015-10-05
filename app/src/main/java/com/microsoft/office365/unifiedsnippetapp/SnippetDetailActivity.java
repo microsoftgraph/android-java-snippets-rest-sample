@@ -6,7 +6,6 @@ package com.microsoft.office365.unifiedsnippetapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.view.Menu;
 import android.view.MenuItem;
 
 public class SnippetDetailActivity extends BaseActivity {
@@ -28,13 +27,6 @@ public class SnippetDetailActivity extends BaseActivity {
                     .add(R.id.snippet_detail_container, fragment)
                     .commit();
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_snippet_detail, menu);
-        return true;
     }
 
     @Override
