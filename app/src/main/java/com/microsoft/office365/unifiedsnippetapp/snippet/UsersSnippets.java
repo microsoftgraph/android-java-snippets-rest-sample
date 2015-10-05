@@ -84,7 +84,9 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<UnifiedUserS
 
                         //create password profile
                         JsonObject passwordProfile = new JsonObject();
-                        passwordProfile.addProperty("password", "p@ssw0rd!");
+
+                        //Generate random UUID for the password which has 16 character maximum
+                        passwordProfile.addProperty("password", UUID.randomUUID().toString().substring(0,16));
                         passwordProfile.addProperty("forceChangePasswordNextLogin", false);
                         newUser.add("passwordProfile", passwordProfile);
 
