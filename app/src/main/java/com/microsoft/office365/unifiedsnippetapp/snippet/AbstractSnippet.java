@@ -13,15 +13,15 @@ import retrofit.Callback;
 public abstract class AbstractSnippet<Service, Result> {
 
     public static final Services sServices = new Services();
+    private static final int mNameIndex = 0;
+    private static final int mDescIndex = 1;
+    private static final int mUrlIndex = 2;
+    private static final int mO365VersionIndex = 3;
+    private static final int mIsAdminRequiredIndex = 4;
+
     public final Service mService;
-    private final int mNameIndex = 0;
-    private final int mDescIndex = 1;
-    private final int mUrlIndex = 2;
-    private final int mO365VersionIndex = 3;
-    private final int mIsAdminRequiredIndex = 4;
     boolean mIsAdminRequired;
     private String mName, mDesc, mUrl, mO365Version;
-
 
     /**
      * Snippet constructor
