@@ -72,24 +72,34 @@ public class SnippetDetailFragment<T, Result>
 
     public static final String ARG_ITEM_ID = "item_id";
     public static final int UNSET = -1;
+
     @InjectView(txt_status_code)
     protected TextView mStatusCode;
+
     @InjectView(txt_status_color)
     protected View mStatusColor;
+
     @InjectView(txt_desc)
     protected TextView mSnippetDescription;
+
     @InjectView(txt_request_url)
     protected TextView mRequestUrl;
+
     @InjectView(txt_response_headers)
     protected TextView mResponseHeaders;
+
     @InjectView(txt_response_body)
     protected TextView mResponseBody;
+
     @InjectView(spinner)
     protected Spinner mSpinner;
+
     @InjectView(progressbar)
     protected ProgressBar mProgressbar;
+
     @InjectView(btn_run)
     protected Button mRunButton;
+
     boolean setupDidRun = false;
     private AbstractSnippet<T, Result> mItem;
 
