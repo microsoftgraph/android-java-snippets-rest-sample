@@ -77,7 +77,7 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<UnifiedUserS
                         //create body
                         JsonObject newUser = new JsonObject();
                         newUser.addProperty("accountEnabled", true);
-                        newUser.addProperty("displayName", randomUserName);
+                        newUser.addProperty("displayName", "SAMPLE " + randomUserName);
                         newUser.addProperty("mailNickname", randomUserName);
                         String tenant = SharedPrefsUtil.getSharedPreferences().getString(SharedPrefsUtil.PREF_USER_TENANT, "");
                         newUser.addProperty("userPrincipalName", randomUserName + '@' + tenant);
@@ -86,7 +86,7 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<UnifiedUserS
                         JsonObject passwordProfile = new JsonObject();
 
                         //Generate random UUID for the password which has 16 character maximum
-                        passwordProfile.addProperty("password", UUID.randomUUID().toString().substring(0,16));
+                        passwordProfile.addProperty("password", UUID.randomUUID().toString().substring(0, 16));
                         passwordProfile.addProperty("forceChangePasswordNextLogin", false);
                         newUser.add("passwordProfile", passwordProfile);
 
