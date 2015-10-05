@@ -273,8 +273,7 @@ public class SnippetDetailFragment<T, Result>
 
     private void displayResponse(Response response) {
         int color = getColor(response);
-        displayStatusCode(Integer.valueOf(response.getStatus())
-                .toString(), getResources().getColor(color));
+        displayStatusCode(Integer.toString(response.getStatus()), getResources().getColor(color));
         displayRequestUrl(response);
         maybeDisplayResponseHeaders(response);
         maybeDisplayResponseBody(response);
