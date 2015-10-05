@@ -69,6 +69,7 @@ public class SnippetDetailFragment<T, Result>
 
     public static final String ARG_ITEM_ID = "item_id";
     private static final int UNSET = -1;
+    private static final String STATUS_COLOR = "STATUS_COLOR";
 
     @InjectView(txt_status_code)
     protected TextView mStatusCode;
@@ -194,12 +195,27 @@ public class SnippetDetailFragment<T, Result>
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (null != mStatusColor.getTag()) {
+            outState.putInt(STATUS_COLOR, (Integer) mStatusColor.getTag());
+        }
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (null != getActivity() && getActivity() instanceof AppCompatActivity) {
             AppCompatActivity activity = (AppCompatActivity) getActivity();
             if (null != activity.getSupportActionBar()) {
                 activity.getSupportActionBar().setTitle(mItem.getName());
+            }
+        }
+        if (null != savedInstanceState && savedInstanceState.containsKey(STATUS_COLOR)) {
+            int statusColor = savedInstanceState.getInt(STATUS_COLOR, UNSET);
+            if (UNSET != statusColor) {
+                mStatusColor.setBackgroundColor(statusColor);
+                mStatusColor.setTag(statusColor);
             }
         }
     }
@@ -311,6 +327,7 @@ public class SnippetDetailFragment<T, Result>
     private void displayStatusCode(String text, int color) {
         mStatusCode.setText(text);
         mStatusColor.setBackgroundColor(color);
+        mStatusColor.setTag(color);
     }
 
     private void displayThrowable(Throwable t) {
