@@ -21,7 +21,6 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import retrofit.mime.TypedString;
 
-
 import static com.microsoft.office365.unifiedsnippetapp.R.array.delete_a_group;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.get_a_group;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.get_all_groups;

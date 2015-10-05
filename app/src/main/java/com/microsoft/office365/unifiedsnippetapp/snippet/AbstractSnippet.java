@@ -4,8 +4,8 @@
 package com.microsoft.office365.unifiedsnippetapp.snippet;
 
 
-import com.microsoft.office365.unifiedsnippetapp.application.SnippetApp;
 import com.microsoft.office365.unifiedapiservices.UnifiedContactService;
+import com.microsoft.office365.unifiedsnippetapp.application.SnippetApp;
 
 import retrofit.Callback;
 
@@ -45,7 +45,7 @@ public abstract class AbstractSnippet<Service, Result> {
      * Gets the items from the specified snippet XML string array and stores the values
      * in private class fields
      *
-     * @param category Snippet category as corresponds to UI displayed sections (organization, me, groups, etc...)
+     * @param category         Snippet category as corresponds to UI displayed sections (organization, me, groups, etc...)
      * @param descriptionArray The String array for the specified snippet
      */
     private void getSnippetArrayContent(SnippetCategory<Service> category, Integer descriptionArray) {

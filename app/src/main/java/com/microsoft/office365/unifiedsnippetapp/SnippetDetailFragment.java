@@ -15,12 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import com.microsoft.office365.unifiedsnippetapp.snippet.AbstractSnippet;
 import com.microsoft.office365.unifiedsnippetapp.snippet.SnippetContent;
@@ -48,21 +46,20 @@ import static android.R.layout.simple_spinner_dropdown_item;
 import static android.R.layout.simple_spinner_item;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
-
+import static com.microsoft.office365.unifiedsnippetapp.R.id.btn_run;
+import static com.microsoft.office365.unifiedsnippetapp.R.id.progressbar;
+import static com.microsoft.office365.unifiedsnippetapp.R.id.spinner;
 import static com.microsoft.office365.unifiedsnippetapp.R.id.txt_desc;
-import static com.microsoft.office365.unifiedsnippetapp.R.id.txt_status_code;
+import static com.microsoft.office365.unifiedsnippetapp.R.id.txt_hyperlink;
 import static com.microsoft.office365.unifiedsnippetapp.R.id.txt_request_url;
 import static com.microsoft.office365.unifiedsnippetapp.R.id.txt_response_body;
 import static com.microsoft.office365.unifiedsnippetapp.R.id.txt_response_headers;
+import static com.microsoft.office365.unifiedsnippetapp.R.id.txt_status_code;
 import static com.microsoft.office365.unifiedsnippetapp.R.id.txt_status_color;
-import static com.microsoft.office365.unifiedsnippetapp.R.id.spinner;
-import static com.microsoft.office365.unifiedsnippetapp.R.id.progressbar;
-import static com.microsoft.office365.unifiedsnippetapp.R.id.btn_run;
+import static com.microsoft.office365.unifiedsnippetapp.R.string.clippy;
 import static com.microsoft.office365.unifiedsnippetapp.R.string.req_url;
 import static com.microsoft.office365.unifiedsnippetapp.R.string.response_body;
 import static com.microsoft.office365.unifiedsnippetapp.R.string.response_headers;
-import static com.microsoft.office365.unifiedsnippetapp.R.string.clippy;
-import static com.microsoft.office365.unifiedsnippetapp.R.id.txt_hyperlink;
 
 /**
  * A placeholder fragment containing a simple view.

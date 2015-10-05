@@ -22,10 +22,10 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 import retrofit.mime.TypedString;
 
-import static com.microsoft.office365.unifiedsnippetapp.R.array.get_user_events;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.create_event;
-import static com.microsoft.office365.unifiedsnippetapp.R.array.update_event;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.delete_event;
+import static com.microsoft.office365.unifiedsnippetapp.R.array.get_user_events;
+import static com.microsoft.office365.unifiedsnippetapp.R.array.update_event;
 
 public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEventsService, Result> {
 
@@ -155,7 +155,7 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
                                 return "application/json";
                             }
                         };
-                        unifiedEventsService.createNewEvent(getVersion(),body,new Callback<Void>(){
+                        unifiedEventsService.createNewEvent(getVersion(), body, new Callback<Void>() {
 
                             @Override
                             public void success(Void aVoid, Response response) {
