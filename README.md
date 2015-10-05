@@ -116,8 +116,8 @@ To use the Office 365 unified API REST snippets project, you need the following:
 O365-Android-Unified-API-Snippets** folder and click **OK**.
 5. Respond to the dialog ("Gradle Sync: Gradle settings for this project are not configured yet. Would you like the project to use the Gradle wrapper? ") by clicking the **OK** button to use the Gradle wrapper. 
 6. Open the ServiceConstants.java file in the com.microsoft.o365_android_unified_api_snippets.snippet package.
-7. Find the ```CLIENT_ID``` string and set its value to the client id you registered in Azure.
-8. Find the ```REDIRECT_URI``` string and set its value to the redirect URI you registered in Azure.
+7. Find the [```CLIENT_ID```](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/ServiceConstants.java#L10) string and set its value to the client id you registered in Azure.
+8. Find the [```REDIRECT_URI```](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/ServiceConstants.java#L9) string and set its value to the redirect URI you registered in Azure.
 
 ##How the project affects your tenant data
 The project runs REST commands that create, read, update, or delete data. When performing destructive commands, such as delete, the project creates fake entries, so that your actual tenant data is unaffected. For example, if you choose to run the delete group snippet, it first creates a fake group, and then deletes it, and displays the REST call information about the delete operation. The project may leave behind fake entries on your tenant as part of this process.
