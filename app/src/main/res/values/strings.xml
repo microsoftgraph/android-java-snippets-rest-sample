@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">O365-Android-Unified-API-Snippets</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="org_acct">Organizational Account</string>
+    <string name="signin_err">An error signing in has occurred. Check LogCat for details.</string>
+    <string name="o365_hint">Sign in with the account provided by your work or school to use with Office 365 or other Microsoft services</string>
+    <string name="warning_clientid_redirecturi_incorrect">The client ID or redirect URI is not valid. Enter a valid client ID and redirect URI in the ServiceConstants.java file and run again</string>
+    <string name="title_activity_snippet_detail">SnippetDetailActivity</string>
+    <string name="docs"><u>Documentation</u></string>
+    <string name="run">Run</string>
+    <string name="req_url">Request URL</string>
+    <string name="response">Response</string>
+    <string name="status_code">HTTP Status Code</string>
+    <string name="response_headers">Response Headers</string>
+    <string name="response_body">Response Body</string>
+    <string name="clippy">copied to clipboard</string>
+    <string name="admin">Requires Admin account</string>
+    <string name="directReports">directReports</string>
+    <string name="manager">manager</string>
+    <string name="meResponsibility">AboutMe,Responsibilities,Tags</string>
+    <string name="memberOf">memberOf</string>
+    <string name="userPhoto">userPhoto</string>
+    <string name="mailBody">You can send an email by making a POST request to /me/sendMail.</string>
+    <string name="mailSubject">Unified API snippets</string>
+    <string name="fragment_snippet_textview_description">Description of the Snippet here</string>
+    <string name="txt_snippet_name_text">Get all pages</string>
+    <string name="list_segment_snippet_name">PAGES</string>
+    <string name="signin_button">Connect to Office 365</string>
+    <string name="signin_description">Welcome to the Office 365 Android Unified API Snippets sample! Let\'s sign in and get started...</string>
+</resources>

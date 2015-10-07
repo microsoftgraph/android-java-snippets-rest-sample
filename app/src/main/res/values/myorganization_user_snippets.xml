@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?><!-- Format for each section
+item 1: Title of snippet
+item 2: Description of snippet
+item 3: Documentation link for more info on snippet
+item 4: version endpoint (beta, v1, v2, etc..)
+item 5: is admin account required to run snippet (true/false)
+-->
+
+<resources>
+    <!-- The name of this section-->
+    <string name="section_user">/myOrganization</string>
+    <string-array name="get_organization_users">
+        <item>GET: Get all users</item>
+        <item>Gets all of the users in your tenant\'s directory.</item>
+        <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_User</item>
+        <item>beta</item>
+        <item>true</item>
+    </string-array>
+    <string-array name="get_organization_filtered_users">
+        <item>GET: Get all users (with $filter)</item>
+        <item>Gets all of the users in your tenant\'s directory who are from the United States, using $filter.</item>
+        <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_User</item>
+        <item>beta</item>
+        <item>true</item>
+    </string-array>
+    <string-array name="insert_organization_user">
+        <item>POST: Add user</item>
+        <item>Adds a new user to the tenant\'s directory.</item>
+        <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_User</item>
+        <item>beta</item>
+        <item>true</item>
+    </string-array>
+
+</resources>

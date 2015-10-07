@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?><!-- Format for each section
+item 1: Title of snippet
+item 2: Description of snippet
+item 3: Documentation link for more info on snippet
+item 4: version endpoint (beta, v1, v2, etc..)
+item 5: is admin account required to run snippet (true/false)
+-->
+
+<resources>
+    <!-- The name of this section-->
+    <string name="section_messages">/messages</string>
+
+    <string-array name="get_user_messages">
+        <item>GET: Get user\'s messages</item>
+        <item>Gets the signed-in user\'s emails.</item>
+        <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_Messages</item>
+        <item>beta</item>
+        <item>false</item>
+    </string-array>
+    <string-array name="send_an_email_message">
+        <item>POST: Send an email</item>
+        <item>Sends an email as the signed-in user and saves a copy to their Sent Items folder.</item>
+        <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_action_user_sendMail</item>
+        <item>beta</item>
+        <item>false</item>
+    </string-array>
+</resources>
