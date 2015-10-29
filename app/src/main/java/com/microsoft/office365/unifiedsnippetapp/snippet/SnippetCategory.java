@@ -7,6 +7,7 @@ package com.microsoft.office365.unifiedsnippetapp.snippet;
 import com.microsoft.office365.unifiedapiservices.UnifiedContactService;
 import com.microsoft.office365.unifiedapiservices.UnifiedDrivesService;
 import com.microsoft.office365.unifiedapiservices.UnifiedEventsService;
+import com.microsoft.office365.unifiedapiservices.UnifiedFilesService;
 import com.microsoft.office365.unifiedapiservices.UnifiedGroupsService;
 import com.microsoft.office365.unifiedapiservices.UnifiedMailService;
 import com.microsoft.office365.unifiedapiservices.UnifiedMeService;
@@ -20,7 +21,7 @@ import static com.microsoft.office365.unifiedsnippetapp.R.string.section_groups;
 import static com.microsoft.office365.unifiedsnippetapp.R.string.section_me;
 import static com.microsoft.office365.unifiedsnippetapp.R.string.section_messages;
 import static com.microsoft.office365.unifiedsnippetapp.R.string.section_user;
-
+import static com.microsoft.office365.unifiedsnippetapp.R.string.section_files;
 
 public class SnippetCategory<T> {
     static final SnippetCategory<UnifiedContactService> contactSnippetCategory
@@ -43,6 +44,10 @@ public class SnippetCategory<T> {
 
     static final SnippetCategory<UnifiedDrivesService> drivesSnippetCategory
             = new SnippetCategory<>(section_drives, create(UnifiedDrivesService.class));
+
+    static final SnippetCategory<UnifiedFilesService> filesSnippetCategory
+            = new SnippetCategory<>(section_files, create(UnifiedFilesService.class));
+
 
     final String mSection;
     final T mService;
