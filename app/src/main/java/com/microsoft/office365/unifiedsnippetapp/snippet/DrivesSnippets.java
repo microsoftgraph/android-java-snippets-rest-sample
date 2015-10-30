@@ -8,6 +8,7 @@ import com.microsoft.office365.unifiedapiservices.UnifiedDrivesService;
 import retrofit.Callback;
 
 import static com.microsoft.office365.unifiedsnippetapp.R.array.get_me_drive;
+import static com.microsoft.office365.unifiedsnippetapp.R.array.get_me_files;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.get_organization_drives;
 
 abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesService, Result> {
@@ -51,6 +52,18 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
                         service.getOrganizationDrives(
                                 getVersion(),
                                 callback);
+                    }
+                },
+                 /*
+                 * Get a file
+                 * HTTP GET https://graph.microsoft.com/{version}/...
+                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_groups
+                 */
+                new DrivesSnippets<Void>(get_me_files) {
+                    @Override
+                    public void request(final UnifiedDrivesService service, final retrofit.Callback<Void> callback) {
+                        //Get first group
+                        service.getCurrentUserFiles(getVersion(), callback);
                     }
                 }
         };

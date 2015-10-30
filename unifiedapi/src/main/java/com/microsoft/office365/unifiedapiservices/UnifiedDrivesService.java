@@ -30,6 +30,18 @@ public interface UnifiedDrivesService {
             @Path("version") String version,
             Callback<Void> callback
     );
+
+    /**
+     * Gets children file metadata of the root folder
+     *
+     * @param version The version of the API to use (beta, v1, etc...)
+     * @param callback will be called with results of REST operation
+     */
+    @GET("/{version}/me/drive/root/children")
+    void getCurrentUserFiles(
+            @Path("version") String version,
+            Callback<Void> callback
+    );
 }
 // *********************************************************
 //

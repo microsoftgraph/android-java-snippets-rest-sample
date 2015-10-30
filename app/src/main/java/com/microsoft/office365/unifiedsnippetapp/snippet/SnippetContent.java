@@ -14,7 +14,6 @@ import static com.microsoft.office365.unifiedsnippetapp.snippet.GroupsSnippets.g
 import static com.microsoft.office365.unifiedsnippetapp.snippet.MeSnippets.getMeSnippets;
 import static com.microsoft.office365.unifiedsnippetapp.snippet.MessageSnippets.getMessageSnippets;
 import static com.microsoft.office365.unifiedsnippetapp.snippet.UsersSnippets.getUsersSnippets;
-import static com.microsoft.office365.unifiedsnippetapp.snippet.FilesSnippets.getFilesSnippets;
 
 public class SnippetContent {
 
@@ -23,7 +22,6 @@ public class SnippetContent {
 
     static {
         AbstractSnippet<?, ?>[][] baseSnippets = new AbstractSnippet<?, ?>[][]{
-                getFilesSnippets(),
                 getContactsSnippets(),
                 getGroupsSnippets(),
                 getEventsSnippets(),
