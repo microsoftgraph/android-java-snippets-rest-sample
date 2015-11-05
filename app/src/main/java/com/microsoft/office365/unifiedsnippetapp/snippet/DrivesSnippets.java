@@ -22,6 +22,7 @@ import static com.microsoft.office365.unifiedsnippetapp.R.array.download_me_file
 import static com.microsoft.office365.unifiedsnippetapp.R.array.update_me_file;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.delete_me_file;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.copy_me_file;
+import static com.microsoft.office365.unifiedsnippetapp.R.array.rename_me_file;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.get_me_drive;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.get_me_files;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.get_organization_drives;
@@ -212,7 +213,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
                 },
                  /*
                  * Copies a file
-                 * HTTP POST https://graph.microsoft.com/{version}/me/drive/items/{fileId}/ Microsoft.Graph.Copy
+                 * HTTP POST https://graph.microsoft.com/{version}/me/drive/items/{fileId}/Microsoft.Graph.Copy
                  * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event
                  */
                 new DrivesSnippets<Void>(copy_me_file) {
@@ -245,6 +246,54 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
                                 };
                                 //download the file we created
                                 unifiedDrivesService.copyFile(
+                                        getVersion(),
+                                        getFileId(response),
+                                        body,
+                                        callback);
+                            }
+
+                            @Override
+                            public void failure(RetrofitError error) {
+                                //pass along error to original callback
+                                callback.failure(error);
+                            }
+                        });
+                    }
+                },
+                /*
+                 * Renames a file
+                 * HTTP PATCH https://graph.microsoft.com/{version}/me/drive/items/{fileId}/
+                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event
+                 */
+                new DrivesSnippets<Void>(rename_me_file) {
+
+                    @Override
+                    public void request(
+                            final UnifiedDrivesService unifiedDrivesService,
+                            final Callback<Void> callback) {
+                        final TypedString body = new TypedString("file contents") {
+                            @Override
+                            public String mimeType() {
+                                return "application/json";
+                            }
+                        };
+                        unifiedDrivesService.putNewFile(getVersion(), java.util.UUID.randomUUID().toString(), body, new Callback<Void>() {
+
+                            @Override
+                            public void success(Void aVoid, Response response) {
+
+
+                                // Build contents of post body and convert to StringContent object.
+                                // Using line breaks for readability.
+                                String patchBody = "{"
+                                        + "'name':'" + java.util.UUID.randomUUID().toString() + "'}";
+
+                                final TypedString body = new TypedString(patchBody){
+                                    @Override
+                                    public String mimeType() { return "application/json";}
+                                };
+                                //download the file we created
+                                unifiedDrivesService.renameFile(
                                         getVersion(),
                                         getFileId(response),
                                         body,
