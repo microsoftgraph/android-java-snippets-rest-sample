@@ -23,6 +23,7 @@ import static com.microsoft.office365.unifiedsnippetapp.R.array.update_me_file;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.delete_me_file;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.copy_me_file;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.rename_me_file;
+import static com.microsoft.office365.unifiedsnippetapp.R.array.create_me_folder;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.get_me_drive;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.get_me_files;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.get_organization_drives;
@@ -308,6 +309,36 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
                         });
                     }
                 },
+                /*
+                 * Creates a folder
+                 * HTTP POST https://graph.microsoft.com/me/drive/root/children
+                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event
+                 */
+                new DrivesSnippets<Void>(create_me_folder) {
+
+                    @Override
+                    public void request(
+                            final UnifiedDrivesService unifiedDrivesService,
+                            final Callback<Void> callback) {
+                                String folderMetadata = "{"
+                                        + "'name': '" + java.util.UUID.randomUUID().toString() + "',"
+                                        + "'folder': {},"
+                                        + "'@name.conflictBehavior': 'rename'"
+                                        + "}"
+                                        ;
+
+                                final TypedString body = new TypedString(folderMetadata){
+                                    @Override
+                                    public String mimeType() { return "application/json";}
+                                };
+                                //download the file we created
+                                unifiedDrivesService.createFolder(
+                                        getVersion(),
+                                        body,
+                                        callback);
+
+                    }
+                }
         };
     }
 
