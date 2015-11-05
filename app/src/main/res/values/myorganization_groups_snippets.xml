@@ -14,49 +14,49 @@ item 5: is admin account required to run snippet (true/false)
         <item>GET: Get groups</item>
         <item>Gets all of the groups in your tenant\'s directory.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_groups</item>
-        <item>beta</item>
+        <item>v1.0</item>
         <item>false</item>
     </string-array>
     <string-array name="insert_a_group">
         <item>POST: Add group</item>
         <item>Adds a new security group to the tenant.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_groups</item>
-        <item>beta</item>
+        <item>v1.0</item>
         <item>false</item>
     </string-array>
     <string-array name="get_a_group">
         <item>GET: Get a specific group</item>
         <item>Gets information about a group in the tenant by ID.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_groups</item>
-        <item>beta</item>
+        <item>v1.0</item>
         <item>false</item>
     </string-array>
     <string-array name="update_a_group">
         <item>PATCH: Update a group</item>
         <item>Adds a new group to the tenant, then updates the description of that group.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Group</item>
-        <item>beta</item>
+        <item>v1.0</item>
         <item>false</item>
     </string-array>
     <string-array name="delete_a_group">
         <item>DELETE: Delete a group</item>
         <item>Adds a new group to the tenant, then deletes the group.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Group</item>
-        <item>beta</item>
+        <item>v1.0</item>
         <item>false</item>
     </string-array>
     <string-array name="get_group_members">
         <item>GET: Get group members</item>
         <item>Gets the members of a group.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_members</item>
-        <item>beta</item>
+        <item>v1.0</item>
         <item>false</item>
     </string-array>
     <string-array name="get_group_owners">
         <item>GET: Get group owners</item>
         <item>Gets the owners of a group.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_relationship_owners</item>
-        <item>beta</item>
+        <item>v1.0</item>
         <item>false</item>
     </string-array>
 

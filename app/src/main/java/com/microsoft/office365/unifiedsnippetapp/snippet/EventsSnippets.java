@@ -160,10 +160,9 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
                             @Override
                             public void success(Void aVoid, Response response) {
                                 //Delete the event we created
-                                String groupID = getGroupId(response);
                                 unifiedEventsService.deleteEvent(
                                         getVersion(),
-                                        groupID,
+                                        getGroupId(response),
                                         callback);
                             }
 

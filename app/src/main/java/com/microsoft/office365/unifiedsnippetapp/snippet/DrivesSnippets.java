@@ -3,10 +3,25 @@
 */
 package com.microsoft.office365.unifiedsnippetapp.snippet;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 import com.microsoft.office365.unifiedapiservices.UnifiedDrivesService;
 
-import retrofit.Callback;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+import retrofit.mime.TypedString;
+
+import static com.microsoft.office365.unifiedsnippetapp.R.array.create_me_file;
+import static com.microsoft.office365.unifiedsnippetapp.R.array.download_me_file;
+import static com.microsoft.office365.unifiedsnippetapp.R.array.update_me_file;
+import static com.microsoft.office365.unifiedsnippetapp.R.array.delete_me_file;
+import static com.microsoft.office365.unifiedsnippetapp.R.array.copy_me_file;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.get_me_drive;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.get_me_files;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.get_organization_drives;
@@ -65,11 +80,207 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
                         //Get first group
                         service.getCurrentUserFiles(getVersion(), callback);
                     }
-                }
+                },
+                 /*
+                 * Create a file
+                 * HTTP GET https://graph.microsoft.com/{version}/...
+                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_groups
+                 */
+                new DrivesSnippets<Void>(create_me_file) {
+                    @Override
+                    public void request(final UnifiedDrivesService service, final retrofit.Callback<Void> callback) {
+                        //Create a new file under root
+                        TypedString fileContents = new TypedString("file contents");
+                        service.putNewFile(getVersion(), java.util.UUID.randomUUID().toString(), fileContents, callback);
+                    }
+                },
+                /*
+                 * Download the content of a file
+                 * HTTP GET https://graph.microsoft.com/{version}/me/drive/items/{filename}/content
+                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event
+                 */
+                new DrivesSnippets<Void>(download_me_file) {
+
+                    @Override
+                    public void request(
+                            final UnifiedDrivesService unifiedDrivesService,
+                            final Callback<Void> callback) {
+                        TypedString body = new TypedString("file contents") {
+                            @Override
+                            public String mimeType() {
+                                return "application/json";
+                            }
+                        };
+                        unifiedDrivesService.putNewFile(getVersion(), java.util.UUID.randomUUID().toString(), body, new Callback<Void>() {
+
+                            @Override
+                            public void success(Void aVoid, Response response) {
+                                //download the file we created
+                                unifiedDrivesService.downloadFile(
+                                        getVersion(),
+                                        getFileId(response),
+                                        callback);
+                            }
+
+                            @Override
+                            public void failure(RetrofitError error) {
+                                //pass along error to original callback
+                                callback.failure(error);
+                            }
+                        });
+                    }
+                },
+                /*
+                 * Update the content of a file
+                 * HTTP PUT https://graph.microsoft.com/{version}/me/drive/items/{filename}/content
+                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event
+                 */
+                new DrivesSnippets<Void>(update_me_file) {
+
+                    @Override
+                    public void request(
+                            final UnifiedDrivesService unifiedDrivesService,
+                            final Callback<Void> callback) {
+                          final TypedString body = new TypedString("file contents") {
+                            @Override
+                            public String mimeType() {
+                                return "application/json";
+                            }
+                        };
+                        unifiedDrivesService.putNewFile(getVersion(), java.util.UUID.randomUUID().toString(), body, new Callback<Void>() {
+
+                            @Override
+                            public void success(Void aVoid, Response response) {
+                                final TypedString updatedBody = new TypedString("Updated file contents") {
+                                    @Override
+                                    public String mimeType() {
+                                        return "application/json";
+                                    }
+                                };
+                                //download the file we created
+                                unifiedDrivesService.updateFile(
+                                        getVersion(),
+                                        getFileId(response),
+                                        updatedBody,
+                                        callback);
+                            }
+
+                            @Override
+                            public void failure(RetrofitError error) {
+                                //pass along error to original callback
+                                callback.failure(error);
+                            }
+                        });
+                    }
+                },
+                /*
+                 * Delete the content of a file
+                 * HTTP DELETE https://graph.microsoft.com/{version}/me/drive/items/{fileId}/
+                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event
+                 */
+                new DrivesSnippets<Void>(delete_me_file) {
+
+                    @Override
+                    public void request(
+                            final UnifiedDrivesService unifiedDrivesService,
+                            final Callback<Void> callback) {
+                        final TypedString body = new TypedString("file contents") {
+                            @Override
+                            public String mimeType() {
+                                return "application/json";
+                            }
+                        };
+                        unifiedDrivesService.putNewFile(getVersion(), java.util.UUID.randomUUID().toString(), body, new Callback<Void>() {
+
+                            @Override
+                            public void success(Void aVoid, Response response) {
+
+                                //download the file we created
+                                unifiedDrivesService.deleteFile(
+                                        getVersion(),
+                                        getFileId(response),
+                                        callback);
+                            }
+
+                            @Override
+                            public void failure(RetrofitError error) {
+                                //pass along error to original callback
+                                callback.failure(error);
+                            }
+                        });
+                    }
+                },
+                 /*
+                 * Copies a file
+                 * HTTP POST https://graph.microsoft.com/{version}/me/drive/items/{fileId}/ Microsoft.Graph.Copy
+                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event
+                 */
+                new DrivesSnippets<Void>(copy_me_file) {
+
+                    @Override
+                    public void request(
+                            final UnifiedDrivesService unifiedDrivesService,
+                            final Callback<Void> callback) {
+                        final TypedString body = new TypedString("file contents") {
+                            @Override
+                            public String mimeType() {
+                                return "application/json";
+                            }
+                        };
+                        unifiedDrivesService.putNewFile(getVersion(), java.util.UUID.randomUUID().toString(), body, new Callback<Void>() {
+
+                            @Override
+                            public void success(Void aVoid, Response response) {
+
+
+                                // Build contents of post body and convert to StringContent object.
+                                // Using line breaks for readability.
+                                String postBody = "{'parentReference':{"
+                                        + "'path':'" + "/drive/root:'},"
+                                        + "'name':'" + java.util.UUID.randomUUID().toString() + "'}";
+
+                                final TypedString body = new TypedString(postBody){
+                                    @Override
+                                    public String mimeType() { return "application/json";}
+                                };
+                                //download the file we created
+                                unifiedDrivesService.copyFile(
+                                        getVersion(),
+                                        getFileId(response),
+                                        body,
+                                        callback);
+                            }
+
+                            @Override
+                            public void failure(RetrofitError error) {
+                                //pass along error to original callback
+                                callback.failure(error);
+                            }
+                        });
+                    }
+                },
         };
     }
 
     public abstract void request(UnifiedDrivesService unifiedDrivesService, Callback<Result> callback);
+
+    protected String getFileId(retrofit.client.Response json) {
+        if (json == null)
+            return "";
+
+        String fileId;
+
+        try {
+            JsonReader reader = new JsonReader(new InputStreamReader(json.getBody().in(), "UTF-8"));
+            JsonElement responseElement = new JsonParser().parse(reader);
+            JsonObject responseObject = responseElement.getAsJsonObject();
+            fileId = responseObject.get("id").getAsString();
+            return fileId;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
 }
 // *********************************************************
 //

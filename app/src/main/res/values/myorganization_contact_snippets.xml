@@ -14,7 +14,7 @@ item 5: is admin account required to run snippet (true/false)
         <item>GET: Gets all contacts</item>
         <item>Queries for all organization contacts and returns a list.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Contact</item>
-        <item>beta</item>
+        <item>v1.0</item>
         <item>false</item>
     </string-array>
 
