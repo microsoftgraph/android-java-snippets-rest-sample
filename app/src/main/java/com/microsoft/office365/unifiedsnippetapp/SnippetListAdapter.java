@@ -72,6 +72,19 @@ public class SnippetListAdapter extends BaseAdapter {
             }
         }
 
+        //Set text to indicate if this is a beta version snippet
+        if (!isSegment) {
+            if (clickedSnippet.isBeta()) {
+                TextView betaIndicator = (TextView) convertView.findViewById(R.id.beta_indicator);
+                betaIndicator.setText(R.string.beta);
+                betaIndicator.setVisibility(View.VISIBLE);
+            } else {
+                TextView betaIndicator = (TextView) convertView.findViewById(R.id.beta_indicator);
+                betaIndicator.setVisibility(View.GONE);
+            }
+        }
+
+
         return convertView;
     }
 

@@ -5,10 +5,12 @@ package com.microsoft.office365.unifiedsnippetapp.snippet;
 
 
 import com.microsoft.office365.unifiedapiservices.UnifiedContactService;
+import com.microsoft.office365.unifiedsnippetapp.R;
 import com.microsoft.office365.unifiedsnippetapp.application.SnippetApp;
 
 import retrofit.Callback;
 
+import static com.microsoft.office365.unifiedsnippetapp.R.string.beta;
 
 public abstract class AbstractSnippet<Service, Result> {
 
@@ -88,6 +90,11 @@ public abstract class AbstractSnippet<Service, Result> {
      */
     protected String getVersion() {
         return mO365Version;
+    }
+
+    public boolean isBeta() {
+        String betaString = SnippetApp.getApp().getString(beta);
+        return (mO365Version.equalsIgnoreCase(betaString));
     }
 
     public String getName() {
