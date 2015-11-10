@@ -20,7 +20,7 @@
     <string name="manager">manager</string>
     <string name="meResponsibility">AboutMe,Responsibilities,Tags</string>
     <string name="memberOf">memberOf</string>
-    <string name="userPhoto">userPhoto</string>
+    <string name="userPhoto">photo</string>
     <string name="mailBody">You can send an email by making a POST request to /me/sendMail.</string>
     <string name="mailSubject">Unified API snippets</string>
     <string name="fragment_snippet_textview_description">Description of the Snippet here</string>
@@ -28,4 +28,5 @@
     <string name="list_segment_snippet_name">PAGES</string>
     <string name="signin_button">Connect to Office 365</string>
     <string name="signin_description">Welcome to the Office 365 Android Unified API Snippets sample! Let\'s sign in and get started...</string>
+    <string name="beta">BETA</string>
 </resources>

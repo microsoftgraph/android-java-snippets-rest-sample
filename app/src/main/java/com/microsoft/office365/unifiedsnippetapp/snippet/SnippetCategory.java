@@ -21,7 +21,6 @@ import static com.microsoft.office365.unifiedsnippetapp.R.string.section_me;
 import static com.microsoft.office365.unifiedsnippetapp.R.string.section_messages;
 import static com.microsoft.office365.unifiedsnippetapp.R.string.section_user;
 
-
 public class SnippetCategory<T> {
     static final SnippetCategory<UnifiedContactService> contactSnippetCategory
             = new SnippetCategory<>(section_contacts, create(UnifiedContactService.class));

@@ -160,10 +160,9 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
                             @Override
                             public void success(Void aVoid, Response response) {
                                 //Delete the event we created
-                                String groupID = getGroupId(response);
                                 unifiedEventsService.deleteEvent(
                                         getVersion(),
-                                        groupID,
+                                        getGroupId(response),
                                         callback);
                             }
 
@@ -188,8 +187,16 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
         //create body
         JsonObject newEvent = new JsonObject();
         newEvent.addProperty("Subject", "Office 365 unified API discussion");
-        newEvent.addProperty("Start", start.toString());
-        newEvent.addProperty("End", end.toString());
+
+        JsonObject startDate = new JsonObject();
+        startDate.addProperty("DateTime",start.toString());
+        startDate.addProperty("TimeZone", "UTC");
+        newEvent.add("Start", startDate);
+
+        JsonObject endDate = new JsonObject();
+        endDate.addProperty("DateTime", end.toString());
+        endDate.addProperty("TimeZone","UTC");
+        newEvent.add("End",endDate);
 
         //create location
         JsonObject location = new JsonObject();
@@ -244,6 +251,7 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
             return "";
         }
     }
+
 }
 // *********************************************************
 //

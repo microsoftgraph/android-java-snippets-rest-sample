@@ -13,15 +13,69 @@ item 5: is admin account required to run snippet (true/false)
         <item>GET: Get user\'s drive</item>
         <item>Gets the signed-in user\'s drive.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Drive</item>
-        <item>beta</item>
+        <item>v1.0</item>
         <item>false</item>
     </string-array>
     <string-array name="get_organization_drives">
         <item>GET: Get drives</item>
         <item>Gets  all of the drives in your tenant.</item>
         <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_drives</item>
-        <item>beta</item>
+        <item>v1.0</item>
         <item>false</item>
     </string-array>
-
-</resources>
+    <string-array name="get_me_files">
+        <item>GET: Get children under root</item>
+        <item>Gets the metadata list of children files under the root folder.</item>
+        <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Drive</item>
+        <item>v1.0</item>
+        <item>false</item>
+    </string-array>
+    <string-array name="create_me_file">
+        <item>PUT: Create a file under root</item>
+        <item>Gets the metadata list of children files under the root folder.</item>
+        <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Drive</item>
+        <item>v1.0</item>
+        <item>false</item>
+    </string-array>
+    <string-array name="download_me_file">
+        <item>GET: Download a file under root</item>
+        <item>Gets the contents of a file under the root folder.</item>
+        <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Drive</item>
+        <item>v1.0</item>
+        <item>false</item>
+    </string-array>
+    <string-array name="update_me_file">
+        <item>PUT: Update the contents of a file under root</item>
+        <item>Gets the metadata list of children files under the root folder.</item>
+        <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Drive</item>
+        <item>v1.0</item>
+        <item>false</item>
+    </string-array>
+    <string-array name="delete_me_file">
+        <item>DELETE: Delete a file under root</item>
+        <item>Gets the metadata list of children files under the root folder.</item>
+        <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Drive</item>
+        <item>v1.0</item>
+        <item>false</item>
+    </string-array>
+    <string-array name="copy_me_file">
+        <item>POST: Copy a file under root</item>
+        <item>Gets the metadata list of children files under the root folder.</item>
+        <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Drive</item>
+        <item>v1.0</item>
+        <item>false</item>
+    </string-array>
+    <string-array name="rename_me_file">
+        <item>PATCH: Rename a file in the root</item>
+        <item>Renames a file under the root folder.</item>
+        <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Drive</item>
+        <item>v1.0</item>
+        <item>false</item>
+    </string-array>
+    <string-array name="create_me_folder">
+        <item>POST: Create a folder under root</item>
+        <item>Creates a folder under the root folder.</item>
+        <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Drive</item>
+        <item>v1.0</item>
+        <item>false</item>
+    </string-array></resources>
