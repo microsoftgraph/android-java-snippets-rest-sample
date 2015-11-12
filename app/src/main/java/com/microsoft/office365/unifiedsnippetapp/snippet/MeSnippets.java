@@ -4,7 +4,7 @@
 package com.microsoft.office365.unifiedsnippetapp.snippet;
 
 
-import com.microsoft.office365.unifiedapiservices.UnifiedMeService;
+import com.microsoft.office365.unifiedapiservices.MSGraphMeService;
 import com.microsoft.office365.unifiedsnippetapp.R;
 import com.microsoft.office365.unifiedsnippetapp.application.SnippetApp;
 
@@ -16,7 +16,7 @@ import static com.microsoft.office365.unifiedsnippetapp.R.array.get_me_photo;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.get_me_responsibilities;
 
 
-public abstract class MeSnippets<Result> extends AbstractSnippet<UnifiedMeService, Result> {
+public abstract class MeSnippets<Result> extends AbstractSnippet<MSGraphMeService, Result> {
     /**
      * Snippet constructor
      *
@@ -31,7 +31,7 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<UnifiedMeServic
                 // Marker element
                 new MeSnippets(null) {
                     @Override
-                    public void request(UnifiedMeService service, retrofit.Callback callback) {
+                    public void request(MSGraphMeService service, retrofit.Callback callback) {
                         // Not implemented
                     }
                 },
@@ -42,7 +42,7 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<UnifiedMeServic
                  */
                 new MeSnippets<Void>(get_me) {
                     @Override
-                    public void request(UnifiedMeService service, retrofit.Callback<Void> callback) {
+                    public void request(MSGraphMeService service, retrofit.Callback<Void> callback) {
                         service.getMe(
                                 getVersion(),
                                 callback);
@@ -54,7 +54,7 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<UnifiedMeServic
                  */
                 new MeSnippets<Void>(get_me_responsibilities) {
                     @Override
-                    public void request(UnifiedMeService service, retrofit.Callback<Void> callback) {
+                    public void request(MSGraphMeService service, retrofit.Callback<Void> callback) {
                         service.getMeResponsibilities(
                                 getVersion(),
                                 SnippetApp.getApp().getString(R.string.meResponsibility),
@@ -67,7 +67,7 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<UnifiedMeServic
                  */
                 new MeSnippets<Void>(get_me_manager) {
                     @Override
-                    public void request(UnifiedMeService service, retrofit.Callback<Void> callback) {
+                    public void request(MSGraphMeService service, retrofit.Callback<Void> callback) {
                         service.getMeEntities(
                                 getVersion(),
                                 SnippetApp.getApp().getString(R.string.manager),
@@ -80,7 +80,7 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<UnifiedMeServic
                  */
                 new MeSnippets<Void>(get_me_direct_reports) {
                     @Override
-                    public void request(UnifiedMeService service, retrofit.Callback<Void> callback) {
+                    public void request(MSGraphMeService service, retrofit.Callback<Void> callback) {
                         service.getMeEntities(
                                 getVersion(),
                                 SnippetApp.getApp().getString(R.string.directReports),
@@ -93,7 +93,7 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<UnifiedMeServic
                  */
                 new MeSnippets<Void>(get_me_group_membership) {
                     @Override
-                    public void request(UnifiedMeService service, retrofit.Callback<Void> callback) {
+                    public void request(MSGraphMeService service, retrofit.Callback<Void> callback) {
                         service.getMeEntities(
                                 getVersion(),
                                 SnippetApp.getApp().getString(R.string.memberOf),
@@ -106,7 +106,7 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<UnifiedMeServic
                  */
                 new MeSnippets<Void>(get_me_photo) {
                     @Override
-                    public void request(UnifiedMeService service, retrofit.Callback<Void> callback) {
+                    public void request(MSGraphMeService service, retrofit.Callback<Void> callback) {
                         service.getMeEntities(
                                 getVersion(),
                                 SnippetApp.getApp().getString(R.string.userPhoto),
@@ -117,7 +117,7 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<UnifiedMeServic
     }
 
     @Override
-    public abstract void request(UnifiedMeService service, retrofit.Callback<Result> callback);
+    public abstract void request(MSGraphMeService service, retrofit.Callback<Result> callback);
 
 
 }

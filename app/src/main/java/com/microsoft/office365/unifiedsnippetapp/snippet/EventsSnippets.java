@@ -10,7 +10,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
-import com.microsoft.office365.unifiedapiservices.UnifiedEventsService;
+import com.microsoft.office365.unifiedapiservices.MSGraphEventsService;
 
 import org.joda.time.DateTime;
 
@@ -27,7 +27,7 @@ import static com.microsoft.office365.unifiedsnippetapp.R.array.delete_event;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.get_user_events;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.update_event;
 
-public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEventsService, Result> {
+public abstract class EventsSnippets<Result> extends AbstractSnippet<MSGraphEventsService, Result> {
 
     public EventsSnippets(Integer descriptionArray) {
         super(SnippetCategory.eventsSnippetCategory, descriptionArray);
@@ -39,7 +39,7 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
                 new EventsSnippets(null) {
 
                     @Override
-                    public void request(UnifiedEventsService o, Callback callback) {
+                    public void request(MSGraphEventsService o, Callback callback) {
                         //No implementation
                     }
                 },
@@ -54,10 +54,10 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
 
                     @Override
                     public void request(
-                            UnifiedEventsService unifiedEventsService,
+                            MSGraphEventsService MSGraphEventsService,
                             retrofit.Callback<Void> callback) {
-                        unifiedEventsService.getEvents(getVersion(), callback);
-                    }
+                                 MSGraphEventsService.getEvents(getVersion(), callback);
+                             }
                 },
 
                 /*
@@ -69,21 +69,21 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
 
                     @Override
                     public void request(
-                            UnifiedEventsService unifiedEventsService,
+                            MSGraphEventsService MSGraphEventsService,
                             retrofit.Callback<Void> callback) {
 
-                        JsonObject newEvent = createNewEventJsonBody();
+                                JsonObject newEvent = createNewEventJsonBody();
 
-                        TypedString body = new TypedString(newEvent.toString()) {
-                            @Override
-                            public String mimeType() {
-                                return "application/json";
+                                TypedString body = new TypedString(newEvent.toString()) {
+                                    @Override
+                                    public String mimeType() {
+                                        return "application/json";
+                                    }
+                                };
+
+                                //Call service to POST the new event
+                                MSGraphEventsService.createNewEvent(getVersion(), body, callback);
                             }
-                        };
-
-                        //Call service to POST the new event
-                        unifiedEventsService.createNewEvent(getVersion(), body, callback);
-                    }
 
                 },
                  /*
@@ -95,7 +95,7 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
 
                     @Override
                     public void request(
-                            final UnifiedEventsService unifiedEventsService,
+                            final MSGraphEventsService MSGraphEventsService,
                             final retrofit.Callback<Void> callback) {
                         final JsonObject newEvent = createNewEventJsonBody();
                         TypedString body = new TypedString(newEvent.toString()) {
@@ -104,7 +104,7 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
                                 return "application/json";
                             }
                         };
-                        unifiedEventsService.createNewEvent(getVersion(), body, new Callback<Void>() {
+                        MSGraphEventsService.createNewEvent(getVersion(), body, new Callback<Void>() {
 
                             @Override
                             public void success(Void aVoid, Response response) {
@@ -121,7 +121,7 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
                                         return "application/json";
                                     }
                                 };
-                                unifiedEventsService.updateEvent(
+                                MSGraphEventsService.updateEvent(
                                         getVersion(),
                                         groupID,
                                         updateBody,
@@ -146,32 +146,32 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
 
                     @Override
                     public void request(
-                            final UnifiedEventsService unifiedEventsService,
-                            final retrofit.Callback<Void> callback) {
-                        final JsonObject newEvent = createNewEventJsonBody();
-                        TypedString body = new TypedString(newEvent.toString()) {
-                            @Override
-                            public String mimeType() {
-                                return "application/json";
-                            }
-                        };
-                        unifiedEventsService.createNewEvent(getVersion(), body, new Callback<Void>() {
+                        final MSGraphEventsService MSGraphEventsService,
+                        final retrofit.Callback<Void> callback) {
+                                final JsonObject newEvent = createNewEventJsonBody();
+                                TypedString body = new TypedString(newEvent.toString()) {
+                                    @Override
+                                    public String mimeType() {
+                                        return "application/json";
+                                    }
+                                };
+                                MSGraphEventsService.createNewEvent(getVersion(), body, new Callback<Void>() {
 
-                            @Override
-                            public void success(Void aVoid, Response response) {
-                                //Delete the event we created
-                                unifiedEventsService.deleteEvent(
-                                        getVersion(),
-                                        getGroupId(response),
-                                        callback);
-                            }
+                                    @Override
+                                    public void success(Void aVoid, Response response) {
+                                        //Delete the event we created
+                                        MSGraphEventsService.deleteEvent(
+                                                getVersion(),
+                                                getGroupId(response),
+                                                callback);
+                                    }
 
-                            @Override
-                            public void failure(RetrofitError error) {
-                                //pass along error to original callback
-                                callback.failure(error);
-                            }
-                        });
+                                    @Override
+                                    public void failure(RetrofitError error) {
+                                        //pass along error to original callback
+                                        callback.failure(error);
+                                    }
+                             });
                     }
                 }
 
@@ -196,7 +196,7 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
         JsonObject endDate = new JsonObject();
         endDate.addProperty("DateTime", end.toString());
         endDate.addProperty("TimeZone","UTC");
-        newEvent.add("End",endDate);
+        newEvent.add("End", endDate);
 
         //create location
         JsonObject location = new JsonObject();
@@ -224,7 +224,7 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<UnifiedEven
         return newEvent;
     }
 
-    public abstract void request(UnifiedEventsService unifiedEventsService, Callback<Result> callback);
+    public abstract void request(MSGraphEventsService MSGraphEventsService, Callback<Result> callback);
 
     /**
      * Gets the group object id from the HTTP response object

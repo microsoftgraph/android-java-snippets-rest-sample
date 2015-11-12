@@ -4,7 +4,7 @@
 package com.microsoft.office365.unifiedsnippetapp.snippet;
 
 import com.google.gson.JsonObject;
-import com.microsoft.office365.unifiedapiservices.UnifiedUserService;
+import com.microsoft.office365.unifiedapiservices.MSGraphUserService;
 import com.microsoft.office365.unifiedsnippetapp.util.SharedPrefsUtil;
 
 import java.util.UUID;
@@ -16,7 +16,7 @@ import static com.microsoft.office365.unifiedsnippetapp.R.array.get_organization
 import static com.microsoft.office365.unifiedsnippetapp.R.array.insert_organization_user;
 
 
-public abstract class UsersSnippets<Result> extends AbstractSnippet<UnifiedUserService, Result> {
+public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserService, Result> {
 
     public UsersSnippets(Integer descriptionArray) {
         super(SnippetCategory.userSnippetCategory, descriptionArray);
@@ -28,7 +28,7 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<UnifiedUserS
                 new UsersSnippets(null) {
 
                     @Override
-                    public void request(UnifiedUserService o, retrofit.Callback callback) {
+                    public void request(MSGraphUserService o, retrofit.Callback callback) {
                     }
                 },
 
@@ -40,9 +40,9 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<UnifiedUserS
                 new UsersSnippets<Void>(get_organization_users) {
                     @Override
                     public void request(
-                            UnifiedUserService unifiedUserService,
+                            MSGraphUserService MSGraphUserService,
                             retrofit.Callback<Void> callback) {
-                        unifiedUserService.getUsers(getVersion(), callback);
+                        MSGraphUserService.getUsers(getVersion(), callback);
                     }
                 },
 
@@ -54,9 +54,9 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<UnifiedUserS
                 new UsersSnippets<Void>(get_organization_filtered_users) {
                     @Override
                     public void request(
-                            UnifiedUserService unifiedUserService,
+                            MSGraphUserService MSGraphUserService,
                             retrofit.Callback<Void> callback) {
-                        unifiedUserService.getFilteredUsers(getVersion(), "country eq 'United States'", callback);
+                        MSGraphUserService.getFilteredUsers(getVersion(), "country eq 'United States'", callback);
                     }
                 },
 
@@ -68,7 +68,7 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<UnifiedUserS
                 new UsersSnippets<Void>(insert_organization_user) {
                     @Override
                     public void request(
-                            UnifiedUserService unifiedUserService,
+                            MSGraphUserService MSGraphUserService,
                             retrofit.Callback<Void> callback) {
 
                         //Use a random UUI for the user name
@@ -98,13 +98,13 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<UnifiedUserS
                         };
 
                         //Call service to POST the new user
-                        unifiedUserService.createNewUser(getVersion(), body, callback);
+                        MSGraphUserService.createNewUser(getVersion(), body, callback);
                     }
                 }
         };
     }
 
-    public abstract void request(UnifiedUserService unifiedUserService, retrofit.Callback<Result> callback);
+    public abstract void request(MSGraphUserService MSGraphUserService, retrofit.Callback<Result> callback);
 }
 
 // *********************************************************

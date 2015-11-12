@@ -4,7 +4,7 @@
 package com.microsoft.office365.unifiedsnippetapp.snippet;
 
 
-import com.microsoft.office365.unifiedapiservices.UnifiedContactService;
+import com.microsoft.office365.unifiedapiservices.MSGraphContactService;
 import com.microsoft.office365.unifiedsnippetapp.application.SnippetApp;
 
 import retrofit.Callback;
@@ -110,10 +110,10 @@ public abstract class AbstractSnippet<Service, Result> {
 
     protected static class Services {
 
-        public final UnifiedContactService mUnifiedContactService;
+        public final MSGraphContactService mMSGraphContactService;
 
         Services() {
-            mUnifiedContactService = SnippetCategory.contactSnippetCategory.mService;
+            mMSGraphContactService = SnippetCategory.contactSnippetCategory.mService;
         }
     }
 

@@ -13,7 +13,7 @@ import retrofit.http.PUT;
 import retrofit.http.Path;
 import retrofit.mime.TypedString;
 
-public interface UnifiedDrivesService {
+public interface MSGraphDrivesService {
 
     /**
      *

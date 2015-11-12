@@ -7,7 +7,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
-import com.microsoft.office365.unifiedapiservices.UnifiedDrivesService;
+import com.microsoft.office365.unifiedapiservices.MSGraphDrivesService;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -28,7 +28,7 @@ import static com.microsoft.office365.unifiedsnippetapp.R.array.get_me_drive;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.get_me_files;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.get_organization_drives;
 
-abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesService, Result> {
+abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesService, Result> {
 
     public DrivesSnippets(Integer descriptionArray) {
         super(SnippetCategory.drivesSnippetCategory, descriptionArray);
@@ -40,7 +40,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
                 new DrivesSnippets(null) {
 
                     @Override
-                    public void request(UnifiedDrivesService o, retrofit.Callback callback) {
+                    public void request(MSGraphDrivesService o, retrofit.Callback callback) {
                         //No implementation
                     }
                 },
@@ -52,7 +52,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
                  */
                 new DrivesSnippets<Void>(get_me_drive) {
                     @Override
-                    public void request(UnifiedDrivesService service, retrofit.Callback<Void> callback) {
+                    public void request(MSGraphDrivesService service, retrofit.Callback<Void> callback) {
                         service.getDrive(
                                 getVersion(),
                                 callback);
@@ -65,7 +65,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
                  */
                 new DrivesSnippets<Void>(get_organization_drives) {
                     @Override
-                    public void request(UnifiedDrivesService service, retrofit.Callback<Void> callback) {
+                    public void request(MSGraphDrivesService service, retrofit.Callback<Void> callback) {
                         service.getOrganizationDrives(
                                 getVersion(),
                                 callback);
@@ -78,7 +78,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
                  */
                 new DrivesSnippets<Void>(get_me_files) {
                     @Override
-                    public void request(final UnifiedDrivesService service, final retrofit.Callback<Void> callback) {
+                    public void request(final MSGraphDrivesService service, final retrofit.Callback<Void> callback) {
                         //Get first group
                         service.getCurrentUserFiles(getVersion(), callback);
                     }
@@ -90,7 +90,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
                  */
                 new DrivesSnippets<Void>(create_me_file) {
                     @Override
-                    public void request(final UnifiedDrivesService service, final retrofit.Callback<Void> callback) {
+                    public void request(final MSGraphDrivesService service, final retrofit.Callback<Void> callback) {
                         //Create a new file under root
                         TypedString fileContents = new TypedString("file contents");
                         service.putNewFile(getVersion(), java.util.UUID.randomUUID().toString(), fileContents, callback);
@@ -105,7 +105,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
 
                     @Override
                     public void request(
-                            final UnifiedDrivesService unifiedDrivesService,
+                            final MSGraphDrivesService MSGraphDrivesService,
                             final Callback<Void> callback) {
                         TypedString body = new TypedString("file contents") {
                             @Override
@@ -113,12 +113,12 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
                                 return "application/json";
                             }
                         };
-                        unifiedDrivesService.putNewFile(getVersion(), java.util.UUID.randomUUID().toString(), body, new Callback<Void>() {
+                        MSGraphDrivesService.putNewFile(getVersion(), java.util.UUID.randomUUID().toString(), body, new Callback<Void>() {
 
                             @Override
                             public void success(Void aVoid, Response response) {
                                 //download the file we created
-                                unifiedDrivesService.downloadFile(
+                                MSGraphDrivesService.downloadFile(
                                         getVersion(),
                                         getFileId(response),
                                         callback);
@@ -141,7 +141,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
 
                     @Override
                     public void request(
-                            final UnifiedDrivesService unifiedDrivesService,
+                            final MSGraphDrivesService MSGraphDrivesService,
                             final Callback<Void> callback) {
                           final TypedString body = new TypedString("file contents") {
                             @Override
@@ -149,7 +149,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
                                 return "application/json";
                             }
                         };
-                        unifiedDrivesService.putNewFile(getVersion(), java.util.UUID.randomUUID().toString(), body, new Callback<Void>() {
+                        MSGraphDrivesService.putNewFile(getVersion(), java.util.UUID.randomUUID().toString(), body, new Callback<Void>() {
 
                             @Override
                             public void success(Void aVoid, Response response) {
@@ -160,7 +160,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
                                     }
                                 };
                                 //download the file we created
-                                unifiedDrivesService.updateFile(
+                                MSGraphDrivesService.updateFile(
                                         getVersion(),
                                         getFileId(response),
                                         updatedBody,
@@ -184,7 +184,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
 
                     @Override
                     public void request(
-                            final UnifiedDrivesService unifiedDrivesService,
+                            final MSGraphDrivesService MSGraphDrivesService,
                             final Callback<Void> callback) {
                         final TypedString body = new TypedString("file contents") {
                             @Override
@@ -192,13 +192,13 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
                                 return "application/json";
                             }
                         };
-                        unifiedDrivesService.putNewFile(getVersion(), java.util.UUID.randomUUID().toString(), body, new Callback<Void>() {
+                        MSGraphDrivesService.putNewFile(getVersion(), java.util.UUID.randomUUID().toString(), body, new Callback<Void>() {
 
                             @Override
                             public void success(Void aVoid, Response response) {
 
                                 //download the file we created
-                                unifiedDrivesService.deleteFile(
+                                MSGraphDrivesService.deleteFile(
                                         getVersion(),
                                         getFileId(response),
                                         callback);
@@ -221,7 +221,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
 
                     @Override
                     public void request(
-                            final UnifiedDrivesService unifiedDrivesService,
+                            final MSGraphDrivesService MSGraphDrivesService,
                             final Callback<Void> callback) {
                         final TypedString body = new TypedString("file contents") {
                             @Override
@@ -229,7 +229,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
                                 return "application/json";
                             }
                         };
-                        unifiedDrivesService.putNewFile(getVersion(), java.util.UUID.randomUUID().toString(), body, new Callback<Void>() {
+                        MSGraphDrivesService.putNewFile(getVersion(), java.util.UUID.randomUUID().toString(), body, new Callback<Void>() {
 
                             @Override
                             public void success(Void aVoid, Response response) {
@@ -246,7 +246,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
                                     public String mimeType() { return "application/json";}
                                 };
                                 //download the file we created
-                                unifiedDrivesService.copyFile(
+                                MSGraphDrivesService.copyFile(
                                         getVersion(),
                                         getFileId(response),
                                         body,
@@ -270,7 +270,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
 
                     @Override
                     public void request(
-                            final UnifiedDrivesService unifiedDrivesService,
+                            final MSGraphDrivesService MSGraphDrivesService,
                             final Callback<Void> callback) {
                         final TypedString body = new TypedString("file contents") {
                             @Override
@@ -278,7 +278,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
                                 return "application/json";
                             }
                         };
-                        unifiedDrivesService.putNewFile(getVersion(), java.util.UUID.randomUUID().toString(), body, new Callback<Void>() {
+                        MSGraphDrivesService.putNewFile(getVersion(), java.util.UUID.randomUUID().toString(), body, new Callback<Void>() {
 
                             @Override
                             public void success(Void aVoid, Response response) {
@@ -294,7 +294,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
                                     public String mimeType() { return "application/json";}
                                 };
                                 //download the file we created
-                                unifiedDrivesService.renameFile(
+                                MSGraphDrivesService.renameFile(
                                         getVersion(),
                                         getFileId(response),
                                         body,
@@ -318,7 +318,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
 
                     @Override
                     public void request(
-                            final UnifiedDrivesService unifiedDrivesService,
+                            final MSGraphDrivesService MSGraphDrivesService,
                             final Callback<Void> callback) {
                                 String folderMetadata = "{"
                                         + "'name': '" + java.util.UUID.randomUUID().toString() + "',"
@@ -332,7 +332,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
                                     public String mimeType() { return "application/json";}
                                 };
                                 //download the file we created
-                                unifiedDrivesService.createFolder(
+                                MSGraphDrivesService.createFolder(
                                         getVersion(),
                                         body,
                                         callback);
@@ -342,7 +342,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
         };
     }
 
-    public abstract void request(UnifiedDrivesService unifiedDrivesService, Callback<Result> callback);
+    public abstract void request(MSGraphDrivesService MSGraphDrivesService, Callback<Result> callback);
 
     protected String getFileId(retrofit.client.Response json) {
         if (json == null)

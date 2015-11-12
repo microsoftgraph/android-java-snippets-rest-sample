@@ -7,7 +7,7 @@ import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.Path;
 
-public interface UnifiedContactService {
+public interface MSGraphContactService {
 
     /**
      * Get the connected user's contacts.

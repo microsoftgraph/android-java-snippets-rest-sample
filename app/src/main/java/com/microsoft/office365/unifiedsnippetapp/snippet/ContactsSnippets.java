@@ -4,7 +4,7 @@
 package com.microsoft.office365.unifiedsnippetapp.snippet;
 
 
-import com.microsoft.office365.unifiedapiservices.UnifiedContactService;
+import com.microsoft.office365.unifiedapiservices.MSGraphContactService;
 
 import retrofit.Callback;
 
@@ -12,7 +12,7 @@ import static com.microsoft.office365.unifiedsnippetapp.R.array.get_all_contacts
 
 ;
 
-public abstract class ContactsSnippets<Result> extends AbstractSnippet<UnifiedContactService, Result> {
+public abstract class ContactsSnippets<Result> extends AbstractSnippet<MSGraphContactService, Result> {
 
     public ContactsSnippets(Integer descriptionArray) {
         super(SnippetCategory.contactSnippetCategory, descriptionArray);
@@ -24,7 +24,7 @@ public abstract class ContactsSnippets<Result> extends AbstractSnippet<UnifiedCo
                 // Marker element
                 new ContactsSnippets(null) {
                     @Override
-                    public void request(UnifiedContactService service, Callback callback) {
+                    public void request(MSGraphContactService service, Callback callback) {
                         // Not implemented
                     }
                 },
@@ -36,7 +36,7 @@ public abstract class ContactsSnippets<Result> extends AbstractSnippet<UnifiedCo
                  */
                 new ContactsSnippets<Void>(get_all_contacts) {
                     @Override
-                    public void request(UnifiedContactService service, Callback<Void> callback) {
+                    public void request(MSGraphContactService service, Callback<Void> callback) {
                         service.getContacts(
                                 getVersion(),
                                 callback);
@@ -46,7 +46,7 @@ public abstract class ContactsSnippets<Result> extends AbstractSnippet<UnifiedCo
     }
 
     @Override
-    public abstract void request(UnifiedContactService service, Callback<Result> callback);
+    public abstract void request(MSGraphContactService service, Callback<Result> callback);
 
 }
 // *********************************************************
