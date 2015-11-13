@@ -47,7 +47,7 @@ You can explore the following operations for Office 365:
 
 **Contacts**
 
-* Get all contacts in the tenant.
+* [Get all contacts in the tenant.](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/ContactsSnippets.java#L37)
 * Create a new contact in your tenant.
 
 **Groups**
