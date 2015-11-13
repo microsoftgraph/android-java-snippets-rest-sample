@@ -25,7 +25,7 @@ You can explore the following operations for Office 365:
 * [Get the user's manager.](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/MeSnippets.java#L68)
 * [Get the user's direct reports.](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/MeSnippets.java#L81)
 * [Get the user's photo.](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/MeSnippets.java#L107)
-* Get the group's the user is a member of.
+* [Get the groups the user is a member of.](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/MeSnippets.java#L94)
 
 **Users**
 
