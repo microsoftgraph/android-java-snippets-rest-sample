@@ -43,7 +43,7 @@ You can explore the following operations for Office 365:
 **Messages**
 
 * [Get user's messages from Office 365.](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/MessageSnippets.java#L46)
-* Send a message from the user.
+* [Send a message from the user.](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/MessageSnippets.java#L58)
 
 **Contacts**
 
