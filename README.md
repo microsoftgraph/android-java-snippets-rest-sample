@@ -21,7 +21,7 @@ You can explore the following operations for Office 365:
 **Me**
 
 * [Get information about the signed in user.](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/MeSnippets.java#L43)
-* Get the user's responsibilities.
+* [Get the user's responsibilities.](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/MeSnippets.java#L55)
 * Get the user's manager.
 * Get the user's direct reports.
 * Get the user's photo.
