@@ -35,10 +35,10 @@ You can explore the following operations for Office 365:
 
 **Events**
 
-* Get the signed-in user's events from Office 365
-* Create a new event for the user
-* Update a user's event
-* Delete a user's event
+* [Get the signed-in user's events from Office 365.](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/EventsSnippets.java#L53)
+* Create a new event for the user.
+* Update a user's event.
+* Delete a user's event.
 
 **Messages**
 
