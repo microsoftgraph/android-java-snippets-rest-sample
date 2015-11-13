@@ -30,7 +30,7 @@ You can explore the following operations for Office 365:
 **Users**
 
 * [Get users from your tenant's directory.](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/UsersSnippets.java#L40)
-* Get users filtered by criteria from your tenant's directory.
+* [Get users filtered by criteria from your tenant's directory.](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/UsersSnippets.java#L54)
 * Create a new user.
 
 **Events**
