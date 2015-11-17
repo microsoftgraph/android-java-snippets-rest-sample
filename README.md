@@ -48,22 +48,21 @@ You can explore the following operations for Office 365:
 **Contacts**
 
 * [Get all contacts in the tenant.](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/ContactsSnippets.java#L37)
-* [Create a new contact in your tenant.](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/UsersSnippets.java#L68)
 
 **Groups**
 
 * [Get all groups in your tenant's directory.](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/GroupsSnippets.java#L138)
 * [Create a new security group.](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/GroupsSnippets.java#L152)
-* [Get information about a specific group in the tenant.](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/GroupsSnippets.java#L57)
-* [Update the description of a group.](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/GroupsSnippets.java#L170)
+* [Get information about a specific group in the tenant.](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/GroupsSnippets.java#L55)
+* [Update the description of a group.](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/GroupsSnippets.java#L167)
 * [Delete a group.](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/GroupsSnippets.java#L197)
-* [Get a group's members.](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/GroupsSnippets.java#L93)
-* [Get a group's owners.](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/GroupsSnippets.java#L122)
+* [Get a group's members.](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/GroupsSnippets.java#L84)
+* [Get a group's owners.](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/GroupsSnippets.java#L113)
 
 **Drives**
 
-* [Gets the signed-in user's drive.](/app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/DrivesSnippets.java#L55)
-* [Gets  all of the drives in your tenant.](/app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/DrivesSnippets.java#L68)
+* [Gets the signed-in user's drive.](/app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/DrivesSnippets.java#L53)
+* [Gets  all of the drives in your tenant.](/app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/DrivesSnippets.java#L66)
 * [Gets all of the files in the user's root folder.](/app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/DrivesSnippets.java#L79)
 * [Creates a new file in the user's root folder.](/app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/DrivesSnippets.java#L91)
 * [Downloads a file from the user's root folder.](/app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/DrivesSnippets.java#L104)
