@@ -10,7 +10,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
-import com.microsoft.office365.unifiedapiservices.UnifiedGroupsService;
+import com.microsoft.office365.unifiedapiservices.MSGraphGroupsService;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -30,7 +30,7 @@ import static com.microsoft.office365.unifiedsnippetapp.R.array.insert_a_group;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.update_a_group;
 
 
-public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGroupsService, Result> {
+public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGroupsService, Result> {
 
     public GroupsSnippets(Integer descriptionArray) {
         super(SnippetCategory.groupSnippetCategory, descriptionArray);
@@ -41,7 +41,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                 // Marker element
                 new GroupsSnippets(null) {
                     @Override
-                    public void request(UnifiedGroupsService service, retrofit.Callback callback) {
+                    public void request(MSGraphGroupsService service, retrofit.Callback callback) {
                         // Not implemented
                     }
                 },
@@ -54,7 +54,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                  */
                 new GroupsSnippets<Void>(get_a_group) {
                     @Override
-                    public void request(final UnifiedGroupsService service, final retrofit.Callback<Void> callback) {
+                    public void request(final MSGraphGroupsService service, final retrofit.Callback<Void> callback) {
                         //Get first group
                         service.getGroups(getVersion(), ImmutableMap.of("$top", "1"), new Callback<Void>() {
 
@@ -83,7 +83,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                  */
                 new GroupsSnippets<Void>(get_group_members) {
                     @Override
-                    public void request(final UnifiedGroupsService service, final retrofit.Callback<Void> callback) {
+                    public void request(final MSGraphGroupsService service, final retrofit.Callback<Void> callback) {
                         //Get first group
                         service.getGroups(getVersion(), ImmutableMap.of("$top", "1"), new Callback<Void>() {
 
@@ -112,7 +112,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                  */
                 new GroupsSnippets<Void>(get_group_owners) {
                     @Override
-                    public void request(final UnifiedGroupsService service, final retrofit.Callback<Void> callback) {
+                    public void request(final MSGraphGroupsService service, final retrofit.Callback<Void> callback) {
                         //Get first group
                         service.getGroups(getVersion(), ImmutableMap.of("$top", "1"), new Callback<Void>() {
 
@@ -137,7 +137,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
 
                 new GroupsSnippets<Void>(get_all_groups) {
                     @Override
-                    public void request(UnifiedGroupsService service, retrofit.Callback<Void> callback) {
+                    public void request(MSGraphGroupsService service, retrofit.Callback<Void> callback) {
                         service.getGroups(
                                 getVersion(),
                                 null,
@@ -152,7 +152,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                 new GroupsSnippets<Void>(insert_a_group) {
 
                     @Override
-                    public void request(final UnifiedGroupsService service, retrofit.Callback<Void> callback) {
+                    public void request(final MSGraphGroupsService service, retrofit.Callback<Void> callback) {
                         service.createGroup(
                                 getVersion(),
                                 createNewGroup(),
@@ -167,7 +167,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                 new GroupsSnippets<Void>(update_a_group) {
 
                     @Override
-                    public void request(final UnifiedGroupsService service, final retrofit.Callback<Void> callback) {
+                    public void request(final MSGraphGroupsService service, final retrofit.Callback<Void> callback) {
                         //Create a group that we will delete
                         service.createGroup(getVersion(), createNewGroup(), new Callback<Void>() {
 
@@ -197,7 +197,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
                 new GroupsSnippets<Void>(delete_a_group) {
 
                     @Override
-                    public void request(final UnifiedGroupsService service, final retrofit.Callback<Void> callback) {
+                    public void request(final MSGraphGroupsService service, final retrofit.Callback<Void> callback) {
                         //Create a group that we will delete
                         service.createGroup(getVersion(), createNewGroup(), new Callback<Void>() {
 
@@ -222,7 +222,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<UnifiedGrou
     }
 
     @Override
-    public abstract void request(UnifiedGroupsService service, retrofit.Callback<Result> callback);
+    public abstract void request(MSGraphGroupsService service, retrofit.Callback<Result> callback);
 
     /**
      * Creates a Json payload for a POST operation to

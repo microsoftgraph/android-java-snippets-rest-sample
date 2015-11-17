@@ -3,8 +3,6 @@
 */
 package com.microsoft.office365.unifiedapiservices;
 
-import java.util.Map;
-
 import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.DELETE;
@@ -12,89 +10,64 @@ import retrofit.http.GET;
 import retrofit.http.PATCH;
 import retrofit.http.POST;
 import retrofit.http.Path;
-import retrofit.http.QueryMap;
 import retrofit.mime.TypedString;
 
-public interface UnifiedGroupsService {
+public interface MSGraphEventsService {
 
     /**
+     * Gets events for the connected user
      *
      * @param version The version of the API to use (beta, v1, etc...)
      * @param callback will be called with results of REST operation
      */
-    @GET("/{version}/myOrganization/Groups")
-    void getGroups(
+    @GET("/{version}/me/events")
+    void getEvents(
             @Path("version") String version,
-            @QueryMap Map<String,String> filters,
             Callback<Void> callback
     );
 
     /**
+     * Creates a new event for the connected user
      *
      * @param version The version of the API to use (beta, v1, etc...)
-     * @param groupId Id of the group to return
+     * @param body JSON describing the properties of the new event to craete
      * @param callback will be called with results of REST operation
      */
-    @GET("/{version}/myOrganization/Groups/{groupId}")
-    void getGroup(
+    @POST("/{version}/me/events")
+    void createNewEvent(
             @Path("version") String version,
-            @Path("groupId") String groupId,
+            @Body TypedString body,
             Callback<Void> callback
     );
 
     /**
+     * Updates an event owned by the connected user
      *
      * @param version The version of the API to use (beta, v1, etc...)
-     * @param groupId The Id of the group being queries
-     * @param entity Which entity to retrieve (members, owners, etc...)
+     * @param eventId Id of the event to update
+     * @param body JSON describing the properties of the updated event to apply with patch
      * @param callback will be called with results of REST operation
      */
-    @GET("/{version}/myOrganization/Groups/{groupId}/{entity}")
-    void getGroupEntities(
+    @PATCH("/{version}/me/events/{eventid}")
+    void updateEvent(
             @Path("version") String version,
-            @Path("groupId") String groupId,
-            @Path("entity") String entity,
+            @Path("eventid") String eventId,
+            @Body TypedString body,
             Callback<Void> callback
+
     );
 
     /**
+     * Deletes a connected users event
      *
      * @param version The version of the API to use (beta, v1, etc...)
-     * @param content JSON describing the properties of the new group
+     * @param eventId Id of the event to delete
      * @param callback will be called with results of REST operation
      */
-    @POST("/{version}/myOrganization/Groups/")
-    void createGroup(
+    @DELETE("/{version}/me/events/{eventid}")
+    void deleteEvent(
             @Path("version") String version,
-            @Body TypedString content,
-            Callback<Void> callback
-    );
-
-    /**
-     *
-     * @param version The version of the API to use (beta, v1, etc...)
-     * @param groupId Id of the group to update
-     * @param content JSON describing properties of the updated group
-     * @param callback will be called with results of REST operation
-     */
-    @PATCH("/{version}/myOrganization/Groups/{groupId}")
-    void updateGroup(
-            @Path("version") String version,
-            @Path("groupId") String groupId,
-            @Body TypedString content,
-            Callback<Void> callback
-    );
-
-    /**
-     *
-     * @param version The version of the API to use (beta, v1, etc...)
-     * @param groupId Id of the group to delete
-     * @param callback will be called with results of REST operation
-     */
-    @DELETE("/{version}/myOrganization/Groups/{groupId}")
-    void deleteGroup(
-            @Path("version") String version,
-            @Path("groupId") String groupId,
+            @Path("eventid") String eventId,
             Callback<Void> callback
     );
 

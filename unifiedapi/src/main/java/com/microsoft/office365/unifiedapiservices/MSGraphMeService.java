@@ -4,37 +4,46 @@
 package com.microsoft.office365.unifiedapiservices;
 
 import retrofit.Callback;
-import retrofit.http.Body;
 import retrofit.http.GET;
-import retrofit.http.POST;
 import retrofit.http.Path;
-import retrofit.mime.TypedString;
+import retrofit.http.Query;
 
-public interface UnifiedMailService {
+public interface MSGraphMeService {
 
     /**
-     * Gets the connected users mail messages
      *
      * @param version The version of the API to use (beta, v1, etc...)
      * @param callback will be called with results of REST operation
      */
-    @GET("/{version}/me/messages")
-    void getMail(
+    @GET("/{version}/me")
+    void getMe(
             @Path("version") String version,
             Callback<Void> callback
     );
 
     /**
-     * Sends a mail message for the connected user
      *
      * @param version The version of the API to use (beta, v1, etc...)
-     * @param body JSON describing the propeties of the message to send
+     * @param select A set of names specifying which properties to return in results
      * @param callback will be called with results of REST operation
      */
-    @POST("/{version}/me/sendMail")
-    void createNewMail(
+    @GET("/{version}/me")
+    void getMeResponsibilities(
             @Path("version") String version,
-            @Body TypedString body,
+            @Query("$select") String select,
+            Callback<Void> callback
+    );
+
+    /**
+     *
+     * @param version The version of the API to use (beta, v1, etc...)
+     * @param entity Which entity to retrieve (manager, direct reports, etc...)
+     * @param callback will be called with results of REST operation
+     */
+    @GET("/{version}/me/{entity}")
+    void getMeEntities(
+            @Path("version") String version,
+            @Path("entity") String entity,
             Callback<Void> callback
     );
 }

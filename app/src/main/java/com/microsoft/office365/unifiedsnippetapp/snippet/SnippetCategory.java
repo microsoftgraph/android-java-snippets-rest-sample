@@ -4,13 +4,13 @@
 package com.microsoft.office365.unifiedsnippetapp.snippet;
 
 
-import com.microsoft.office365.unifiedapiservices.UnifiedContactService;
-import com.microsoft.office365.unifiedapiservices.UnifiedDrivesService;
-import com.microsoft.office365.unifiedapiservices.UnifiedEventsService;
-import com.microsoft.office365.unifiedapiservices.UnifiedGroupsService;
-import com.microsoft.office365.unifiedapiservices.UnifiedMailService;
-import com.microsoft.office365.unifiedapiservices.UnifiedMeService;
-import com.microsoft.office365.unifiedapiservices.UnifiedUserService;
+import com.microsoft.office365.unifiedapiservices.MSGraphContactService;
+import com.microsoft.office365.unifiedapiservices.MSGraphDrivesService;
+import com.microsoft.office365.unifiedapiservices.MSGraphEventsService;
+import com.microsoft.office365.unifiedapiservices.MSGraphGroupsService;
+import com.microsoft.office365.unifiedapiservices.MSGraphMailService;
+import com.microsoft.office365.unifiedapiservices.MSGraphMeService;
+import com.microsoft.office365.unifiedapiservices.MSGraphUserService;
 import com.microsoft.office365.unifiedsnippetapp.application.SnippetApp;
 
 import static com.microsoft.office365.unifiedsnippetapp.R.string.section_contacts;
@@ -22,26 +22,26 @@ import static com.microsoft.office365.unifiedsnippetapp.R.string.section_message
 import static com.microsoft.office365.unifiedsnippetapp.R.string.section_user;
 
 public class SnippetCategory<T> {
-    static final SnippetCategory<UnifiedContactService> contactSnippetCategory
-            = new SnippetCategory<>(section_contacts, create(UnifiedContactService.class));
+    static final SnippetCategory<MSGraphContactService> contactSnippetCategory
+            = new SnippetCategory<>(section_contacts, create(MSGraphContactService.class));
 
-    static final SnippetCategory<UnifiedEventsService> eventsSnippetCategory
-            = new SnippetCategory<>(section_events, create(UnifiedEventsService.class));
+    static final SnippetCategory<MSGraphEventsService> eventsSnippetCategory
+            = new SnippetCategory<>(section_events, create(MSGraphEventsService.class));
 
-    static final SnippetCategory<UnifiedGroupsService> groupSnippetCategory
-            = new SnippetCategory<>(section_groups, create(UnifiedGroupsService.class));
+    static final SnippetCategory<MSGraphGroupsService> groupSnippetCategory
+            = new SnippetCategory<>(section_groups, create(MSGraphGroupsService.class));
 
-    static final SnippetCategory<UnifiedUserService> userSnippetCategory
-            = new SnippetCategory<>(section_user, create(UnifiedUserService.class));
+    static final SnippetCategory<MSGraphUserService> userSnippetCategory
+            = new SnippetCategory<>(section_user, create(MSGraphUserService.class));
 
-    static final SnippetCategory<UnifiedMailService> mailSnippetCategory
-            = new SnippetCategory<>(section_messages, create(UnifiedMailService.class));
+    static final SnippetCategory<MSGraphMailService> mailSnippetCategory
+            = new SnippetCategory<>(section_messages, create(MSGraphMailService.class));
 
-    static final SnippetCategory<UnifiedMeService> meSnippetCategory
-            = new SnippetCategory<>(section_me, create(UnifiedMeService.class));
+    static final SnippetCategory<MSGraphMeService> meSnippetCategory
+            = new SnippetCategory<>(section_me, create(MSGraphMeService.class));
 
-    static final SnippetCategory<UnifiedDrivesService> drivesSnippetCategory
-            = new SnippetCategory<>(section_drives, create(UnifiedDrivesService.class));
+    static final SnippetCategory<MSGraphDrivesService> drivesSnippetCategory
+            = new SnippetCategory<>(section_drives, create(MSGraphDrivesService.class));
 
     final String mSection;
     final T mService;

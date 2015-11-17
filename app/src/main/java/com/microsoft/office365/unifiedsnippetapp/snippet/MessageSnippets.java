@@ -8,7 +8,7 @@ import android.content.Context;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.microsoft.office365.unifiedapiservices.UnifiedMailService;
+import com.microsoft.office365.unifiedapiservices.MSGraphMailService;
 import com.microsoft.office365.unifiedsnippetapp.R;
 import com.microsoft.office365.unifiedsnippetapp.application.SnippetApp;
 import com.microsoft.office365.unifiedsnippetapp.inject.AppModule;
@@ -19,7 +19,7 @@ import retrofit.mime.TypedString;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.get_user_messages;
 import static com.microsoft.office365.unifiedsnippetapp.R.array.send_an_email_message;
 
-public abstract class MessageSnippets<Result> extends AbstractSnippet<UnifiedMailService, Result> {
+public abstract class MessageSnippets<Result> extends AbstractSnippet<MSGraphMailService, Result> {
     /**
      * Snippet constructor
      *
@@ -34,7 +34,7 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<UnifiedMai
                 // Marker element
                 new MessageSnippets(null) {
                     @Override
-                    public void request(UnifiedMailService service, retrofit.Callback callback) {
+                    public void request(MSGraphMailService service, retrofit.Callback callback) {
                         // Not implemented
                     }
                 },
@@ -45,7 +45,7 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<UnifiedMai
                  */
                 new MessageSnippets<Void>(get_user_messages) {
                     @Override
-                    public void request(UnifiedMailService service, retrofit.Callback<Void> callback) {
+                    public void request(MSGraphMailService service, retrofit.Callback<Void> callback) {
                         service.getMail(
                                 getVersion(),
                                 callback);
@@ -57,7 +57,7 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<UnifiedMai
                  */
                 new MessageSnippets<Void>(send_an_email_message) {
                     @Override
-                    public void request(UnifiedMailService service, retrofit.Callback<Void> callback) {
+                    public void request(MSGraphMailService service, retrofit.Callback<Void> callback) {
                         service.createNewMail(
                                 getVersion(),
                                 createMailPayload(
@@ -72,7 +72,7 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<UnifiedMai
     }
 
     @Override
-    public abstract void request(UnifiedMailService service, retrofit.Callback<Result> callback);
+    public abstract void request(MSGraphMailService service, retrofit.Callback<Result> callback);
 
     protected TypedString createMailPayload(
             String subject,
