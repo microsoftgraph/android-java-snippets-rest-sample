@@ -73,19 +73,19 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
                 },
                  /*
                  * Get a file
-                 * HTTP GET https://graph.microsoft.com/{version}/...
+                 * HTTP GET https://graph.microsoft.com/{version}/me/drive/root/children
                  * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_groups
                  */
                 new DrivesSnippets<Void>(get_me_files) {
                     @Override
                     public void request(final UnifiedDrivesService service, final retrofit.Callback<Void> callback) {
-                        //Get first group
+                        //Get user's root folder files
                         service.getCurrentUserFiles(getVersion(), callback);
                     }
                 },
                  /*
                  * Create a file
-                 * HTTP GET https://graph.microsoft.com/{version}/...
+                 * HTTP PUT https://graph.microsoft.com/{version}/me/drive/root/children/{filename}/content
                  * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_groups
                  */
                 new DrivesSnippets<Void>(create_me_file) {
@@ -110,7 +110,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
                         TypedString body = new TypedString("file contents") {
                             @Override
                             public String mimeType() {
-                                return "application/json";
+                                return "text/plain";
                             }
                         };
                         unifiedDrivesService.putNewFile(getVersion(), java.util.UUID.randomUUID().toString(), body, new Callback<Void>() {
@@ -118,10 +118,16 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
                             @Override
                             public void success(Void aVoid, Response response) {
                                 //download the file we created
-                                unifiedDrivesService.downloadFile(
-                                        getVersion(),
-                                        getFileId(response),
-                                        callback);
+                                try{
+                                    unifiedDrivesService.downloadFile(
+                                            getVersion(),
+                                            getFileId(response),
+                                            callback);
+
+                                }catch(IOException ex){
+                                  //  RetrofitError retrofitError = new RetrofitError(ex.getMessage());
+                             //       callback.failure(ex.getMessage());
+                                }
                             }
 
                             @Override
@@ -146,7 +152,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
                           final TypedString body = new TypedString("file contents") {
                             @Override
                             public String mimeType() {
-                                return "application/json";
+                                return "text/plain";
                             }
                         };
                         unifiedDrivesService.putNewFile(getVersion(), java.util.UUID.randomUUID().toString(), body, new Callback<Void>() {
@@ -160,11 +166,11 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
                                     }
                                 };
                                 //download the file we created
-                                unifiedDrivesService.updateFile(
-                                        getVersion(),
-                                        getFileId(response),
-                                        updatedBody,
-                                        callback);
+//                                unifiedDrivesService.updateFile(
+//                                        getVersion(),
+//                                        getFileId(response),
+//                                        updatedBody,
+//                                        callback);
                             }
 
                             @Override
@@ -198,10 +204,10 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
                             public void success(Void aVoid, Response response) {
 
                                 //download the file we created
-                                unifiedDrivesService.deleteFile(
-                                        getVersion(),
-                                        getFileId(response),
-                                        callback);
+//                                unifiedDrivesService.deleteFile(
+//                                        getVersion(),
+//                                        getFileId(response),
+//                                        callback);
                             }
 
                             @Override
@@ -246,11 +252,11 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
                                     public String mimeType() { return "application/json";}
                                 };
                                 //download the file we created
-                                unifiedDrivesService.copyFile(
-                                        getVersion(),
-                                        getFileId(response),
-                                        body,
-                                        callback);
+//                                unifiedDrivesService.copyFile(
+//                                        getVersion(),
+//                                        getFileId(response),
+//                                        body,
+//                                        callback);
                             }
 
                             @Override
@@ -294,11 +300,11 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
                                     public String mimeType() { return "application/json";}
                                 };
                                 //download the file we created
-                                unifiedDrivesService.renameFile(
-                                        getVersion(),
-                                        getFileId(response),
-                                        body,
-                                        callback);
+//                                unifiedDrivesService.renameFile(
+//                                        getVersion(),
+//                                        getFileId(response),
+//                                        body,
+//                                        callback);
                             }
 
                             @Override
@@ -344,22 +350,16 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<UnifiedDrivesServi
 
     public abstract void request(UnifiedDrivesService unifiedDrivesService, Callback<Result> callback);
 
-    protected String getFileId(retrofit.client.Response json) {
-        if (json == null)
-            return "";
-
+    protected String getFileId(retrofit.client.Response json) throws IOException {
         String fileId;
-
-        try {
-            JsonReader reader = new JsonReader(new InputStreamReader(json.getBody().in(), "UTF-8"));
-            JsonElement responseElement = new JsonParser().parse(reader);
-            JsonObject responseObject = responseElement.getAsJsonObject();
-            fileId = responseObject.get("id").getAsString();
-            return fileId;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "";
-        }
+        InputStreamReader streamReader = new InputStreamReader(json.getBody().in(),"UTF-8");
+        JsonReader reader = new JsonReader(streamReader);
+        JsonElement responseElement = new JsonParser().parse(reader);
+        JsonObject responseObject = responseElement.getAsJsonObject();
+        fileId = responseObject.get("id").getAsString();
+        reader.close();
+        streamReader.close();
+        return fileId;
     }
 }
 // *********************************************************
