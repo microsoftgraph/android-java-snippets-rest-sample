@@ -60,7 +60,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
 
                  /* Get all of the drives in your tenant
                  * HTTP GET https://graph.microsoft.com/{version}/myOrganization/drives
-                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_drives
+                 * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/drive_get
                  */
                 new DrivesSnippets<Void>(get_organization_drives) {
                     @Override
