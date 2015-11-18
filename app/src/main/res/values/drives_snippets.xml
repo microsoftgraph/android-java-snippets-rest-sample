@@ -58,13 +58,6 @@ item 5: is admin account required to run snippet (true/false)
         <item>v1.0</item>
         <item>false</item>
     </string-array>
-    <string-array name="copy_me_file">
-        <item>POST: Copy a file under root</item>
-        <item>Gets the metadata list of children files under the root folder.</item>
-        <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Drive</item>
-        <item>v1.0</item>
-        <item>false</item>
-    </string-array>
     <string-array name="rename_me_file">
         <item>PATCH: Rename a file in the root</item>
         <item>Renames a file under the root folder.</item>
