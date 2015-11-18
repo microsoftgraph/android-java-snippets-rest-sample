@@ -5,7 +5,7 @@ android {
     buildToolsVersion "22.0.1"
 
     defaultConfig {
-        applicationId "com.microsoft.o365_android_unified_api_snippets"
+        applicationId "com.microsoft.o365_android_microsoft_graph_snippets"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
