@@ -97,17 +97,17 @@ To use the Microsoft Graph API REST snippets project, you need the following:
 7.	Click the arrow button on the bottom-right corner of the page.
 8.	On the **Application information** page, specify a **Redirect URI** for example http://localhost/androidsnippets, and then select the check box in the lower-right corner of the page.
 9.	After the application has been successfully added, you will be taken to the **Quick Start** page for the application. From there, select **Configure** in the top menu.
-10. In the permissions to other applications section, add the Microsoft Graph API application.
-11. For the Microsoft Graph API application, add the following permissions:
-   - Read signed-in user's files
-   - Read and write sign-in user's calendars
-   - Send mail as signed-in user
-   - Read signed-in user's mail 
-   - Read and write directory data
-   - Read all users' full profiles
-   - Read and write signed-in user's profile
-   - Read signed-in user's contacts
-   - Access directory as the signed-in user
+10. In the permissions to other applications section, add the Microsoft Graph application.
+11. For the Microsoft Graph application, add the following permissions:
+   * Sign in and read user profile
+   * Have full access to user files and files shared with user
+   * Have full access to user calendars
+   * Read and write access to user mail 
+   * Send mail as a user
+   * Read user mail
+   * Read and write directory data
+   * Read all users' basic profiles
+   * Read and write all groups
 13. Click **Save** in the bottom menu.
 14. Note the values specified for **Client ID** on the **Configure** page. You will need these later when you configure the project.
 
