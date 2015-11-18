@@ -39,6 +39,7 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<MSGraphMeServic
 
                 /* Get information about signed in user
                  * HTTP GET https://graph.microsoft.com/{version}/me
+                 * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/user_get
                  */
                 new MeSnippets<Void>(get_me) {
                     @Override
@@ -51,6 +52,7 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<MSGraphMeServic
 
                 /* Get responsibilities of signed in user
                  * HTTP GET https://graph.microsoft.com/{version}/me?$select=AboutMe,Responsibilities,Tags
+                 * @see https://graph.microsoft.io/docs/api-reference/v1.0/resources/user
                  */
                 new MeSnippets<Void>(get_me_responsibilities) {
                     @Override
@@ -64,6 +66,7 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<MSGraphMeServic
 
                 /* Get the user's manager
                  * HTTP GET https://graph.microsoft.com/{version}/me/manager
+                 * @see https://graph.microsoft.io/docs/api-reference/v1.0/resources/user
                  */
                 new MeSnippets<Void>(get_me_manager) {
                     @Override
@@ -77,6 +80,7 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<MSGraphMeServic
 
                 /* Get the user's direct reports
                  * HTTP GET https://graph.microsoft.com/{version}/me/directReports
+                 * @see https://graph.microsoft.io/docs/api-reference/v1.0/resources/user
                  */
                 new MeSnippets<Void>(get_me_direct_reports) {
                     @Override
@@ -90,6 +94,7 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<MSGraphMeServic
 
                 /* Get the group membership of the user
                  * HTTP GET https://graph.microsoft.com/{version}/me/memberOf
+                 * @see https://graph.microsoft.io/docs/api-reference/v1.0/resources/user
                  */
                 new MeSnippets<Void>(get_me_group_membership) {
                     @Override
@@ -103,6 +108,7 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<MSGraphMeServic
 
                 /* Get the photo of the user
                  * HTTP GET https://graph.microsoft.com/{version}/me/userPhoto
+                 * @see https://graph.microsoft.io/docs/api-reference/v1.0/resources/user
                  */
                 new MeSnippets<Void>(get_me_photo) {
                     @Override
