@@ -107,20 +107,6 @@ public interface MSGraphDrivesService {
     );
 
     /**
-     * Copies a file in the same folder
-     * @param version
-     * @param fileId
-     * @param callback
-     */
-    @POST("/{version}/me/drive/items/{fileId}/microsoft.graph.copy")
-    void copyFile(
-            @Path("version") String version,
-            @Path("fileId") String fileId,
-            @Body TypedString body,
-            Callback<Void> callback
-    );
-
-    /**
      * Rename the specified file
      * @param version
      * @param fileId
