@@ -61,16 +61,15 @@ You can explore the following operations for Office 365:
 
 **Drives**
 
-* [Gets the signed-in user's drive.](/app/src/main/java/com/microsoft/office365/MSGraphsnippetapp/snippet/DrivesSnippets.java#L53)
-* [Gets  all of the drives in your tenant.](/app/src/main/java/com/microsoft/office365/MSGraphsnippetapp/snippet/DrivesSnippets.java#L66)
-* [Gets all of the files in the user's root folder.](/app/src/main/java/com/microsoft/office365/MSGraphsnippetapp/snippet/DrivesSnippets.java#L79)
-* [Creates a new file in the user's root folder.](/app/src/main/java/com/microsoft/office365/MSGraphsnippetapp/snippet/DrivesSnippets.java#L91)
-* [Downloads a file from the user's root folder.](/app/src/main/java/com/microsoft/office365/MSGraphsnippetapp/snippet/DrivesSnippets.java#L104)
-* [Updates the contents of a file in the user's root folder.](/app/src/main/java/com/microsoft/office365/MSGraphsnippetapp/snippet/DrivesSnippets.java#L140)
-* [Deletes a file in the user's root folder.](/app/src/main/java/com/microsoft/office365/MSGraphsnippetapp/snippet/DrivesSnippets.java#L183)
-* [Copies a file in the user's root folder.](/app/src/main/java/com/microsoft/office365/MSGraphsnippetapp/snippet/DrivesSnippets.java#L220)
-* [Renames a file in the user's root folder.](/app/src/main/java/com/microsoft/office365/MSGraphsnippetapp/snippet/DrivesSnippets.java#L269)
-* [Creates a folder under the user's root folder.](/app/src/main/java/com/microsoft/office365/MSGraphsnippetapp/snippet/DrivesSnippets.java#L317)
+* [Gets the signed-in user's drive.](/app/src/main/java/com/microsoft/office365/MSGraphsnippetapp/snippet/DrivesSnippets.java#L52)
+* [Gets  all of the drives in your tenant.](/app/src/main/java/com/microsoft/office365/MSGraphsnippetapp/snippet/DrivesSnippets.java#L65)
+* [Gets all of the files in the user's root folder.](/app/src/main/java/com/microsoft/office365/MSGraphsnippetapp/snippet/DrivesSnippets.java#L78)
+* [Creates a new file in the user's root folder.](/app/src/main/java/com/microsoft/office365/MSGraphsnippetapp/snippet/DrivesSnippets.java#L90)
+* [Downloads a file from the user's root folder.](/app/src/main/java/com/microsoft/office365/MSGraphsnippetapp/snippet/DrivesSnippets.java#L103)
+* [Updates the contents of a file in the user's root folder.](/app/src/main/java/com/microsoft/office365/MSGraphsnippetapp/snippet/DrivesSnippets.java#L139)
+* [Deletes a file in the user's root folder.](/app/src/main/java/com/microsoft/office365/MSGraphsnippetapp/snippet/DrivesSnippets.java#L182)
+* [Renames a file in the user's root folder.](/app/src/main/java/com/microsoft/office365/MSGraphsnippetapp/snippet/DrivesSnippets.java#L219)
+* [Creates a folder under the user's root folder.](/app/src/main/java/com/microsoft/office365/MSGraphsnippetapp/snippet/DrivesSnippets.java#L267)
 
 ##Change History
 September 2015
