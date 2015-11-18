@@ -1,4 +1,4 @@
-# Office 365 Android Microsoft Graph Snippets Project
+# Office 365 Android Microsoft Graph Snippets
 
 **Table of contents**
 
@@ -14,7 +14,7 @@
 * [Contributing](#contributing)
 * [Additional resources](#additional-resources)
 
-Looking to build cool apps that help people work with their Office 365 data? Explore, learn, and understand the Microsoft Graph REST APIs by using the Android Microsoft Graph API REST Snippets sample. This sample shows you how to access multiple resources, including Microsoft Azure Active Directory and the Office 365 APIs, by making HTTP requests to the Microsoft Graph API in an Android application.
+Looking to build cool apps that help people work with their Office 365 data? Explore, learn, and understand the Microsoft Graph (previously called Office 365 unified API) REST APIs by using the Android Microsoft Graph API REST Snippets sample. This sample shows you how to access multiple resources, including Microsoft Azure Active Directory and the Office 365 APIs, by making HTTP requests to the Microsoft Graph API in an Android application.
 
 You can explore the following operations for Office 365:
 
@@ -98,7 +98,7 @@ To use the Microsoft Graph API REST snippets project, you need the following:
 7.	Click the arrow button on the bottom-right corner of the page.
 8.	On the **Application information** page, specify a **Redirect URI** for example http://localhost/androidsnippets, and then select the check box in the lower-right corner of the page.
 9.	After the application has been successfully added, you will be taken to the **Quick Start** page for the application. From there, select **Configure** in the top menu.
-10. In the permissions to other applications section, add the Microsoft Graph application.
+10. In the permissions to other applications section, add the Microsoft Graph API application.
 11. For the Microsoft Graph API application, add the following permissions:
    - Read signed-in user's files
    - Read and write sign-in user's calendars
