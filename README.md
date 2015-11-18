@@ -1,4 +1,4 @@
-# Office 365 Android Microsoft Graph Snippets Project
+# Office 365 Android Microsoft Graph Snippets
 
 **Table of contents**
 
