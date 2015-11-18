@@ -145,12 +145,12 @@ The Office 365 Android unified API snippets project uses these classes to manage
 The Office 365 Android unified API snippets project is comprised of three modules. The modular design enables you to build a new app based on this sample by importing the modules into your app. After you've imported the modules, use the code in the Office 365 Android unified API snippets [app](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/tree/master/app) module as an example of how to call methods in the other sample modules.
 
 ###Modules in the Office 365 Android unified API snippets project
-* [`o365-Auth`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/tree/master/o365-auth). This module contains the library calls to authenticate a user with Office 365.
-* [`unifiedapi`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/tree/master/unifiedapi). This module encapsulates the Retrofit REST operations used for the Office 365 Microsoft Graph API endpoint.
-* [`app`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/tree/master/app). The UI and business logic module. REST operations are started in the snippet classes in this module.
+* [`o365-Auth`](/o365-auth). This module contains the library calls to authenticate a user with Office 365.
+* [`unifiedapi`](/unifiedapi). This module encapsulates the Retrofit REST operations used for the Office 365 Microsoft Graph API endpoint.
+* [`app`](/app). The UI and business logic module. REST operations are started in the snippet classes in this module.
 
 ###Snippet classes
-A snippet runs a single REST operation and returns the results. Snippets are found in the [app](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/tree/master/app) module. Snippets set the state required to make the calls on the Microsoft Graph API service classes described below.
+A snippet runs a single REST operation and returns the results. Snippets are found in the [app](/app) module. Snippets set the state required to make the calls on the Microsoft Graph API service classes described below.
 * [`ContactsSnippets`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/app/src/main/java/com/microsoft/o365_android_unified_api_snippets/snippet/ContactsSnippets.java)
 * [`EventsSnippets`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/app/src/main/java/com/microsoft/o365_android_unified_api_snippets/snippet/EventsSnippet.java)
 * [`GroupsSnippets`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/app/src/main/java/com/microsoft/o365_android_unified_api_snippets/snippet/GroupsSnippets.java)
