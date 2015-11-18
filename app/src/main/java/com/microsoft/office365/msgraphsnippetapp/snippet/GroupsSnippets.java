@@ -23,11 +23,11 @@ import retrofit.mime.TypedString;
 
 import static com.microsoft.office365.msgraphsnippetapp.R.array.delete_a_group;
 import static com.microsoft.office365.msgraphsnippetapp.R.array.get_a_group;
-import static com.microsoft.office365.msgraphsnippetapp.R.array.get_all_groups;
 import static com.microsoft.office365.msgraphsnippetapp.R.array.get_group_members;
 import static com.microsoft.office365.msgraphsnippetapp.R.array.get_group_owners;
 import static com.microsoft.office365.msgraphsnippetapp.R.array.insert_a_group;
 import static com.microsoft.office365.msgraphsnippetapp.R.array.update_a_group;
+import static com.microsoft.office365.msgraphsnippetapp.R.array.get_all_groups;
 
 
 public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGroupsService, Result> {
@@ -50,7 +50,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
                 /*
                  * Get a group by id
                  * HTTP GET https://graph.microsoft.com/{version}/myOrganization/groups/{Group.objectId}
-                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_groups
+                 * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/group_get
                  */
                 new GroupsSnippets<Void>(get_a_group) {
                     @Override
@@ -79,7 +79,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
 
                  /* Get all of the members of the first organization group
                  * HTTP GET https://graph.microsoft.com/{version}/myOrganization/groups/{Group.objectId}/members
-                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_groups
+                 * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/group_list_members
                  */
                 new GroupsSnippets<Void>(get_group_members) {
                     @Override
@@ -108,7 +108,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
 
                 /* Get all of a group's owners
                  * HTTP GET https://graph.microsoft.com/{version}/myOrganization/groups/{Group.objectId}/owners
-                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_groups
+                 * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/group_list_owners
                  */
                 new GroupsSnippets<Void>(get_group_owners) {
                     @Override
@@ -134,7 +134,10 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
                         });
                     }
                 },
-
+                /* List all organization groups
+                 * HTTP GET https://graph.microsoft.com/v1.0/groupshttps://graph.microsoft.com/v1.0/groups
+                 * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/group_list
+                 */
                 new GroupsSnippets<Void>(get_all_groups) {
                     @Override
                     public void request(MSGraphGroupsService service, retrofit.Callback<Void> callback) {
@@ -147,7 +150,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
 
                 /* Create a new group with a random name
                  * HTTP POST https://graph.microsoft.com/{version}/myOrganization/groups
-                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_groups
+                 * @see https://graph.microsoft.io/docs/api-reference/v1.0/resources/group
                  */
                 new GroupsSnippets<Void>(insert_a_group) {
 
@@ -162,7 +165,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
 
                 /* Update a group
                  * HTTP PATCH https://graph.microsoft.com/{version}/myOrganization/groups/{Group.objectId}
-                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_groups
+                 * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/group_update
                  */
                 new GroupsSnippets<Void>(update_a_group) {
 
@@ -192,7 +195,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
 
                 /* Delete a group
                  * HTTP DELETE https://graph.microsoft.com/{version}/myOrganization/groups/{Group.objectId}
-                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_groups
+                 * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/group_delete
                  */
                 new GroupsSnippets<Void>(delete_a_group) {
 

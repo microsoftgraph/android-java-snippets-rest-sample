@@ -48,7 +48,7 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<MSGraphEven
                 /*
                  * Get all events for the signed in user.
                  * HTTP GET https://graph.microsoft.com/{version}/me/events
-                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event
+                 * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/user_list_events
                  */
                 new EventsSnippets<Void>(get_user_events) {
 
@@ -63,7 +63,7 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<MSGraphEven
                 /*
                  * Adds an event to the signed-in user\'s calendar.
                  * HTTP POST https://graph.microsoft.com/{version}/me/events
-                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event
+                 * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/user_post_events
                  */
                 new EventsSnippets<Void>(create_event) {
 
@@ -89,7 +89,7 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<MSGraphEven
                  /*
                  * Update an event
                  * HTTP PATCH https://graph.microsoft.com/{version}/me/events/{Event.Id}
-                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event
+                 * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/event_update
                  */
                 new EventsSnippets<Void>(update_event) {
 
@@ -140,7 +140,7 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<MSGraphEven
                  /*
                  * Delete an event
                  * HTTP DELETE https://graph.microsoft.com/{version}/me/events/{Event.Id}
-                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event
+                 * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/event_delete
                  */
                 new EventsSnippets<Void>(delete_event) {
 

@@ -47,7 +47,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
 
                 /* Get the user's drive
                  * HTTP GET https://graph.microsoft.com/{version}/me/drive
-                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_drives
+                 * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/drive_get
                  */
                 new DrivesSnippets<Void>(get_me_drive) {
                     @Override
@@ -73,7 +73,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                  /*
                  * Get a file
                  * HTTP GET https://graph.microsoft.com/{version}/me/drive/root/children
-                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_groups
+                 * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/item_list_children
                  */
                 new DrivesSnippets<Void>(get_me_files) {
                     @Override
@@ -85,7 +85,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                  /*
                  * Create a file
                  * HTTP PUT https://graph.microsoft.com/{version}/me/drive/root/children/{filename}/content
-                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entitySet_groups
+                 * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/item_post_children
                  */
                 new DrivesSnippets<Void>(create_me_file) {
                     @Override
@@ -98,7 +98,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                 /*
                  * Download the content of a file
                  * HTTP GET https://graph.microsoft.com/{version}/me/drive/items/{filename}/content
-                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event
+                 * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/item_downloadcontent
                  */
                 new DrivesSnippets<Void>(download_me_file) {
 
@@ -134,7 +134,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                 /*
                  * Update the content of a file
                  * HTTP PUT https://graph.microsoft.com/{version}/me/drive/items/{filename}/content
-                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event
+                 * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/item_update
                  */
                 new DrivesSnippets<Void>(update_me_file) {
 
@@ -177,7 +177,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                 /*
                  * Delete the content of a file
                  * HTTP DELETE https://graph.microsoft.com/{version}/me/drive/items/{fileId}/
-                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event
+                 * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/item_delete
                  */
                 new DrivesSnippets<Void>(delete_me_file) {
 
@@ -214,7 +214,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                 /*
                  * Renames a file
                  * HTTP PATCH https://graph.microsoft.com/{version}/me/drive/items/{fileId}/
-                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event
+                 * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/item_update
                  */
                 new DrivesSnippets<Void>(rename_me_file) {
 
@@ -262,7 +262,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                 /*
                  * Creates a folder
                  * HTTP POST https://graph.microsoft.com/me/drive/root/children
-                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_Event
+                 * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/item_post_children
                  */
                 new DrivesSnippets<Void>(create_me_folder) {
 

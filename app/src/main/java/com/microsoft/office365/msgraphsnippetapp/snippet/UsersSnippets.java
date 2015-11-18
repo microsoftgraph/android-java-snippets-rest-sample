@@ -35,7 +35,7 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserS
                 /*
                  * Gets all of the users in your tenant\'s directory.
                  * HTTP GET https://graph.microsoft.com/{version}/myOrganization/users
-                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_User
+                 * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/user_list
                  */
                 new UsersSnippets<Void>(get_organization_users) {
                     @Override
@@ -49,7 +49,7 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserS
                 /*
                  * Gets all of the users in your tenant's directory who are from the United States, using $filter.
                  * HTTP GET https://graph.microsoft.com/{version}/myOrganization/users?$filter=country eq \'United States\'
-                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_User
+                 * @see http://graph.microsoft.io/docs/overview/query_parameters
                  */
                 new UsersSnippets<Void>(get_organization_filtered_users) {
                     @Override
@@ -63,7 +63,7 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserS
                  /*
                  * Adds a new user to the tenant's directory
                  * HTTP POST https://graph.microsoft.com/{version}/myOrganization/users
-                 * @see https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_User
+                 * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/user_post_users
                  */
                 new UsersSnippets<Void>(insert_organization_user) {
                     @Override

@@ -42,6 +42,7 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<MSGraphMai
 
                 /* Get messages from mailbox for signed in user
                  * HTTP GET https://graph.microsoft.com/{version}/me/messages
+                 * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/user_list_messages
                  */
                 new MessageSnippets<Void>(get_user_messages) {
                     @Override
@@ -54,6 +55,7 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<MSGraphMai
 
                 /* Sends an email message on behalf of the signed in user
                  * HTTP POST https://graph.microsoft.com/{version}/me/messages/sendMail
+                 * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/user_post_messages
                  */
                 new MessageSnippets<Void>(send_an_email_message) {
                     @Override
