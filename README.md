@@ -68,7 +68,6 @@ You can explore the following operations for Office 365:
 * [Downloads a file from the user's root folder.](/app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/DrivesSnippets.java#L104)
 * [Updates the contents of a file in the user's root folder.](/app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/DrivesSnippets.java#L140)
 * [Deletes a file in the user's root folder.](/app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/DrivesSnippets.java#L183)
-* [Copies a file in the user's root folder.](/app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/DrivesSnippets.java#L220)
 * [Renames a file in the user's root folder.](/app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/DrivesSnippets.java#L269)
 * [Creates a folder under the user's root folder.](/app/src/main/java/com/microsoft/office365/unifiedsnippetapp/snippet/DrivesSnippets.java#L317)
 
