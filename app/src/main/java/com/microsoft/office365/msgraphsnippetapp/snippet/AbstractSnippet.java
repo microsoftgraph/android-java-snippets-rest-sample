@@ -4,11 +4,13 @@
 package com.microsoft.office365.msgraphsnippetapp.snippet;
 
 
+
 import com.microsoft.office365.msgraphapiservices.MSGraphContactService;
 import com.microsoft.office365.msgraphsnippetapp.application.SnippetApp;
 
 import retrofit.Callback;
 
+import static com.microsoft.office365.msgraphsnippetapp.R.string.beta;
 
 public abstract class AbstractSnippet<Service, Result> {
 
@@ -88,6 +90,11 @@ public abstract class AbstractSnippet<Service, Result> {
      */
     protected String getVersion() {
         return mO365Version;
+    }
+
+    public boolean isBeta() {
+        String betaString = SnippetApp.getApp().getString(beta);
+        return mO365Version.equalsIgnoreCase(betaString);
     }
 
     public String getName() {
