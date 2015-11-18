@@ -5,7 +5,7 @@ android {
     buildToolsVersion "22.0.1"
 
     defaultConfig {
-        applicationId "com.microsoft.o365_android_unified_api_snippets"
+        applicationId "com.microsoft.o365_android_microsoft_graph_snippets"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
@@ -32,7 +32,7 @@ dependencies {
         exclude group: 'com.android.support'
     }
 
-    compile(project(':unifiedapi'))
+    compile(project(':microsoftgraphapi'))
 
     // Dagger compiler for DI annotation support
     provided('com.squareup.dagger:dagger-compiler:1.2.2') {
