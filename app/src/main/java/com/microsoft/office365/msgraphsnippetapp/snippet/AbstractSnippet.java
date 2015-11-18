@@ -94,7 +94,7 @@ public abstract class AbstractSnippet<Service, Result> {
 
     public boolean isBeta() {
         String betaString = SnippetApp.getApp().getString(beta);
-        return (mO365Version.equalsIgnoreCase(betaString));
+        return mO365Version.equalsIgnoreCase(betaString);
     }
 
     public String getName() {
