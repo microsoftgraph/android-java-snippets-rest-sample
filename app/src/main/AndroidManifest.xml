@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.microsoft.office365.unifiedsnippetapp">
+    package="com.microsoft.office365.msgraphsnippetapp">
 
     <application
-        android:name=".application.SnippetApp"
+        android:name="com.microsoft.office365.msgraphsnippetapp.application.SnippetApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SignInActivity"
+            android:name="com.microsoft.office365.msgraphsnippetapp.SignInActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+)
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SnippetListActivity" />
+        <activity android:name="com.microsoft.office365.msgraphsnippetapp.SnippetListActivity" />
         <activity
-            android:name=".SnippetDetailActivity"
+            android:name="com.microsoft.office365.msgraphsnippetapp.SnippetDetailActivity"
             android:label="@string/title_activity_snippet_detail"></activity>
     </application>
 

@@ -149,7 +149,7 @@ public class AuthenticationManager {
 }
 // *********************************************************
 //
-// O365-Android-Unified-API-Snippets, https://github.com/OfficeDev/O365-Android-Unified-API-Snippets
+// O365-Android-Unified-API-Snippets, https://github.com/OfficeDev/O365-Android-Microsoft-Graph-Snippets
 //
 // Copyright (c) Microsoft Corporation
 // All rights reserved.
