@@ -142,7 +142,7 @@ This sample runs REST commands that create, read, update, or delete data. When r
 ##Understand the code
 The Office 365 Android unified API snippets project uses these classes to manage interactions with the Microsoft Graph API on Office 365:
 ###Sample project organization
-The Office 365 Android unified API snippets project is comprised of three modules. The modular design enables you to build a new app based on this sample by importing the modules into your app. After you've imported the modules, use the code in the Office 365 Android unified API snippets [app](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/tree/master/app) module as an example of how to call methods in the other sample modules.
+The Office 365 Android unified API snippets project is comprised of three modules. The modular design enables you to build a new app based on this sample by importing the modules into your app. After you've imported the modules, use the code in the Office 365 Android unified API snippets [app](/app) module as an example of how to call methods in the other sample modules.
 
 ###Modules in the Office 365 Android unified API snippets project
 * [`o365-Auth`](/o365-auth). This module contains the library calls to authenticate a user with Office 365.
@@ -151,25 +151,25 @@ The Office 365 Android unified API snippets project is comprised of three module
 
 ###Snippet classes
 A snippet runs a single REST operation and returns the results. Snippets are found in the [app](/app) module. Snippets set the state required to make the calls on the Microsoft Graph API service classes described below.
-* [`ContactsSnippets`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/app/src/main/java/com/microsoft/o365_android_unified_api_snippets/snippet/ContactsSnippets.java)
-* [`EventsSnippets`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/app/src/main/java/com/microsoft/o365_android_unified_api_snippets/snippet/EventsSnippet.java)
-* [`GroupsSnippets`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/app/src/main/java/com/microsoft/o365_android_unified_api_snippets/snippet/GroupsSnippets.java)
-* [`AbstractSnippet`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/app/src/main/java/com/microsoft/o365_android_unified_api_snippets/snippet/AbstractSnippet.java)
+* [`ContactsSnippets`](/app/src/main/java/com/microsoft/o365_android_unified_api_snippets/snippet/ContactsSnippets.java)
+* [`EventsSnippets`](/app/src/main/java/com/microsoft/o365_android_unified_api_snippets/snippet/EventsSnippet.java)
+* [`GroupsSnippets`](/app/src/main/java/com/microsoft/o365_android_unified_api_snippets/snippet/GroupsSnippets.java)
+* [`AbstractSnippet`](/app/src/main/java/com/microsoft/o365_android_unified_api_snippets/snippet/AbstractSnippet.java)
 
 ###Microsoft Graph API service classes
-These classes are found in the [unifiedapi](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/tree/master/unifiedapi) module and make the Retrofit library calls that generate the REST queries and handle operation results. These service classes are consumed by the snippets.
-* [`MSGraphContactService`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/unifiedapi/src/main/java/com/microsoft/unifiedapi/service/MSGraphContactService.java)
-* [`MSGraphEventsService`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/unifiedapi/src/main/java/com/microsoft/unifiedapi/service/MSGraphEventsService.java)
-* [`MSGraphGroupsService`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/unifiedapi/src/main/java/com/microsoft/unifiedapi/service/MSGraphGroupsService.java)
-* [`MSGraphMailService`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/unifiedapi/src/main/java/com/microsoft/unifiedapi/service/MSGraphMailService.java)
-* [`MSGraphUserService`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/unifiedapi/src/main/java/com/microsoft/unifiedapi/service/MSGraphUserService.java)
+These classes are found in the [unifiedapi](/unifiedapi) module and make the Retrofit library calls that generate the REST queries and handle operation results. These service classes are consumed by the snippets.
+* [`MSGraphContactService`](/microsoftgraphapi/src/main/java/com/microsoft/unifiedapi/service/MSGraphContactService.java)
+* [`MSGraphEventsService`](/microsoftgraphapi/src/main/java/com/microsoft/unifiedapi/service/MSGraphEventsService.java)
+* [`MSGraphGroupsService`](/microsoftgraphapi/src/main/java/com/microsoft/unifiedapi/service/MSGraphGroupsService.java)
+* [`MSGraphMailService`](/microsoftgraphapi/src/main/java/com/microsoft/unifiedapi/service/MSGraphMailService.java)
+* [`MSGraphUserService`](/microsoftgraphapi/src/main/java/com/microsoft/unifiedapi/service/MSGraphUserService.java)
 
 ###Authentication classes for Office 365 business accounts
-The authentication classes are found in the [o365-Auth](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/tree/master/o365-auth) module. These classes use the [Microsoft Azure Active Directory Library (ADAL) for Android](https://github.com/AzureAD/azure-activedirectory-library-for-android) to connect to a business version of Office 365 such as Office 365 Enterprise. 
+The authentication classes are found in the [o365-Auth](/o365-auth) module. These classes use the [Microsoft Azure Active Directory Library (ADAL) for Android](https://github.com/AzureAD/azure-activedirectory-library-for-android) to connect to a business version of Office 365 such as Office 365 Enterprise. 
 
-* [`AuthenticationManager`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/o365-auth/src/main/java/com/microsoft/o365_auth/AuthenticationManager.java). Encapsulates user connect and disconnect logic in addition to Azure app authorization.
-* [`AzureADModule`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/o365-auth/src/main/java/com/microsoft/o365_auth/AzureADModule.java). Authentication helper class. 
-* [`AzureAppCompatActivity`](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/blob/master/o365-auth/src/main/java/com/microsoft/o365_auth/AzureAppCompatActivity.java). Dependency injection helper.
+* [`AuthenticationManager`](/o365-auth/src/main/java/com/microsoft/o365_auth/AuthenticationManager.java). Encapsulates user connect and disconnect logic in addition to Azure app authorization.
+* [`AzureADModule`](/o365-auth/src/main/java/com/microsoft/o365_auth/AzureADModule.java). Authentication helper class. 
+* [`AzureAppCompatActivity`](/o365-auth/src/main/java/com/microsoft/o365_auth/AzureAppCompatActivity.java). Dependency injection helper.
 
 ## Questions and comments
 We'd love to get your feedback about the Android Microsoft Graph API REST Snippets sample. You can send your feedback to us in the [Issues](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets/issues) section of this repository. <br/>
