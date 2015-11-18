@@ -14,7 +14,7 @@
 * [Contributing](#contributing)
 * [Additional resources](#additional-resources)
 
-Looking to build cool apps that help people work with their Office 365 data? Explore, learn, and understand the Microsoft Graph REST APIs by using the Android Microsoft Graph API REST Snippets sample. This sample shows you how to access multiple resources, including Microsoft Azure Active Directory and the Office 365 APIs, by making HTTP requests to the Microsoft Graph API in an Android application.
+Looking to build cool apps that help people work with their Office 365 data? Explore, learn, and understand the Microsoft Graph (previously called Office 365 unified API) REST APIs by using the Android Microsoft Graph API REST Snippets sample. This sample shows you how to access multiple resources, including Microsoft Azure Active Directory and the Office 365 APIs, by making HTTP requests to the Microsoft Graph API in an Android application.
 
 You can explore the following operations for Office 365:
 
