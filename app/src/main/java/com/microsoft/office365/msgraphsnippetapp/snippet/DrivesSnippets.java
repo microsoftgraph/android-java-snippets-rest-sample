@@ -40,7 +40,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                 new DrivesSnippets(null) {
 
                     @Override
-                    public void request(MSGraphDrivesService o, retrofit.Callback callback) {
+                    public void request(MSGraphDrivesService o, Callback callback) {
                         //No implementation
                     }
                 },
@@ -52,7 +52,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                  */
                 new DrivesSnippets<Void>(get_me_drive) {
                     @Override
-                    public void request(MSGraphDrivesService service, retrofit.Callback<Void> callback) {
+                    public void request(MSGraphDrivesService service, Callback<Void> callback) {
                         service.getDrive(
                                 getVersion(),
                                 callback);
@@ -65,7 +65,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                  */
                 new DrivesSnippets<Void>(get_organization_drives) {
                     @Override
-                    public void request(MSGraphDrivesService service, retrofit.Callback<Void> callback) {
+                    public void request(MSGraphDrivesService service, Callback<Void> callback) {
                         service.getOrganizationDrives(
                                 getVersion(),
                                 callback);
@@ -78,7 +78,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                  */
                 new DrivesSnippets<Void>(get_me_files) {
                     @Override
-                    public void request(final MSGraphDrivesService service, final retrofit.Callback<Void> callback) {
+                    public void request(final MSGraphDrivesService service, final Callback<Void> callback) {
                         //Get first group
                         service.getCurrentUserFiles(getVersion(), callback);
                     }
@@ -90,7 +90,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                  */
                 new DrivesSnippets<Void>(create_me_file) {
                     @Override
-                    public void request(final MSGraphDrivesService service, final retrofit.Callback<Void> callback) {
+                    public void request(final MSGraphDrivesService service, final Callback<Void> callback) {
                         //Create a new file under root
                         TypedString fileContents = new TypedString("file contents");
                         service.putNewFile(getVersion(), java.util.UUID.randomUUID().toString(), fileContents, callback);
@@ -143,7 +143,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                     public void request(
                             final MSGraphDrivesService MSGraphDrivesService,
                             final Callback<Void> callback) {
-                          final TypedString body = new TypedString("file contents") {
+                        final TypedString body = new TypedString("file contents") {
                             @Override
                             public String mimeType() {
                                 return "text/plain";
@@ -240,9 +240,11 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                                 String patchBody = "{"
                                         + "'name':'" + java.util.UUID.randomUUID().toString() + "'}";
 
-                                final TypedString body = new TypedString(patchBody){
+                                final TypedString body = new TypedString(patchBody) {
                                     @Override
-                                    public String mimeType() { return "application/json";}
+                                    public String mimeType() {
+                                        return "application/json";
+                                    }
                                 };
                                 //download the file we created
                                 MSGraphDrivesService.renameFile(
@@ -271,22 +273,23 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                     public void request(
                             final MSGraphDrivesService MSGraphDrivesService,
                             final Callback<Void> callback) {
-                                String folderMetadata = "{"
-                                        + "'name': '" + java.util.UUID.randomUUID().toString() + "',"
-                                        + "'folder': {},"
-                                        + "'@name.conflictBehavior': 'rename'"
-                                        + "}"
-                                        ;
+                        String folderMetadata = "{"
+                                + "'name': '" + java.util.UUID.randomUUID().toString() + "',"
+                                + "'folder': {},"
+                                + "'@name.conflictBehavior': 'rename'"
+                                + "}";
 
-                                final TypedString body = new TypedString(folderMetadata){
-                                    @Override
-                                    public String mimeType() { return "application/json";}
-                                };
-                                //download the file we created
-                                MSGraphDrivesService.createFolder(
-                                        getVersion(),
-                                        body,
-                                        callback);
+                        final TypedString body = new TypedString(folderMetadata) {
+                            @Override
+                            public String mimeType() {
+                                return "application/json";
+                            }
+                        };
+                        //download the file we created
+                        MSGraphDrivesService.createFolder(
+                                getVersion(),
+                                body,
+                                callback);
 
                     }
                 }
@@ -295,7 +298,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
 
     public abstract void request(MSGraphDrivesService MSGraphDrivesService, Callback<Result> callback);
 
-    protected String getFileId(retrofit.client.Response json) {
+    protected String getFileId(Response json) {
         if (json == null)
             return "";
 
