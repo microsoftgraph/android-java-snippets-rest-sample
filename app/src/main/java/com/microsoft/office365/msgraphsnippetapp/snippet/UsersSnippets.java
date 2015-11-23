@@ -10,6 +10,7 @@ import com.microsoft.office365.msgraphsnippetapp.util.SharedPrefsUtil;
 
 import java.util.UUID;
 
+import retrofit.Callback;
 import retrofit.mime.TypedString;
 
 import static com.microsoft.office365.msgraphsnippetapp.R.array.get_organization_filtered_users;
@@ -28,7 +29,7 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserS
                 new UsersSnippets(null) {
 
                     @Override
-                    public void request(MSGraphUserService o, retrofit.Callback callback) {
+                    public void request(MSGraphUserService o, Callback callback) {
                     }
                 },
 
@@ -41,7 +42,7 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserS
                     @Override
                     public void request(
                             MSGraphUserService MSGraphUserService,
-                            retrofit.Callback<Void> callback) {
+                            Callback<Void> callback) {
                         MSGraphUserService.getUsers(getVersion(), callback);
                     }
                 },
@@ -55,7 +56,7 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserS
                     @Override
                     public void request(
                             MSGraphUserService MSGraphUserService,
-                            retrofit.Callback<Void> callback) {
+                            Callback<Void> callback) {
                         MSGraphUserService.getFilteredUsers(getVersion(), "country eq 'United States'", callback);
                     }
                 },
@@ -69,7 +70,7 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserS
                     @Override
                     public void request(
                             MSGraphUserService MSGraphUserService,
-                            retrofit.Callback<Void> callback) {
+                            Callback<Void> callback) {
 
                         //Use a random UUI for the user name
                         String randomUserName = UUID.randomUUID().toString();
@@ -104,5 +105,5 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserS
         };
     }
 
-    public abstract void request(MSGraphUserService MSGraphUserService, retrofit.Callback<Result> callback);
+    public abstract void request(MSGraphUserService MSGraphUserService, Callback<Result> callback);
 }
