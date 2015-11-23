@@ -13,14 +13,13 @@
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-)
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name="com.microsoft.office365.msgraphsnippetapp.SnippetListActivity" />
         <activity
             android:name="com.microsoft.office365.msgraphsnippetapp.SnippetDetailActivity"
-            android:label="@string/title_activity_snippet_detail"></activity>
+            android:label="@string/title_activity_snippet_detail" />
     </application>
 
 </manifest>
