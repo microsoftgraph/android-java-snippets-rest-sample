@@ -14,6 +14,7 @@ import com.microsoft.office365.msgraphsnippetapp.application.SnippetApp;
 import com.microsoft.office365.msgraphsnippetapp.inject.AppModule;
 import com.microsoft.office365.msgraphsnippetapp.util.SharedPrefsUtil;
 
+import retrofit.Callback;
 import retrofit.mime.TypedString;
 
 import static com.microsoft.office365.msgraphsnippetapp.R.array.get_user_messages;
@@ -34,7 +35,7 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<MSGraphMai
                 // Marker element
                 new MessageSnippets(null) {
                     @Override
-                    public void request(MSGraphMailService service, retrofit.Callback callback) {
+                    public void request(MSGraphMailService service, Callback callback) {
                         // Not implemented
                     }
                 },
@@ -46,7 +47,7 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<MSGraphMai
                  */
                 new MessageSnippets<Void>(get_user_messages) {
                     @Override
-                    public void request(MSGraphMailService service, retrofit.Callback<Void> callback) {
+                    public void request(MSGraphMailService service, Callback<Void> callback) {
                         service.getMail(
                                 getVersion(),
                                 callback);
@@ -59,7 +60,7 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<MSGraphMai
                  */
                 new MessageSnippets<Void>(send_an_email_message) {
                     @Override
-                    public void request(MSGraphMailService service, retrofit.Callback<Void> callback) {
+                    public void request(MSGraphMailService service, Callback<Void> callback) {
                         service.createNewMail(
                                 getVersion(),
                                 createMailPayload(
@@ -74,7 +75,7 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<MSGraphMai
     }
 
     @Override
-    public abstract void request(MSGraphMailService service, retrofit.Callback<Result> callback);
+    public abstract void request(MSGraphMailService service, Callback<Result> callback);
 
     protected TypedString createMailPayload(
             String subject,
