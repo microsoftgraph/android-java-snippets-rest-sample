@@ -1,6 +1,7 @@
 /*
-*  Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
-*/
+ * Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license.
+ * See LICENSE in the project root for license information.
+ */
 package com.microsoft.office365.msgraphsnippetapp.snippet;
 
 import com.google.gson.JsonElement;
@@ -39,7 +40,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                 new DrivesSnippets(null) {
 
                     @Override
-                    public void request(MSGraphDrivesService o, retrofit.Callback callback) {
+                    public void request(MSGraphDrivesService o, Callback callback) {
                         //No implementation
                     }
                 },
@@ -51,7 +52,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                  */
                 new DrivesSnippets<Void>(get_me_drive) {
                     @Override
-                    public void request(MSGraphDrivesService service, retrofit.Callback<Void> callback) {
+                    public void request(MSGraphDrivesService service, Callback<Void> callback) {
                         service.getDrive(
                                 getVersion(),
                                 callback);
@@ -64,7 +65,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                  */
                 new DrivesSnippets<Void>(get_organization_drives) {
                     @Override
-                    public void request(MSGraphDrivesService service, retrofit.Callback<Void> callback) {
+                    public void request(MSGraphDrivesService service, Callback<Void> callback) {
                         service.getOrganizationDrives(
                                 getVersion(),
                                 callback);
@@ -77,7 +78,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                  */
                 new DrivesSnippets<Void>(get_me_files) {
                     @Override
-                    public void request(final MSGraphDrivesService service, final retrofit.Callback<Void> callback) {
+                    public void request(final MSGraphDrivesService service, final Callback<Void> callback) {
                         //Get first group
                         service.getCurrentUserFiles(getVersion(), callback);
                     }
@@ -89,7 +90,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                  */
                 new DrivesSnippets<Void>(create_me_file) {
                     @Override
-                    public void request(final MSGraphDrivesService service, final retrofit.Callback<Void> callback) {
+                    public void request(final MSGraphDrivesService service, final Callback<Void> callback) {
                         //Create a new file under root
                         TypedString fileContents = new TypedString("file contents");
                         service.putNewFile(getVersion(), java.util.UUID.randomUUID().toString(), fileContents, callback);
@@ -142,7 +143,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                     public void request(
                             final MSGraphDrivesService MSGraphDrivesService,
                             final Callback<Void> callback) {
-                          final TypedString body = new TypedString("file contents") {
+                        final TypedString body = new TypedString("file contents") {
                             @Override
                             public String mimeType() {
                                 return "text/plain";
@@ -239,9 +240,11 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                                 String patchBody = "{"
                                         + "'name':'" + java.util.UUID.randomUUID().toString() + "'}";
 
-                                final TypedString body = new TypedString(patchBody){
+                                final TypedString body = new TypedString(patchBody) {
                                     @Override
-                                    public String mimeType() { return "application/json";}
+                                    public String mimeType() {
+                                        return "application/json";
+                                    }
                                 };
                                 //download the file we created
                                 MSGraphDrivesService.renameFile(
@@ -270,22 +273,23 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                     public void request(
                             final MSGraphDrivesService MSGraphDrivesService,
                             final Callback<Void> callback) {
-                                String folderMetadata = "{"
-                                        + "'name': '" + java.util.UUID.randomUUID().toString() + "',"
-                                        + "'folder': {},"
-                                        + "'@name.conflictBehavior': 'rename'"
-                                        + "}"
-                                        ;
+                        String folderMetadata = "{"
+                                + "'name': '" + java.util.UUID.randomUUID().toString() + "',"
+                                + "'folder': {},"
+                                + "'@name.conflictBehavior': 'rename'"
+                                + "}";
 
-                                final TypedString body = new TypedString(folderMetadata){
-                                    @Override
-                                    public String mimeType() { return "application/json";}
-                                };
-                                //download the file we created
-                                MSGraphDrivesService.createFolder(
-                                        getVersion(),
-                                        body,
-                                        callback);
+                        final TypedString body = new TypedString(folderMetadata) {
+                            @Override
+                            public String mimeType() {
+                                return "application/json";
+                            }
+                        };
+                        //download the file we created
+                        MSGraphDrivesService.createFolder(
+                                getVersion(),
+                                body,
+                                callback);
 
                     }
                 }
@@ -294,7 +298,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
 
     public abstract void request(MSGraphDrivesService MSGraphDrivesService, Callback<Result> callback);
 
-    protected String getFileId(retrofit.client.Response json) {
+    protected String getFileId(Response json) {
         if (json == null)
             return "";
 
@@ -312,31 +316,3 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
         }
     }
 }
-// *********************************************************
-//
-// O365-Android-Microsoft-Graph-Snippets, https://github.com/OfficeDev/O365-Android-Microsoft-Graph-Snippets
-//
-// Copyright (c) Microsoft Corporation
-// All rights reserved.
-//
-// MIT License:
-// Permission is hereby granted, free of charge, to any person obtaining
-// a copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to
-// permit persons to whom the Software is furnished to do so, subject to
-// the following conditions:
-//
-// The above copyright notice and this permission notice shall be
-// included in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-//
-// *********************************************************
