@@ -15,12 +15,25 @@ import retrofit.http.Path;
 
 public interface MSGraphMailService {
 
+    /**
+     * Fetch a user's Messages
+     *
+     * @param version  The version of the API to use (beta, v1, etc...)
+     * @param callback will be called with results of REST operation
+     */
     @GET("/{version}/me/messages")
     void getMail(
             @Path("version") String version,
             Callback<Response> callback
     );
 
+    /**
+     * Creates & sends a new Message
+     *
+     * @param version  The version of the API to use (beta, v1, etc...)
+     * @param body     The Message object
+     * @param callback will be called with results of REST operation
+     */
     @POST("/{version}/me/microsoft.graph.sendmail")
     void createNewMail(
             @Path("version") String version,
