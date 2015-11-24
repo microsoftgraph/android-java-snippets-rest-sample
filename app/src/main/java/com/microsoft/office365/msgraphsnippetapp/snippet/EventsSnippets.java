@@ -7,6 +7,7 @@ package com.microsoft.office365.msgraphsnippetapp.snippet;
 import com.microsoft.office365.microsoftgraphvos.AttendeeVO;
 import com.microsoft.office365.microsoftgraphvos.DateTimeTimeZoneVO;
 import com.microsoft.office365.microsoftgraphvos.EmailAddressVO;
+import com.microsoft.office365.microsoftgraphvos.Envelope;
 import com.microsoft.office365.microsoftgraphvos.EventVO;
 import com.microsoft.office365.microsoftgraphvos.ItemBodyVO;
 import com.microsoft.office365.microsoftgraphvos.LocationVO;
@@ -46,12 +47,12 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<MSGraphEven
                  * GET https://graph.microsoft.com/{version}/me/events
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/user_list_events
                  */
-                new EventsSnippets<Response>(get_user_events) {
+                new EventsSnippets<Envelope<EventVO>>(get_user_events) {
 
                     @Override
                     public void request(
                             MSGraphEventsService MSGraphEventsService,
-                            Callback<Response> callback) {
+                            Callback<Envelope<EventVO>> callback) {
                         MSGraphEventsService.getEvents(getVersion(), callback);
                     }
                 },
@@ -76,12 +77,12 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<MSGraphEven
                  * PATCH https://graph.microsoft.com/{version}/me/events/{Event.Id}
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/event_update
                  */
-                new EventsSnippets<Response>(update_event) {
+                new EventsSnippets<EventVO>(update_event) {
 
                     @Override
                     public void request(
                             final MSGraphEventsService MSGraphEventsService,
-                            final Callback<Response> callback) {
+                            final Callback<EventVO> callback) {
                         // create a new event to update
                         MSGraphEventsService.createNewEvent(
                                 getVersion(),

@@ -4,6 +4,7 @@
  */
 package com.microsoft.office365.msgraphapiservices;
 
+import com.microsoft.office365.microsoftgraphvos.Envelope;
 import com.microsoft.office365.microsoftgraphvos.EventVO;
 
 import retrofit.Callback;
@@ -26,7 +27,7 @@ public interface MSGraphEventsService {
     @GET("/{version}/me/events")
     void getEvents(
             @Path("version") String version,
-            Callback<Response> callback
+            Callback<Envelope<EventVO>> callback
     );
 
     /**
@@ -56,7 +57,7 @@ public interface MSGraphEventsService {
             @Path("version") String version,
             @Path("eventid") String eventId,
             @Body EventVO body,
-            Callback<Response> callback
+            Callback<EventVO> callback
 
     );
 
