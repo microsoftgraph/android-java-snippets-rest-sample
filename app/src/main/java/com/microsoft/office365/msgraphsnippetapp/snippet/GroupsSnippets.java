@@ -110,10 +110,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
                 new GroupsSnippets<Envelope<GroupVO>>(get_all_groups) {
                     @Override
                     public void request(MSGraphGroupsService service, Callback<Envelope<GroupVO>> callback) {
-                        service.getGroups(
-                                getVersion(),
-                                null,
-                                callback);
+                        service.getGroups(getVersion(), null, callback);
                     }
                 },
 
@@ -125,10 +122,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
 
                     @Override
                     public void request(final MSGraphGroupsService service, Callback<GroupVO> callback) {
-                        service.createGroup(
-                                getVersion(),
-                                createGroup(),
-                                callback);
+                        service.createGroup(getVersion(), createGroup(), callback);
                     }
                 },
 
@@ -178,10 +172,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
                             @Override
                             public void success(GroupVO group, Response response) {
                                 //Delete the group we created
-                                service.deleteGroup(
-                                        getVersion(),
-                                        group.id,
-                                        callback);
+                                service.deleteGroup(getVersion(), group.id, callback);
                             }
 
                             @Override

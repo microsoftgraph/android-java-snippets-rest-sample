@@ -33,7 +33,6 @@ public abstract class AbstractSnippet<Service, Result> {
     public AbstractSnippet(
             SnippetCategory<Service> category,
             Integer descriptionArray) {
-
         //Get snippet configuration information from the
         //XML configuration for the snippet
         getSnippetArrayContent(category, descriptionArray);

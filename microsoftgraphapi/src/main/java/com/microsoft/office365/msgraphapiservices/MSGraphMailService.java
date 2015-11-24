@@ -4,9 +4,10 @@
  */
 package com.microsoft.office365.msgraphapiservices;
 
-import com.microsoft.office365.microsoftgraphvos.MessageVO;
+import com.microsoft.office365.microsoftgraphvos.MessageWrapperVO;
 
 import retrofit.Callback;
+import retrofit.client.Response;
 import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.POST;
@@ -17,13 +18,13 @@ public interface MSGraphMailService {
     @GET("/{version}/me/messages")
     void getMail(
             @Path("version") String version,
-            Callback<Void> callback
+            Callback<Response> callback
     );
 
-    @POST("/{version}/me/sendMail")
+    @POST("/{version}/me/microsoft.graph.sendmail")
     void createNewMail(
             @Path("version") String version,
-            @Body MessageVO body,
-            Callback<Void> callback
+            @Body MessageWrapperVO body,
+            Callback<Response> callback
     );
 }

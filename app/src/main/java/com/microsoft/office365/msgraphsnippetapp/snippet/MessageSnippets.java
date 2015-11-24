@@ -6,6 +6,11 @@ package com.microsoft.office365.msgraphsnippetapp.snippet;
 
 import android.content.Context;
 
+import com.microsoft.office365.microsoftgraphvos.EmailAddressVO;
+import com.microsoft.office365.microsoftgraphvos.ItemBodyVO;
+import com.microsoft.office365.microsoftgraphvos.MessageVO;
+import com.microsoft.office365.microsoftgraphvos.MessageWrapperVO;
+import com.microsoft.office365.microsoftgraphvos.RecipientVO;
 import com.microsoft.office365.msgraphapiservices.MSGraphMailService;
 import com.microsoft.office365.msgraphsnippetapp.R;
 import com.microsoft.office365.msgraphsnippetapp.application.SnippetApp;
@@ -13,6 +18,7 @@ import com.microsoft.office365.msgraphsnippetapp.inject.AppModule;
 import com.microsoft.office365.msgraphsnippetapp.util.SharedPrefsUtil;
 
 import retrofit.Callback;
+import retrofit.client.Response;
 
 import static com.microsoft.office365.msgraphsnippetapp.R.array.get_user_messages;
 import static com.microsoft.office365.msgraphsnippetapp.R.array.send_an_email_message;
@@ -42,9 +48,9 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<MSGraphMai
                  * HTTP GET https://graph.microsoft.com/{version}/me/messages
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/user_list_messages
                  */
-                new MessageSnippets<Void>(get_user_messages) {
+                new MessageSnippets<Response>(get_user_messages) {
                     @Override
-                    public void request(MSGraphMailService service, Callback<Void> callback) {
+                    public void request(MSGraphMailService service, Callback<Response> callback) {
                         service.getMail(
                                 getVersion(),
                                 callback);
@@ -55,23 +61,48 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<MSGraphMai
                  * HTTP POST https://graph.microsoft.com/{version}/me/messages/sendMail
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/user_post_messages
                  */
-//                new MessageSnippets<Void>(send_an_email_message) {
-//                    @Override
-//                    public void request(MSGraphMailService service, Callback<Void> callback) {
-//                        service.createNewMail(
-//                                getVersion(),
-//                                createMailPayload(
-//                                        SnippetApp.getApp().getString(R.string.mailSubject),
-//                                        SnippetApp.getApp().getString(R.string.mailBody),
-//                                        SnippetApp.getApp().getSharedPreferences(AppModule.PREFS,
-//                                                Context.MODE_PRIVATE).getString(SharedPrefsUtil.PREF_USER_ID, "")),
-//                                callback);
-//                    }
-//                }
+                new MessageSnippets<Response>(send_an_email_message) {
+                    @Override
+                    public void request(MSGraphMailService service, Callback<Response> callback) {
+                        service.createNewMail(
+                                getVersion(),
+                                createMessage(SnippetApp.getApp().getString(R.string.mailSubject),
+                                        SnippetApp.getApp().getString(R.string.mailBody),
+                                        SnippetApp.getApp().getSharedPreferences(AppModule.PREFS,
+                                                Context.MODE_PRIVATE).getString(SharedPrefsUtil.PREF_USER_ID, "")),
+                                callback);
+                    }
+                }
         };
     }
 
     @Override
     public abstract void request(MSGraphMailService service, Callback<Result> callback);
 
+    private static MessageWrapperVO createMessage(
+            String msgSubject,
+            String msgBody,
+            String msgRecipient) {
+        MessageVO msg = new MessageVO();
+
+        // add the recipient
+        RecipientVO recipient = new RecipientVO();
+        recipient.emailAddress = new EmailAddressVO();
+        recipient.emailAddress.address = msgRecipient;
+        msg.toRecipients = new RecipientVO[]{recipient};
+
+        // set the subject
+        msg.subject = msgSubject;
+
+        // create the body
+        ItemBodyVO body = new ItemBodyVO();
+        body.contentType = ItemBodyVO.CONTENT_TYPE_TEXT;
+        body.content = msgBody;
+        msg.body = body;
+
+        MessageWrapperVO wrapper = new MessageWrapperVO();
+        wrapper.message = msg;
+        wrapper.saveToSentItems = true;
+        return wrapper;
+    }
 }

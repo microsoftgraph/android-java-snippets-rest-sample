@@ -86,8 +86,7 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<MSGraphMeServic
                 new MeSnippets<Void>(get_me_direct_reports) {
                     @Override
                     public void request(MSGraphMeService service, Callback<Void> callback) {
-                        service.getMeEntities(
-                                getVersion(),
+                        service.getMeEntities(getVersion(),
                                 SnippetApp.getApp().getString(R.string.directReports),
                                 callback);
                     }
