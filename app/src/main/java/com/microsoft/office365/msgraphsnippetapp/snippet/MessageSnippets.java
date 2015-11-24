@@ -63,6 +63,7 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<MSGraphMai
                 new MessageSnippets<Response>(send_an_email_message) {
                     @Override
                     public void request(MSGraphMailService service, Callback<Response> callback) {
+                        // Get a context so we can interrogate Resources & SharedPreferences
                         SnippetApp app = SnippetApp.getApp();
                         SharedPreferences prefs = SharedPrefsUtil.getSharedPreferences();
 
