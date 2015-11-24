@@ -24,13 +24,8 @@ android {
 }
 
 dependencies {
-    // Retrofit + custom HTTP
+    // custom HTTP
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
     compile 'com.squareup.okhttp:okhttp:2.0.0'
-    compile 'com.squareup.retrofit:retrofit:1.9.0'
-    //Joda-Time for calendar time
-    compile 'joda-time:joda-time:2.7'
-    compile(project(':microsoftgraphvos')) {
-        exclude group: 'com.squareup.retrofit'
-    }
+    compile(project(':microsoftgraphvos'))
 }
