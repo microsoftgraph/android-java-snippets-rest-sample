@@ -360,7 +360,7 @@ public class SnippetDetailFragment<T, Result>
 
     @Override
     public void failure(RetrofitError error) {
-        Timber.d(error, "");
+        Timber.e(error, "");
         mProgressbar.setVisibility(GONE);
         if (null != error.getResponse()) {
             displayResponse(error.getResponse());

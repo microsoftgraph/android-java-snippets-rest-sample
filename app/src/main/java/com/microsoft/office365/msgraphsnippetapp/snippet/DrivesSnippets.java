@@ -4,14 +4,12 @@
  */
 package com.microsoft.office365.msgraphsnippetapp.snippet;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonReader;
+import com.microsoft.office365.microsoftgraphvos.BaseVO;
+import com.microsoft.office365.microsoftgraphvos.FolderVO;
+import com.microsoft.office365.microsoftgraphvos.ItemVO;
 import com.microsoft.office365.msgraphapiservices.MSGraphDrivesService;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.UUID;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -40,7 +38,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                 new DrivesSnippets(null) {
 
                     @Override
-                    public void request(MSGraphDrivesService o, Callback callback) {
+                    public void request(MSGraphDrivesService msGraphDrivesService, Callback callback) {
                         //No implementation
                     }
                 },
@@ -50,12 +48,10 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                  * HTTP GET https://graph.microsoft.com/{version}/me/drive
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/drive_get
                  */
-                new DrivesSnippets<Void>(get_me_drive) {
+                new DrivesSnippets<Response>(get_me_drive) {
                     @Override
-                    public void request(MSGraphDrivesService service, Callback<Void> callback) {
-                        service.getDrive(
-                                getVersion(),
-                                callback);
+                    public void request(MSGraphDrivesService msGraphDrivesService, Callback<Response> callback) {
+                        msGraphDrivesService.getDrive(getVersion(), callback);
                     }
                 },
 
@@ -63,12 +59,10 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                  * HTTP GET https://graph.microsoft.com/{version}/myOrganization/drives
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/drive_get
                  */
-                new DrivesSnippets<Void>(get_organization_drives) {
+                new DrivesSnippets<Response>(get_organization_drives) {
                     @Override
-                    public void request(MSGraphDrivesService service, Callback<Void> callback) {
-                        service.getOrganizationDrives(
-                                getVersion(),
-                                callback);
+                    public void request(MSGraphDrivesService msGraphDrivesService, Callback<Response> callback) {
+                        msGraphDrivesService.getOrganizationDrives(getVersion(), callback);
                     }
                 },
                  /*
@@ -76,11 +70,11 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                  * HTTP GET https://graph.microsoft.com/{version}/me/drive/root/children
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/item_list_children
                  */
-                new DrivesSnippets<Void>(get_me_files) {
+                new DrivesSnippets<Response>(get_me_files) {
                     @Override
-                    public void request(final MSGraphDrivesService service, final Callback<Void> callback) {
+                    public void request(final MSGraphDrivesService msGraphDrivesService, final Callback<Response> callback) {
                         //Get first group
-                        service.getCurrentUserFiles(getVersion(), callback);
+                        msGraphDrivesService.getCurrentUserFiles(getVersion(), callback);
                     }
                 },
                  /*
@@ -88,48 +82,56 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                  * HTTP PUT https://graph.microsoft.com/{version}/me/drive/root/children/{filename}/content
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/item_post_children
                  */
-                new DrivesSnippets<Void>(create_me_file) {
+                new DrivesSnippets<BaseVO>(create_me_file) {
                     @Override
-                    public void request(final MSGraphDrivesService service, final Callback<Void> callback) {
+                    public void request(final MSGraphDrivesService msGraphDrivesService, final Callback<BaseVO> callback) {
                         //Create a new file under root
                         TypedString fileContents = new TypedString("file contents");
-                        service.putNewFile(getVersion(), java.util.UUID.randomUUID().toString(), fileContents, callback);
+                        msGraphDrivesService.putNewFile(
+                                getVersion(),
+                                UUID.randomUUID().toString(),
+                                fileContents,
+                                callback);
                     }
                 },
-                /*
+                 /*
                  * Download the content of a file
                  * HTTP GET https://graph.microsoft.com/{version}/me/drive/items/{filename}/content
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/item_downloadcontent
                  */
-                new DrivesSnippets<Void>(download_me_file) {
+                new DrivesSnippets<Response>(download_me_file) {
 
                     @Override
                     public void request(
-                            final MSGraphDrivesService MSGraphDrivesService,
-                            final Callback<Void> callback) {
+                            final MSGraphDrivesService msGraphDrivesService,
+                            final Callback<Response> callback) {
                         TypedString body = new TypedString("file contents") {
                             @Override
                             public String mimeType() {
                                 return "text/plain";
                             }
                         };
-                        MSGraphDrivesService.putNewFile(getVersion(), java.util.UUID.randomUUID().toString(), body, new Callback<Void>() {
 
-                            @Override
-                            public void success(Void aVoid, Response response) {
-                                //download the file we created
-                                MSGraphDrivesService.downloadFile(
-                                        getVersion(),
-                                        getFileId(response),
-                                        callback);
-                            }
+                        msGraphDrivesService.putNewFile(getVersion(),
+                                UUID.randomUUID().toString(),
+                                body,
+                                new Callback<BaseVO>() {
 
-                            @Override
-                            public void failure(RetrofitError error) {
-                                //pass along error to original callback
-                                callback.failure(error);
-                            }
-                        });
+                                    @Override
+                                    public void success(BaseVO file, Response response) {
+                                        //download the file we created
+                                        msGraphDrivesService.downloadFile(
+                                                getVersion(),
+                                                file.id,
+                                                callback);
+                                    }
+
+                                    @Override
+                                    public void failure(RetrofitError error) {
+                                        //pass along error to original callback
+                                        callback.failure(error);
+                                    }
+                                });
                     }
                 },
                 /*
@@ -137,42 +139,45 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                  * HTTP PUT https://graph.microsoft.com/{version}/me/drive/items/{filename}/content
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/item_update
                  */
-                new DrivesSnippets<Void>(update_me_file) {
+                new DrivesSnippets<BaseVO>(update_me_file) {
 
                     @Override
                     public void request(
-                            final MSGraphDrivesService MSGraphDrivesService,
-                            final Callback<Void> callback) {
+                            final MSGraphDrivesService msGraphDrivesService,
+                            final Callback<BaseVO> callback) {
                         final TypedString body = new TypedString("file contents") {
                             @Override
                             public String mimeType() {
                                 return "text/plain";
                             }
                         };
-                        MSGraphDrivesService.putNewFile(getVersion(), java.util.UUID.randomUUID().toString(), body, new Callback<Void>() {
+                        msGraphDrivesService.putNewFile(getVersion(),
+                                UUID.randomUUID().toString(),
+                                body,
+                                new Callback<BaseVO>() {
 
-                            @Override
-                            public void success(Void aVoid, Response response) {
-                                final TypedString updatedBody = new TypedString("Updated file contents") {
                                     @Override
-                                    public String mimeType() {
-                                        return "application/json";
+                                    public void success(BaseVO directoryObject, Response response) {
+                                        final TypedString updatedBody = new TypedString("Updated file contents") {
+                                            @Override
+                                            public String mimeType() {
+                                                return "application/json";
+                                            }
+                                        };
+                                        //download the file we created
+                                        msGraphDrivesService.updateFile(
+                                                getVersion(),
+                                                directoryObject.id,
+                                                updatedBody,
+                                                callback);
                                     }
-                                };
-                                //download the file we created
-                                MSGraphDrivesService.updateFile(
-                                        getVersion(),
-                                        getFileId(response),
-                                        updatedBody,
-                                        callback);
-                            }
 
-                            @Override
-                            public void failure(RetrofitError error) {
-                                //pass along error to original callback
-                                callback.failure(error);
-                            }
-                        });
+                                    @Override
+                                    public void failure(RetrofitError error) {
+                                        //pass along error to original callback
+                                        callback.failure(error);
+                                    }
+                                });
                     }
                 },
                 /*
@@ -180,36 +185,39 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                  * HTTP DELETE https://graph.microsoft.com/{version}/me/drive/items/{fileId}/
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/item_delete
                  */
-                new DrivesSnippets<Void>(delete_me_file) {
+                new DrivesSnippets<BaseVO>(delete_me_file) {
 
                     @Override
                     public void request(
-                            final MSGraphDrivesService MSGraphDrivesService,
-                            final Callback<Void> callback) {
+                            final MSGraphDrivesService msGraphDrivesService,
+                            final Callback<BaseVO> callback) {
                         final TypedString body = new TypedString("file contents") {
                             @Override
                             public String mimeType() {
                                 return "application/json";
                             }
                         };
-                        MSGraphDrivesService.putNewFile(getVersion(), java.util.UUID.randomUUID().toString(), body, new Callback<Void>() {
+                        msGraphDrivesService.putNewFile(
+                                getVersion(),
+                                UUID.randomUUID().toString(),
+                                body,
+                                new Callback<BaseVO>() {
 
-                            @Override
-                            public void success(Void aVoid, Response response) {
+                                    @Override
+                                    public void success(BaseVO file, Response response) {
+                                        //download the file we created
+                                        msGraphDrivesService.deleteFile(
+                                                getVersion(),
+                                                file.id,
+                                                callback);
+                                    }
 
-                                //download the file we created
-                                MSGraphDrivesService.deleteFile(
-                                        getVersion(),
-                                        getFileId(response),
-                                        callback);
-                            }
-
-                            @Override
-                            public void failure(RetrofitError error) {
-                                //pass along error to original callback
-                                callback.failure(error);
-                            }
-                        });
+                                    @Override
+                                    public void failure(RetrofitError error) {
+                                        //pass along error to original callback
+                                        callback.failure(error);
+                                    }
+                                });
                     }
                 },
                 /*
@@ -217,49 +225,46 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                  * HTTP PATCH https://graph.microsoft.com/{version}/me/drive/items/{fileId}/
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/item_update
                  */
-                new DrivesSnippets<Void>(rename_me_file) {
+                new DrivesSnippets<BaseVO>(rename_me_file) {
 
                     @Override
                     public void request(
-                            final MSGraphDrivesService MSGraphDrivesService,
-                            final Callback<Void> callback) {
+                            final MSGraphDrivesService msGraphDrivesService,
+                            final Callback<BaseVO> callback) {
                         final TypedString body = new TypedString("file contents") {
                             @Override
                             public String mimeType() {
                                 return "application/json";
                             }
                         };
-                        MSGraphDrivesService.putNewFile(getVersion(), java.util.UUID.randomUUID().toString(), body, new Callback<Void>() {
+                        msGraphDrivesService.putNewFile(
+                                getVersion(),
+                                UUID.randomUUID().toString(),
+                                body,
+                                new Callback<BaseVO>() {
 
-                            @Override
-                            public void success(Void aVoid, Response response) {
-
-
-                                // Build contents of post body and convert to StringContent object.
-                                // Using line breaks for readability.
-                                String patchBody = "{"
-                                        + "'name':'" + java.util.UUID.randomUUID().toString() + "'}";
-
-                                final TypedString body = new TypedString(patchBody) {
                                     @Override
-                                    public String mimeType() {
-                                        return "application/json";
-                                    }
-                                };
-                                //download the file we created
-                                MSGraphDrivesService.renameFile(
-                                        getVersion(),
-                                        getFileId(response),
-                                        body,
-                                        callback);
-                            }
+                                    public void success(BaseVO file, Response response) {
+                                        // Build contents of post body and convert to StringContent object.
+                                        // Using line breaks for readability.
 
-                            @Override
-                            public void failure(RetrofitError error) {
-                                //pass along error to original callback
-                                callback.failure(error);
-                            }
-                        });
+                                        ItemVO delta = new ItemVO();
+                                        delta.name = UUID.randomUUID().toString();
+
+                                        //download the file we created
+                                        msGraphDrivesService.renameFile(
+                                                getVersion(),
+                                                file.id,
+                                                delta,
+                                                callback);
+                                    }
+
+                                    @Override
+                                    public void failure(RetrofitError error) {
+                                        //pass along error to original callback
+                                        callback.failure(error);
+                                    }
+                                });
                     }
                 },
                 /*
@@ -267,52 +272,21 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                  * HTTP POST https://graph.microsoft.com/me/drive/root/children
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/item_post_children
                  */
-                new DrivesSnippets<Void>(create_me_folder) {
+                new DrivesSnippets<Response>(create_me_folder) {
 
                     @Override
                     public void request(
-                            final MSGraphDrivesService MSGraphDrivesService,
-                            final Callback<Void> callback) {
-                        String folderMetadata = "{"
-                                + "'name': '" + java.util.UUID.randomUUID().toString() + "',"
-                                + "'folder': {},"
-                                + "'@name.conflictBehavior': 'rename'"
-                                + "}";
-
-                        final TypedString body = new TypedString(folderMetadata) {
-                            @Override
-                            public String mimeType() {
-                                return "application/json";
-                            }
-                        };
-                        //download the file we created
-                        MSGraphDrivesService.createFolder(
-                                getVersion(),
-                                body,
-                                callback);
-
+                            final MSGraphDrivesService msGraphDrivesService,
+                            final Callback<Response> callback) {
+                        ItemVO folder = new ItemVO();
+                        folder.name = UUID.randomUUID().toString();
+                        folder.folder = new FolderVO();
+                        folder.conflictBehavior = "rename";
+                        msGraphDrivesService.createFolder(getVersion(), folder, callback);
                     }
                 }
         };
     }
 
-    public abstract void request(MSGraphDrivesService MSGraphDrivesService, Callback<Result> callback);
-
-    protected String getFileId(Response json) {
-        if (json == null)
-            return "";
-
-        String fileId;
-
-        try {
-            JsonReader reader = new JsonReader(new InputStreamReader(json.getBody().in(), "UTF-8"));
-            JsonElement responseElement = new JsonParser().parse(reader);
-            JsonObject responseObject = responseElement.getAsJsonObject();
-            fileId = responseObject.get("id").getAsString();
-            return fileId;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
+    public abstract void request(MSGraphDrivesService msGraphDrivesService, Callback<Result> callback);
 }

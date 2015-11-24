@@ -4,7 +4,11 @@
  */
 package com.microsoft.office365.msgraphapiservices;
 
+import com.microsoft.office365.microsoftgraphvos.BaseVO;
+import com.microsoft.office365.microsoftgraphvos.ItemVO;
+
 import retrofit.Callback;
+import retrofit.client.Response;
 import retrofit.http.Body;
 import retrofit.http.DELETE;
 import retrofit.http.GET;
@@ -17,37 +21,35 @@ import retrofit.mime.TypedString;
 public interface MSGraphDrivesService {
 
     /**
-     *
-     * @param version The version of the API to use (beta, v1, etc...)
+     * @param version  The version of the API to use (beta, v1, etc...)
      * @param callback will be called with results of REST operation
      */
     @GET("/{version}/me/drive")
     void getDrive(
             @Path("version") String version,
-            Callback<Void> callback
+            Callback<Response> callback
     );
 
     /**
-     *
-     * @param version The version of the API to use (beta, v1, etc...)
+     * @param version  The version of the API to use (beta, v1, etc...)
      * @param callback will be called with results of REST operation
      */
     @GET("/{version}/myOrganization/drives")
     void getOrganizationDrives(
             @Path("version") String version,
-            Callback<Void> callback
+            Callback<Response> callback
     );
 
     /**
      * Gets children file metadata of the root folder
      *
-     * @param version The version of the API to use (beta, v1, etc...)
+     * @param version  The version of the API to use (beta, v1, etc...)
      * @param callback will be called with results of REST operation
      */
     @GET("/{version}/me/drive/root/children")
     void getCurrentUserFiles(
             @Path("version") String version,
-            Callback<Void> callback
+            Callback<Response> callback
     );
 
     /**
@@ -63,11 +65,12 @@ public interface MSGraphDrivesService {
             @Path("version") String version,
             @Path("filename") String filename,
             @Body TypedString value,
-            Callback<Void> callback
+            Callback<BaseVO> callback
     );
 
     /**
      * Downloads the content of a file from a user root folder
+     *
      * @param version
      * @param filename
      * @param callback
@@ -76,11 +79,12 @@ public interface MSGraphDrivesService {
     void downloadFile(
             @Path("version") String version,
             @Path("filename") String filename,
-            Callback<Void> callback
+            Callback<Response> callback
     );
 
     /**
      * Updates the contents of a file owned by the signed in user
+     *
      * @param version
      * @param fileId
      * @param value
@@ -91,11 +95,12 @@ public interface MSGraphDrivesService {
             @Path("version") String version,
             @Path("fileId") String fileId,
             @Body TypedString value,
-            Callback<Void> callback
+            Callback<BaseVO> callback
     );
 
     /**
      * Deletes a file by file id
+     *
      * @param version
      * @param fileId
      * @param callback
@@ -104,11 +109,12 @@ public interface MSGraphDrivesService {
     void deleteFile(
             @Path("version") String version,
             @Path("fileId") String fileId,
-            Callback<Void> callback
+            Callback<BaseVO> callback
     );
 
     /**
      * Rename the specified file
+     *
      * @param version
      * @param fileId
      * @param body
@@ -118,12 +124,13 @@ public interface MSGraphDrivesService {
     void renameFile(
             @Path("version") String version,
             @Path("fileId") String fileId,
-            @Body TypedString body,
-            Callback<Void> callback
+            @Body ItemVO body,
+            Callback<BaseVO> callback
     );
 
     /**
      * Create a folder under user root folder
+     *
      * @param version
      * @param body
      * @param callback
@@ -131,7 +138,7 @@ public interface MSGraphDrivesService {
     @POST("/{version}/me/drive/root/children")
     void createFolder(
             @Path("version") String version,
-            @Body TypedString body,
-            Callback<Void> callback
+            @Body ItemVO body,
+            Callback<Response> callback
     );
 }

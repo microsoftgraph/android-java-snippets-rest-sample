@@ -4,14 +4,9 @@
  */
 package com.microsoft.office365.msgraphsnippetapp.snippet;
 
-import com.google.gson.JsonObject;
 import com.microsoft.office365.msgraphapiservices.MSGraphUserService;
-import com.microsoft.office365.msgraphsnippetapp.util.SharedPrefsUtil;
-
-import java.util.UUID;
 
 import retrofit.Callback;
-import retrofit.mime.TypedString;
 
 import static com.microsoft.office365.msgraphsnippetapp.R.array.get_organization_filtered_users;
 import static com.microsoft.office365.msgraphsnippetapp.R.array.get_organization_users;
@@ -71,35 +66,7 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserS
                     public void request(
                             MSGraphUserService MSGraphUserService,
                             Callback<Void> callback) {
-
-                        //Use a random UUI for the user name
-                        String randomUserName = UUID.randomUUID().toString();
-
-                        //create body
-                        JsonObject newUser = new JsonObject();
-                        newUser.addProperty("accountEnabled", true);
-                        newUser.addProperty("displayName", "SAMPLE " + randomUserName);
-                        newUser.addProperty("mailNickname", randomUserName);
-                        String tenant = SharedPrefsUtil.getSharedPreferences().getString(SharedPrefsUtil.PREF_USER_TENANT, "");
-                        newUser.addProperty("userPrincipalName", randomUserName + '@' + tenant);
-
-                        //create password profile
-                        JsonObject passwordProfile = new JsonObject();
-
-                        //Generate random UUID for the password which has 16 character maximum
-                        passwordProfile.addProperty("password", UUID.randomUUID().toString().substring(0, 16));
-                        passwordProfile.addProperty("forceChangePasswordNextLogin", false);
-                        newUser.add("passwordProfile", passwordProfile);
-
-                        TypedString body = new TypedString(newUser.toString()) {
-                            @Override
-                            public String mimeType() {
-                                return "application/json";
-                            }
-                        };
-
-                        //Call service to POST the new user
-                        MSGraphUserService.createNewUser(getVersion(), body, callback);
+                        // TODO implement
                     }
                 }
         };
