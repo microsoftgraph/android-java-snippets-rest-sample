@@ -38,53 +38,59 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                 new DrivesSnippets(null) {
 
                     @Override
-                    public void request(MSGraphDrivesService msGraphDrivesService, Callback callback) {
+                    public void request(MSGraphDrivesService msGraphDrivesService,
+                                        Callback callback) {
                         //No implementation
                     }
                 },
                 //Snippets
 
                 /* Get the user's drive
-                 * HTTP GET https://graph.microsoft.com/{version}/me/drive
+                 * GET https://graph.microsoft.com/{version}/me/drive
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/drive_get
                  */
                 new DrivesSnippets<Response>(get_me_drive) {
                     @Override
-                    public void request(MSGraphDrivesService msGraphDrivesService, Callback<Response> callback) {
+                    public void request(MSGraphDrivesService msGraphDrivesService,
+                                        Callback<Response> callback) {
                         msGraphDrivesService.getDrive(getVersion(), callback);
                     }
                 },
 
-                 /* Get all of the drives in your tenant
-                 * HTTP GET https://graph.microsoft.com/{version}/myOrganization/drives
+                /* Get all of the drives in your tenant
+                 * GET https://graph.microsoft.com/{version}/myOrganization/drives
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/drive_get
                  */
                 new DrivesSnippets<Response>(get_organization_drives) {
                     @Override
-                    public void request(MSGraphDrivesService msGraphDrivesService, Callback<Response> callback) {
+                    public void request(MSGraphDrivesService msGraphDrivesService,
+                                        Callback<Response> callback) {
                         msGraphDrivesService.getOrganizationDrives(getVersion(), callback);
                     }
                 },
-                 /*
+                /*
                  * Get a file
-                 * HTTP GET https://graph.microsoft.com/{version}/me/drive/root/children
+                 * GET https://graph.microsoft.com/{version}/me/drive/root/children
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/item_list_children
                  */
                 new DrivesSnippets<Response>(get_me_files) {
                     @Override
-                    public void request(final MSGraphDrivesService msGraphDrivesService, final Callback<Response> callback) {
+                    public void request(
+                            final MSGraphDrivesService msGraphDrivesService,
+                            final Callback<Response> callback) {
                         //Get first group
                         msGraphDrivesService.getCurrentUserFiles(getVersion(), callback);
                     }
                 },
-                 /*
+                /*
                  * Create a file
-                 * HTTP PUT https://graph.microsoft.com/{version}/me/drive/root/children/{filename}/content
+                 * PUT https://graph.microsoft.com/{version}/me/drive/root/children/{filename}/content
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/item_post_children
                  */
                 new DrivesSnippets<BaseVO>(create_me_file) {
                     @Override
-                    public void request(final MSGraphDrivesService msGraphDrivesService, final Callback<BaseVO> callback) {
+                    public void request(final MSGraphDrivesService msGraphDrivesService,
+                                        final Callback<BaseVO> callback) {
                         //Create a new file under root
                         TypedString fileContents = new TypedString("file contents");
                         msGraphDrivesService.putNewFile(
@@ -94,9 +100,9 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                                 callback);
                     }
                 },
-                 /*
+                /*
                  * Download the content of a file
-                 * HTTP GET https://graph.microsoft.com/{version}/me/drive/items/{filename}/content
+                 * GET https://graph.microsoft.com/{version}/me/drive/items/{filename}/content
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/item_downloadcontent
                  */
                 new DrivesSnippets<Response>(download_me_file) {
@@ -136,7 +142,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                 },
                 /*
                  * Update the content of a file
-                 * HTTP PUT https://graph.microsoft.com/{version}/me/drive/items/{filename}/content
+                 * PUT https://graph.microsoft.com/{version}/me/drive/items/{filename}/content
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/item_update
                  */
                 new DrivesSnippets<BaseVO>(update_me_file) {
@@ -158,12 +164,13 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
 
                                     @Override
                                     public void success(BaseVO directoryObject, Response response) {
-                                        final TypedString updatedBody = new TypedString("Updated file contents") {
-                                            @Override
-                                            public String mimeType() {
-                                                return "application/json";
-                                            }
-                                        };
+                                        final TypedString updatedBody =
+                                                new TypedString("Updated file contents") {
+                                                    @Override
+                                                    public String mimeType() {
+                                                        return "application/json";
+                                                    }
+                                                };
                                         //download the file we created
                                         msGraphDrivesService.updateFile(
                                                 getVersion(),
@@ -182,7 +189,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                 },
                 /*
                  * Delete the content of a file
-                 * HTTP DELETE https://graph.microsoft.com/{version}/me/drive/items/{fileId}/
+                 * DELETE https://graph.microsoft.com/{version}/me/drive/items/{fileId}/
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/item_delete
                  */
                 new DrivesSnippets<BaseVO>(delete_me_file) {
@@ -222,7 +229,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                 },
                 /*
                  * Renames a file
-                 * HTTP PATCH https://graph.microsoft.com/{version}/me/drive/items/{fileId}/
+                 * PATCH https://graph.microsoft.com/{version}/me/drive/items/{fileId}/
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/item_update
                  */
                 new DrivesSnippets<BaseVO>(rename_me_file) {
@@ -245,9 +252,6 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
 
                                     @Override
                                     public void success(BaseVO file, Response response) {
-                                        // Build contents of post body and convert to StringContent object.
-                                        // Using line breaks for readability.
-
                                         ItemVO delta = new ItemVO();
                                         delta.name = UUID.randomUUID().toString();
 
@@ -269,7 +273,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                 },
                 /*
                  * Creates a folder
-                 * HTTP POST https://graph.microsoft.com/me/drive/root/children
+                 * POST https://graph.microsoft.com/me/drive/root/children
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/item_post_children
                  */
                 new DrivesSnippets<Response>(create_me_folder) {
@@ -288,5 +292,5 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
         };
     }
 
-    public abstract void request(MSGraphDrivesService msGraphDrivesService, Callback<Result> callback);
+    public abstract void request(MSGraphDrivesService service, Callback<Result> callback);
 }

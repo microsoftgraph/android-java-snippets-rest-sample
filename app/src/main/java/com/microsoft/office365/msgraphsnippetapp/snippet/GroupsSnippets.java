@@ -41,12 +41,13 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
 
                 /*
                  * Get a group by id
-                 * HTTP GET https://graph.microsoft.com/{version}/myOrganization/groups/{Group.objectId}
+                 * GET https://graph.microsoft.com/{version}/myOrganization/groups/{Group.objectId}
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/group_get
                  */
                 new GroupsSnippets<GroupVO>(get_a_group) {
                     @Override
-                    public void request(final MSGraphGroupsService service, final Callback<GroupVO> callback) {
+                    public void request(final MSGraphGroupsService service,
+                                        final Callback<GroupVO> callback) {
                         // create a group then query it
                         service.createGroup(getVersion(), createGroup(), new Callback<GroupVO>() {
                             @Override
@@ -61,13 +62,14 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
                         });
                     }
                 },
-                 /* Get all of the members of the first organization group
-                 * HTTP GET https://graph.microsoft.com/{version}/myOrganization/groups/{Group.objectId}/members
+                /* Get all of the members of the first organization group
+                 * GET https://graph.microsoft.com/{version}/myOrganization/groups/{Group.objectId}/members
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/group_list_members
                  */
                 new GroupsSnippets<Void>(get_group_members) {
                     @Override
-                    public void request(final MSGraphGroupsService service, final Callback<Void> callback) {
+                    public void request(final MSGraphGroupsService service,
+                                        final Callback<Void> callback) {
                         service.createGroup(getVersion(), createGroup(), new Callback<GroupVO>() {
                             @Override
                             public void success(GroupVO groupVO, Response response) {
@@ -83,7 +85,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
                 },
 
                 /* Get all of a group's owners
-                 * HTTP GET https://graph.microsoft.com/{version}/myOrganization/groups/{Group.objectId}/owners
+                 * GET https://graph.microsoft.com/{version}/myOrganization/groups/{Group.objectId}/owners
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/group_list_owners
                  */
                 new GroupsSnippets<Void>(get_group_owners) {
@@ -104,7 +106,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
                     }
                 },
                 /* List all organization groups
-                 * HTTP GET https://graph.microsoft.com/v1.0/groupshttps://graph.microsoft.com/v1.0/groups
+                 * GET https://graph.microsoft.com/v1.0/groupshttps://graph.microsoft.com/v1.0/groups
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/group_list
                  */
                 new GroupsSnippets<Envelope<GroupVO>>(get_all_groups) {
@@ -115,7 +117,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
                 },
 
                 /* Create a new group with a random name
-                 * HTTP POST https://graph.microsoft.com/{version}/myOrganization/groups
+                 * POST https://graph.microsoft.com/{version}/myOrganization/groups
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/resources/group
                  */
                 new GroupsSnippets<GroupVO>(insert_a_group) {
@@ -127,7 +129,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
                 },
 
                 /* Update a group
-                 * HTTP PATCH https://graph.microsoft.com/{version}/myOrganization/groups/{Group.objectId}
+                 * PATCH https://graph.microsoft.com/{version}/myOrganization/groups/{Group.objectId}
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/group_update
                  */
                 new GroupsSnippets<GroupVO>(update_a_group) {
@@ -159,7 +161,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
                 },
 
                 /* Delete a group
-                 * HTTP DELETE https://graph.microsoft.com/{version}/myOrganization/groups/{Group.objectId}
+                 * DELETE https://graph.microsoft.com/{version}/myOrganization/groups/{Group.objectId}
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/group_delete
                  */
                 new GroupsSnippets<Response>(delete_a_group) {

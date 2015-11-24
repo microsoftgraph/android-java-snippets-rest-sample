@@ -43,7 +43,7 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<MSGraphEven
 
                 /*
                  * Get all events for the signed in user.
-                 * HTTP GET https://graph.microsoft.com/{version}/me/events
+                 * GET https://graph.microsoft.com/{version}/me/events
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/user_list_events
                  */
                 new EventsSnippets<Response>(get_user_events) {
@@ -58,7 +58,7 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<MSGraphEven
 
                 /*
                  * Adds an event to the signed-in user\'s calendar.
-                 * HTTP POST https://graph.microsoft.com/{version}/me/events
+                 * POST https://graph.microsoft.com/{version}/me/events
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/user_post_events
                  */
                 new EventsSnippets<EventVO>(create_event) {
@@ -73,7 +73,7 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<MSGraphEven
                 },
                  /*
                  * Update an event
-                 * HTTP PATCH https://graph.microsoft.com/{version}/me/events/{Event.Id}
+                 * PATCH https://graph.microsoft.com/{version}/me/events/{Event.Id}
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/event_update
                  */
                 new EventsSnippets<Response>(update_event) {
@@ -108,7 +108,7 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<MSGraphEven
                 },
                  /*
                  * Delete an event
-                 * HTTP DELETE https://graph.microsoft.com/{version}/me/events/{Event.Id}
+                 * DELETE https://graph.microsoft.com/{version}/me/events/{Event.Id}
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/event_delete
                  */
                 new EventsSnippets<Response>(delete_event) {
@@ -140,7 +140,7 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<MSGraphEven
         };
     }
 
-    public abstract void request(MSGraphEventsService MSGraphEventsService, Callback<Result> callback);
+    public abstract void request(MSGraphEventsService service, Callback<Result> callback);
 
     private static EventVO createEvent() {
         EventVO event = new EventVO();
