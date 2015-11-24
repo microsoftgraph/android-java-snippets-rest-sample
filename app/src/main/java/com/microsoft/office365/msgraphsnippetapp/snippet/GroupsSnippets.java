@@ -63,7 +63,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
                         });
                     }
                 },
-                /* Get all of the members of the first organization group
+                /* Get all of the members of a newly created organization group
                  * GET https://graph.microsoft.com/{version}/myOrganization/groups/{Group.objectId}/members
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/group_list_members
                  */
