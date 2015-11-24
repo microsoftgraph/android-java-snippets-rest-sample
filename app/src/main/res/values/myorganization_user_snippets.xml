@@ -12,21 +12,21 @@ item 5: is admin account required to run snippet (true/false)
     <string-array name="get_organization_users">
         <item>GET: Get all users</item>
         <item>Gets all of the users in your tenant\'s directory.</item>
-        <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_User</item>
+        <item>https://graph.microsoft.io/docs/api-reference/v1.0/resources/organization</item>
         <item>v1.0</item>
         <item>true</item>
     </string-array>
     <string-array name="get_organization_filtered_users">
         <item>GET: Get all users (with $filter)</item>
         <item>Gets all of the users in your tenant\'s directory who are from the United States, using $filter.</item>
-        <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_User</item>
+        <item>https://graph.microsoft.io/docs/api-reference/v1.0/resources/organization</item>
         <item>v1.0</item>
         <item>true</item>
     </string-array>
     <string-array name="insert_organization_user">
         <item>POST: Add user</item>
         <item>Adds a new user to the tenant\'s directory.</item>
-        <item>https://msdn.microsoft.com/office/office365/HowTo/office-365-unified-api-reference#msg_ref_entityType_User</item>
+        <item>https://graph.microsoft.io/docs/api-reference/v1.0/resources/organization</item>
         <item>v1.0</item>
         <item>true</item>
     </string-array>
