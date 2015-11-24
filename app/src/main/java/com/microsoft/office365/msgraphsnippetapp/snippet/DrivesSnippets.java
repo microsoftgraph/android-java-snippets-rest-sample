@@ -14,7 +14,6 @@ import java.util.UUID;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import retrofit.mime.TypedString;
 
 import static com.microsoft.office365.msgraphsnippetapp.R.array.create_me_file;
 import static com.microsoft.office365.msgraphsnippetapp.R.array.create_me_folder;
@@ -27,6 +26,8 @@ import static com.microsoft.office365.msgraphsnippetapp.R.array.rename_me_file;
 import static com.microsoft.office365.msgraphsnippetapp.R.array.update_me_file;
 
 abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesService, Result> {
+
+    private static final String fileContents = "A plain text file";
 
     public DrivesSnippets(Integer descriptionArray) {
         super(SnippetCategory.drivesSnippetCategory, descriptionArray);
@@ -92,7 +93,8 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                     public void request(final MSGraphDrivesService msGraphDrivesService,
                                         final Callback<BaseVO> callback) {
                         //Create a new file under root
-                        TypedString fileContents = new TypedString("file contents");
+                        //TypedString fileContents = new TypedString("file contents");
+                        String fileContents = "file contents";
                         msGraphDrivesService.putNewFile(
                                 getVersion(),
                                 UUID.randomUUID().toString(),
@@ -111,16 +113,9 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                     public void request(
                             final MSGraphDrivesService msGraphDrivesService,
                             final Callback<Response> callback) {
-                        TypedString body = new TypedString("file contents") {
-                            @Override
-                            public String mimeType() {
-                                return "text/plain";
-                            }
-                        };
-
                         msGraphDrivesService.putNewFile(getVersion(),
                                 UUID.randomUUID().toString(),
-                                body,
+                                fileContents,
                                 new Callback<BaseVO>() {
 
                                     @Override
@@ -151,26 +146,14 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                     public void request(
                             final MSGraphDrivesService msGraphDrivesService,
                             final Callback<BaseVO> callback) {
-                        final TypedString body = new TypedString("file contents") {
-                            @Override
-                            public String mimeType() {
-                                return "text/plain";
-                            }
-                        };
                         msGraphDrivesService.putNewFile(getVersion(),
                                 UUID.randomUUID().toString(),
-                                body,
+                                fileContents,
                                 new Callback<BaseVO>() {
 
                                     @Override
                                     public void success(BaseVO directoryObject, Response response) {
-                                        final TypedString updatedBody =
-                                                new TypedString("Updated file contents") {
-                                                    @Override
-                                                    public String mimeType() {
-                                                        return "application/json";
-                                                    }
-                                                };
+                                        String updatedBody = "Updated file contents";
                                         //download the file we created
                                         msGraphDrivesService.updateFile(
                                                 getVersion(),
@@ -198,16 +181,10 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                     public void request(
                             final MSGraphDrivesService msGraphDrivesService,
                             final Callback<BaseVO> callback) {
-                        final TypedString body = new TypedString("file contents") {
-                            @Override
-                            public String mimeType() {
-                                return "application/json";
-                            }
-                        };
                         msGraphDrivesService.putNewFile(
                                 getVersion(),
                                 UUID.randomUUID().toString(),
-                                body,
+                                fileContents,
                                 new Callback<BaseVO>() {
 
                                     @Override
@@ -238,16 +215,10 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                     public void request(
                             final MSGraphDrivesService msGraphDrivesService,
                             final Callback<BaseVO> callback) {
-                        final TypedString body = new TypedString("file contents") {
-                            @Override
-                            public String mimeType() {
-                                return "application/json";
-                            }
-                        };
                         msGraphDrivesService.putNewFile(
                                 getVersion(),
                                 UUID.randomUUID().toString(),
-                                body,
+                                fileContents,
                                 new Callback<BaseVO>() {
 
                                     @Override

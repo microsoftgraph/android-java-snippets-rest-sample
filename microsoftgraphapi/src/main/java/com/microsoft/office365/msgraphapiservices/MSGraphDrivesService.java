@@ -56,7 +56,7 @@ public interface MSGraphDrivesService {
     void putNewFile(
             @Path("version") String version,
             @Path("filename") String filename,
-            @Body TypedString value,
+            @Body String value,
             Callback<BaseVO> callback
     );
 
@@ -71,7 +71,7 @@ public interface MSGraphDrivesService {
     void updateFile(
             @Path("version") String version,
             @Path("fileId") String fileId,
-            @Body TypedString value,
+            @Body String value,
             Callback<BaseVO> callback
     );
 
