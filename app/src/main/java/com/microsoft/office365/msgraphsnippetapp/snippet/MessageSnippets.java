@@ -88,14 +88,25 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<MSGraphMai
     private static MessageWrapperVO createMessage(
             String msgSubject,
             String msgBody,
-            String msgRecipient) {
+            String... msgRecipients) {
         MessageVO msg = new MessageVO();
 
         // add the recipient
-        RecipientVO recipient = new RecipientVO();
-        recipient.emailAddress = new EmailAddressVO();
-        recipient.emailAddress.address = msgRecipient;
-        msg.toRecipients = new RecipientVO[]{recipient};
+        RecipientVO recipient;
+        for (int ii = 0; ii < msgRecipients.length; ii++) {
+            // if the recipient array does not exist, new one up
+            if (null == msg.toRecipients) {
+                msg.toRecipients = new RecipientVO[msgRecipients.length];
+            }
+            // allocate a new recipient
+            recipient = new RecipientVO();
+            // give them an email address
+            recipient.emailAddress = new EmailAddressVO();
+            // set that address to be the currently iterated-upon recipient string
+            recipient.emailAddress.address = msgRecipients[ii];
+            // add it to the array at the position
+            msg.toRecipients[ii] = recipient;
+        }
 
         // set the subject
         msg.subject = msgSubject;
