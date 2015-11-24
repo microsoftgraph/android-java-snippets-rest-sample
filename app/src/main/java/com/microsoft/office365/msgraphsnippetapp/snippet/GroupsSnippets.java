@@ -52,6 +52,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
                         service.createGroup(getVersion(), createGroup(), new Callback<GroupVO>() {
                             @Override
                             public void success(GroupVO groupVO, Response response) {
+                                // request the newly created group
                                 service.getGroup(getVersion(), groupVO.id, callback);
                             }
 
@@ -70,6 +71,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
                     @Override
                     public void request(final MSGraphGroupsService service,
                                         final Callback<Void> callback) {
+                        // create a group then ask for its members
                         service.createGroup(getVersion(), createGroup(), new Callback<GroupVO>() {
                             @Override
                             public void success(GroupVO groupVO, Response response) {
@@ -96,7 +98,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
                     @Override
                     public void request(final MSGraphGroupsService service,
                                         final Callback<Void> callback) {
-                        //Get first group
+                        // create a group and then request its owner
                         service.createGroup(getVersion(), createGroup(), new Callback<GroupVO>() {
                             @Override
                             public void success(GroupVO groupVO, Response response) {
@@ -148,7 +150,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
                     @Override
                     public void request(final MSGraphGroupsService service,
                                         final Callback<GroupVO> callback) {
-                        //Create a group that we will delete
+                        //Create a group that we will update
                         service.createGroup(getVersion(), createGroup(), new Callback<GroupVO>() {
 
                             @Override

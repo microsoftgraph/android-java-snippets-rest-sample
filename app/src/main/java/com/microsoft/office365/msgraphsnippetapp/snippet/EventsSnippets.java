@@ -82,15 +82,18 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<MSGraphEven
                     public void request(
                             final MSGraphEventsService MSGraphEventsService,
                             final Callback<Response> callback) {
-
+                        // create a new event to update
                         MSGraphEventsService.createNewEvent(
                                 getVersion(),
                                 createEvent(),
                                 new Callback<EventVO>() {
                                     @Override
                                     public void success(EventVO eventVO, Response response) {
+                                        // now that the event has been created,
+                                        // let's change the subject
                                         EventVO amended = new EventVO();
                                         amended.subject = "Weekly Sync Meeting";
+
                                         MSGraphEventsService.updateEvent(
                                                 getVersion(),
                                                 eventVO.id,
@@ -117,6 +120,7 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<MSGraphEven
                     public void request(
                             final MSGraphEventsService MSGraphEventsService,
                             final Callback<Response> callback) {
+                        // create a new event to delete
                         EventVO event = createEvent();
                         MSGraphEventsService.createNewEvent(
                                 getVersion(),
@@ -124,6 +128,7 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<MSGraphEven
                                 new Callback<EventVO>() {
                                     @Override
                                     public void success(EventVO eventVO, Response response) {
+                                        // event created, now let's delete it
                                         MSGraphEventsService.deleteEvent(
                                                 getVersion(),
                                                 eventVO.id,
