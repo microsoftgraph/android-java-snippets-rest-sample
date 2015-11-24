@@ -40,7 +40,7 @@ public interface MSGraphGroupsService {
             @Path("version") String version,
             @Path("groupId") String groupId,
             @Path("entity") String entity,
-            Callback<Void> callback
+            Callback<Response> callback
     );
 
     @POST("/{version}/myOrganization/Groups/")

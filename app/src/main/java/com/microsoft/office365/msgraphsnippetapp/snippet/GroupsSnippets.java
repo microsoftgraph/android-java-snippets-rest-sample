@@ -67,10 +67,10 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
                  * GET https://graph.microsoft.com/{version}/myOrganization/groups/{Group.objectId}/members
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/group_list_members
                  */
-                new GroupsSnippets<Void>(get_group_members) {
+                new GroupsSnippets<Response>(get_group_members) {
                     @Override
                     public void request(final MSGraphGroupsService service,
-                                        final Callback<Void> callback) {
+                                        final Callback<Response> callback) {
                         // create a group then ask for its members
                         service.createGroup(getVersion(), createGroup(), new Callback<GroupVO>() {
                             @Override
@@ -94,10 +94,10 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
                  * GET https://graph.microsoft.com/{version}/myOrganization/groups/{Group.objectId}/owners
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/group_list_owners
                  */
-                new GroupsSnippets<Void>(get_group_owners) {
+                new GroupsSnippets<Response>(get_group_owners) {
                     @Override
                     public void request(final MSGraphGroupsService service,
-                                        final Callback<Void> callback) {
+                                        final Callback<Response> callback) {
                         // create a group and then request its owner
                         service.createGroup(getVersion(), createGroup(), new Callback<GroupVO>() {
                             @Override

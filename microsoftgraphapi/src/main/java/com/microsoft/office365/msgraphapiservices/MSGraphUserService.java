@@ -7,6 +7,7 @@ package com.microsoft.office365.msgraphapiservices;
 import com.microsoft.office365.microsoftgraphvos.UserVO;
 
 import retrofit.Callback;
+import retrofit.client.Response;
 import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.POST;
@@ -16,39 +17,36 @@ import retrofit.http.Query;
 public interface MSGraphUserService {
 
     /**
-     *
-     * @param version The version of the API to use (beta, v1, etc...)
-     * @param filter An expression specifying criteria for which set of results should be returned
+     * @param version  The version of the API to use (beta, v1, etc...)
+     * @param filter   An expression specifying criteria for which set of results should be returned
      * @param callback will be called with results of REST operation
      */
     @GET("/{version}/myOrganization/users")
     void getFilteredUsers(
             @Path("version") String version,
             @Query("$filter") String filter,
-            Callback<Void> callback
+            Callback<Response> callback
     );
 
     /**
-     *
-     * @param version The version of the API to use (beta, v1, etc...)
+     * @param version  The version of the API to use (beta, v1, etc...)
      * @param callback will be called with results of REST operation
      */
     @GET("/{version}/myOrganization/users")
     void getUsers(
             @Path("version") String version,
-            Callback<Void> callback
+            Callback<Response> callback
     );
 
     /**
-     *
-     * @param version The version of the API to use (beta, v1, etc...)
-     * @param body JSON describing properties of the new user
+     * @param version  The version of the API to use (beta, v1, etc...)
+     * @param body     JSON describing properties of the new user
      * @param callback will be called with results of REST operation
      */
     @POST("/{version}/myOrganization/users")
     void createNewUser(
             @Path("version") String version,
             @Body UserVO body,
-            Callback<Void> callback
+            Callback<Response> callback
     );
 }

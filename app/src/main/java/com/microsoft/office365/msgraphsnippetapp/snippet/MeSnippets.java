@@ -9,6 +9,7 @@ import com.microsoft.office365.msgraphsnippetapp.R;
 import com.microsoft.office365.msgraphsnippetapp.application.SnippetApp;
 
 import retrofit.Callback;
+import retrofit.client.Response;
 
 import static com.microsoft.office365.msgraphsnippetapp.R.array.get_me;
 import static com.microsoft.office365.msgraphsnippetapp.R.array.get_me_direct_reports;
@@ -42,9 +43,9 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<MSGraphMeServic
                  * HTTP GET https://graph.microsoft.com/{version}/me
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/user_get
                  */
-                new MeSnippets<Void>(get_me) {
+                new MeSnippets<Response>(get_me) {
                     @Override
-                    public void request(MSGraphMeService service, Callback<Void> callback) {
+                    public void request(MSGraphMeService service, Callback<Response> callback) {
                         service.getMe(
                                 getVersion(),
                                 callback);
@@ -55,9 +56,9 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<MSGraphMeServic
                  * HTTP GET https://graph.microsoft.com/{version}/me?$select=AboutMe,Responsibilities,Tags
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/resources/user
                  */
-                new MeSnippets<Void>(get_me_responsibilities) {
+                new MeSnippets<Response>(get_me_responsibilities) {
                     @Override
-                    public void request(MSGraphMeService service, Callback<Void> callback) {
+                    public void request(MSGraphMeService service, Callback<Response> callback) {
                         service.getMeResponsibilities(
                                 getVersion(),
                                 SnippetApp.getApp().getString(R.string.meResponsibility),
@@ -69,9 +70,9 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<MSGraphMeServic
                  * HTTP GET https://graph.microsoft.com/{version}/me/manager
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/resources/user
                  */
-                new MeSnippets<Void>(get_me_manager) {
+                new MeSnippets<Response>(get_me_manager) {
                     @Override
-                    public void request(MSGraphMeService service, Callback<Void> callback) {
+                    public void request(MSGraphMeService service, Callback<Response> callback) {
                         service.getMeEntities(
                                 getVersion(),
                                 SnippetApp.getApp().getString(R.string.manager),
@@ -83,9 +84,9 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<MSGraphMeServic
                  * HTTP GET https://graph.microsoft.com/{version}/me/directReports
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/resources/user
                  */
-                new MeSnippets<Void>(get_me_direct_reports) {
+                new MeSnippets<Response>(get_me_direct_reports) {
                     @Override
-                    public void request(MSGraphMeService service, Callback<Void> callback) {
+                    public void request(MSGraphMeService service, Callback<Response> callback) {
                         service.getMeEntities(getVersion(),
                                 SnippetApp.getApp().getString(R.string.directReports),
                                 callback);
@@ -96,9 +97,9 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<MSGraphMeServic
                  * HTTP GET https://graph.microsoft.com/{version}/me/memberOf
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/resources/user
                  */
-                new MeSnippets<Void>(get_me_group_membership) {
+                new MeSnippets<Response>(get_me_group_membership) {
                     @Override
-                    public void request(MSGraphMeService service, Callback<Void> callback) {
+                    public void request(MSGraphMeService service, Callback<Response> callback) {
                         service.getMeEntities(
                                 getVersion(),
                                 SnippetApp.getApp().getString(R.string.memberOf),
@@ -110,9 +111,9 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<MSGraphMeServic
                  * HTTP GET https://graph.microsoft.com/{version}/me/userPhoto
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/resources/user
                  */
-                new MeSnippets<Void>(get_me_photo) {
+                new MeSnippets<Response>(get_me_photo) {
                     @Override
-                    public void request(MSGraphMeService service, Callback<Void> callback) {
+                    public void request(MSGraphMeService service, Callback<Response> callback) {
                         service.getMeEntities(
                                 getVersion(),
                                 SnippetApp.getApp().getString(R.string.userPhoto),

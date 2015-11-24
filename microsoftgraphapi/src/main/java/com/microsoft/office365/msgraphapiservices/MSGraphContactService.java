@@ -5,6 +5,7 @@
 package com.microsoft.office365.msgraphapiservices;
 
 import retrofit.Callback;
+import retrofit.client.Response;
 import retrofit.http.GET;
 import retrofit.http.Path;
 
@@ -19,7 +20,7 @@ public interface MSGraphContactService {
     @GET("/{version}/myOrganization/contacts")
     void getContacts(
             @Path("version") String version,
-            Callback<Void> callback
+            Callback<Response> callback
     );
 
 }
