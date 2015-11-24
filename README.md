@@ -2,7 +2,6 @@
 
 **Table of contents**
 
-* [Change History](#change-history)
 * [Device requirement](#device-requirement)
 * [Prerequisites](#prerequisites)
 * [Azure client application registration](#azure-client-application-registration)
@@ -20,60 +19,56 @@ You can explore the following operations for Office 365:
 
 **Me**
 
-* [Get information about the signed in user.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/MeSnippets.java#L43)
-* [Get the user's responsibilities.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/MeSnippets.java#L55)
-* [Get the user's manager.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/MeSnippets.java#L68)
-* [Get the user's direct reports.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/MeSnippets.java#L81)
-* [Get the user's photo.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/MeSnippets.java#L107)
-* [Get the groups the user is a member of.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/MeSnippets.java#L94)
+* [Get information about the signed in user.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/MeSnippets.java#L46)
+* [Get the user's responsibilities.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/MeSnippets.java#L59)
+* [Get the user's manager.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/MeSnippets.java#L73)
+* [Get the user's direct reports.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/MeSnippets.java#L87)
+* [Get the user's photo.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/MeSnippets.java#L114)
+* [Get the groups the user is a member of.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/MeSnippets.java#L100)
 
 **Users**
 
-* [Get users from your tenant's directory.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/UsersSnippets.java#L40)
-* [Get users filtered by criteria from your tenant's directory.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/UsersSnippets.java#L54)
-* [Create a new user.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/UsersSnippets.java#L68)
+* [Get users from your tenant's directory.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/UsersSnippets.java#L45)
+* [Get users filtered by criteria from your tenant's directory.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/UsersSnippets.java#L59)
+* [Create a new user.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/UsersSnippets.java#L76)
 
 **Events**
 
-* [Get the signed-in user's events from Office 365.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/EventsSnippets.java#L53)
-* [Create a new event for the user.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/EventsSnippets.java#L68)
-* [Update a user's event.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/EventsSnippets.java#L94)
-* [Delete a user's event.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/EventsSnippets.java#L145)
+* [Get the signed-in user's events from Office 365.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/EventsSnippets.java#L50)
+* [Create a new event for the user.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/EventsSnippets.java#L65)
+* [Update a user's event.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/EventsSnippets.java#L80)
+* [Delete a user's event.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/EventsSnippets.java#L118)
 
 **Messages**
 
-* [Get user's messages from Office 365.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/MessageSnippets.java#L46)
-* [Send a message from the user.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/MessageSnippets.java#L58)
+* [Get user's messages from Office 365.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/MessageSnippets.java#L50)
+* [Send a message from the user.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/MessageSnippets.java#L63)
 
 **Contacts**
 
-* [Get all contacts in the tenant.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/ContactsSnippets.java#L37)
+* [Get all contacts in the tenant.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/ContactsSnippets.java#L36)
 
 **Groups**
 
-* [Get all groups in your tenant's directory.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/GroupsSnippets.java#L138)
-* [Create a new security group.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/GroupsSnippets.java#L152)
-* [Get information about a specific group in the tenant.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/GroupsSnippets.java#L55)
-* [Update the description of a group.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/GroupsSnippets.java#L167)
-* [Delete a group.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/GroupsSnippets.java#L197)
-* [Get a group's members.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/GroupsSnippets.java#L84)
-* [Get a group's owners.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/GroupsSnippets.java#L113)
+* [Get all groups in your tenant's directory.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/GroupsSnippets.java#L123)
+* [Create a new group.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/GroupsSnippets.java#L135)
+* [Get information about a specific group in the tenant.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/GroupsSnippets.java#L47)
+* [Update the description of a group.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/GroupsSnippets.java#L148)
+* [Delete a group.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/GroupsSnippets.java#L181)
+* [Get a group's members.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/GroupsSnippets.java#L70)
+* [Get a group's owners.](app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/GroupsSnippets.java#L97)
 
 **Drives**
 
-* [Gets the signed-in user's drive.](/app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/DrivesSnippets.java#L52)
-* [Gets  all of the drives in your tenant.](/app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/DrivesSnippets.java#L65)
-* [Gets all of the files in the user's root folder.](/app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/DrivesSnippets.java#L78)
-* [Creates a new file in the user's root folder.](/app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/DrivesSnippets.java#L90)
-* [Downloads a file from the user's root folder.](/app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/DrivesSnippets.java#L103)
-* [Updates the contents of a file in the user's root folder.](/app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/DrivesSnippets.java#L139)
-* [Deletes a file in the user's root folder.](/app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/DrivesSnippets.java#L182)
-* [Renames a file in the user's root folder.](/app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/DrivesSnippets.java#L219)
-* [Creates a folder under the user's root folder.](/app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/DrivesSnippets.java#L267)
-
-##Change History
-September 2015
-* Initial release
+* [Gets the signed-in user's drive.](/app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/DrivesSnippets.java#L53)
+* [Gets all of the drives in your tenant.](/app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/DrivesSnippets.java#L65)
+* [Gets all of the files in the user's root folder.](/app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/DrivesSnippets.java#L77)
+* [Creates a new file in the user's root folder.](/app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/DrivesSnippets.java#L91)
+* [Downloads a file from the user's root folder.](/app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/DrivesSnippets.java#L108)
+* [Updates the contents of a file in the user's root folder.](/app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/DrivesSnippets.java#L142)
+* [Deletes a file in the user's root folder.](/app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/DrivesSnippets.java#L177)
+* [Renames a file in the user's root folder.](/app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/DrivesSnippets.java#L211)
+* [Creates a folder under the user's root folder.](/app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/DrivesSnippets.java#L252)
 
 ##Device requirement
 To run the Microsoft Graph API REST snippets project, your device must meet the following requirement:
