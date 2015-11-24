@@ -4,13 +4,21 @@
  */
 package com.microsoft.office365.msgraphsnippetapp.snippet;
 
+import android.content.SharedPreferences;
+
+import com.microsoft.office365.microsoftgraphvos.PasswordProfileVO;
+import com.microsoft.office365.microsoftgraphvos.UserVO;
 import com.microsoft.office365.msgraphapiservices.MSGraphUserService;
+import com.microsoft.office365.msgraphsnippetapp.util.SharedPrefsUtil;
+
+import java.util.UUID;
 
 import retrofit.Callback;
 
 import static com.microsoft.office365.msgraphsnippetapp.R.array.get_organization_filtered_users;
 import static com.microsoft.office365.msgraphsnippetapp.R.array.get_organization_users;
 import static com.microsoft.office365.msgraphsnippetapp.R.array.insert_organization_user;
+import static com.microsoft.office365.msgraphsnippetapp.util.SharedPrefsUtil.PREF_USER_TENANT;
 
 public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserService, Result> {
 
@@ -24,7 +32,7 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserS
                 new UsersSnippets(null) {
 
                     @Override
-                    public void request(MSGraphUserService o, Callback callback) {
+                    public void request(MSGraphUserService msGraphUserService, Callback callback) {
                     }
                 },
 
@@ -36,9 +44,9 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserS
                 new UsersSnippets<Void>(get_organization_users) {
                     @Override
                     public void request(
-                            MSGraphUserService MSGraphUserService,
+                            MSGraphUserService msGraphUserService,
                             Callback<Void> callback) {
-                        MSGraphUserService.getUsers(getVersion(), callback);
+                        msGraphUserService.getUsers(getVersion(), callback);
                     }
                 },
 
@@ -50,9 +58,9 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserS
                 new UsersSnippets<Void>(get_organization_filtered_users) {
                     @Override
                     public void request(
-                            MSGraphUserService MSGraphUserService,
+                            MSGraphUserService msGraphUserService,
                             Callback<Void> callback) {
-                        MSGraphUserService.getFilteredUsers(getVersion(), "country eq 'United States'", callback);
+                        msGraphUserService.getFilteredUsers(getVersion(), "country eq 'United States'", callback);
                     }
                 },
 
@@ -64,13 +72,34 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserS
                 new UsersSnippets<Void>(insert_organization_user) {
                     @Override
                     public void request(
-                            MSGraphUserService MSGraphUserService,
+                            MSGraphUserService msGraphUserService,
                             Callback<Void> callback) {
-                        // TODO implement
+                        //Use a random UUID for the user name
+                        String randomUserName = UUID.randomUUID().toString();
+
+                        // create the user
+                        UserVO user = new UserVO();
+                        user.accountEnabled = true;
+                        user.displayName = "SAMPLE " + randomUserName;
+                        user.mailNickname = randomUserName;
+
+                        // get the tenant from preferences
+                        SharedPreferences prefs = SharedPrefsUtil.getSharedPreferences();
+                        String tenant = prefs.getString(PREF_USER_TENANT, "");
+                        user.userPrincipalName = randomUserName + "@" + tenant;
+
+                        // initialize a password & say whether or not the user must change it
+                        PasswordProfileVO password = new PasswordProfileVO();
+                        password.password = UUID.randomUUID().toString().substring(0, 16);
+                        password.forceChangePasswordNextSignIn = false;
+
+                        user.passwordProfile = password;
+
+                        msGraphUserService.createNewUser(getVersion(), user, callback);
                     }
                 }
         };
     }
 
-    public abstract void request(MSGraphUserService MSGraphUserService, Callback<Result> callback);
+    public abstract void request(MSGraphUserService msGraphUserService, Callback<Result> callback);
 }

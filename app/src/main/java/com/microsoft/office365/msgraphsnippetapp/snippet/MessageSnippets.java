@@ -4,7 +4,7 @@
  */
 package com.microsoft.office365.msgraphsnippetapp.snippet;
 
-import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.microsoft.office365.microsoftgraphvos.EmailAddressVO;
 import com.microsoft.office365.microsoftgraphvos.ItemBodyVO;
@@ -14,7 +14,6 @@ import com.microsoft.office365.microsoftgraphvos.RecipientVO;
 import com.microsoft.office365.msgraphapiservices.MSGraphMailService;
 import com.microsoft.office365.msgraphsnippetapp.R;
 import com.microsoft.office365.msgraphsnippetapp.application.SnippetApp;
-import com.microsoft.office365.msgraphsnippetapp.inject.AppModule;
 import com.microsoft.office365.msgraphsnippetapp.util.SharedPrefsUtil;
 
 import retrofit.Callback;
@@ -64,13 +63,19 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<MSGraphMai
                 new MessageSnippets<Response>(send_an_email_message) {
                     @Override
                     public void request(MSGraphMailService service, Callback<Response> callback) {
-                        service.createNewMail(
-                                getVersion(),
-                                createMessage(SnippetApp.getApp().getString(R.string.mailSubject),
-                                        SnippetApp.getApp().getString(R.string.mailBody),
-                                        SnippetApp.getApp().getSharedPreferences(AppModule.PREFS,
-                                                Context.MODE_PRIVATE).getString(SharedPrefsUtil.PREF_USER_ID, "")),
-                                callback);
+                        SnippetApp app = SnippetApp.getApp();
+                        SharedPreferences prefs = SharedPrefsUtil.getSharedPreferences();
+
+                        // load the contents
+                        String subject = app.getString(R.string.mailSubject);
+                        String body = app.getString(R.string.mailBody);
+                        String recipient = prefs.getString(SharedPrefsUtil.PREF_USER_ID, "");
+
+                        // make it
+                        MessageWrapperVO msgWrapper = createMessage(subject, body, recipient);
+
+                        // send it
+                        service.createNewMail(getVersion(), msgWrapper, callback);
                     }
                 }
         };
