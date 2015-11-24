@@ -2,11 +2,9 @@ package com.microsoft.office365.microsoftgraphvos;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ItemVO {
+public class DriveItemVO extends BaseVO{
 
     public String name;
-
-    public String id;
 
     @SerializedName("@name.conflictBehavior")
     public String conflictBehavior;

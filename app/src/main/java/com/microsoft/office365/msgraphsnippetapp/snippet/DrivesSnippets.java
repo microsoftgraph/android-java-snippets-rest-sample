@@ -5,8 +5,8 @@
 package com.microsoft.office365.msgraphsnippetapp.snippet;
 
 import com.microsoft.office365.microsoftgraphvos.BaseVO;
+import com.microsoft.office365.microsoftgraphvos.DriveItemVO;
 import com.microsoft.office365.microsoftgraphvos.FolderVO;
-import com.microsoft.office365.microsoftgraphvos.ItemVO;
 import com.microsoft.office365.msgraphapiservices.MSGraphDrivesService;
 
 import java.util.UUID;
@@ -93,8 +93,6 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                     public void request(final MSGraphDrivesService msGraphDrivesService,
                                         final Callback<BaseVO> callback) {
                         //Create a new file under root
-                        //TypedString fileContents = new TypedString("file contents");
-                        String fileContents = "file contents";
                         msGraphDrivesService.putNewFile(
                                 getVersion(),
                                 UUID.randomUUID().toString(),
@@ -113,6 +111,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                     public void request(
                             final MSGraphDrivesService msGraphDrivesService,
                             final Callback<Response> callback) {
+                        // create a new file to download
                         msGraphDrivesService.putNewFile(getVersion(),
                                 UUID.randomUUID().toString(),
                                 fileContents,
@@ -120,7 +119,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
 
                                     @Override
                                     public void success(BaseVO file, Response response) {
-                                        //download the file we created
+                                        // download the file we created
                                         msGraphDrivesService.downloadFile(
                                                 getVersion(),
                                                 file.id,
@@ -129,7 +128,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
 
                                     @Override
                                     public void failure(RetrofitError error) {
-                                        //pass along error to original callback
+                                        // pass along error to original callback
                                         callback.failure(error);
                                     }
                                 });
@@ -223,7 +222,10 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
 
                                     @Override
                                     public void success(BaseVO file, Response response) {
-                                        ItemVO delta = new ItemVO();
+                                        // create a new item
+                                        DriveItemVO delta = new DriveItemVO();
+
+                                        // give it a random name
                                         delta.name = UUID.randomUUID().toString();
 
                                         //download the file we created
@@ -253,10 +255,17 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                     public void request(
                             final MSGraphDrivesService msGraphDrivesService,
                             final Callback<Response> callback) {
-                        ItemVO folder = new ItemVO();
+                        // create a new driveitem
+                        DriveItemVO folder = new DriveItemVO();
+                        // give it a random name
                         folder.name = UUID.randomUUID().toString();
+                        // set the folder
                         folder.folder = new FolderVO();
+                        // set the conflict resolution behavior for actions that create
+                        // a new item
                         folder.conflictBehavior = "rename";
+
+                        // actually create the folder
                         msGraphDrivesService.createFolder(getVersion(), folder, callback);
                     }
                 }

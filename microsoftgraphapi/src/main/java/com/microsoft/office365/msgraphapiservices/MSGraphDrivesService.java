@@ -5,7 +5,7 @@
 package com.microsoft.office365.msgraphapiservices;
 
 import com.microsoft.office365.microsoftgraphvos.BaseVO;
-import com.microsoft.office365.microsoftgraphvos.ItemVO;
+import com.microsoft.office365.microsoftgraphvos.DriveItemVO;
 
 import retrofit.Callback;
 import retrofit.client.Response;
@@ -16,7 +16,6 @@ import retrofit.http.PATCH;
 import retrofit.http.POST;
 import retrofit.http.PUT;
 import retrofit.http.Path;
-import retrofit.mime.TypedString;
 
 public interface MSGraphDrivesService {
 
@@ -86,14 +85,14 @@ public interface MSGraphDrivesService {
     void renameFile(
             @Path("version") String version,
             @Path("fileId") String fileId,
-            @Body ItemVO body,
+            @Body DriveItemVO body,
             Callback<BaseVO> callback
     );
 
     @POST("/{version}/me/drive/root/children")
     void createFolder(
             @Path("version") String version,
-            @Body ItemVO body,
+            @Body DriveItemVO body,
             Callback<Response> callback
     );
 }
