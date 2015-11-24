@@ -1,8 +1,7 @@
 package com.microsoft.office365.microsoftgraphvos;
 
-public class EventVO {
+public class EventVO extends BaseVO {
 
-    public String id;
     public String subject;
     public ItemBodyVO body;
     public DateTimeTimeZoneVO start;
