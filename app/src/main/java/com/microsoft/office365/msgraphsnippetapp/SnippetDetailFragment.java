@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license.
+ * See LICENSE in the project root for license information.
+ */
 package com.microsoft.office365.msgraphsnippetapp;
 
 import android.annotation.TargetApi;
@@ -61,9 +65,6 @@ import static com.microsoft.office365.msgraphsnippetapp.R.string.req_url;
 import static com.microsoft.office365.msgraphsnippetapp.R.string.response_body;
 import static com.microsoft.office365.msgraphsnippetapp.R.string.response_headers;
 
-/**
- * A placeholder fragment containing a simple view.
- */
 public class SnippetDetailFragment<T, Result>
         extends BaseFragment implements Callback<Result> {
 
@@ -359,7 +360,7 @@ public class SnippetDetailFragment<T, Result>
 
     @Override
     public void failure(RetrofitError error) {
-        Timber.d(error, "");
+        Timber.e(error, "");
         mProgressbar.setVisibility(GONE);
         if (null != error.getResponse()) {
             displayResponse(error.getResponse());

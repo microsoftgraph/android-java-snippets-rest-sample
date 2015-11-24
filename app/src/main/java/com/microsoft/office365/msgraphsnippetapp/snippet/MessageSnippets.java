@@ -1,20 +1,23 @@
 /*
-*  Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
-*/
+ * Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license.
+ * See LICENSE in the project root for license information.
+ */
 package com.microsoft.office365.msgraphsnippetapp.snippet;
 
+import android.content.SharedPreferences;
 
-import android.content.Context;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.microsoft.office365.microsoftgraphvos.EmailAddressVO;
+import com.microsoft.office365.microsoftgraphvos.ItemBodyVO;
+import com.microsoft.office365.microsoftgraphvos.MessageVO;
+import com.microsoft.office365.microsoftgraphvos.MessageWrapperVO;
+import com.microsoft.office365.microsoftgraphvos.RecipientVO;
 import com.microsoft.office365.msgraphapiservices.MSGraphMailService;
 import com.microsoft.office365.msgraphsnippetapp.R;
 import com.microsoft.office365.msgraphsnippetapp.application.SnippetApp;
-import com.microsoft.office365.msgraphsnippetapp.inject.AppModule;
 import com.microsoft.office365.msgraphsnippetapp.util.SharedPrefsUtil;
 
-import retrofit.mime.TypedString;
+import retrofit.Callback;
+import retrofit.client.Response;
 
 import static com.microsoft.office365.msgraphsnippetapp.R.array.get_user_messages;
 import static com.microsoft.office365.msgraphsnippetapp.R.array.send_an_email_message;
@@ -34,7 +37,7 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<MSGraphMai
                 // Marker element
                 new MessageSnippets(null) {
                     @Override
-                    public void request(MSGraphMailService service, retrofit.Callback callback) {
+                    public void request(MSGraphMailService service, Callback callback) {
                         // Not implemented
                     }
                 },
@@ -44,9 +47,9 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<MSGraphMai
                  * HTTP GET https://graph.microsoft.com/{version}/me/messages
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/user_list_messages
                  */
-                new MessageSnippets<Void>(get_user_messages) {
+                new MessageSnippets<Response>(get_user_messages) {
                     @Override
-                    public void request(MSGraphMailService service, retrofit.Callback<Void> callback) {
+                    public void request(MSGraphMailService service, Callback<Response> callback) {
                         service.getMail(
                                 getVersion(),
                                 callback);
@@ -57,86 +60,66 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<MSGraphMai
                  * HTTP POST https://graph.microsoft.com/{version}/me/messages/sendMail
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/user_post_messages
                  */
-                new MessageSnippets<Void>(send_an_email_message) {
+                new MessageSnippets<Response>(send_an_email_message) {
                     @Override
-                    public void request(MSGraphMailService service, retrofit.Callback<Void> callback) {
-                        service.createNewMail(
-                                getVersion(),
-                                createMailPayload(
-                                        SnippetApp.getApp().getString(R.string.mailSubject),
-                                        SnippetApp.getApp().getString(R.string.mailBody),
-                                        SnippetApp.getApp().getSharedPreferences(AppModule.PREFS,
-                                                Context.MODE_PRIVATE).getString(SharedPrefsUtil.PREF_USER_ID, "")),
-                                callback);
+                    public void request(MSGraphMailService service, Callback<Response> callback) {
+                        // Get a context so we can interrogate Resources & SharedPreferences
+                        SnippetApp app = SnippetApp.getApp();
+                        SharedPreferences prefs = SharedPrefsUtil.getSharedPreferences();
+
+                        // load the contents
+                        String subject = app.getString(R.string.mailSubject);
+                        String body = app.getString(R.string.mailBody);
+                        String recipient = prefs.getString(SharedPrefsUtil.PREF_USER_ID, "");
+
+                        // make it
+                        MessageWrapperVO msgWrapper = createMessage(subject, body, recipient);
+
+                        // send it
+                        service.createNewMail(getVersion(), msgWrapper, callback);
                     }
                 }
         };
     }
 
     @Override
-    public abstract void request(MSGraphMailService service, retrofit.Callback<Result> callback);
+    public abstract void request(MSGraphMailService service, Callback<Result> callback);
 
-    protected TypedString createMailPayload(
-            String subject,
-            String body,
-            String address) {
-        JsonObject jsonObject_Body = new JsonObject();
-        jsonObject_Body.addProperty("ContentType", "Text");
-        jsonObject_Body.addProperty("Content", body);
+    private static MessageWrapperVO createMessage(
+            String msgSubject,
+            String msgBody,
+            String... msgRecipients) {
+        MessageVO msg = new MessageVO();
 
-        JsonObject jsonObject_ToAddress = new JsonObject();
-        jsonObject_ToAddress.addProperty("Address", address);
-
-        JsonObject jsonObject_ToRecipient = new JsonObject();
-        jsonObject_ToRecipient.add("EmailAddress", jsonObject_ToAddress);
-
-        JsonArray toRecipients = new JsonArray();
-        toRecipients.add(jsonObject_ToRecipient);
-
-
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.addProperty("Subject", subject);
-        jsonObject.add("Body", jsonObject_Body);
-        jsonObject.add("ToRecipients", toRecipients);
-
-        JsonObject messageObject = new JsonObject();
-        messageObject.add("Message", jsonObject);
-        messageObject.addProperty("SaveToSentItems", true);
-        return new TypedString(messageObject.toString()) {
-            @Override
-            public String mimeType() {
-                return "application/json";
+        // add the recipient
+        RecipientVO recipient;
+        for (int ii = 0; ii < msgRecipients.length; ii++) {
+            // if the recipient array does not exist, new one up
+            if (null == msg.toRecipients) {
+                msg.toRecipients = new RecipientVO[msgRecipients.length];
             }
-        };
+            // allocate a new recipient
+            recipient = new RecipientVO();
+            // give them an email address
+            recipient.emailAddress = new EmailAddressVO();
+            // set that address to be the currently iterated-upon recipient string
+            recipient.emailAddress.address = msgRecipients[ii];
+            // add it to the array at the position
+            msg.toRecipients[ii] = recipient;
+        }
+
+        // set the subject
+        msg.subject = msgSubject;
+
+        // create the body
+        ItemBodyVO body = new ItemBodyVO();
+        body.contentType = ItemBodyVO.CONTENT_TYPE_TEXT;
+        body.content = msgBody;
+        msg.body = body;
+
+        MessageWrapperVO wrapper = new MessageWrapperVO();
+        wrapper.message = msg;
+        wrapper.saveToSentItems = true;
+        return wrapper;
     }
-
-
 }
-// *********************************************************
-//
-// O365-Android-Microsoft-Graph-Snippets, https://github.com/OfficeDev/O365-Android-Microsoft-Graph-Snippets
-//
-// Copyright (c) Microsoft Corporation
-// All rights reserved.
-//
-// MIT License:
-// Permission is hereby granted, free of charge, to any person obtaining
-// a copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to
-// permit persons to whom the Software is furnished to do so, subject to
-// the following conditions:
-//
-// The above copyright notice and this permission notice shall be
-// included in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-//
-// *********************************************************

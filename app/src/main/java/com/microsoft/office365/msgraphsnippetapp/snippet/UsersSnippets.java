@@ -1,20 +1,25 @@
 /*
-*  Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
-*/
+ * Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license.
+ * See LICENSE in the project root for license information.
+ */
 package com.microsoft.office365.msgraphsnippetapp.snippet;
 
-import com.google.gson.JsonObject;
+import android.content.SharedPreferences;
+
+import com.microsoft.office365.microsoftgraphvos.PasswordProfileVO;
+import com.microsoft.office365.microsoftgraphvos.UserVO;
 import com.microsoft.office365.msgraphapiservices.MSGraphUserService;
 import com.microsoft.office365.msgraphsnippetapp.util.SharedPrefsUtil;
 
 import java.util.UUID;
 
-import retrofit.mime.TypedString;
+import retrofit.Callback;
+import retrofit.client.Response;
 
 import static com.microsoft.office365.msgraphsnippetapp.R.array.get_organization_filtered_users;
 import static com.microsoft.office365.msgraphsnippetapp.R.array.get_organization_users;
 import static com.microsoft.office365.msgraphsnippetapp.R.array.insert_organization_user;
-
+import static com.microsoft.office365.msgraphsnippetapp.util.SharedPrefsUtil.PREF_USER_TENANT;
 
 public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserService, Result> {
 
@@ -28,7 +33,7 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserS
                 new UsersSnippets(null) {
 
                     @Override
-                    public void request(MSGraphUserService o, retrofit.Callback callback) {
+                    public void request(MSGraphUserService msGraphUserService, Callback callback) {
                     }
                 },
 
@@ -37,12 +42,12 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserS
                  * HTTP GET https://graph.microsoft.com/{version}/myOrganization/users
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/user_list
                  */
-                new UsersSnippets<Void>(get_organization_users) {
+                new UsersSnippets<Response>(get_organization_users) {
                     @Override
                     public void request(
-                            MSGraphUserService MSGraphUserService,
-                            retrofit.Callback<Void> callback) {
-                        MSGraphUserService.getUsers(getVersion(), callback);
+                            MSGraphUserService msGraphUserService,
+                            Callback<Response> callback) {
+                        msGraphUserService.getUsers(getVersion(), callback);
                     }
                 },
 
@@ -51,12 +56,15 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserS
                  * HTTP GET https://graph.microsoft.com/{version}/myOrganization/users?$filter=country eq \'United States\'
                  * @see http://graph.microsoft.io/docs/overview/query_parameters
                  */
-                new UsersSnippets<Void>(get_organization_filtered_users) {
+                new UsersSnippets<Response>(get_organization_filtered_users) {
                     @Override
                     public void request(
-                            MSGraphUserService MSGraphUserService,
-                            retrofit.Callback<Void> callback) {
-                        MSGraphUserService.getFilteredUsers(getVersion(), "country eq 'United States'", callback);
+                            MSGraphUserService msGraphUserService,
+                            Callback<Response> callback) {
+                        msGraphUserService.getFilteredUsers(
+                                getVersion(),
+                                "country eq 'United States'",
+                                callback);
                     }
                 },
 
@@ -65,73 +73,37 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserS
                  * HTTP POST https://graph.microsoft.com/{version}/myOrganization/users
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/user_post_users
                  */
-                new UsersSnippets<Void>(insert_organization_user) {
+                new UsersSnippets<Response>(insert_organization_user) {
                     @Override
                     public void request(
-                            MSGraphUserService MSGraphUserService,
-                            retrofit.Callback<Void> callback) {
-
-                        //Use a random UUI for the user name
+                            MSGraphUserService msGraphUserService,
+                            Callback<Response> callback) {
+                        //Use a random UUID for the user name
                         String randomUserName = UUID.randomUUID().toString();
 
-                        //create body
-                        JsonObject newUser = new JsonObject();
-                        newUser.addProperty("accountEnabled", true);
-                        newUser.addProperty("displayName", "SAMPLE " + randomUserName);
-                        newUser.addProperty("mailNickname", randomUserName);
-                        String tenant = SharedPrefsUtil.getSharedPreferences().getString(SharedPrefsUtil.PREF_USER_TENANT, "");
-                        newUser.addProperty("userPrincipalName", randomUserName + '@' + tenant);
+                        // create the user
+                        UserVO user = new UserVO();
+                        user.accountEnabled = true;
+                        user.displayName = "SAMPLE " + randomUserName;
+                        user.mailNickname = randomUserName;
 
-                        //create password profile
-                        JsonObject passwordProfile = new JsonObject();
+                        // get the tenant from preferences
+                        SharedPreferences prefs = SharedPrefsUtil.getSharedPreferences();
+                        String tenant = prefs.getString(PREF_USER_TENANT, "");
+                        user.userPrincipalName = randomUserName + "@" + tenant;
 
-                        //Generate random UUID for the password which has 16 character maximum
-                        passwordProfile.addProperty("password", UUID.randomUUID().toString().substring(0, 16));
-                        passwordProfile.addProperty("forceChangePasswordNextLogin", false);
-                        newUser.add("passwordProfile", passwordProfile);
+                        // initialize a password & say whether or not the user must change it
+                        PasswordProfileVO password = new PasswordProfileVO();
+                        password.password = UUID.randomUUID().toString().substring(0, 16);
+                        password.forceChangePasswordNextSignIn = false;
 
-                        TypedString body = new TypedString(newUser.toString()) {
-                            @Override
-                            public String mimeType() {
-                                return "application/json";
-                            }
-                        };
+                        user.passwordProfile = password;
 
-                        //Call service to POST the new user
-                        MSGraphUserService.createNewUser(getVersion(), body, callback);
+                        msGraphUserService.createNewUser(getVersion(), user, callback);
                     }
                 }
         };
     }
 
-    public abstract void request(MSGraphUserService MSGraphUserService, retrofit.Callback<Result> callback);
+    public abstract void request(MSGraphUserService msGraphUserService, Callback<Result> callback);
 }
-
-// *********************************************************
-//
-// O365-Android-Microsoft-Graph-Snippets, https://github.com/OfficeDev/O365-Android-Microsoft-Graph-Snippets
-//
-// Copyright (c) Microsoft Corporation
-// All rights reserved.
-//
-// MIT License:
-// Permission is hereby granted, free of charge, to any person obtaining
-// a copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to
-// permit persons to whom the Software is furnished to do so, subject to
-// the following conditions:
-//
-// The above copyright notice and this permission notice shall be
-// included in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-//
-// *********************************************************

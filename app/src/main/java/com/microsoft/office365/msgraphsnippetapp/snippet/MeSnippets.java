@@ -1,12 +1,15 @@
 /*
-*  Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See full license at the bottom of this file.
-*/
+ * Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license.
+ * See LICENSE in the project root for license information.
+ */
 package com.microsoft.office365.msgraphsnippetapp.snippet;
-
 
 import com.microsoft.office365.msgraphapiservices.MSGraphMeService;
 import com.microsoft.office365.msgraphsnippetapp.R;
 import com.microsoft.office365.msgraphsnippetapp.application.SnippetApp;
+
+import retrofit.Callback;
+import retrofit.client.Response;
 
 import static com.microsoft.office365.msgraphsnippetapp.R.array.get_me;
 import static com.microsoft.office365.msgraphsnippetapp.R.array.get_me_direct_reports;
@@ -14,7 +17,6 @@ import static com.microsoft.office365.msgraphsnippetapp.R.array.get_me_group_mem
 import static com.microsoft.office365.msgraphsnippetapp.R.array.get_me_manager;
 import static com.microsoft.office365.msgraphsnippetapp.R.array.get_me_photo;
 import static com.microsoft.office365.msgraphsnippetapp.R.array.get_me_responsibilities;
-
 
 public abstract class MeSnippets<Result> extends AbstractSnippet<MSGraphMeService, Result> {
     /**
@@ -31,7 +33,7 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<MSGraphMeServic
                 // Marker element
                 new MeSnippets(null) {
                     @Override
-                    public void request(MSGraphMeService service, retrofit.Callback callback) {
+                    public void request(MSGraphMeService service, Callback callback) {
                         // Not implemented
                     }
                 },
@@ -41,9 +43,9 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<MSGraphMeServic
                  * HTTP GET https://graph.microsoft.com/{version}/me
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/user_get
                  */
-                new MeSnippets<Void>(get_me) {
+                new MeSnippets<Response>(get_me) {
                     @Override
-                    public void request(MSGraphMeService service, retrofit.Callback<Void> callback) {
+                    public void request(MSGraphMeService service, Callback<Response> callback) {
                         service.getMe(
                                 getVersion(),
                                 callback);
@@ -54,9 +56,9 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<MSGraphMeServic
                  * HTTP GET https://graph.microsoft.com/{version}/me?$select=AboutMe,Responsibilities,Tags
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/resources/user
                  */
-                new MeSnippets<Void>(get_me_responsibilities) {
+                new MeSnippets<Response>(get_me_responsibilities) {
                     @Override
-                    public void request(MSGraphMeService service, retrofit.Callback<Void> callback) {
+                    public void request(MSGraphMeService service, Callback<Response> callback) {
                         service.getMeResponsibilities(
                                 getVersion(),
                                 SnippetApp.getApp().getString(R.string.meResponsibility),
@@ -68,9 +70,9 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<MSGraphMeServic
                  * HTTP GET https://graph.microsoft.com/{version}/me/manager
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/resources/user
                  */
-                new MeSnippets<Void>(get_me_manager) {
+                new MeSnippets<Response>(get_me_manager) {
                     @Override
-                    public void request(MSGraphMeService service, retrofit.Callback<Void> callback) {
+                    public void request(MSGraphMeService service, Callback<Response> callback) {
                         service.getMeEntities(
                                 getVersion(),
                                 SnippetApp.getApp().getString(R.string.manager),
@@ -82,11 +84,10 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<MSGraphMeServic
                  * HTTP GET https://graph.microsoft.com/{version}/me/directReports
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/resources/user
                  */
-                new MeSnippets<Void>(get_me_direct_reports) {
+                new MeSnippets<Response>(get_me_direct_reports) {
                     @Override
-                    public void request(MSGraphMeService service, retrofit.Callback<Void> callback) {
-                        service.getMeEntities(
-                                getVersion(),
+                    public void request(MSGraphMeService service, Callback<Response> callback) {
+                        service.getMeEntities(getVersion(),
                                 SnippetApp.getApp().getString(R.string.directReports),
                                 callback);
                     }
@@ -96,9 +97,9 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<MSGraphMeServic
                  * HTTP GET https://graph.microsoft.com/{version}/me/memberOf
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/resources/user
                  */
-                new MeSnippets<Void>(get_me_group_membership) {
+                new MeSnippets<Response>(get_me_group_membership) {
                     @Override
-                    public void request(MSGraphMeService service, retrofit.Callback<Void> callback) {
+                    public void request(MSGraphMeService service, Callback<Response> callback) {
                         service.getMeEntities(
                                 getVersion(),
                                 SnippetApp.getApp().getString(R.string.memberOf),
@@ -110,9 +111,9 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<MSGraphMeServic
                  * HTTP GET https://graph.microsoft.com/{version}/me/userPhoto
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/resources/user
                  */
-                new MeSnippets<Void>(get_me_photo) {
+                new MeSnippets<Response>(get_me_photo) {
                     @Override
-                    public void request(MSGraphMeService service, retrofit.Callback<Void> callback) {
+                    public void request(MSGraphMeService service, Callback<Response> callback) {
                         service.getMeEntities(
                                 getVersion(),
                                 SnippetApp.getApp().getString(R.string.userPhoto),
@@ -123,35 +124,6 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<MSGraphMeServic
     }
 
     @Override
-    public abstract void request(MSGraphMeService service, retrofit.Callback<Result> callback);
-
+    public abstract void request(MSGraphMeService service, Callback<Result> callback);
 
 }
-// *********************************************************
-//
-// O365-Android-Microsoft-Graph-Snippets, https://github.com/OfficeDev/O365-Android-Microsoft-Graph-Snippets
-//
-// Copyright (c) Microsoft Corporation
-// All rights reserved.
-//
-// MIT License:
-// Permission is hereby granted, free of charge, to any person obtaining
-// a copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to
-// permit persons to whom the Software is furnished to do so, subject to
-// the following conditions:
-//
-// The above copyright notice and this permission notice shall be
-// included in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-// EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-//
-// *********************************************************

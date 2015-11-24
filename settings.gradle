@@ -1,1 +1,1 @@
-include ':app', ':o365-auth', ':microsoftgraphapi'
+include ':app', ':o365-auth', ':microsoftgraphapi', ':microsoftgraphvos'
