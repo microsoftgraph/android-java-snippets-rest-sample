@@ -35,9 +35,7 @@ public abstract class ContactsSnippets<Result> extends AbstractSnippet<MSGraphCo
                 new ContactsSnippets<Void>(get_all_contacts) {
                     @Override
                     public void request(MSGraphContactService service, Callback<Void> callback) {
-                        service.getContacts(
-                                getVersion(),
-                                callback);
+                        service.getContacts(getVersion(), callback);
                     }
                 }
         };
