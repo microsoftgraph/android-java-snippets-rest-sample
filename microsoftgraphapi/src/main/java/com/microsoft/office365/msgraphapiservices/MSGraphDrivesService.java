@@ -52,14 +52,6 @@ public interface MSGraphDrivesService {
             Callback<Response> callback
     );
 
-    /**
-     * Creates a new file under the root folder
-     *
-     * @param version
-     * @param filename
-     * @param value
-     * @param callback
-     */
     @PUT("/{version}/me/drive/root/children/{filename}/content")
     void putNewFile(
             @Path("version") String version,
@@ -68,13 +60,6 @@ public interface MSGraphDrivesService {
             Callback<BaseVO> callback
     );
 
-    /**
-     * Downloads the content of a file from a user root folder
-     *
-     * @param version
-     * @param filename
-     * @param callback
-     */
     @GET("/{version}/me/drive/items/{filename}/content")
     void downloadFile(
             @Path("version") String version,
@@ -82,14 +67,6 @@ public interface MSGraphDrivesService {
             Callback<Response> callback
     );
 
-    /**
-     * Updates the contents of a file owned by the signed in user
-     *
-     * @param version
-     * @param fileId
-     * @param value
-     * @param callback
-     */
     @PUT("/{version}/me/drive/items/{fileId}/content")
     void updateFile(
             @Path("version") String version,
@@ -98,13 +75,6 @@ public interface MSGraphDrivesService {
             Callback<BaseVO> callback
     );
 
-    /**
-     * Deletes a file by file id
-     *
-     * @param version
-     * @param fileId
-     * @param callback
-     */
     @DELETE("/{version}/me/drive/items/{fileId}/")
     void deleteFile(
             @Path("version") String version,
@@ -112,14 +82,6 @@ public interface MSGraphDrivesService {
             Callback<BaseVO> callback
     );
 
-    /**
-     * Rename the specified file
-     *
-     * @param version
-     * @param fileId
-     * @param body
-     * @param callback
-     */
     @PATCH("/{version}/me/drive/items/{fileId}/")
     void renameFile(
             @Path("version") String version,
@@ -128,13 +90,6 @@ public interface MSGraphDrivesService {
             Callback<BaseVO> callback
     );
 
-    /**
-     * Create a folder under user root folder
-     *
-     * @param version
-     * @param body
-     * @param callback
-     */
     @POST("/{version}/me/drive/root/children")
     void createFolder(
             @Path("version") String version,
