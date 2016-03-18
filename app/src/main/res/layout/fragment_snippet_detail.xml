@@ -31,7 +31,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:enabled="false"
                 android:text="@string/run" />
         </LinearLayout>
 
@@ -46,12 +45,6 @@
             android:visibility="gone" />
 
         <!-- Spinner with Page, Notebook, or Section chooser-->
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:visibility="gone" />
 
         <EditText
             android:id="@+id/txt_input"
@@ -108,11 +101,11 @@
             <TextView
                 android:id="@+id/txt_status_code"
                 android:layout_width="wrap_content"
-                android:freezesText="true"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="5dp"
                 android:layout_marginStart="5dp"
+                android:freezesText="true"
                 android:gravity="center_vertical" />
 
             <!-- The HTTP status color -->

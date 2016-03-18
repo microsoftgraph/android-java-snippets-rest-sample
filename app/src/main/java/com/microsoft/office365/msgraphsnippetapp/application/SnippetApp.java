@@ -26,6 +26,7 @@ public class SnippetApp extends Application {
      * @see javax.inject.Singleton
      */
     public ObjectGraph mObjectGraph;
+
     @Inject
     protected String endpoint;
 
