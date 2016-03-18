@@ -46,6 +46,10 @@ import timber.log.Timber;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static com.microsoft.office365.msgraphsnippetapp.R.color.code_1xx;
+import static com.microsoft.office365.msgraphsnippetapp.R.color.code_3xx;
+import static com.microsoft.office365.msgraphsnippetapp.R.color.code_4xx;
+import static com.microsoft.office365.msgraphsnippetapp.R.color.transparent;
 import static com.microsoft.office365.msgraphsnippetapp.R.id.btn_run;
 import static com.microsoft.office365.msgraphsnippetapp.R.id.progressbar;
 import static com.microsoft.office365.msgraphsnippetapp.R.id.txt_desc;
@@ -134,26 +138,46 @@ public class SnippetDetailFragment<T, Result>
     //
     @OnClick(txt_request_url)
     public void onRequestUrlClicked(TextView tv) {
+        // copy to clip
         clipboard(tv);
     }
 
     @OnClick(txt_response_headers)
     public void onResponseHeadersClicked(TextView tv) {
+        // copy to clip
         clipboard(tv);
     }
 
     @OnClick(txt_response_body)
     public void onResponseBodyClicked(TextView tv) {
+        // copy to clip
         clipboard(tv);
     }
 
     @OnClick(btn_run)
     public void onRunClicked(Button btn) {
+        // disable the button while the snippet is running
+        mRunButton.setEnabled(false);
+
+        // clear the old request url
         mRequestUrl.setText("");
+
+        // clear any old headers
         mResponseHeaders.setText("");
+
+        // clear any old response body
         mResponseBody.setText("");
-        displayStatusCode("", getResources().getColor(R.color.transparent));
+
+        // reset the status 'stoplight'
+        displayStatusCode("",
+                getResources()
+                        .getColor(transparent)
+        );
+
+        // show the indeterminate spinner
         mProgressbar.setVisibility(VISIBLE);
+
+        // actually make the request
         mItem.request(mItem.mService, this);
     }
 
@@ -218,6 +242,7 @@ public class SnippetDetailFragment<T, Result>
             // the user has left...
             return;
         }
+        mRunButton.setEnabled(true);
         mProgressbar.setVisibility(GONE);
         displayResponse(response);
     }
@@ -225,6 +250,7 @@ public class SnippetDetailFragment<T, Result>
     @Override
     public void failure(RetrofitError error) {
         Timber.e(error, "");
+        mRunButton.setEnabled(true);
         mProgressbar.setVisibility(GONE);
         if (null != error.getResponse()) {
             displayResponse(error.getResponse());
@@ -347,17 +373,17 @@ public class SnippetDetailFragment<T, Result>
         switch (response.getStatus() / 100) {
             case 1:
             case 2:
-                color = R.color.code_1xx;
+                color = code_1xx;
                 break;
             case 3:
-                color = R.color.code_3xx;
+                color = code_3xx;
                 break;
             case 4:
             case 5:
-                color = R.color.code_4xx;
+                color = code_4xx;
                 break;
             default:
-                color = R.color.transparent;
+                color = transparent;
         }
         return color;
     }
