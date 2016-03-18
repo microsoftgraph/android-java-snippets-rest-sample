@@ -79,11 +79,7 @@ public class SignInActivity
         final int at = userDisplayableId.indexOf("@");
 
         // parse-out the tenant
-        final String tenant =
-                authenticationResult
-                        .getUserInfo()
-                        .getDisplayableId()
-                        .substring(at + 1);
+        final String tenant = userDisplayableId.substring(at + 1);
 
         SharedPrefsUtil.persistUserTenant(tenant);
         SharedPrefsUtil.persistUserID(authenticationResult);
