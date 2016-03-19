@@ -4,7 +4,6 @@
  */
 package com.microsoft.office365.msgraphsnippetapp.snippet;
 
-import com.microsoft.office365.msgraphapiservices.MSGraphContactService;
 import com.microsoft.office365.msgraphsnippetapp.application.SnippetApp;
 
 import retrofit.Callback;
@@ -13,7 +12,6 @@ import static com.microsoft.office365.msgraphsnippetapp.R.string.beta;
 
 public abstract class AbstractSnippet<Service, Result> {
 
-    public static final Services sServices = new Services();
     private static final int mNameIndex = 0;
     private static final int mDescIndex = 1;
     private static final int mUrlIndex = 2;
@@ -74,12 +72,6 @@ public abstract class AbstractSnippet<Service, Result> {
         }
     }
 
-    @SuppressWarnings("unused")
-    public void setUp(Services services, retrofit.Callback<String[]> callback) {
-        // Optional method....
-        callback.success(new String[]{}, null);
-    }
-
     /**
      * Returns the version segment of the endpoint url with input from
      * XML snippet description
@@ -112,14 +104,5 @@ public abstract class AbstractSnippet<Service, Result> {
     }
 
     public abstract void request(Service service, Callback<Result> callback);
-
-    protected static class Services {
-
-        public final MSGraphContactService mMSGraphContactService;
-
-        Services() {
-            mMSGraphContactService = SnippetCategory.contactSnippetCategory.mService;
-        }
-    }
 
 }
