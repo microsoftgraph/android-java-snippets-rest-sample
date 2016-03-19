@@ -261,23 +261,40 @@ public class SnippetDetailFragment<T, Result>
     // Private methods
     //
     private void clipboard(TextView tv) {
+        // which view are we copying to the clipboard?
         int which;
+
         switch (tv.getId()) {
-            case txt_request_url:
+            case txt_request_url: // the url field
                 which = req_url;
                 break;
-            case txt_response_headers:
+
+            case txt_response_headers: // the display headers
                 which = response_headers;
                 break;
-            case txt_response_body:
+
+            case txt_response_body: // the response body
                 which = response_body;
                 break;
+
             default:
-                which = UNSET;
+                which = UNSET; // don't assign a prefix
         }
+
+        // if we know which view we're copying, prefix it with useful info
         String what = which == UNSET ? "" : getString(which) + " ";
+
+        // concat the clipboard data to this String
         what += getString(clippy);
-        Toast.makeText(getActivity(), what, Toast.LENGTH_SHORT).show();
+
+        // inform the user that data was added to the clipboard
+        Toast.makeText(
+                getActivity(),
+                what,
+                Toast.LENGTH_SHORT
+        ).show();
+
+        // depending on our API, do it one way or another...
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
             // old way
             ClipboardManager clipboardManager = (ClipboardManager)
