@@ -51,7 +51,7 @@ public class SignInActivity
     @OnClick(o365_signin)
     public void onSignInO365Clicked() {
         try {
-            authenticateOrganization();
+            authenticate();
         } catch (IllegalArgumentException e) {
             warnBadClient();
         }
@@ -112,7 +112,7 @@ public class SignInActivity
                 .show();
     }
 
-    private void authenticateOrganization() throws IllegalArgumentException {
+    private void authenticate() throws IllegalArgumentException {
         validateOrganizationArgs();
         mAuthenticationManager.connect(this);
     }
