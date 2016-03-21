@@ -90,7 +90,7 @@ To use the Microsoft Graph API REST snippets project, you need the following:
 5.	On the **What do you want to do page**, click **Add an application my organization is developing**.
 6.	On the **Tell us about your application page**, specify **Android Snippet Sample** for the application name and select **NATIVE CLIENT APPLICATION** for type.
 7.	Click the arrow button on the bottom-right corner of the page.
-8.	On the **Application information** page, specify a **Redirect URI** for example http://localhost/androidsnippets, and then select the check box in the lower-right corner of the page.
+8.	On the **Application information** page, specify a **Redirect URI** for example `http://localhost/androidsnippets`, and then select the check box in the lower-right corner of the page.
 9.	After the application has been successfully added, you will be taken to the **Quick Start** page for the application. From there, select **Configure** in the top menu.
 10. In the permissions to other applications section, add the Microsoft Graph application.
 11. For the Microsoft Graph application, add the following permissions:

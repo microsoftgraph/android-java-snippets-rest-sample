@@ -17,10 +17,8 @@ import android.text.ClipboardManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,13 +44,14 @@ import retrofit.client.Header;
 import retrofit.client.Response;
 import timber.log.Timber;
 
-import static android.R.layout.simple_spinner_dropdown_item;
-import static android.R.layout.simple_spinner_item;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static com.microsoft.office365.msgraphsnippetapp.R.color.code_1xx;
+import static com.microsoft.office365.msgraphsnippetapp.R.color.code_3xx;
+import static com.microsoft.office365.msgraphsnippetapp.R.color.code_4xx;
+import static com.microsoft.office365.msgraphsnippetapp.R.color.transparent;
 import static com.microsoft.office365.msgraphsnippetapp.R.id.btn_run;
 import static com.microsoft.office365.msgraphsnippetapp.R.id.progressbar;
-import static com.microsoft.office365.msgraphsnippetapp.R.id.spinner;
 import static com.microsoft.office365.msgraphsnippetapp.R.id.txt_desc;
 import static com.microsoft.office365.msgraphsnippetapp.R.id.txt_hyperlink;
 import static com.microsoft.office365.msgraphsnippetapp.R.id.txt_request_url;
@@ -69,101 +68,116 @@ public class SnippetDetailFragment<T, Result>
         extends BaseFragment implements Callback<Result> {
 
     public static final String ARG_ITEM_ID = "item_id";
+
     private static final int UNSET = -1;
     private static final String STATUS_COLOR = "STATUS_COLOR";
 
+    private AbstractSnippet<T, Result> mItem;
+
+    //
+    // UI component bindings
+    //
+
+    /**
+     * Displays the status code of the service call
+     */
     @InjectView(txt_status_code)
     protected TextView mStatusCode;
 
+    /**
+     * Displays the status code as color 'stoplight'
+     */
     @InjectView(txt_status_color)
     protected View mStatusColor;
 
+    /**
+     * On-screen description of the current snippet
+     */
     @InjectView(txt_desc)
     protected TextView mSnippetDescription;
 
+    /**
+     * The request url of the current snippet
+     */
     @InjectView(txt_request_url)
     protected TextView mRequestUrl;
 
+    /**
+     * The response headers of the current snippet's request
+     */
     @InjectView(txt_response_headers)
     protected TextView mResponseHeaders;
 
+    /**
+     * The response body of the snippet's request
+     */
     @InjectView(txt_response_body)
     protected TextView mResponseBody;
 
-    @InjectView(spinner)
-    protected Spinner mSpinner;
-
+    /**
+     * Barber's pole progress bar (indeterminate)
+     */
     @InjectView(progressbar)
     protected ProgressBar mProgressbar;
 
+    /**
+     * The 'run-snippet' button
+     */
     @InjectView(btn_run)
     protected Button mRunButton;
 
-    boolean setupDidRun = false;
-    private AbstractSnippet<T, Result> mItem;
-
+    /**
+     * Fragment default constructor
+     */
     public SnippetDetailFragment() {
+        // unimplemented
     }
 
+    //
+    // UI event bindings
+    //
     @OnClick(txt_request_url)
     public void onRequestUrlClicked(TextView tv) {
+        // copy to clip
         clipboard(tv);
     }
 
     @OnClick(txt_response_headers)
     public void onResponseHeadersClicked(TextView tv) {
+        // copy to clip
         clipboard(tv);
     }
 
     @OnClick(txt_response_body)
     public void onResponseBodyClicked(TextView tv) {
+        // copy to clip
         clipboard(tv);
-    }
-
-    private void clipboard(TextView tv) {
-        int which;
-        switch (tv.getId()) {
-            case txt_request_url:
-                which = req_url;
-                break;
-            case txt_response_headers:
-                which = response_headers;
-                break;
-            case txt_response_body:
-                which = response_body;
-                break;
-            default:
-                which = UNSET;
-        }
-        String what = which == UNSET ? "" : getString(which) + " ";
-        what += getString(clippy);
-        Toast.makeText(getActivity(), what, Toast.LENGTH_SHORT).show();
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-            // old way
-            ClipboardManager clipboardManager = (ClipboardManager)
-                    getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
-            clipboardManager.setText(tv.getText());
-        } else {
-            clipboard11(tv);
-        }
-    }
-
-    @TargetApi(11)
-    private void clipboard11(TextView tv) {
-        android.content.ClipboardManager clipboardManager =
-                (android.content.ClipboardManager) getActivity()
-                        .getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clipData = ClipData.newPlainText("RESTSnippets", tv.getText());
-        clipboardManager.setPrimaryClip(clipData);
     }
 
     @OnClick(btn_run)
     public void onRunClicked(Button btn) {
+        // disable the button while the snippet is running
+        mRunButton.setEnabled(false);
+
+        // clear the old request url
         mRequestUrl.setText("");
+
+        // clear any old headers
         mResponseHeaders.setText("");
+
+        // clear any old response body
         mResponseBody.setText("");
-        displayStatusCode("", getResources().getColor(R.color.transparent));
+
+        // reset the status 'stoplight'
+        displayStatusCode("",
+                getResources()
+                        .getColor(transparent)
+        );
+
+        // show the indeterminate spinner
         mProgressbar.setVisibility(VISIBLE);
+
+        // actually make the request
         mItem.request(mItem.mService, this);
     }
 
@@ -172,11 +186,9 @@ public class SnippetDetailFragment<T, Result>
         launchUrl(Uri.parse(mItem.getUrl()));
     }
 
-    private void launchUrl(Uri uri) {
-        Intent viewDocs = new Intent(Intent.ACTION_VIEW, uri);
-        startActivity(viewDocs);
-    }
-
+    //
+    // Lifecycle hooks
+    //
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -221,55 +233,90 @@ public class SnippetDetailFragment<T, Result>
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (!setupDidRun) {
-            setupDidRun = true;
-            mProgressbar.setVisibility(View.VISIBLE);
-            mItem.setUp(AbstractSnippet.sServices, getSetUpCallback());
-        }
-    }
-
-    private retrofit.Callback<String[]> getSetUpCallback() {
-        return new retrofit.Callback<String[]>() {
-            @Override
-            public void success(String[] strings, Response response) {
-                if (isAdded()) {
-                    mProgressbar.setVisibility(View.GONE);
-                    populateSpinner(strings);
-                    mRunButton.setEnabled(true);
-                }
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                if (isAdded()) {
-                    displayThrowable(error.getCause());
-                    mProgressbar.setVisibility(View.GONE);
-                }
-            }
-        };
-    }
-
-    private void populateSpinner(String[] strings) {
-        ArrayAdapter<String> spinnerArrayAdapter
-                = new ArrayAdapter<>(
-                getActivity(),
-                simple_spinner_item,
-                strings);
-        spinnerArrayAdapter.setDropDownViewResource(simple_spinner_dropdown_item);
-        mSpinner.setAdapter(spinnerArrayAdapter);
-    }
-
+    //
+    // Custom event bindings
+    //
     @Override
     public void success(Result result, Response response) {
         if (!isAdded()) {
             // the user has left...
             return;
         }
+        mRunButton.setEnabled(true);
         mProgressbar.setVisibility(GONE);
         displayResponse(response);
+    }
+
+    @Override
+    public void failure(RetrofitError error) {
+        Timber.e(error, "");
+        mRunButton.setEnabled(true);
+        mProgressbar.setVisibility(GONE);
+        if (null != error.getResponse()) {
+            displayResponse(error.getResponse());
+        }
+    }
+
+    //
+    // Private methods
+    //
+    private void clipboard(TextView tv) {
+        // which view are we copying to the clipboard?
+        int which;
+
+        switch (tv.getId()) {
+            case txt_request_url: // the url field
+                which = req_url;
+                break;
+
+            case txt_response_headers: // the display headers
+                which = response_headers;
+                break;
+
+            case txt_response_body: // the response body
+                which = response_body;
+                break;
+
+            default:
+                which = UNSET; // don't assign a prefix
+        }
+
+        // if we know which view we're copying, prefix it with useful info
+        String what = which == UNSET ? "" : getString(which) + " ";
+
+        // concat the clipboard data to this String
+        what += getString(clippy);
+
+        // inform the user that data was added to the clipboard
+        Toast.makeText(
+                getActivity(),
+                what,
+                Toast.LENGTH_SHORT
+        ).show();
+
+        // depending on our API, do it one way or another...
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+            // old way
+            ClipboardManager clipboardManager = (ClipboardManager)
+                    getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+            clipboardManager.setText(tv.getText());
+        } else {
+            clipboard11(tv);
+        }
+    }
+
+    @TargetApi(11)
+    private void clipboard11(TextView tv) {
+        android.content.ClipboardManager clipboardManager =
+                (android.content.ClipboardManager) getActivity()
+                        .getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clipData = ClipData.newPlainText("RESTSnippets", tv.getText());
+        clipboardManager.setPrimaryClip(clipData);
+    }
+
+    private void launchUrl(Uri uri) {
+        Intent viewDocs = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(viewDocs);
     }
 
     private void displayResponse(Response response) {
@@ -343,28 +390,19 @@ public class SnippetDetailFragment<T, Result>
         switch (response.getStatus() / 100) {
             case 1:
             case 2:
-                color = R.color.code_1xx;
+                color = code_1xx;
                 break;
             case 3:
-                color = R.color.code_3xx;
+                color = code_3xx;
                 break;
             case 4:
             case 5:
-                color = R.color.code_4xx;
+                color = code_4xx;
                 break;
             default:
-                color = R.color.transparent;
+                color = transparent;
         }
         return color;
-    }
-
-    @Override
-    public void failure(RetrofitError error) {
-        Timber.e(error, "");
-        mProgressbar.setVisibility(GONE);
-        if (null != error.getResponse()) {
-            displayResponse(error.getResponse());
-        }
     }
 
 }
