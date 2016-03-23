@@ -5,38 +5,37 @@
     android:orientation="vertical"
     android:padding="15dp">
 
-        <TextView
-            android:id="@+id/txt_snippet_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="@string/txt_snippet_name_text" />
+    <TextView
+        android:id="@+id/txt_snippet_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="@string/txt_snippet_name_text" />
 
-        <TextView
-            android:id="@+id/beta_indicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed"
-            android:paddingLeft="3dp"
-            android:paddingRight="3dp"
-            android:text="@string/beta"
-            android:textColor="#A32800"
-            android:textSize="12sp"
-            android:visibility="gone" />
+    <TextView
+        android:id="@+id/beta_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:text="@string/beta"
+        android:textColor="#A32800"
+        android:textSize="12sp"
+        android:visibility="gone" />
 
-        <TextView
-            android:id="@+id/admin_indicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_snippet_name"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="2dp"
-            android:fontFamily="sans-serif-condensed"
-            android:paddingLeft="3dp"
-            android:paddingRight="3dp"
-            android:text="@string/admin"
-            android:textColor="#A32800"
-            android:textSize="12sp" />
+    <TextView
+        android:id="@+id/admin_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="2dp"
+        android:fontFamily="sans-serif-condensed"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:text="@string/admin"
+        android:textColor="#A32800"
+        android:textSize="12sp" />
 
 </LinearLayout>
