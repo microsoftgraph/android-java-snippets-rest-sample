@@ -4,7 +4,7 @@
  */
 package com.microsoft.office365.msgraphapiservices;
 
-import com.microsoft.office365.microsoftgraphvos.UserVO;
+import com.microsoft.office365.microsoftgraphvos.User;
 
 import retrofit.Callback;
 import retrofit.client.Response;
@@ -46,7 +46,7 @@ public interface MSGraphUserService {
     @POST("/{version}/myOrganization/users")
     void createNewUser(
             @Path("version") String version,
-            @Body UserVO body,
+            @Body User body,
             Callback<Response> callback
     );
 }

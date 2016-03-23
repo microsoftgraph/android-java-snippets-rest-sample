@@ -5,7 +5,7 @@
 package com.microsoft.office365.msgraphsnippetapp.snippet;
 
 import com.microsoft.office365.microsoftgraphvos.Envelope;
-import com.microsoft.office365.microsoftgraphvos.GroupVO;
+import com.microsoft.office365.microsoftgraphvos.Group;
 import com.microsoft.office365.msgraphapiservices.MSGraphGroupsService;
 
 import java.util.UUID;
@@ -44,14 +44,14 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
                  * GET https://graph.microsoft.com/{version}/myOrganization/groups/{Group.objectId}
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/group_get
                  */
-                new GroupsSnippets<GroupVO>(get_a_group) {
+                new GroupsSnippets<Group>(get_a_group) {
                     @Override
                     public void request(final MSGraphGroupsService service,
-                                        final Callback<GroupVO> callback) {
+                                        final Callback<Group> callback) {
                         // create a group then query it
-                        service.createGroup(getVersion(), createGroup(), new Callback<GroupVO>() {
+                        service.createGroup(getVersion(), createGroup(), new Callback<Group>() {
                             @Override
-                            public void success(GroupVO groupVO, Response response) {
+                            public void success(Group groupVO, Response response) {
                                 // request the newly created group
                                 service.getGroup(getVersion(), groupVO.id, callback);
                             }
@@ -72,9 +72,9 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
                     public void request(final MSGraphGroupsService service,
                                         final Callback<Response> callback) {
                         // create a group then ask for its members
-                        service.createGroup(getVersion(), createGroup(), new Callback<GroupVO>() {
+                        service.createGroup(getVersion(), createGroup(), new Callback<Group>() {
                             @Override
-                            public void success(GroupVO groupVO, Response response) {
+                            public void success(Group groupVO, Response response) {
                                 service.getGroupEntities(
                                         getVersion(),
                                         groupVO.id,
@@ -99,9 +99,9 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
                     public void request(final MSGraphGroupsService service,
                                         final Callback<Response> callback) {
                         // create a group and then request its owner
-                        service.createGroup(getVersion(), createGroup(), new Callback<GroupVO>() {
+                        service.createGroup(getVersion(), createGroup(), new Callback<Group>() {
                             @Override
-                            public void success(GroupVO groupVO, Response response) {
+                            public void success(Group groupVO, Response response) {
                                 service.getGroupEntities(
                                         getVersion(),
                                         groupVO.id,
@@ -120,10 +120,10 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
                  * GET https://graph.microsoft.com/v1.0/groupshttps://graph.microsoft.com/v1.0/groups
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/group_list
                  */
-                new GroupsSnippets<Envelope<GroupVO>>(get_all_groups) {
+                new GroupsSnippets<Envelope<Group>>(get_all_groups) {
                     @Override
                     public void request(MSGraphGroupsService service,
-                                        Callback<Envelope<GroupVO>> callback) {
+                                        Callback<Envelope<Group>> callback) {
                         service.getGroups(getVersion(), null, callback);
                     }
                 },
@@ -132,11 +132,11 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
                  * POST https://graph.microsoft.com/{version}/myOrganization/groups
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/resources/group
                  */
-                new GroupsSnippets<GroupVO>(insert_a_group) {
+                new GroupsSnippets<Group>(insert_a_group) {
 
                     @Override
                     public void request(final MSGraphGroupsService service,
-                                        Callback<GroupVO> callback) {
+                                        Callback<Group> callback) {
                         service.createGroup(getVersion(), createGroup(), callback);
                     }
                 },
@@ -145,17 +145,17 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
                  * PATCH https://graph.microsoft.com/{version}/myOrganization/groups/{Group.objectId}
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/group_update
                  */
-                new GroupsSnippets<GroupVO>(update_a_group) {
+                new GroupsSnippets<Group>(update_a_group) {
 
                     @Override
                     public void request(final MSGraphGroupsService service,
-                                        final Callback<GroupVO> callback) {
+                                        final Callback<Group> callback) {
                         //Create a group that we will update
-                        service.createGroup(getVersion(), createGroup(), new Callback<GroupVO>() {
+                        service.createGroup(getVersion(), createGroup(), new Callback<Group>() {
 
                             @Override
-                            public void success(GroupVO group, Response response) {
-                                GroupVO amended = new GroupVO();
+                            public void success(Group group, Response response) {
+                                Group amended = new Group();
                                 amended.displayName = "A renamed group";
                                 //Update the group we created
                                 service.updateGroup(
@@ -184,10 +184,10 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
                     public void request(final MSGraphGroupsService service,
                                         final Callback<Response> callback) {
                         //Create a group that we will delete
-                        service.createGroup(getVersion(), createGroup(), new Callback<GroupVO>() {
+                        service.createGroup(getVersion(), createGroup(), new Callback<Group>() {
 
                             @Override
-                            public void success(GroupVO group, Response response) {
+                            public void success(Group group, Response response) {
                                 //Delete the group we created
                                 service.deleteGroup(getVersion(), group.id, callback);
                             }
@@ -206,8 +206,8 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
     @Override
     public abstract void request(MSGraphGroupsService service, Callback<Result> callback);
 
-    private static GroupVO createGroup() {
-        GroupVO group = new GroupVO();
+    private static Group createGroup() {
+        Group group = new Group();
         group.displayName = group.mailNickname = UUID.randomUUID().toString();
         return group;
     }

@@ -4,9 +4,9 @@
  */
 package com.microsoft.office365.msgraphsnippetapp.snippet;
 
-import com.microsoft.office365.microsoftgraphvos.BaseVO;
-import com.microsoft.office365.microsoftgraphvos.DriveItemVO;
-import com.microsoft.office365.microsoftgraphvos.FolderVO;
+import com.microsoft.office365.microsoftgraphvos.Base;
+import com.microsoft.office365.microsoftgraphvos.DriveItem;
+import com.microsoft.office365.microsoftgraphvos.Folder;
 import com.microsoft.office365.msgraphapiservices.MSGraphDrivesService;
 
 import java.util.UUID;
@@ -88,10 +88,10 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                  * PUT https://graph.microsoft.com/{version}/me/drive/root/children/{filename}/content
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/item_post_children
                  */
-                new DrivesSnippets<BaseVO>(create_me_file) {
+                new DrivesSnippets<Base>(create_me_file) {
                     @Override
                     public void request(final MSGraphDrivesService msGraphDrivesService,
-                                        final Callback<BaseVO> callback) {
+                                        final Callback<Base> callback) {
                         //Create a new file under root
                         msGraphDrivesService.putNewFile(
                                 getVersion(),
@@ -115,10 +115,10 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                         msGraphDrivesService.putNewFile(getVersion(),
                                 UUID.randomUUID().toString(),
                                 fileContents,
-                                new Callback<BaseVO>() {
+                                new Callback<Base>() {
 
                                     @Override
-                                    public void success(BaseVO file, Response response) {
+                                    public void success(Base file, Response response) {
                                         // download the file we created
                                         msGraphDrivesService.downloadFile(
                                                 getVersion(),
@@ -139,19 +139,19 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                  * PUT https://graph.microsoft.com/{version}/me/drive/items/{filename}/content
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/item_update
                  */
-                new DrivesSnippets<BaseVO>(update_me_file) {
+                new DrivesSnippets<Base>(update_me_file) {
 
                     @Override
                     public void request(
                             final MSGraphDrivesService msGraphDrivesService,
-                            final Callback<BaseVO> callback) {
+                            final Callback<Base> callback) {
                         msGraphDrivesService.putNewFile(getVersion(),
                                 UUID.randomUUID().toString(),
                                 fileContents,
-                                new Callback<BaseVO>() {
+                                new Callback<Base>() {
 
                                     @Override
-                                    public void success(BaseVO directoryObject, Response response) {
+                                    public void success(Base directoryObject, Response response) {
                                         String updatedBody = "Updated file contents";
                                         //download the file we created
                                         msGraphDrivesService.updateFile(
@@ -174,20 +174,20 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                  * DELETE https://graph.microsoft.com/{version}/me/drive/items/{fileId}/
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/item_delete
                  */
-                new DrivesSnippets<BaseVO>(delete_me_file) {
+                new DrivesSnippets<Base>(delete_me_file) {
 
                     @Override
                     public void request(
                             final MSGraphDrivesService msGraphDrivesService,
-                            final Callback<BaseVO> callback) {
+                            final Callback<Base> callback) {
                         msGraphDrivesService.putNewFile(
                                 getVersion(),
                                 UUID.randomUUID().toString(),
                                 fileContents,
-                                new Callback<BaseVO>() {
+                                new Callback<Base>() {
 
                                     @Override
-                                    public void success(BaseVO file, Response response) {
+                                    public void success(Base file, Response response) {
                                         //download the file we created
                                         msGraphDrivesService.deleteFile(
                                                 getVersion(),
@@ -208,22 +208,22 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                  * PATCH https://graph.microsoft.com/{version}/me/drive/items/{fileId}/
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/item_update
                  */
-                new DrivesSnippets<BaseVO>(rename_me_file) {
+                new DrivesSnippets<Base>(rename_me_file) {
 
                     @Override
                     public void request(
                             final MSGraphDrivesService msGraphDrivesService,
-                            final Callback<BaseVO> callback) {
+                            final Callback<Base> callback) {
                         msGraphDrivesService.putNewFile(
                                 getVersion(),
                                 UUID.randomUUID().toString(),
                                 fileContents,
-                                new Callback<BaseVO>() {
+                                new Callback<Base>() {
 
                                     @Override
-                                    public void success(BaseVO file, Response response) {
+                                    public void success(Base file, Response response) {
                                         // create a new item
-                                        DriveItemVO delta = new DriveItemVO();
+                                        DriveItem delta = new DriveItem();
 
                                         // give it a random name
                                         delta.name = UUID.randomUUID().toString();
@@ -256,11 +256,11 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                             final MSGraphDrivesService msGraphDrivesService,
                             final Callback<Response> callback) {
                         // create a new driveitem
-                        DriveItemVO folder = new DriveItemVO();
+                        DriveItem folder = new DriveItem();
                         // give it a random name
                         folder.name = UUID.randomUUID().toString();
                         // set the folder
-                        folder.folder = new FolderVO();
+                        folder.folder = new Folder();
                         // set the conflict resolution behavior for actions that create
                         // a new item
                         folder.conflictBehavior = "rename";

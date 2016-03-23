@@ -4,8 +4,8 @@
  */
 package com.microsoft.office365.msgraphapiservices;
 
-import com.microsoft.office365.microsoftgraphvos.BaseVO;
-import com.microsoft.office365.microsoftgraphvos.DriveItemVO;
+import com.microsoft.office365.microsoftgraphvos.Base;
+import com.microsoft.office365.microsoftgraphvos.DriveItem;
 
 import retrofit.Callback;
 import retrofit.client.Response;
@@ -64,7 +64,7 @@ public interface MSGraphDrivesService {
             @Path("version") String version,
             @Path("filename") String filename,
             @Body String value,
-            Callback<BaseVO> callback
+            Callback<Base> callback
     );
 
     /**
@@ -92,7 +92,7 @@ public interface MSGraphDrivesService {
             @Path("version") String version,
             @Path("fileId") String fileId,
             @Body String value,
-            Callback<BaseVO> callback
+            Callback<Base> callback
     );
 
     /**
@@ -106,7 +106,7 @@ public interface MSGraphDrivesService {
     void deleteFile(
             @Path("version") String version,
             @Path("fileId") String fileId,
-            Callback<BaseVO> callback
+            Callback<Base> callback
     );
 
     /**
@@ -121,8 +121,8 @@ public interface MSGraphDrivesService {
     void renameFile(
             @Path("version") String version,
             @Path("fileId") String fileId,
-            @Body DriveItemVO body,
-            Callback<BaseVO> callback
+            @Body DriveItem body,
+            Callback<Base> callback
     );
 
     /**
@@ -135,7 +135,7 @@ public interface MSGraphDrivesService {
     @POST("/{version}/me/drive/root/children")
     void createFolder(
             @Path("version") String version,
-            @Body DriveItemVO body,
+            @Body DriveItem body,
             Callback<Response> callback
     );
 }

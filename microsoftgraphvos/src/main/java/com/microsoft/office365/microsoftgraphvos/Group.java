@@ -1,6 +1,6 @@
 package com.microsoft.office365.microsoftgraphvos;
 
-public class GroupVO extends BaseVO {
+public class Group extends Base {
 
     public String displayName;
     public String mailNickname;

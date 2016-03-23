@@ -1,6 +1,6 @@
 package com.microsoft.office365.microsoftgraphvos;
 
-public class BaseVO {
+public class Folder {
 
-    public String id;
+    public long childCount;
 }

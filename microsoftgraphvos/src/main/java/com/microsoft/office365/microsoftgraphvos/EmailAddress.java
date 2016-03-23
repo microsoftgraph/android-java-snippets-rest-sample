@@ -1,6 +1,6 @@
 package com.microsoft.office365.microsoftgraphvos;
 
-public class EmailAddressVO {
+public class EmailAddress {
 
     public String address;
     public String name;
