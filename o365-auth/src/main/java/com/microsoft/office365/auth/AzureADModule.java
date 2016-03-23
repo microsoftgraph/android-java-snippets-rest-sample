@@ -30,6 +30,7 @@ public class AzureADModule {
     }
 
     @Provides
+    @SuppressWarnings("unused") // not actually unused -- used by Dagger
     public AuthenticationContext providesAuthenticationContext() {
         try {
             return new AuthenticationContext(
@@ -42,6 +43,7 @@ public class AzureADModule {
     }
 
     @Provides
+    @SuppressWarnings("unused") // not actually unused -- used by Dagger
     public AuthenticationManager providesAuthenticationManager(
             AuthenticationContext authenticationContext) {
         return new AuthenticationManager(
