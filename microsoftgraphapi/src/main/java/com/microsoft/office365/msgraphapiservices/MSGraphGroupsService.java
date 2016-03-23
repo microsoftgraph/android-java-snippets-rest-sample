@@ -5,7 +5,7 @@
 package com.microsoft.office365.msgraphapiservices;
 
 import com.microsoft.office365.microsoftgraphvos.Envelope;
-import com.microsoft.office365.microsoftgraphvos.GroupVO;
+import com.microsoft.office365.microsoftgraphvos.Group;
 
 import java.util.Map;
 
@@ -32,7 +32,7 @@ public interface MSGraphGroupsService {
     void getGroups(
             @Path("version") String version,
             @QueryMap Map<String, String> filters,
-            Callback<Envelope<GroupVO>> callback
+            Callback<Envelope<Group>> callback
     );
 
     /**
@@ -46,7 +46,7 @@ public interface MSGraphGroupsService {
     void getGroup(
             @Path("version") String version,
             @Path("groupId") String groupId,
-            Callback<GroupVO> callback
+            Callback<Group> callback
     );
 
     /**
@@ -75,8 +75,8 @@ public interface MSGraphGroupsService {
     @POST("/{version}/myOrganization/Groups/")
     void createGroup(
             @Path("version") String version,
-            @Body GroupVO content,
-            Callback<GroupVO> callback
+            @Body Group content,
+            Callback<Group> callback
     );
 
     /**
@@ -91,8 +91,8 @@ public interface MSGraphGroupsService {
     void updateGroup(
             @Path("version") String version,
             @Path("groupId") String groupId,
-            @Body GroupVO content,
-            Callback<GroupVO> callback
+            @Body Group content,
+            Callback<Group> callback
     );
 
     /**

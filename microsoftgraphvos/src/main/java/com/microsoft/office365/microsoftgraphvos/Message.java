@@ -1,8 +1,8 @@
 package com.microsoft.office365.microsoftgraphvos;
 
-public class MessageVO {
+public class Message {
 
     public String subject;
-    public ItemBodyVO body;
+    public ItemBody body;
     public RecipientVO[] toRecipients;
 }

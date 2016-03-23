@@ -6,8 +6,8 @@ package com.microsoft.office365.msgraphsnippetapp.snippet;
 
 import android.content.SharedPreferences;
 
-import com.microsoft.office365.microsoftgraphvos.PasswordProfileVO;
-import com.microsoft.office365.microsoftgraphvos.UserVO;
+import com.microsoft.office365.microsoftgraphvos.PasswordProfile;
+import com.microsoft.office365.microsoftgraphvos.User;
 import com.microsoft.office365.msgraphapiservices.MSGraphUserService;
 import com.microsoft.office365.msgraphsnippetapp.util.SharedPrefsUtil;
 
@@ -82,7 +82,7 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserS
                         String randomUserName = UUID.randomUUID().toString();
 
                         // create the user
-                        UserVO user = new UserVO();
+                        User user = new User();
                         user.accountEnabled = true;
                         user.displayName = "SAMPLE " + randomUserName;
                         user.mailNickname = randomUserName;
@@ -93,7 +93,7 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserS
                         user.userPrincipalName = randomUserName + "@" + tenant;
 
                         // initialize a password & say whether or not the user must change it
-                        PasswordProfileVO password = new PasswordProfileVO();
+                        PasswordProfile password = new PasswordProfile();
                         password.password = UUID.randomUUID().toString().substring(0, 16);
                         password.forceChangePasswordNextSignIn = false;
 

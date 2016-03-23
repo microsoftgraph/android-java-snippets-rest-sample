@@ -24,16 +24,19 @@ public class AppModule {
     public static final String PREFS = "com.microsoft.o365_android_unified_API_REST_snippets";
 
     @Provides
+    @SuppressWarnings("unused") // not actually unused -- used by Dagger
     public String providesRestEndpoint() {
         return ServiceConstants.AUTHENTICATION_RESOURCE_ID;
     }
 
     @Provides
+    @SuppressWarnings("unused") // not actually unused -- used by Dagger
     public RestAdapter.LogLevel providesLogLevel() {
         return RestAdapter.LogLevel.FULL;
     }
 
     @Provides
+    @SuppressWarnings("unused") // not actually unused -- used by Dagger
     public RequestInterceptor providesRequestInterceptor() {
         return new RequestInterceptor() {
             @Override

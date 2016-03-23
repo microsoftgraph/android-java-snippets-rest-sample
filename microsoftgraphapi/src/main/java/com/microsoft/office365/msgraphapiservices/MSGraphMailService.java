@@ -4,7 +4,7 @@
  */
 package com.microsoft.office365.msgraphapiservices;
 
-import com.microsoft.office365.microsoftgraphvos.MessageWrapperVO;
+import com.microsoft.office365.microsoftgraphvos.MessageWrapper;
 
 import retrofit.Callback;
 import retrofit.client.Response;
@@ -37,7 +37,7 @@ public interface MSGraphMailService {
     @POST("/{version}/me/microsoft.graph.sendmail")
     void createNewMail(
             @Path("version") String version,
-            @Body MessageWrapperVO body,
+            @Body MessageWrapper body,
             Callback<Response> callback
     );
 }

@@ -27,7 +27,7 @@
     <string name="txt_snippet_name_text">Get all pages</string>
     <string name="list_segment_snippet_name">PAGES</string>
     <string name="signin_button">Connect to Office 365</string>
-    <string name="signin_description">Welcome to the Office 365 Android Microsoft Graph Snippets sample! Let\'s sign in and get started...</string>
+    <string name="signin_description">Welcome to the Office 365 Android Microsoft Graph Snippets sample! Let\'s sign in and get started…</string>
     <string name="beta">BETA</string>
     <string name="diagnostics">Diagnostics</string>
 </resources>

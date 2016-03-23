@@ -6,10 +6,10 @@ package com.microsoft.office365.msgraphsnippetapp.snippet;
 
 import android.content.SharedPreferences;
 
-import com.microsoft.office365.microsoftgraphvos.EmailAddressVO;
-import com.microsoft.office365.microsoftgraphvos.ItemBodyVO;
-import com.microsoft.office365.microsoftgraphvos.MessageVO;
-import com.microsoft.office365.microsoftgraphvos.MessageWrapperVO;
+import com.microsoft.office365.microsoftgraphvos.EmailAddress;
+import com.microsoft.office365.microsoftgraphvos.ItemBody;
+import com.microsoft.office365.microsoftgraphvos.Message;
+import com.microsoft.office365.microsoftgraphvos.MessageWrapper;
 import com.microsoft.office365.microsoftgraphvos.RecipientVO;
 import com.microsoft.office365.msgraphapiservices.MSGraphMailService;
 import com.microsoft.office365.msgraphsnippetapp.R;
@@ -73,7 +73,7 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<MSGraphMai
                         String recipient = prefs.getString(SharedPrefsUtil.PREF_USER_ID, "");
 
                         // make it
-                        MessageWrapperVO msgWrapper = createMessage(subject, body, recipient);
+                        MessageWrapper msgWrapper = createMessage(subject, body, recipient);
 
                         // send it
                         service.createNewMail(getVersion(), msgWrapper, callback);
@@ -85,11 +85,11 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<MSGraphMai
     @Override
     public abstract void request(MSGraphMailService service, Callback<Result> callback);
 
-    private static MessageWrapperVO createMessage(
+    private static MessageWrapper createMessage(
             String msgSubject,
             String msgBody,
             String... msgRecipients) {
-        MessageVO msg = new MessageVO();
+        Message msg = new Message();
 
         // add the recipient
         RecipientVO recipient;
@@ -101,7 +101,7 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<MSGraphMai
             // allocate a new recipient
             recipient = new RecipientVO();
             // give them an email address
-            recipient.emailAddress = new EmailAddressVO();
+            recipient.emailAddress = new EmailAddress();
             // set that address to be the currently iterated-upon recipient string
             recipient.emailAddress.address = msgRecipients[ii];
             // add it to the array at the position
@@ -112,12 +112,12 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<MSGraphMai
         msg.subject = msgSubject;
 
         // create the body
-        ItemBodyVO body = new ItemBodyVO();
-        body.contentType = ItemBodyVO.CONTENT_TYPE_TEXT;
+        ItemBody body = new ItemBody();
+        body.contentType = ItemBody.CONTENT_TYPE_TEXT;
         body.content = msgBody;
         msg.body = body;
 
-        MessageWrapperVO wrapper = new MessageWrapperVO();
+        MessageWrapper wrapper = new MessageWrapper();
         wrapper.message = msg;
         wrapper.saveToSentItems = true;
         return wrapper;
