@@ -23,7 +23,7 @@ public abstract class ContactsSnippets<Result> extends AbstractSnippet<MSGraphCo
                 // Marker element
                 new ContactsSnippets(null) {
                     @Override
-                    public void request(MSGraphContactService service, Callback callback) {
+                    public void request(Callback callback) {
                         // Not implemented
                     }
                 },
@@ -35,14 +35,14 @@ public abstract class ContactsSnippets<Result> extends AbstractSnippet<MSGraphCo
                  */
                 new ContactsSnippets<Response>(get_all_contacts) {
                     @Override
-                    public void request(MSGraphContactService service, Callback<Response> callback) {
-                        service.getContacts(getVersion(), callback);
+                    public void request(Callback<Response> callback) {
+                        mService.getContacts(getVersion(), callback);
                     }
                 }
         };
     }
 
     @Override
-    public abstract void request(MSGraphContactService service, Callback<Result> callback);
+    public abstract void request(Callback<Result> callback);
 
 }

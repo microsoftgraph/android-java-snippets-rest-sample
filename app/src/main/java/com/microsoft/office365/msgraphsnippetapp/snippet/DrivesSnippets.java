@@ -39,8 +39,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                 new DrivesSnippets(null) {
 
                     @Override
-                    public void request(MSGraphDrivesService msGraphDrivesService,
-                                        Callback callback) {
+                    public void request(Callback callback) {
                         //No implementation
                     }
                 },
@@ -52,9 +51,8 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                  */
                 new DrivesSnippets<Response>(get_me_drive) {
                     @Override
-                    public void request(MSGraphDrivesService msGraphDrivesService,
-                                        Callback<Response> callback) {
-                        msGraphDrivesService.getDrive(getVersion(), callback);
+                    public void request(Callback<Response> callback) {
+                        mService.getDrive(getVersion(), callback);
                     }
                 },
 
@@ -64,9 +62,8 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                  */
                 new DrivesSnippets<Response>(get_organization_drives) {
                     @Override
-                    public void request(MSGraphDrivesService msGraphDrivesService,
-                                        Callback<Response> callback) {
-                        msGraphDrivesService.getOrganizationDrives(getVersion(), callback);
+                    public void request(Callback<Response> callback) {
+                        mService.getOrganizationDrives(getVersion(), callback);
                     }
                 },
                 /*
@@ -76,11 +73,9 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                  */
                 new DrivesSnippets<Response>(get_me_files) {
                     @Override
-                    public void request(
-                            final MSGraphDrivesService msGraphDrivesService,
-                            final Callback<Response> callback) {
+                    public void request(final Callback<Response> callback) {
                         //Get first group
-                        msGraphDrivesService.getCurrentUserFiles(getVersion(), callback);
+                        mService.getCurrentUserFiles(getVersion(), callback);
                     }
                 },
                 /*
@@ -90,10 +85,9 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                  */
                 new DrivesSnippets<Base>(create_me_file) {
                     @Override
-                    public void request(final MSGraphDrivesService msGraphDrivesService,
-                                        final Callback<Base> callback) {
+                    public void request(final Callback<Base> callback) {
                         //Create a new file under root
-                        msGraphDrivesService.putNewFile(
+                        mService.putNewFile(
                                 getVersion(),
                                 UUID.randomUUID().toString(),
                                 fileContents,
@@ -108,11 +102,9 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                 new DrivesSnippets<Response>(download_me_file) {
 
                     @Override
-                    public void request(
-                            final MSGraphDrivesService msGraphDrivesService,
-                            final Callback<Response> callback) {
+                    public void request(final Callback<Response> callback) {
                         // create a new file to download
-                        msGraphDrivesService.putNewFile(getVersion(),
+                        mService.putNewFile(getVersion(),
                                 UUID.randomUUID().toString(),
                                 fileContents,
                                 new Callback<Base>() {
@@ -120,7 +112,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                                     @Override
                                     public void success(Base file, Response response) {
                                         // download the file we created
-                                        msGraphDrivesService.downloadFile(
+                                        mService.downloadFile(
                                                 getVersion(),
                                                 file.id,
                                                 callback);
@@ -142,10 +134,8 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                 new DrivesSnippets<Base>(update_me_file) {
 
                     @Override
-                    public void request(
-                            final MSGraphDrivesService msGraphDrivesService,
-                            final Callback<Base> callback) {
-                        msGraphDrivesService.putNewFile(getVersion(),
+                    public void request(final Callback<Base> callback) {
+                        mService.putNewFile(getVersion(),
                                 UUID.randomUUID().toString(),
                                 fileContents,
                                 new Callback<Base>() {
@@ -154,7 +144,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                                     public void success(Base directoryObject, Response response) {
                                         String updatedBody = "Updated file contents";
                                         //download the file we created
-                                        msGraphDrivesService.updateFile(
+                                        mService.updateFile(
                                                 getVersion(),
                                                 directoryObject.id,
                                                 updatedBody,
@@ -177,10 +167,8 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                 new DrivesSnippets<Base>(delete_me_file) {
 
                     @Override
-                    public void request(
-                            final MSGraphDrivesService msGraphDrivesService,
-                            final Callback<Base> callback) {
-                        msGraphDrivesService.putNewFile(
+                    public void request(final Callback<Base> callback) {
+                        mService.putNewFile(
                                 getVersion(),
                                 UUID.randomUUID().toString(),
                                 fileContents,
@@ -189,7 +177,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                                     @Override
                                     public void success(Base file, Response response) {
                                         //download the file we created
-                                        msGraphDrivesService.deleteFile(
+                                        mService.deleteFile(
                                                 getVersion(),
                                                 file.id,
                                                 callback);
@@ -211,10 +199,8 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                 new DrivesSnippets<Base>(rename_me_file) {
 
                     @Override
-                    public void request(
-                            final MSGraphDrivesService msGraphDrivesService,
-                            final Callback<Base> callback) {
-                        msGraphDrivesService.putNewFile(
+                    public void request(final Callback<Base> callback) {
+                        mService.putNewFile(
                                 getVersion(),
                                 UUID.randomUUID().toString(),
                                 fileContents,
@@ -229,7 +215,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                                         delta.name = UUID.randomUUID().toString();
 
                                         //download the file we created
-                                        msGraphDrivesService.renameFile(
+                                        mService.renameFile(
                                                 getVersion(),
                                                 file.id,
                                                 delta,
@@ -252,9 +238,7 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                 new DrivesSnippets<Response>(create_me_folder) {
 
                     @Override
-                    public void request(
-                            final MSGraphDrivesService msGraphDrivesService,
-                            final Callback<Response> callback) {
+                    public void request(final Callback<Response> callback) {
                         // create a new driveitem
                         DriveItem folder = new DriveItem();
                         // give it a random name
@@ -266,11 +250,11 @@ abstract class DrivesSnippets<Result> extends AbstractSnippet<MSGraphDrivesServi
                         folder.conflictBehavior = "rename";
 
                         // actually create the folder
-                        msGraphDrivesService.createFolder(getVersion(), folder, callback);
+                        mService.createFolder(getVersion(), folder, callback);
                     }
                 }
         };
     }
 
-    public abstract void request(MSGraphDrivesService service, Callback<Result> callback);
+    public abstract void request(Callback<Result> callback);
 }

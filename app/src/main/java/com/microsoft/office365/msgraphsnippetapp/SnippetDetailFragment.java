@@ -64,15 +64,14 @@ import static com.microsoft.office365.msgraphsnippetapp.R.string.req_url;
 import static com.microsoft.office365.msgraphsnippetapp.R.string.response_body;
 import static com.microsoft.office365.msgraphsnippetapp.R.string.response_headers;
 
-public class SnippetDetailFragment<T, Result>
-        extends BaseFragment implements Callback<Result> {
+public class SnippetDetailFragment<T, Result> extends BaseFragment {
 
     public static final String ARG_ITEM_ID = "item_id";
 
     private static final int UNSET = -1;
     private static final String STATUS_COLOR = "STATUS_COLOR";
 
-    private AbstractSnippet<T, Result> mItem;
+    private AbstractSnippet<T, Result> mSnippet;
 
     //
     // UI component bindings
@@ -178,12 +177,34 @@ public class SnippetDetailFragment<T, Result>
         mProgressbar.setVisibility(VISIBLE);
 
         // actually make the request
-        mItem.request(mItem.mService, this);
+        //mSnippet.request(this);
+        mSnippet.request(new Callback<Result>() {
+            @Override
+            public void success(Result result, Response response) {
+                if (!isAdded()) {
+                    // the user has left...
+                    return;
+                }
+                mRunButton.setEnabled(true);
+                mProgressbar.setVisibility(GONE);
+                displayResponse(response);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Timber.e(error, "");
+                mRunButton.setEnabled(true);
+                mProgressbar.setVisibility(GONE);
+                if (null != error.getResponse()) {
+                    displayResponse(error.getResponse());
+                }
+            }
+        });
     }
 
     @OnClick(txt_hyperlink)
     public void onDocsLinkClicked(TextView textView) {
-        launchUrl(Uri.parse(mItem.getUrl()));
+        launchUrl(Uri.parse(mSnippet.getUrl()));
     }
 
     //
@@ -193,7 +214,7 @@ public class SnippetDetailFragment<T, Result>
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments().containsKey(ARG_ITEM_ID)) {
-            mItem = (AbstractSnippet<T, Result>)
+            mSnippet = (AbstractSnippet<T, Result>)
                     SnippetContent.ITEMS.get(getArguments().getInt(ARG_ITEM_ID));
         }
     }
@@ -203,7 +224,7 @@ public class SnippetDetailFragment<T, Result>
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_snippet_detail, container, false);
         ButterKnife.inject(this, rootView);
-        mSnippetDescription.setText(mItem.getDescription());
+        mSnippetDescription.setText(mSnippet.getDescription());
         return rootView;
     }
 
@@ -221,7 +242,7 @@ public class SnippetDetailFragment<T, Result>
         if (null != getActivity() && getActivity() instanceof AppCompatActivity) {
             AppCompatActivity activity = (AppCompatActivity) getActivity();
             if (null != activity.getSupportActionBar()) {
-                activity.getSupportActionBar().setTitle(mItem.getName());
+                activity.getSupportActionBar().setTitle(mSnippet.getName());
             }
         }
         if (null != savedInstanceState && savedInstanceState.containsKey(STATUS_COLOR)) {
@@ -230,30 +251,6 @@ public class SnippetDetailFragment<T, Result>
                 mStatusColor.setBackgroundColor(statusColor);
                 mStatusColor.setTag(statusColor);
             }
-        }
-    }
-
-    //
-    // Custom event bindings
-    //
-    @Override
-    public void success(Result result, Response response) {
-        if (!isAdded()) {
-            // the user has left...
-            return;
-        }
-        mRunButton.setEnabled(true);
-        mProgressbar.setVisibility(GONE);
-        displayResponse(response);
-    }
-
-    @Override
-    public void failure(RetrofitError error) {
-        Timber.e(error, "");
-        mRunButton.setEnabled(true);
-        mProgressbar.setVisibility(GONE);
-        if (null != error.getResponse()) {
-            displayResponse(error.getResponse());
         }
     }
 

@@ -33,7 +33,7 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<MSGraphMeServic
                 // Marker element
                 new MeSnippets(null) {
                     @Override
-                    public void request(MSGraphMeService service, Callback callback) {
+                    public void request(Callback callback) {
                         // Not implemented
                     }
                 },
@@ -45,8 +45,8 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<MSGraphMeServic
                  */
                 new MeSnippets<Response>(get_me) {
                     @Override
-                    public void request(MSGraphMeService service, Callback<Response> callback) {
-                        service.getMe(
+                    public void request(Callback<Response> callback) {
+                        mService.getMe(
                                 getVersion(),
                                 callback);
                     }
@@ -58,8 +58,8 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<MSGraphMeServic
                  */
                 new MeSnippets<Response>(get_me_responsibilities) {
                     @Override
-                    public void request(MSGraphMeService service, Callback<Response> callback) {
-                        service.getMeResponsibilities(
+                    public void request(Callback<Response> callback) {
+                        mService.getMeResponsibilities(
                                 getVersion(),
                                 SnippetApp.getApp().getString(R.string.meResponsibility),
                                 callback);
@@ -72,8 +72,8 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<MSGraphMeServic
                  */
                 new MeSnippets<Response>(get_me_manager) {
                     @Override
-                    public void request(MSGraphMeService service, Callback<Response> callback) {
-                        service.getMeEntities(
+                    public void request(Callback<Response> callback) {
+                        mService.getMeEntities(
                                 getVersion(),
                                 SnippetApp.getApp().getString(R.string.manager),
                                 callback);
@@ -86,8 +86,8 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<MSGraphMeServic
                  */
                 new MeSnippets<Response>(get_me_direct_reports) {
                     @Override
-                    public void request(MSGraphMeService service, Callback<Response> callback) {
-                        service.getMeEntities(getVersion(),
+                    public void request(Callback<Response> callback) {
+                        mService.getMeEntities(getVersion(),
                                 SnippetApp.getApp().getString(R.string.directReports),
                                 callback);
                     }
@@ -99,8 +99,8 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<MSGraphMeServic
                  */
                 new MeSnippets<Response>(get_me_group_membership) {
                     @Override
-                    public void request(MSGraphMeService service, Callback<Response> callback) {
-                        service.getMeEntities(
+                    public void request(Callback<Response> callback) {
+                        mService.getMeEntities(
                                 getVersion(),
                                 SnippetApp.getApp().getString(R.string.memberOf),
                                 callback);
@@ -113,8 +113,8 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<MSGraphMeServic
                  */
                 new MeSnippets<Response>(get_me_photo) {
                     @Override
-                    public void request(MSGraphMeService service, Callback<Response> callback) {
-                        service.getMeEntities(
+                    public void request(Callback<Response> callback) {
+                        mService.getMeEntities(
                                 getVersion(),
                                 SnippetApp.getApp().getString(R.string.userPhoto),
                                 callback);
@@ -124,6 +124,6 @@ public abstract class MeSnippets<Result> extends AbstractSnippet<MSGraphMeServic
     }
 
     @Override
-    public abstract void request(MSGraphMeService service, Callback<Result> callback);
+    public abstract void request(Callback<Result> callback);
 
 }

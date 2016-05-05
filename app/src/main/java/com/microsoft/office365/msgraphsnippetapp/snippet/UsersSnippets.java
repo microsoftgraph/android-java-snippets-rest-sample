@@ -33,7 +33,7 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserS
                 new UsersSnippets(null) {
 
                     @Override
-                    public void request(MSGraphUserService msGraphUserService, Callback callback) {
+                    public void request(Callback callback) {
                     }
                 },
 
@@ -44,10 +44,8 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserS
                  */
                 new UsersSnippets<Response>(get_organization_users) {
                     @Override
-                    public void request(
-                            MSGraphUserService msGraphUserService,
-                            Callback<Response> callback) {
-                        msGraphUserService.getUsers(getVersion(), callback);
+                    public void request(Callback<Response> callback) {
+                        mService.getUsers(getVersion(), callback);
                     }
                 },
 
@@ -58,10 +56,8 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserS
                  */
                 new UsersSnippets<Response>(get_organization_filtered_users) {
                     @Override
-                    public void request(
-                            MSGraphUserService msGraphUserService,
-                            Callback<Response> callback) {
-                        msGraphUserService.getFilteredUsers(
+                    public void request(Callback<Response> callback) {
+                        mService.getFilteredUsers(
                                 getVersion(),
                                 "country eq 'United States'",
                                 callback);
@@ -75,9 +71,7 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserS
                  */
                 new UsersSnippets<Response>(insert_organization_user) {
                     @Override
-                    public void request(
-                            MSGraphUserService msGraphUserService,
-                            Callback<Response> callback) {
+                    public void request(Callback<Response> callback) {
                         //Use a random UUID for the user name
                         String randomUserName = UUID.randomUUID().toString();
 
@@ -99,11 +93,11 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserS
 
                         user.passwordProfile = password;
 
-                        msGraphUserService.createNewUser(getVersion(), user, callback);
+                        mService.createNewUser(getVersion(), user, callback);
                     }
                 }
         };
     }
 
-    public abstract void request(MSGraphUserService msGraphUserService, Callback<Result> callback);
+    public abstract void request(Callback<Result> callback);
 }

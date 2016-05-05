@@ -36,7 +36,7 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<MSGraphEven
                 new EventsSnippets(null) {
 
                     @Override
-                    public void request(MSGraphEventsService o, Callback callback) {
+                    public void request(Callback callback) {
                         //No implementation
                     }
                 },
@@ -50,10 +50,8 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<MSGraphEven
                 new EventsSnippets<Envelope<Event>>(get_user_events) {
 
                     @Override
-                    public void request(
-                            MSGraphEventsService MSGraphEventsService,
-                            Callback<Envelope<Event>> callback) {
-                        MSGraphEventsService.getEvents(getVersion(), callback);
+                    public void request(Callback<Envelope<Event>> callback) {
+                        mService.getEvents(getVersion(), callback);
                     }
                 },
 
@@ -65,10 +63,8 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<MSGraphEven
                 new EventsSnippets<Event>(create_event) {
 
                     @Override
-                    public void request(
-                            MSGraphEventsService MSGraphEventsService,
-                            Callback<Event> callback) {
-                        MSGraphEventsService.createNewEvent(getVersion(), createEvent(), callback);
+                    public void request(Callback<Event> callback) {
+                        mService.createNewEvent(getVersion(), createEvent(), callback);
                     }
 
                 },
@@ -80,11 +76,9 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<MSGraphEven
                 new EventsSnippets<Event>(update_event) {
 
                     @Override
-                    public void request(
-                            final MSGraphEventsService MSGraphEventsService,
-                            final Callback<Event> callback) {
+                    public void request(final Callback<Event> callback) {
                         // create a new event to update
-                        MSGraphEventsService.createNewEvent(
+                        mService.createNewEvent(
                                 getVersion(),
                                 createEvent(),
                                 new Callback<Event>() {
@@ -95,7 +89,7 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<MSGraphEven
                                         Event amended = new Event();
                                         amended.subject = "Weekly Sync Meeting";
 
-                                        MSGraphEventsService.updateEvent(
+                                        mService.updateEvent(
                                                 getVersion(),
                                                 eventVO.id,
                                                 amended,
@@ -118,19 +112,17 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<MSGraphEven
                 new EventsSnippets<Response>(delete_event) {
 
                     @Override
-                    public void request(
-                            final MSGraphEventsService MSGraphEventsService,
-                            final Callback<Response> callback) {
+                    public void request(final Callback<Response> callback) {
                         // create a new event to delete
                         Event event = createEvent();
-                        MSGraphEventsService.createNewEvent(
+                        mService.createNewEvent(
                                 getVersion(),
                                 event,
                                 new Callback<Event>() {
                                     @Override
                                     public void success(Event eventVO, Response response) {
                                         // event created, now let's delete it
-                                        MSGraphEventsService.deleteEvent(
+                                        mService.deleteEvent(
                                                 getVersion(),
                                                 eventVO.id,
                                                 callback);
@@ -146,7 +138,7 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<MSGraphEven
         };
     }
 
-    public abstract void request(MSGraphEventsService service, Callback<Result> callback);
+    public abstract void request(Callback<Result> callback);
 
     private static Event createEvent() {
         Event event = new Event();

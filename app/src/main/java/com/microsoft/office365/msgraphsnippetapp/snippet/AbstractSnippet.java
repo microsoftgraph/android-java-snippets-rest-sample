@@ -103,6 +103,6 @@ public abstract class AbstractSnippet<Service, Result> {
         return mIsAdminRequired;
     }
 
-    public abstract void request(Service service, Callback<Result> callback);
+    public abstract void request(Callback<Result> callback);
 
 }
