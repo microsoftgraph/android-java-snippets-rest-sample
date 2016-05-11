@@ -80,7 +80,7 @@ To use the Microsoft Graph API REST snippets project, you need the following:
 * The [Gradle](http://www.gradle.org) build automation system version 2.2.1 or later.
 * An Office 365 account. You can sign up for [an Office 365 Developer subscription](https://portal.office.com/Signup/Signup.aspx?OfferId=C69E7747-2566-4897-8CBA-B998ED3BAB88&DL=DEVELOPERPACK&ali=1#0) that includes the resources you need to start building Office 365 apps.
 * [Java Development Kit (JDK) 7](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).
-* A registered Azure application with a client id and redirect URI value. See [Grant permissions to the Snippets application in Azure] for details about how to create the correct permissions.
+* A registered Azure application with a client id and redirect URI value. See [Grant permissions to the Snippets application in Azure](../../wiki/Grant-permissions-for-the-Snippet-application-in-Azure) for details about how to create the correct permissions.
 
 ##Azure client application registration
 1. Sign in to the [Azure Management Portal](https://manage.windowsazure.com), using your Azure AD credentials.
@@ -108,7 +108,7 @@ To use the Microsoft Graph API REST snippets project, you need the following:
 
 ##Configure the project
 
-1. Download or clone the [Android Unified API Snippets sample](https://github.com/OfficeDev/O365-Android-Unified-API-Snippets).
+1. Download or clone the [Android Microsoft Graph Snippets sample](../../).
 2. Start Android Studio.
 3. From the **Welcome to Android Studio** dialog box, choose **Import project (Eclipse ADT, Gradle, etc)**.
 4. Select the **settings.gradle** file in the **
