@@ -48,6 +48,9 @@ public class AppModule {
                         preferences.getString(SharedPrefsUtil.PREF_AUTH_TOKEN, null);
                 if (null != token) {
                     request.addHeader("Authorization", "Bearer " + token);
+                    // This header has been added to identify this sample in the Microsoft Graph service.
+                    // If you're using this code for your project please remove the following line.
+                    request.addHeader("SampleID", "android-java-snippets-rest-sample");
                 }
             }
         };
