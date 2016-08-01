@@ -7,7 +7,7 @@ android:
   - android-23
   - build-tools-23.0.2
 script:
-- gradle clean build
+- ./gradlew clean build
 notifications:
   email:
     recipients:
