@@ -16,9 +16,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    lintOptions {
+        // Normally this would throw an error
+        // https://github.com/square/okio/issues/58
+        warning 'InvalidPackage'
+    }
 }
 
 dependencies {
-    compile 'com.squareup.retrofit:retrofit:1.9.0'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'joda-time:joda-time:2.7'
 }

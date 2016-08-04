@@ -12,8 +12,11 @@ import com.microsoft.office365.msgraphsnippetapp.inject.AppModule;
 import javax.inject.Inject;
 
 import dagger.ObjectGraph;
-import retrofit.RequestInterceptor;
-import retrofit.RestAdapter;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import timber.log.Timber;
 
 public class SnippetApp extends Application {
@@ -31,10 +34,10 @@ public class SnippetApp extends Application {
     protected String endpoint;
 
     @Inject
-    protected RestAdapter.LogLevel logLevel;
+    protected HttpLoggingInterceptor.Level logLevel;
 
     @Inject
-    protected RequestInterceptor requestInterceptor;
+    protected Interceptor interceptor;
 
     public static SnippetApp getApp() {
         return sSnippetApp;
@@ -51,11 +54,19 @@ public class SnippetApp extends Application {
         }
     }
 
-    public RestAdapter getRestAdapter() {
-        return new RestAdapter.Builder()
-                .setEndpoint(endpoint)
-                .setLogLevel(logLevel)
-                .setRequestInterceptor(requestInterceptor)
+    public Retrofit getRetrofit() {
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(logLevel);
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(interceptor)
+                .addInterceptor(logging)
+                .build();
+
+        return new Retrofit.Builder()
+                .baseUrl(endpoint)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
 }

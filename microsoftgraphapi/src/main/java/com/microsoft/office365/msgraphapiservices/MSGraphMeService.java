@@ -4,45 +4,39 @@
  */
 package com.microsoft.office365.msgraphapiservices;
 
-import retrofit.Callback;
-import retrofit.client.Response;
-import retrofit.http.GET;
-import retrofit.http.Path;
-import retrofit.http.Query;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface MSGraphMeService {
 
     /**
      * @param version  The version of the API to use (beta, v1, etc...)
-     * @param callback will be called with results of REST operation
      */
     @GET("/{version}/me")
-    void getMe(
-            @Path("version") String version,
-            Callback<Response> callback
+    Call<ResponseBody> getMe(
+            @Path("version") String version
     );
 
     /**
      * @param version  The version of the API to use (beta, v1, etc...)
      * @param select   A set of names specifying which properties to return in results
-     * @param callback will be called with results of REST operation
      */
     @GET("/{version}/me")
-    void getMeResponsibilities(
+    Call<ResponseBody> getMeResponsibilities(
             @Path("version") String version,
-            @Query("$select") String select,
-            Callback<Response> callback
+            @Query("$select") String select
     );
 
     /**
      * @param version  The version of the API to use (beta, v1, etc...)
      * @param entity   Which entity to retrieve (manager, direct reports, etc...)
-     * @param callback will be called with results of REST operation
      */
     @GET("/{version}/me/{entity}")
-    void getMeEntities(
+    Call<ResponseBody> getMeEntities(
             @Path("version") String version,
-            @Path("entity") String entity,
-            Callback<Response> callback
+            @Path("entity") String entity
     );
 }

@@ -6,7 +6,7 @@ package com.microsoft.office365.msgraphsnippetapp.snippet;
 
 import com.microsoft.office365.msgraphsnippetapp.application.SnippetApp;
 
-import retrofit.Callback;
+import retrofit2.Callback;
 
 import static com.microsoft.office365.msgraphsnippetapp.R.string.beta;
 

@@ -16,8 +16,8 @@ import com.microsoft.office365.msgraphsnippetapp.R;
 import com.microsoft.office365.msgraphsnippetapp.application.SnippetApp;
 import com.microsoft.office365.msgraphsnippetapp.util.SharedPrefsUtil;
 
-import retrofit.Callback;
-import retrofit.client.Response;
+import okhttp3.ResponseBody;
+import retrofit2.Callback;
 
 import static com.microsoft.office365.msgraphsnippetapp.R.array.get_user_messages;
 import static com.microsoft.office365.msgraphsnippetapp.R.array.send_an_email_message;
@@ -47,12 +47,10 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<MSGraphMai
                  * HTTP GET https://graph.microsoft.com/{version}/me/messages
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/user_list_messages
                  */
-                new MessageSnippets<Response>(get_user_messages) {
+                new MessageSnippets<ResponseBody>(get_user_messages) {
                     @Override
-                    public void request(MSGraphMailService service, Callback<Response> callback) {
-                        service.getMail(
-                                getVersion(),
-                                callback);
+                    public void request(MSGraphMailService service, Callback<ResponseBody> callback) {
+                        service.getMail(getVersion()).enqueue(callback);
                     }
                 },
 
@@ -60,9 +58,9 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<MSGraphMai
                  * HTTP POST https://graph.microsoft.com/{version}/me/messages/sendMail
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/user_post_messages
                  */
-                new MessageSnippets<Response>(send_an_email_message) {
+                new MessageSnippets<ResponseBody>(send_an_email_message) {
                     @Override
-                    public void request(MSGraphMailService service, Callback<Response> callback) {
+                    public void request(MSGraphMailService service, Callback<ResponseBody> callback) {
                         // Get a context so we can interrogate Resources & SharedPreferences
                         SnippetApp app = SnippetApp.getApp();
                         SharedPreferences prefs = SharedPrefsUtil.getSharedPreferences();
@@ -76,7 +74,7 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<MSGraphMai
                         MessageWrapper msgWrapper = createMessage(subject, body, recipient);
 
                         // send it
-                        service.createNewMail(getVersion(), msgWrapper, callback);
+                        service.createNewMail(getVersion(), msgWrapper).enqueue(callback);
                     }
                 }
         };

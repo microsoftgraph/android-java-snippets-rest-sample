@@ -11,10 +11,14 @@ import com.microsoft.office365.msgraphsnippetapp.ServiceConstants;
 import com.microsoft.office365.msgraphsnippetapp.application.SnippetApp;
 import com.microsoft.office365.msgraphsnippetapp.util.SharedPrefsUtil;
 
+import java.io.IOException;
+
 import dagger.Module;
 import dagger.Provides;
-import retrofit.RequestInterceptor;
-import retrofit.RestAdapter;
+import okhttp3.Interceptor;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor.Level;
 
 @Module(library = true,
         injects = {SnippetApp.class}
@@ -31,27 +35,32 @@ public class AppModule {
 
     @Provides
     @SuppressWarnings("unused") // not actually unused -- used by Dagger
-    public RestAdapter.LogLevel providesLogLevel() {
-        return RestAdapter.LogLevel.FULL;
+    public Level providesLogLevel() {
+        return Level.BODY;
     }
 
     @Provides
     @SuppressWarnings("unused") // not actually unused -- used by Dagger
-    public RequestInterceptor providesRequestInterceptor() {
-        return new RequestInterceptor() {
+    public Interceptor providesRequestInterceptor() {
+        return new Interceptor() {
             @Override
-            public void intercept(RequestFacade request) {
+            public Response intercept(Chain chain) throws IOException {
                 // apply the Authorization header if we had a token...
                 final SharedPreferences preferences
                         = SnippetApp.getApp().getSharedPreferences(PREFS, Context.MODE_PRIVATE);
                 final String token =
                         preferences.getString(SharedPrefsUtil.PREF_AUTH_TOKEN, null);
-                if (null != token) {
-                    request.addHeader("Authorization", "Bearer " + token);
-                    // This header has been added to identify this sample in the Microsoft Graph service.
-                    // If you're using this code for your project please remove the following line.
-                    request.addHeader("SampleID", "android-java-snippets-rest-sample");
-                }
+
+                Request request = chain.request();
+                request = request.newBuilder()
+                        .addHeader("Authorization", "Bearer " + token)
+                        // This header has been added to identify this sample in the Microsoft Graph service.
+                        // If you're using this code for your project please remove the following line.
+                        .addHeader("SampleID", "android-java-snippets-rest-sample")
+                        .build();
+
+                Response response = chain.proceed(request);
+                return response;
             }
         };
     }

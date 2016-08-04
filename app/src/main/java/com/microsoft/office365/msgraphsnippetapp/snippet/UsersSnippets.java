@@ -13,8 +13,8 @@ import com.microsoft.office365.msgraphsnippetapp.util.SharedPrefsUtil;
 
 import java.util.UUID;
 
-import retrofit.Callback;
-import retrofit.client.Response;
+import okhttp3.ResponseBody;
+import retrofit2.Callback;
 
 import static com.microsoft.office365.msgraphsnippetapp.R.array.get_organization_filtered_users;
 import static com.microsoft.office365.msgraphsnippetapp.R.array.get_organization_users;
@@ -42,12 +42,12 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserS
                  * HTTP GET https://graph.microsoft.com/{version}/myOrganization/users
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/user_list
                  */
-                new UsersSnippets<Response>(get_organization_users) {
+                new UsersSnippets<ResponseBody>(get_organization_users) {
                     @Override
                     public void request(
                             MSGraphUserService msGraphUserService,
-                            Callback<Response> callback) {
-                        msGraphUserService.getUsers(getVersion(), callback);
+                            Callback<ResponseBody> callback) {
+                        msGraphUserService.getUsers(getVersion()).enqueue(callback);
                     }
                 },
 
@@ -56,15 +56,15 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserS
                  * HTTP GET https://graph.microsoft.com/{version}/myOrganization/users?$filter=country eq \'United States\'
                  * @see http://graph.microsoft.io/docs/overview/query_parameters
                  */
-                new UsersSnippets<Response>(get_organization_filtered_users) {
+                new UsersSnippets<ResponseBody>(get_organization_filtered_users) {
                     @Override
                     public void request(
                             MSGraphUserService msGraphUserService,
-                            Callback<Response> callback) {
+                            Callback<ResponseBody> callback) {
                         msGraphUserService.getFilteredUsers(
                                 getVersion(),
-                                "country eq 'United States'",
-                                callback);
+                                "country eq 'United States'"
+                        ).enqueue(callback);
                     }
                 },
 
@@ -73,11 +73,11 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserS
                  * HTTP POST https://graph.microsoft.com/{version}/myOrganization/users
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/user_post_users
                  */
-                new UsersSnippets<Response>(insert_organization_user) {
+                new UsersSnippets<ResponseBody>(insert_organization_user) {
                     @Override
                     public void request(
                             MSGraphUserService msGraphUserService,
-                            Callback<Response> callback) {
+                            Callback<ResponseBody> callback) {
                         //Use a random UUID for the user name
                         String randomUserName = UUID.randomUUID().toString();
 
@@ -99,7 +99,7 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserS
 
                         user.passwordProfile = password;
 
-                        msGraphUserService.createNewUser(getVersion(), user, callback);
+                        msGraphUserService.createNewUser(getVersion(), user).enqueue(callback);
                     }
                 }
         };

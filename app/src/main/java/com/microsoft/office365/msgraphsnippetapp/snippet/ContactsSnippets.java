@@ -6,8 +6,8 @@ package com.microsoft.office365.msgraphsnippetapp.snippet;
 
 import com.microsoft.office365.msgraphapiservices.MSGraphContactService;
 
-import retrofit.Callback;
-import retrofit.client.Response;
+import okhttp3.ResponseBody;
+import retrofit2.Callback;
 
 import static com.microsoft.office365.msgraphsnippetapp.R.array.get_all_contacts;
 
@@ -33,10 +33,10 @@ public abstract class ContactsSnippets<Result> extends AbstractSnippet<MSGraphCo
                  * HTTP GET https://graph.microsoft.com/{version}/myOrganization/contacts
                  * @see https://graph.microsoft.io/docs/api-reference/v1.0/api/user_list_contacts
                  */
-                new ContactsSnippets<Response>(get_all_contacts) {
+                new ContactsSnippets<ResponseBody>(get_all_contacts) {
                     @Override
-                    public void request(MSGraphContactService service, Callback<Response> callback) {
-                        service.getContacts(getVersion(), callback);
+                    public void request(MSGraphContactService service, Callback<ResponseBody> callback) {
+                        service.getContacts(getVersion()).enqueue(callback);
                     }
                 }
         };

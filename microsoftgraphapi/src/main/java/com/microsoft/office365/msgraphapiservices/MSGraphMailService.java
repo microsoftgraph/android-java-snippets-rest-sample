@@ -6,12 +6,12 @@ package com.microsoft.office365.msgraphapiservices;
 
 import com.microsoft.office365.microsoftgraphvos.MessageWrapper;
 
-import retrofit.Callback;
-import retrofit.client.Response;
-import retrofit.http.Body;
-import retrofit.http.GET;
-import retrofit.http.POST;
-import retrofit.http.Path;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface MSGraphMailService {
 
@@ -19,12 +19,10 @@ public interface MSGraphMailService {
      * Fetch a user's Messages
      *
      * @param version  The version of the API to use (beta, v1, etc...)
-     * @param callback will be called with results of REST operation
      */
     @GET("/{version}/me/messages")
-    void getMail(
-            @Path("version") String version,
-            Callback<Response> callback
+    Call<ResponseBody> getMail(
+            @Path("version") String version
     );
 
     /**
@@ -32,12 +30,10 @@ public interface MSGraphMailService {
      *
      * @param version  The version of the API to use (beta, v1, etc...)
      * @param body     The Message object
-     * @param callback will be called with results of REST operation
      */
     @POST("/{version}/me/microsoft.graph.sendmail")
-    void createNewMail(
+    Call<ResponseBody> createNewMail(
             @Path("version") String version,
-            @Body MessageWrapper body,
-            Callback<Response> callback
+            @Body MessageWrapper body
     );
 }
