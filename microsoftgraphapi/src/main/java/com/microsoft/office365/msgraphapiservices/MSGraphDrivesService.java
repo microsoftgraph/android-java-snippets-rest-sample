@@ -7,48 +7,44 @@ package com.microsoft.office365.msgraphapiservices;
 import com.microsoft.office365.microsoftgraphvos.Base;
 import com.microsoft.office365.microsoftgraphvos.DriveItem;
 
-import retrofit.Callback;
-import retrofit.client.Response;
-import retrofit.http.Body;
-import retrofit.http.DELETE;
-import retrofit.http.GET;
-import retrofit.http.PATCH;
-import retrofit.http.POST;
-import retrofit.http.PUT;
-import retrofit.http.Path;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.http.Body;
+import retrofit2.http.DELETE;
+import retrofit2.http.GET;
+import retrofit2.http.PATCH;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public interface MSGraphDrivesService {
 
     /**
      * @param version  The version of the API to use (beta, v1, etc...)
-     * @param callback will be called with results of REST operation
      */
     @GET("/{version}/me/drive")
-    void getDrive(
-            @Path("version") String version,
-            Callback<Response> callback
+    Call<ResponseBody> getDrive(
+            @Path("version") String version
     );
 
     /**
      * @param version  The version of the API to use (beta, v1, etc...)
-     * @param callback will be called with results of REST operation
      */
     @GET("/{version}/myOrganization/drives")
-    void getOrganizationDrives(
-            @Path("version") String version,
-            Callback<Response> callback
+    Call<ResponseBody> getOrganizationDrives(
+            @Path("version") String version
     );
 
     /**
      * Gets children file metadata of the root folder
      *
      * @param version  The version of the API to use (beta, v1, etc...)
-     * @param callback will be called with results of REST operation
      */
     @GET("/{version}/me/drive/root/children")
-    void getCurrentUserFiles(
-            @Path("version") String version,
-            Callback<Response> callback
+    Call<ResponseBody> getCurrentUserFiles(
+            @Path("version") String version
     );
 
     /**
@@ -57,14 +53,12 @@ public interface MSGraphDrivesService {
      * @param version  The version of the API to use (beta, v1, etc...)
      * @param filename The name of the file to create
      * @param value    The file contents
-     * @param callback will be called with results of REST operation
      */
     @PUT("/{version}/me/drive/root/children/{filename}/content")
-    void putNewFile(
+    Call<ResponseBody> putNewFile(
             @Path("version") String version,
             @Path("filename") String filename,
-            @Body String value,
-            Callback<Base> callback
+            @Body String value
     );
 
     /**
@@ -72,27 +66,23 @@ public interface MSGraphDrivesService {
      *
      * @param version  The version of the API to use (beta, v1, etc...)
      * @param filename The name of the file to download
-     * @param callback will be called with results of REST operation
      */
     @GET("/{version}/me/drive/items/{filename}/content")
-    void downloadFile(
+    Call<ResponseBody> downloadFile(
             @Path("version") String version,
-            @Path("filename") String filename,
-            Callback<Response> callback
+            @Path("filename") String filename
     );
 
     /**
      * @param version  The version of the API to use (beta, v1, etc...)
      * @param fileId   The unique id of the file to update
      * @param value    The updated contents of the file to update
-     * @param callback will be called with results of REST operation
      */
     @PUT("/{version}/me/drive/items/{fileId}/content")
-    void updateFile(
+    Call<ResponseBody> updateFile(
             @Path("version") String version,
             @Path("fileId") String fileId,
-            @Body String value,
-            Callback<Base> callback
+            @Body String value
     );
 
     /**
@@ -100,13 +90,11 @@ public interface MSGraphDrivesService {
      *
      * @param version  The version of the API to use (beta, v1, etc...)
      * @param fileId   The unique id of the file to delete
-     * @param callback will be called with results of REST operation
      */
     @DELETE("/{version}/me/drive/items/{fileId}/")
-    void deleteFile(
+    Call<ResponseBody> deleteFile(
             @Path("version") String version,
-            @Path("fileId") String fileId,
-            Callback<Base> callback
+            @Path("fileId") String fileId
     );
 
     /**
@@ -115,14 +103,12 @@ public interface MSGraphDrivesService {
      * @param version  The version of the API to use (beta, v1, etc...)
      * @param fileId   The unique id of the file to delete
      * @param body     The updated object - fields with differing values from the server-side version will be updated
-     * @param callback will be called with results of REST operation
      */
     @PATCH("/{version}/me/drive/items/{fileId}/")
-    void renameFile(
+    Call<ResponseBody> renameFile(
             @Path("version") String version,
             @Path("fileId") String fileId,
-            @Body DriveItem body,
-            Callback<Base> callback
+            @Body DriveItem body
     );
 
     /**
@@ -130,12 +116,10 @@ public interface MSGraphDrivesService {
      *
      * @param version  The version of the API to use (beta, v1, etc...)
      * @param body     The folder metadata to use in the creation
-     * @param callback will be called with results of REST operation
      */
     @POST("/{version}/me/drive/root/children")
-    void createFolder(
+    Call<ResponseBody> createFolder(
             @Path("version") String version,
-            @Body DriveItem body,
-            Callback<Response> callback
+            @Body DriveItem body
     );
 }

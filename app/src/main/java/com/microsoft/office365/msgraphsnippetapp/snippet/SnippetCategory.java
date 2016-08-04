@@ -52,6 +52,6 @@ public class SnippetCategory<T> {
     }
 
     private static <T> T create(Class<T> clazz) {
-        return SnippetApp.getApp().getRestAdapter().create(clazz);
+        return SnippetApp.getApp().getRetrofit().create(clazz);
     }
 }

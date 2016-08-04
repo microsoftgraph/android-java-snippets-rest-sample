@@ -6,47 +6,43 @@ package com.microsoft.office365.msgraphapiservices;
 
 import com.microsoft.office365.microsoftgraphvos.User;
 
-import retrofit.Callback;
-import retrofit.client.Response;
-import retrofit.http.Body;
-import retrofit.http.GET;
-import retrofit.http.POST;
-import retrofit.http.Path;
-import retrofit.http.Query;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface MSGraphUserService {
 
     /**
      * @param version  The version of the API to use (beta, v1, etc...)
      * @param filter   An expression specifying criteria for which set of results should be returned
-     * @param callback will be called with results of REST operation
      */
     @GET("/{version}/myOrganization/users")
-    void getFilteredUsers(
+    Call<ResponseBody> getFilteredUsers(
             @Path("version") String version,
-            @Query("$filter") String filter,
-            Callback<Response> callback
+            @Query("$filter") String filter
     );
 
     /**
      * @param version  The version of the API to use (beta, v1, etc...)
-     * @param callback will be called with results of REST operation
      */
     @GET("/{version}/myOrganization/users")
-    void getUsers(
-            @Path("version") String version,
-            Callback<Response> callback
+    Call<ResponseBody> getUsers(
+            @Path("version") String version
     );
 
     /**
      * @param version  The version of the API to use (beta, v1, etc...)
      * @param body     JSON describing properties of the new user
-     * @param callback will be called with results of REST operation
      */
     @POST("/{version}/myOrganization/users")
-    void createNewUser(
+    Call<ResponseBody> createNewUser(
             @Path("version") String version,
-            @Body User body,
-            Callback<Response> callback
+            @Body User body
     );
 }

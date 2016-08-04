@@ -4,10 +4,12 @@
  */
 package com.microsoft.office365.msgraphapiservices;
 
-import retrofit.Callback;
-import retrofit.client.Response;
-import retrofit.http.GET;
-import retrofit.http.Path;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 public interface MSGraphContactService {
 
@@ -15,12 +17,9 @@ public interface MSGraphContactService {
      * Get the connected user's contacts.
      *
      * @param version  The version of the API to use (beta, v1, etc...)
-     * @param callback will be called with results of REST operation
      */
     @GET("/{version}/myOrganization/contacts")
-    void getContacts(
-            @Path("version") String version,
-            Callback<Response> callback
+    Call<ResponseBody> getContacts(
+            @Path("version") String version
     );
-
 }

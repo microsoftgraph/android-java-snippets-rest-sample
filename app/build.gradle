@@ -44,4 +44,9 @@ dependencies {
 
     compile 'com.google.guava:guava:18.0'
 
+    // Test
+    testCompile 'junit:junit:4.12'
+    // Retrofit + custom HTTP
+    compile 'com.squareup.okhttp3:okhttp:3.3.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
 }

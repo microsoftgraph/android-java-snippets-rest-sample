@@ -38,10 +38,12 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Header;
-import retrofit.client.Response;
+import okhttp3.Headers;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.http.Header;
+import retrofit2.Response;
 import timber.log.Timber;
 
 import static android.view.View.GONE;
@@ -237,24 +239,30 @@ public class SnippetDetailFragment<T, Result>
     // Custom event bindings
     //
     @Override
-    public void success(Result result, Response response) {
-        if (!isAdded()) {
-            // the user has left...
-            return;
+    public void onResponse(Call<Result> call, Response<Result> response) {
+        if (response.isSuccessful()) {
+            if (!isAdded()) {
+                // the user has left...
+                return;
+            }
+            mRunButton.setEnabled(true);
+            mProgressbar.setVisibility(GONE);
+            displayResponse(response);
+        } else {
+            Timber.e(response.errorBody().toString(), this);
+            mRunButton.setEnabled(true);
+            mProgressbar.setVisibility(GONE);
+
+            if (null != response.errorBody()) {
+                displayResponse(response);
+            }
         }
-        mRunButton.setEnabled(true);
-        mProgressbar.setVisibility(GONE);
-        displayResponse(response);
     }
 
     @Override
-    public void failure(RetrofitError error) {
-        Timber.e(error, "");
-        mRunButton.setEnabled(true);
-        mProgressbar.setVisibility(GONE);
-        if (null != error.getResponse()) {
-            displayResponse(error.getResponse());
-        }
+    public void onFailure(Call<Result> call, Throwable t) {
+        Timber.e(t.getMessage(), this);
+        displayThrowable(t);
     }
 
     //
@@ -321,19 +329,17 @@ public class SnippetDetailFragment<T, Result>
 
     private void displayResponse(Response response) {
         int color = getColor(response);
-        displayStatusCode(Integer.toString(response.getStatus()), getResources().getColor(color));
+        displayStatusCode(Integer.toString(response.code()), getResources().getColor(color));
         displayRequestUrl(response);
         maybeDisplayResponseHeaders(response);
         maybeDisplayResponseBody(response);
     }
 
     private void maybeDisplayResponseBody(Response response) {
-        if (null != response.getBody()) {
+        if (null != response.body()) {
             String body = null;
-            InputStream is = null;
             try {
-                is = response.getBody().in();
-                body = IOUtils.toString(is);
+                body = ((ResponseBody) response.body()).string();
                 String formattedJson = new JSONObject(body).toString(2);
                 mResponseBody.setText(formattedJson);
             } catch (JSONException e) {
@@ -344,30 +350,27 @@ public class SnippetDetailFragment<T, Result>
                     // set the stack trace as the response body
                     displayThrowable(e);
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
-                displayThrowable(e);
-            } finally {
-                if (null != is) {
-                    IOUtils.closeQuietly(is);
-                }
+            } catch (IOException ioe) {
+                displayThrowable(ioe);
             }
         }
     }
 
     private void maybeDisplayResponseHeaders(Response response) {
-        if (null != response.getHeaders()) {
-            List<Header> headers = response.getHeaders();
+        if (null != response.headers()) {
+            Headers headers = response.headers();
             String headerText = "";
-            for (Header header : headers) {
-                headerText += header.getName() + " : " + header.getValue() + "\n";
+
+            for(int i = 0; i < headers.size(); i++){
+                headerText += headers.name(i) + " : " + headers.value(i) + "\n";
             }
+
             mResponseHeaders.setText(headerText);
         }
     }
 
     private void displayRequestUrl(Response response) {
-        String requestUrl = response.getUrl();
+        String requestUrl = response.raw().request().url().toString();
         mRequestUrl.setText(requestUrl);
     }
 
@@ -387,7 +390,7 @@ public class SnippetDetailFragment<T, Result>
 
     private int getColor(Response response) {
         int color;
-        switch (response.getStatus() / 100) {
+        switch (response.code() / 100) {
             case 1:
             case 2:
                 color = code_1xx;
@@ -404,5 +407,4 @@ public class SnippetDetailFragment<T, Result>
         }
         return color;
     }
-
 }
