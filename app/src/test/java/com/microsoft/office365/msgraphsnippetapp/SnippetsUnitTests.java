@@ -7,6 +7,12 @@ package com.microsoft.office365.msgraphsnippetapp;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.microsoft.office365.msgraphapiservices.MSGraphContactService;
+import com.microsoft.office365.msgraphapiservices.MSGraphDrivesService;
+import com.microsoft.office365.msgraphapiservices.MSGraphEventsService;
+import com.microsoft.office365.msgraphapiservices.MSGraphGroupsService;
+import com.microsoft.office365.msgraphapiservices.MSGraphMailService;
+import com.microsoft.office365.msgraphapiservices.MSGraphMeService;
+import com.microsoft.office365.msgraphapiservices.MSGraphUserService;
 
 import org.json.JSONException;
 import org.junit.Assert;
@@ -37,10 +43,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SnippetsUnitTests {
     private static String accessToken;
-    private static Retrofit sRetrofit;
     private static String clientId = System.getenv("test_client_id_v1");
     private static String username = System.getenv("test_username");
     private static String password = System.getenv("test_password");
+
+    private static MSGraphContactService contactService;
+    private static MSGraphDrivesService drivesService;
+    private static MSGraphEventsService eventsService;
+    private static MSGraphGroupsService groupsService;
+    private static MSGraphMailService mailService;
+    private static MSGraphMeService meService;
+    private static MSGraphUserService userService;
 
     private static final String CONTENT_TYPE = "application/x-www-form-urlencoded";
     private static final String GRANT_TYPE = "password";
@@ -108,18 +121,24 @@ public class SnippetsUnitTests {
                 .addInterceptor(logging)
                 .build();
 
-        sRetrofit = new Retrofit.Builder()
+        Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ServiceConstants.AUTHENTICATION_RESOURCE_ID)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+
+        contactService = retrofit.create(MSGraphContactService.class);
+        drivesService = retrofit.create(MSGraphDrivesService.class);
+        eventsService = retrofit.create(MSGraphEventsService.class);
+        groupsService = retrofit.create(MSGraphGroupsService.class);
+        mailService = retrofit.create(MSGraphMailService.class);
+        meService = retrofit.create(MSGraphMeService.class);
+        userService = retrofit.create(MSGraphUserService.class);
     }
 
     @Test
     public void getContacts() throws IOException {
-        MSGraphContactService service = sRetrofit.create(MSGraphContactService.class);
-
-        Call<ResponseBody> call = service.getContacts("beta");
+        Call<ResponseBody> call = contactService.getContacts("beta");
         Response response = call.execute();
         Assert.assertTrue("HTTP Response was not successful", response.isSuccessful());
     }
