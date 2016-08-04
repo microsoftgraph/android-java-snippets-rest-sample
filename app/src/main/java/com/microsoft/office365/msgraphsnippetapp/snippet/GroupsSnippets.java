@@ -4,7 +4,6 @@
  */
 package com.microsoft.office365.msgraphsnippetapp.snippet;
 
-import com.microsoft.office365.microsoftgraphvos.Envelope;
 import com.microsoft.office365.microsoftgraphvos.Group;
 import com.microsoft.office365.msgraphapiservices.MSGraphGroupsService;
 

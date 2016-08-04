@@ -4,7 +4,6 @@
  */
 package com.microsoft.office365.msgraphsnippetapp.snippet;
 
-import com.microsoft.office365.microsoftgraphvos.Base;
 import com.microsoft.office365.microsoftgraphvos.DriveItem;
 import com.microsoft.office365.microsoftgraphvos.Folder;
 import com.microsoft.office365.msgraphapiservices.MSGraphDrivesService;
@@ -19,7 +18,6 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import timber.log.Timber;
 
 import static com.microsoft.office365.msgraphsnippetapp.R.array.create_me_file;
 import static com.microsoft.office365.msgraphsnippetapp.R.array.create_me_folder;

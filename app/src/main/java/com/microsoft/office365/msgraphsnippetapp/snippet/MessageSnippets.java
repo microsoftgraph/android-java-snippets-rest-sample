@@ -18,7 +18,6 @@ import com.microsoft.office365.msgraphsnippetapp.util.SharedPrefsUtil;
 
 import okhttp3.ResponseBody;
 import retrofit2.Callback;
-import retrofit2.Response;
 
 import static com.microsoft.office365.msgraphsnippetapp.R.array.get_user_messages;
 import static com.microsoft.office365.msgraphsnippetapp.R.array.send_an_email_message;

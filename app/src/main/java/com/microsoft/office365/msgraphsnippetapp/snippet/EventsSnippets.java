@@ -11,7 +11,6 @@ import com.microsoft.office365.microsoftgraphvos.Event;
 import com.microsoft.office365.microsoftgraphvos.ItemBody;
 import com.microsoft.office365.microsoftgraphvos.Location;
 import com.microsoft.office365.msgraphapiservices.MSGraphEventsService;
-import okhttp3.ResponseBody;
 
 import org.joda.time.DateTime;
 import org.json.JSONException;
@@ -19,10 +18,10 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import timber.log.Timber;
 
 import static com.microsoft.office365.msgraphsnippetapp.R.array.create_event;
 import static com.microsoft.office365.msgraphsnippetapp.R.array.delete_event;

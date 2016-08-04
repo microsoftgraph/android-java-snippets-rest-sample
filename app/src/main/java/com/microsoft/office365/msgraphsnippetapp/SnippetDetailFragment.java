@@ -25,15 +25,12 @@ import android.widget.Toast;
 import com.microsoft.office365.msgraphsnippetapp.snippet.AbstractSnippet;
 import com.microsoft.office365.msgraphsnippetapp.snippet.SnippetContent;
 
-import org.apache.commons.io.IOUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -42,7 +39,6 @@ import okhttp3.Headers;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.http.Header;
 import retrofit2.Response;
 import timber.log.Timber;
 

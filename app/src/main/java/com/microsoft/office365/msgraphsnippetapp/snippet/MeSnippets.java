@@ -10,7 +10,6 @@ import com.microsoft.office365.msgraphsnippetapp.application.SnippetApp;
 
 import okhttp3.ResponseBody;
 import retrofit2.Callback;
-import retrofit2.Response;
 
 import static com.microsoft.office365.msgraphsnippetapp.R.array.get_me;
 import static com.microsoft.office365.msgraphsnippetapp.R.array.get_me_direct_reports;

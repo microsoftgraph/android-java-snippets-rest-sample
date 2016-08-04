@@ -15,7 +15,6 @@ import java.util.UUID;
 
 import okhttp3.ResponseBody;
 import retrofit2.Callback;
-import retrofit2.Response;
 
 import static com.microsoft.office365.msgraphsnippetapp.R.array.get_organization_filtered_users;
 import static com.microsoft.office365.msgraphsnippetapp.R.array.get_organization_users;
