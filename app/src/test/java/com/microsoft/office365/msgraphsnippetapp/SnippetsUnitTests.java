@@ -6,6 +6,8 @@ package com.microsoft.office365.msgraphsnippetapp;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.microsoft.office365.microsoftgraphvos.DriveItem;
+import com.microsoft.office365.microsoftgraphvos.Folder;
 import com.microsoft.office365.msgraphapiservices.MSGraphContactService;
 import com.microsoft.office365.msgraphapiservices.MSGraphDrivesService;
 import com.microsoft.office365.msgraphapiservices.MSGraphEventsService;
@@ -28,6 +30,9 @@ import java.net.URLEncoder;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -46,6 +51,7 @@ public class SnippetsUnitTests {
     private static String clientId = System.getenv("test_client_id_v1");
     private static String username = System.getenv("test_username");
     private static String password = System.getenv("test_password");
+    private static String dateTime;
 
     private static MSGraphContactService contactService;
     private static MSGraphDrivesService drivesService;
@@ -134,6 +140,9 @@ public class SnippetsUnitTests {
         mailService = retrofit.create(MSGraphMailService.class);
         meService = retrofit.create(MSGraphMeService.class);
         userService = retrofit.create(MSGraphUserService.class);
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmmss", Locale.US);
+        dateTime = simpleDateFormat.format(new Date());
     }
 
     @Test
@@ -141,5 +150,96 @@ public class SnippetsUnitTests {
         Call<ResponseBody> call = contactService.getContacts("beta");
         Response response = call.execute();
         Assert.assertTrue("HTTP Response was not successful", response.isSuccessful());
+    }
+
+    @Test
+    public void getDrive() throws IOException {
+        Call<ResponseBody> call = drivesService.getDrive("v1.0");
+        Response response = call.execute();
+        Assert.assertTrue("HTTP Response was not successful", response.isSuccessful());
+    }
+
+    @Test
+    public void getOrganizationDrives() throws IOException {
+        Call<ResponseBody> call = drivesService.getOrganizationDrives("v1.0");
+        Response response = call.execute();
+        Assert.assertTrue("HTTP Response was not successful", response.isSuccessful());
+    }
+
+    @Test
+    public void getCurrentUserFiles() throws IOException {
+        Call<ResponseBody> call = drivesService.getCurrentUserFiles("v1.0");
+        Response response = call.execute();
+        Assert.assertTrue("HTTP Response was not successful", response.isSuccessful());
+    }
+
+    @Test
+    public void createUpdateDownloadRenameDeleteFile() throws IOException {
+        Call<ResponseBody> call = drivesService.putNewFile(
+                "v1.0",
+                "UnitTest_" + dateTime + ".txt",
+                "File created by unit test"
+        );
+        Response<ResponseBody> response = call.execute();
+        Assert.assertTrue("File creation was not successful", response.isSuccessful());
+
+        String rawJson = response.body().string();
+        String fileId = new JsonParser().parse(rawJson).getAsJsonObject().get("id").getAsString();
+
+        call = drivesService.updateFile(
+                "v1.0",
+                fileId,
+                "File updated by unit test"
+        );
+        response = call.execute();
+        Assert.assertTrue("File update was not successful", response.isSuccessful());
+
+        call = drivesService.downloadFile(
+                "v1.0",
+                fileId
+        );
+        response = call.execute();
+        Assert.assertTrue("File download was not successful", response.isSuccessful());
+
+        DriveItem delta = new DriveItem();
+        delta.name = "UnitTest_" + dateTime + "(updated).txt";
+        call = drivesService.renameFile(
+                "v1.0",
+                fileId,
+                delta
+        );
+        response = call.execute();
+        Assert.assertTrue("File renaming was not successful", response.isSuccessful());
+
+        call = drivesService.deleteFile(
+                "v1.0",
+                fileId
+        );
+        response = call.execute();
+        Assert.assertTrue("File download was not successful", response.isSuccessful());
+    }
+
+    @Test
+    public void createDeleteFolder() throws IOException {
+        DriveItem folder = new DriveItem();
+        folder.name = "UnitTest_" + dateTime;
+        folder.folder = new Folder();
+        folder.conflictBehavior = "rename";
+        Call<ResponseBody> call = drivesService.createFolder(
+                "v1.0",
+                folder
+        );
+        Response<ResponseBody> response = call.execute();
+        Assert.assertTrue("Folder creation was not successful", response.isSuccessful());
+
+        String rawJson = response.body().string();
+        String folderId = new JsonParser().parse(rawJson).getAsJsonObject().get("id").getAsString();
+
+        call = drivesService.deleteFile(
+                "v1.0",
+                folderId
+        );
+        response = call.execute();
+        Assert.assertTrue("File download was not successful", response.isSuccessful());
     }
 }
