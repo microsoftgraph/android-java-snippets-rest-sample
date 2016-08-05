@@ -12,6 +12,7 @@ import com.microsoft.office365.microsoftgraphvos.Event;
 import com.microsoft.office365.microsoftgraphvos.Folder;
 import com.microsoft.office365.microsoftgraphvos.Group;
 import com.microsoft.office365.microsoftgraphvos.MessageWrapper;
+import com.microsoft.office365.microsoftgraphvos.User;
 import com.microsoft.office365.msgraphapiservices.MSGraphContactService;
 import com.microsoft.office365.msgraphapiservices.MSGraphDrivesService;
 import com.microsoft.office365.msgraphapiservices.MSGraphEventsService;
@@ -22,6 +23,7 @@ import com.microsoft.office365.msgraphapiservices.MSGraphUserService;
 import com.microsoft.office365.msgraphsnippetapp.snippet.EventsSnippets;
 import com.microsoft.office365.msgraphsnippetapp.snippet.GroupsSnippets;
 import com.microsoft.office365.msgraphsnippetapp.snippet.MessageSnippets;
+import com.microsoft.office365.msgraphsnippetapp.snippet.UsersSnippets;
 
 import org.json.JSONException;
 import org.junit.Assert;
@@ -58,6 +60,7 @@ public class SnippetsUnitTests {
     private static String accessToken;
     private static String clientId = System.getenv("test_client_id_v1");
     private static String username = System.getenv("test_username");
+    private static String tenant = username.split("@")[1];
     private static String password = System.getenv("test_password");
     private static String dateTime;
 
@@ -390,6 +393,38 @@ public class SnippetsUnitTests {
         Call<ResponseBody> call = meService.getMeEntities(
                 "v1.0",
                 "directReports"
+        );
+        Response response = call.execute();
+        Assert.assertTrue("HTTP Response was not successful", response.isSuccessful());
+    }
+
+    @Test
+    public void getUsers() throws IOException {
+        Call<ResponseBody> call = userService.getUsers("v1.0");
+        Response response = call.execute();
+        Assert.assertTrue("HTTP Response was not successful", response.isSuccessful());
+    }
+
+    @Test
+    public void getFilteredUsers() throws IOException {
+        Call<ResponseBody> call = userService.getFilteredUsers(
+                "v1.0",
+                "country eq 'United States'"
+        );
+        Response response = call.execute();
+        Assert.assertTrue("HTTP Response was not successful", response.isSuccessful());
+    }
+
+    @Test
+    public void createNewUser() throws IOException {
+        User user = UsersSnippets.createUser(
+                "UnitTest " + dateTime,
+                "UnitTest_" + dateTime,
+                "UnitTest_" + dateTime + "@" + tenant
+        );
+        Call<ResponseBody> call = userService.createNewUser(
+                "v1.0",
+                user
         );
         Response response = call.execute();
         Assert.assertTrue("HTTP Response was not successful", response.isSuccessful());
