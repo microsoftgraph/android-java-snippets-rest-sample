@@ -11,6 +11,7 @@ import com.microsoft.office365.microsoftgraphvos.DriveItem;
 import com.microsoft.office365.microsoftgraphvos.Event;
 import com.microsoft.office365.microsoftgraphvos.Folder;
 import com.microsoft.office365.microsoftgraphvos.Group;
+import com.microsoft.office365.microsoftgraphvos.MessageWrapper;
 import com.microsoft.office365.msgraphapiservices.MSGraphContactService;
 import com.microsoft.office365.msgraphapiservices.MSGraphDrivesService;
 import com.microsoft.office365.msgraphapiservices.MSGraphEventsService;
@@ -20,6 +21,7 @@ import com.microsoft.office365.msgraphapiservices.MSGraphMeService;
 import com.microsoft.office365.msgraphapiservices.MSGraphUserService;
 import com.microsoft.office365.msgraphsnippetapp.snippet.EventsSnippets;
 import com.microsoft.office365.msgraphsnippetapp.snippet.GroupsSnippets;
+import com.microsoft.office365.msgraphsnippetapp.snippet.MessageSnippets;
 
 import org.json.JSONException;
 import org.junit.Assert;
@@ -342,5 +344,27 @@ public class SnippetsUnitTests {
         );
         response = call.execute();
         Assert.assertTrue("Group deletion was not successful", response.isSuccessful());
+    }
+
+    @Test
+    public void getMail() throws IOException {
+        Call<ResponseBody> call = mailService.getMail("v1.0");
+        Response response = call.execute();
+        Assert.assertTrue("HTTP Response was not successful", response.isSuccessful());
+    }
+
+    @Test
+    public void sendMail() throws IOException {
+        MessageWrapper message = MessageSnippets.createMessage(
+                "UnitTest_" + dateTime,
+                "Message created from a unit test",
+                username
+        );
+        Call<ResponseBody> call = mailService.createNewMail(
+                "v1.0",
+                message
+        );
+        Response response = call.execute();
+        Assert.assertTrue("HTTP Response was not successful", response.isSuccessful());
     }
 }

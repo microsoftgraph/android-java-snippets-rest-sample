@@ -83,7 +83,7 @@ public abstract class MessageSnippets<Result> extends AbstractSnippet<MSGraphMai
     @Override
     public abstract void request(MSGraphMailService service, Callback<Result> callback);
 
-    private static MessageWrapper createMessage(
+    public static MessageWrapper createMessage(
             String msgSubject,
             String msgBody,
             String... msgRecipients) {
