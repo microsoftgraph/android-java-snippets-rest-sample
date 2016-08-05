@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion "23.0.3"
 
     defaultConfig {
         minSdkVersion 16
@@ -19,12 +19,12 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:appcompat-v7:24.1.1'
 
     // Dependency injection
-    compile 'com.squareup.dagger:dagger:1.2.2'
-    provided 'com.squareup.dagger:dagger-compiler:1.2.2'
+    compile 'com.squareup.dagger:dagger:1.2.5'
+    provided 'com.squareup.dagger:dagger-compiler:1.2.5'
 
     // Azure AD
-    compile 'com.microsoft.aad:adal:1.1.11'
+    compile 'com.microsoft.aad:adal:1.1.13'
 }

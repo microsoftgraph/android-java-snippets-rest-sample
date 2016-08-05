@@ -237,7 +237,7 @@ public abstract class GroupsSnippets<Result> extends AbstractSnippet<MSGraphGrou
     @Override
     public abstract void request(MSGraphGroupsService service, Callback<Result> callback);
 
-    private static Group createGroup() {
+    public static Group createGroup() {
         Group group = new Group();
         group.displayName = group.mailNickname = UUID.randomUUID().toString();
         return group;

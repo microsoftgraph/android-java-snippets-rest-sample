@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        minSdkVersion 7
+        minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -16,15 +16,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    lintOptions {
-        // Normally this would throw an error
-        // https://github.com/square/okio/issues/58
-        warning 'InvalidPackage'
-    }
 }
 
 dependencies {
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-    compile 'joda-time:joda-time:2.9.4'
+    compile 'com.android.support:appcompat-v7:+'
+
+    // Dependency injection
+    compile 'com.squareup.dagger:dagger:+'
+    provided 'com.squareup.dagger:dagger-compiler:+'
+
+    // Azure AD
+    compile 'com.microsoft.aad:adal:1.1.13'
 }

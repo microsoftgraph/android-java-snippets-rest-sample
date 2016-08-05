@@ -162,7 +162,7 @@ public abstract class EventsSnippets<Result> extends AbstractSnippet<MSGraphEven
 
     public abstract void request(MSGraphEventsService service, Callback<Result> callback);
 
-    private static Event createEvent() {
+    public static Event createEvent() {
         Event event = new Event();
         event.subject = "Microsoft Graph API Discussion";
 

@@ -80,24 +80,16 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserS
                             Callback<ResponseBody> callback) {
                         //Use a random UUID for the user name
                         String randomUserName = UUID.randomUUID().toString();
-
-                        // create the user
-                        User user = new User();
-                        user.accountEnabled = true;
-                        user.displayName = "SAMPLE " + randomUserName;
-                        user.mailNickname = randomUserName;
-
                         // get the tenant from preferences
                         SharedPreferences prefs = SharedPrefsUtil.getSharedPreferences();
                         String tenant = prefs.getString(PREF_USER_TENANT, "");
-                        user.userPrincipalName = randomUserName + "@" + tenant;
 
-                        // initialize a password & say whether or not the user must change it
-                        PasswordProfile password = new PasswordProfile();
-                        password.password = UUID.randomUUID().toString().substring(0, 16);
-                        password.forceChangePasswordNextSignIn = false;
-
-                        user.passwordProfile = password;
+                        // create the user
+                        User user = createUser(
+                                "SAMPLE " + randomUserName,
+                                randomUserName,
+                                randomUserName + "@" + tenant
+                        );
 
                         msGraphUserService.createNewUser(getVersion(), user).enqueue(callback);
                     }
@@ -106,4 +98,22 @@ public abstract class UsersSnippets<Result> extends AbstractSnippet<MSGraphUserS
     }
 
     public abstract void request(MSGraphUserService msGraphUserService, Callback<Result> callback);
+
+    public static User createUser(String displayName, String mailNickname, String userPrincipalName) {
+        User user = new User();
+        user.accountEnabled = true;
+        user.displayName = displayName;
+        user.mailNickname = mailNickname;
+
+        user.userPrincipalName = userPrincipalName;
+
+        // initialize a password & say whether or not the user must change it
+        PasswordProfile password = new PasswordProfile();
+        password.password = UUID.randomUUID().toString().substring(0, 16);
+        password.forceChangePasswordNextSignIn = false;
+
+        user.passwordProfile = password;
+
+        return user;
+    }
 }
