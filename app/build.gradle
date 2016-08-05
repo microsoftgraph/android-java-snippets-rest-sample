@@ -32,7 +32,7 @@ dependencies {
     compile(project(':microsoftgraphapi'))
 
     // Dagger compiler for DI annotation support
-    provided('com.squareup.dagger:dagger-compiler:1.2.2') {
+    provided('com.squareup.dagger:dagger-compiler:1.2.5') {
         exclude group: 'com.google.guava'
     }
 
@@ -40,16 +40,16 @@ dependencies {
     compile 'com.jakewharton:butterknife:6.1.0'
 
     // Timber
-    compile 'com.jakewharton.timber:timber:3.1.0'
+    compile 'com.jakewharton.timber:timber:4.1.2'
 
     // Apache Commons
-    compile 'commons-io:commons-io:2.4'
+    compile 'commons-io:commons-io:2.5'
 
-    compile 'com.google.guava:guava:18.0'
+    compile 'com.google.guava:guava:19.0'
 
     // Test
     testCompile 'junit:junit:4.12'
     // Retrofit + custom HTTP
-    compile 'com.squareup.okhttp3:okhttp:3.3.1'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
 }
