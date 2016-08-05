@@ -108,7 +108,7 @@ public class AuthenticationManager {
 
     private void authenticateSilent(
             final AuthenticationCallback<AuthenticationResult> authenticationCallback) {
-        mAuthenticationContext.acquireTokenSilent(
+        mAuthenticationContext.acquireTokenSilentAsync(
                 mAuthenticationResourceId,
                 mClientId,
                 getUserId(),
