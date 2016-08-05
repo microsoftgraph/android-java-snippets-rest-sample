@@ -10,6 +10,7 @@ import com.microsoft.office365.microsoftgraphvos.Attendee;
 import com.microsoft.office365.microsoftgraphvos.DriveItem;
 import com.microsoft.office365.microsoftgraphvos.Event;
 import com.microsoft.office365.microsoftgraphvos.Folder;
+import com.microsoft.office365.microsoftgraphvos.Group;
 import com.microsoft.office365.msgraphapiservices.MSGraphContactService;
 import com.microsoft.office365.msgraphapiservices.MSGraphDrivesService;
 import com.microsoft.office365.msgraphapiservices.MSGraphEventsService;
@@ -18,6 +19,7 @@ import com.microsoft.office365.msgraphapiservices.MSGraphMailService;
 import com.microsoft.office365.msgraphapiservices.MSGraphMeService;
 import com.microsoft.office365.msgraphapiservices.MSGraphUserService;
 import com.microsoft.office365.msgraphsnippetapp.snippet.EventsSnippets;
+import com.microsoft.office365.msgraphsnippetapp.snippet.GroupsSnippets;
 
 import org.json.JSONException;
 import org.junit.Assert;
@@ -35,6 +37,7 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -266,13 +269,13 @@ public class SnippetsUnitTests {
         Assert.assertTrue("Event creation was not successful", response.isSuccessful());
 
         String rawJson = response.body().string();
-        String eventId = new JsonParser().parse(rawJson).getAsJsonObject().get("id").getAsString();
+        String id = new JsonParser().parse(rawJson).getAsJsonObject().get("id").getAsString();
 
         Event amended = new Event();
         amended.subject = "UnitTest_" + dateTime + "_(updated)";
         call = eventsService.updateEvent(
                 "v1.0",
-                eventId,
+                id,
                 amended
         );
         response = call.execute();
@@ -280,9 +283,64 @@ public class SnippetsUnitTests {
 
         call = eventsService.deleteEvent(
                 "v1.0",
-                eventId
+                id
         );
         response = call.execute();
         Assert.assertTrue("Event deletion was not successful", response.isSuccessful());
+    }
+
+    @Test
+    public void getGroups() throws IOException {
+        Call<ResponseBody> call = groupsService.getGroups("v1.0", new HashMap<String, String>());
+        Response response = call.execute();
+        Assert.assertTrue("HTTP Response was not successful", response.isSuccessful());
+    }
+
+    @Test
+    public void createGetUpdateEntitiesDeleteGroup() throws IOException {
+        Group group = GroupsSnippets.createGroup();
+        group.displayName = "UnitTest_" + dateTime;
+
+        Call<ResponseBody> call = groupsService.createGroup(
+                "v1.0",
+                group
+        );
+        Response<ResponseBody> response = call.execute();
+        Assert.assertTrue("Group creation was not successful", response.isSuccessful());
+
+        String rawJson = response.body().string();
+        String id = new JsonParser().parse(rawJson).getAsJsonObject().get("id").getAsString();
+
+        call = groupsService.getGroup(
+                "v1.0",
+                id
+        );
+        response = call.execute();
+        Assert.assertTrue("Group retrieval was not successful", response.isSuccessful());
+
+        Group amended = new Group();
+        amended.displayName = "UnitTest_" + dateTime + "_(updated)";
+        call = groupsService.updateGroup(
+                "v1.0",
+                id,
+                amended
+        );
+        response = call.execute();
+        Assert.assertTrue("Group update was not successful", response.isSuccessful());
+
+        call = groupsService.getGroupEntities(
+                "v1.0",
+                id,
+                "owners"
+        );
+        response = call.execute();
+        Assert.assertTrue("Group entities retrieval was not successful", response.isSuccessful());
+
+        call = groupsService.deleteGroup(
+                "v1.0",
+                id
+        );
+        response = call.execute();
+        Assert.assertTrue("Group deletion was not successful", response.isSuccessful());
     }
 }
