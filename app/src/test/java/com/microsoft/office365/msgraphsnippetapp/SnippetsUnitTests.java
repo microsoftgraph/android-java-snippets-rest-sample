@@ -6,7 +6,9 @@ package com.microsoft.office365.msgraphsnippetapp;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.microsoft.office365.microsoftgraphvos.Attendee;
 import com.microsoft.office365.microsoftgraphvos.DriveItem;
+import com.microsoft.office365.microsoftgraphvos.Event;
 import com.microsoft.office365.microsoftgraphvos.Folder;
 import com.microsoft.office365.msgraphapiservices.MSGraphContactService;
 import com.microsoft.office365.msgraphapiservices.MSGraphDrivesService;
@@ -15,6 +17,7 @@ import com.microsoft.office365.msgraphapiservices.MSGraphGroupsService;
 import com.microsoft.office365.msgraphapiservices.MSGraphMailService;
 import com.microsoft.office365.msgraphapiservices.MSGraphMeService;
 import com.microsoft.office365.msgraphapiservices.MSGraphUserService;
+import com.microsoft.office365.msgraphsnippetapp.snippet.EventsSnippets;
 
 import org.json.JSONException;
 import org.junit.Assert;
@@ -216,7 +219,7 @@ public class SnippetsUnitTests {
                 fileId
         );
         response = call.execute();
-        Assert.assertTrue("File download was not successful", response.isSuccessful());
+        Assert.assertTrue("File deletion was not successful", response.isSuccessful());
     }
 
     @Test
@@ -240,6 +243,46 @@ public class SnippetsUnitTests {
                 folderId
         );
         response = call.execute();
-        Assert.assertTrue("File download was not successful", response.isSuccessful());
+        Assert.assertTrue("File deletion was not successful", response.isSuccessful());
+    }
+
+    @Test
+    public void getEvents() throws IOException {
+        Call<ResponseBody> call = eventsService.getEvents("v1.0");
+        Response response = call.execute();
+        Assert.assertTrue("HTTP Response was not successful", response.isSuccessful());
+    }
+
+    @Test
+    public void createUpdateDeleteEvent() throws IOException {
+        Event event = EventsSnippets.createEvent();
+        event.subject = "UnitTest_" + dateTime;
+        event.attendees = new Attendee[]{};
+        Call<ResponseBody> call = eventsService.createNewEvent(
+                "v1.0",
+                event
+        );
+        Response<ResponseBody> response = call.execute();
+        Assert.assertTrue("Event creation was not successful", response.isSuccessful());
+
+        String rawJson = response.body().string();
+        String eventId = new JsonParser().parse(rawJson).getAsJsonObject().get("id").getAsString();
+
+        Event amended = new Event();
+        amended.subject = "UnitTest_" + dateTime + "_(updated)";
+        call = eventsService.updateEvent(
+                "v1.0",
+                eventId,
+                amended
+        );
+        response = call.execute();
+        Assert.assertTrue("Event update was not successful", response.isSuccessful());
+
+        call = eventsService.deleteEvent(
+                "v1.0",
+                eventId
+        );
+        response = call.execute();
+        Assert.assertTrue("Event deletion was not successful", response.isSuccessful());
     }
 }
