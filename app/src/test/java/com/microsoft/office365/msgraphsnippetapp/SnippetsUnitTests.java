@@ -367,4 +367,31 @@ public class SnippetsUnitTests {
         Response response = call.execute();
         Assert.assertTrue("HTTP Response was not successful", response.isSuccessful());
     }
+
+    @Test
+    public void getMe() throws IOException {
+        Call<ResponseBody> call = meService.getMe("v1.0");
+        Response response = call.execute();
+        Assert.assertTrue("HTTP Response was not successful", response.isSuccessful());
+    }
+
+    @Test
+    public void getMeResponsibilities() throws IOException {
+        Call<ResponseBody> call = meService.getMeResponsibilities(
+                "v1.0",
+                "AboutMe,Responsibilities,Tags"
+        );
+        Response response = call.execute();
+        Assert.assertTrue("HTTP Response was not successful", response.isSuccessful());
+    }
+
+    @Test
+    public void getMeEntities() throws IOException {
+        Call<ResponseBody> call = meService.getMeEntities(
+                "v1.0",
+                "directReports"
+        );
+        Response response = call.execute();
+        Assert.assertTrue("HTTP Response was not successful", response.isSuccessful());
+    }
 }
