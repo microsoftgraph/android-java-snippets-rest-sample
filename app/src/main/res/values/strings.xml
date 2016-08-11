@@ -20,7 +20,7 @@
     <string name="manager">manager</string>
     <string name="meResponsibility">AboutMe,Responsibilities,Tags</string>
     <string name="memberOf">memberOf</string>
-    <string name="userPhoto">photo</string>
+    <string name="userPhoto">photo/$value</string>
     <string name="mailBody">You can send an email by making a POST request to /me/sendMail.</string>
     <string name="mailSubject">Microsoft Graph snippets</string>
     <string name="fragment_snippet_textview_description">Description of the Snippet here</string>

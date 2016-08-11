@@ -8,6 +8,8 @@ import android.annotation.TargetApi;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +39,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 import okhttp3.Headers;
+import okhttp3.MediaType;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,6 +53,7 @@ import static com.microsoft.office365.msgraphsnippetapp.R.color.code_3xx;
 import static com.microsoft.office365.msgraphsnippetapp.R.color.code_4xx;
 import static com.microsoft.office365.msgraphsnippetapp.R.color.transparent;
 import static com.microsoft.office365.msgraphsnippetapp.R.id.btn_run;
+import static com.microsoft.office365.msgraphsnippetapp.R.id.img_photo;
 import static com.microsoft.office365.msgraphsnippetapp.R.id.progressbar;
 import static com.microsoft.office365.msgraphsnippetapp.R.id.txt_desc;
 import static com.microsoft.office365.msgraphsnippetapp.R.id.txt_hyperlink;
@@ -111,6 +116,9 @@ public class SnippetDetailFragment<T, Result>
      */
     @InjectView(txt_response_body)
     protected TextView mResponseBody;
+
+    @InjectView(img_photo)
+    protected ImageView mResponsePhoto;
 
     /**
      * Barber's pole progress bar (indeterminate)
@@ -334,6 +342,17 @@ public class SnippetDetailFragment<T, Result>
     private void maybeDisplayResponseBody(Response response) {
         if (null != response.body()) {
             String body = null;
+
+            if(((ResponseBody) response.body()).contentType().toString().equals("image/jpeg")) {
+                try {
+                    byte[] byteArray = ((ResponseBody) response.body()).bytes();
+                    Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+                    mResponsePhoto.setImageBitmap(bmp);
+                } catch (IOException e) {
+
+                }
+            }
+
             try {
                 body = ((ResponseBody) response.body()).string();
                 String formattedJson = new JSONObject(body).toString(2);

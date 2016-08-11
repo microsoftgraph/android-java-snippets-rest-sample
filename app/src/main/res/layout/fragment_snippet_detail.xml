@@ -149,5 +149,10 @@
             android:layout_height="wrap_content"
             android:freezesText="true" />
 
+        <ImageView
+            android:id="@+id/img_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
     </LinearLayout>
 </ScrollView>
