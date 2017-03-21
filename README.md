@@ -71,11 +71,11 @@ You can explore the following operations for Office 365:
 * [Renames a file in the user's root folder.](/app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/DrivesSnippets.java#L211)
 * [Creates a folder under the user's root folder.](/app/src/main/java/com/microsoft/office365/msgraphsnippetapp/snippet/DrivesSnippets.java#L252)
 
-##Device requirement
+## Device requirement
 To run the Microsoft Graph API REST snippets project, your device must meet the following requirement:
 * Android API level 16 or newer
 
-###Prerequisites
+### Prerequisites
 To use the Microsoft Graph API REST snippets project, you need the following:
 * The latest version of [Android Studio](http://developer.android.com/sdk/index.html).
 * The [Gradle](http://www.gradle.org) build automation system version 2.2.1 or later.
@@ -83,7 +83,7 @@ To use the Microsoft Graph API REST snippets project, you need the following:
 * [Java Development Kit (JDK) 7](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).
 * A registered Azure application with a client id and redirect URI value. See [Grant permissions to the Snippets application in Azure](../../wiki/Grant-permissions-for-the-Snippet-application-in-Azure) for details about how to create the correct permissions.
 
-##Azure client application registration
+## Azure client application registration
 1. Sign in to the [Azure Management Portal](https://manage.windowsazure.com), using your Azure AD credentials.
 2.	Click **Active Directory** on the left menu, then select the directory for your Office 365 developer site.
 3.	On the top menu, click **Applications**.
@@ -107,7 +107,7 @@ To use the Microsoft Graph API REST snippets project, you need the following:
 13. Click **Save** in the bottom menu.
 14. Note the values specified for **Client ID** on the **Configure** page. You will need these later when you configure the project.
 
-##Configure the project
+## Configure the project
 
 1. Download or clone the [Android Microsoft Graph Snippets sample](../../).
 2. Start Android Studio.
@@ -119,7 +119,7 @@ O365-Android-Unified-API-Snippets** folder, and then click **OK**.
 7. Find the [`CLIENT_ID`](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/ServiceConstants.java#L10) string and set its value to the client id you registered in Azure.
 8. Find the [`REDIRECT_URI`](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/ServiceConstants.java#L9) string and set its value to the redirect URI you registered in Azure.
 
-##Run the project
+## Run the project
 After you've built the project you can run it on an emulator or device.
 
 1. Run the project.
@@ -132,27 +132,27 @@ After you've built the project you can run it on an emulator or device.
 7. Click the back button on the REST Explorer toolbar to return to the REST operation list.
 8. (Optional) Click the overflow menu to get the Disconnect menu option.
 
-##How the sample affects your tenant data
+## How the sample affects your tenant data
 This sample runs REST commands that create, read, update, or delete data. When running commands that delete or edit data, the sample creates fake entities. The fake entities are deleted or edited so that your actual tenant data is unaffected. The sample will leave behind fake entities on your tenant.
 
-##Understand the code
+## Understand the code
 The Office 365 Android unified API snippets project uses these classes to manage interactions with the Microsoft Graph API on Office 365:
-###Sample project organization
+### Sample project organization
 The Office 365 Android unified API snippets project is comprised of three modules. The modular design enables you to build a new app based on this sample by importing the modules into your app. After you've imported the modules, use the code in the Office 365 Android unified API snippets [app](/app) module as an example of how to call methods in the other sample modules.
 
-###Modules in the Office 365 Android unified API snippets project
+### Modules in the Office 365 Android unified API snippets project
 * [`o365-Auth`](/o365-auth). This module contains the library calls to authenticate a user with Office 365.
 * [`unifiedapi`](/unifiedapi). This module encapsulates the Retrofit REST operations used for the Office 365 Microsoft Graph API endpoint.
 * [`app`](/app). The UI and business logic module. REST operations are started in the snippet classes in this module.
 
-###Snippet classes
+### Snippet classes
 A snippet runs a single REST operation and returns the results. Snippets are found in the [app](/app) module. Snippets set the state required to make the calls on the Microsoft Graph API service classes described below.
 * [`ContactsSnippets`](/app/src/main/java/com/microsoft/o365_android_unified_api_snippets/snippet/ContactsSnippets.java)
 * [`EventsSnippets`](/app/src/main/java/com/microsoft/o365_android_unified_api_snippets/snippet/EventsSnippet.java)
 * [`GroupsSnippets`](/app/src/main/java/com/microsoft/o365_android_unified_api_snippets/snippet/GroupsSnippets.java)
 * [`AbstractSnippet`](/app/src/main/java/com/microsoft/o365_android_unified_api_snippets/snippet/AbstractSnippet.java)
 
-###Microsoft Graph API service classes
+### Microsoft Graph API service classes
 These classes are found in the [unifiedapi](/unifiedapi) module and make the Retrofit library calls that generate the REST queries and handle operation results. These service classes are consumed by the snippets.
 * [`MSGraphContactService`](/microsoftgraphapi/src/main/java/com/microsoft/unifiedapi/service/MSGraphContactService.java)
 * [`MSGraphEventsService`](/microsoftgraphapi/src/main/java/com/microsoft/unifiedapi/service/MSGraphEventsService.java)
@@ -160,7 +160,7 @@ These classes are found in the [unifiedapi](/unifiedapi) module and make the Ret
 * [`MSGraphMailService`](/microsoftgraphapi/src/main/java/com/microsoft/unifiedapi/service/MSGraphMailService.java)
 * [`MSGraphUserService`](/microsoftgraphapi/src/main/java/com/microsoft/unifiedapi/service/MSGraphUserService.java)
 
-###Authentication classes for Office 365 business accounts
+### Authentication classes for Office 365 business accounts
 The authentication classes are found in the [o365-Auth](/o365-auth) module. These classes use the [Microsoft Azure Active Directory Library (ADAL) for Android](../../../../AzureAD/azure-activedirectory-library-for-android) to connect to a business version of Office 365 such as Office 365 Enterprise. 
 
 * [`AuthenticationManager`](/o365-auth/src/main/java/com/microsoft/o365_auth/AuthenticationManager.java). Encapsulates user connect and disconnect logic in addition to Azure app authorization.
