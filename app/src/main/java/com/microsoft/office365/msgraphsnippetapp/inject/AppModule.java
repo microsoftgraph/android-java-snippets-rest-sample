@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 
 import com.microsoft.office365.msgraphsnippetapp.ServiceConstants;
 import com.microsoft.office365.msgraphsnippetapp.application.SnippetApp;
+import com.microsoft.office365.msgraphsnippetapp.authentication.AuthenticationManager;
 import com.microsoft.office365.msgraphsnippetapp.util.SharedPrefsUtil;
 
 import java.io.IOException;

@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 
 import com.microsoft.aad.adal.AuthenticationResult;
 import com.microsoft.office365.msgraphsnippetapp.application.SnippetApp;
+import com.microsoft.office365.msgraphsnippetapp.authentication.AuthenticationManager;
 import com.microsoft.office365.msgraphsnippetapp.inject.AppModule;
 
 public class SharedPrefsUtil {
@@ -25,8 +26,8 @@ public class SharedPrefsUtil {
         setPreference(PREF_USER_ID, result.getUserInfo().getDisplayableId());
     }
 
-    public static void persistAuthToken(AuthenticationResult result) {
-        setPreference(PREF_AUTH_TOKEN, result.getAccessToken());
+    public static void persistAuthToken(String authToken) {
+        setPreference(PREF_AUTH_TOKEN, authToken);
     }
 
     public static void persistUserTenant(String tenant) {

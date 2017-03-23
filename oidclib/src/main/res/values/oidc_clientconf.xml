@@ -10,7 +10,7 @@
     <bool name="oidc_oauth2only">true</bool>
 
     <!-- OIDC client information you received from your OIDC provider -->
-    <string name="oidc_clientId">7de59867-868d-44c3-ad29-c035bc3a680d</string>
+    <string name="oidc_clientId">a19a5b81-ba9a-4936-92f4-a6b89f8a01fd</string>
     <string name="oidc_clientSecret"></string>
 
     <!-- This URL doesn't really have a use with native apps and basically just signifies the end of
@@ -26,8 +26,13 @@
         <item>openid</item>
         <item>profile</item>
         <item>User.Read</item>
+        <item>Files.ReadWrite.All</item>
+        <item>Files.ReadWrite.AppFolder</item>
+        <item>Files.ReadWrite.Selected</item>
         <item>Mail.Send</item>
-        <item>https://graph.microsoft.com/User.ReadBasic.All</item>
+        <item>Mail.ReadWrite</item>
+        <item>Contacts.Read</item>
+        <item>User.ReadBasic.All</item>
         <item>offline_access</item>
     </string-array>
 

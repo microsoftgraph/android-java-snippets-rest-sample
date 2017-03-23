@@ -1,1 +1,1 @@
-include ':app', ':o365-auth', ':microsoftgraphapi', ':microsoftgraphvos', ':oidclib'
+include ':app', ':microsoftgraphapi', ':microsoftgraphvos', ':oidclib'
