@@ -2,7 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.microsoft.office365.msgraphsnippetapp">
-
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:name="com.microsoft.office365.msgraphsnippetapp.application.SnippetApp"
         android:allowBackup="false"
@@ -23,6 +27,23 @@
         <activity
             android:name="com.microsoft.office365.msgraphsnippetapp.SnippetDetailActivity"
             android:label="@string/title_activity_snippet_detail" />
+
+        <activity
+            android:name="com.lnikkila.oidc.authenticator.AuthenticatorActivity"
+            android:theme="@style/Theme.OidcLib" >
+        </activity>
+
+        <activity
+            android:name="com.lnikkila.oidc.authenticator.OIDCClientConfigurationActivity" >
+        </activity>
+
+        <service android:name="com.lnikkila.oidc.authenticator.AuthenticatorService">
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator" />
+            </intent-filter>
+            <meta-data android:name="android.accounts.AccountAuthenticator"
+                android:resource="@xml/authenticator" />
+        </service>
     </application>
 
 </manifest>

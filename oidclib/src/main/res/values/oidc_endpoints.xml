@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Stores OpenID Connect provider endpoints. -->
+<resources>
+    <string name="op_usualName">example</string>
+    <string name="op_authorizationEnpoint">https://login.microsoftonline.com/common/oauth2/v2.0/authorize</string>
+    <string name="op_tokenEndpoint">https://login.microsoftonline.com/common/oauth2/v2.0/token</string>
+    <string name="op_userInfoEndpoint">https://graph.microsoft.com/v1.0/me</string>
+    <string name="op_revocationEndpoint">https://www.example.com/oauth2/revoketoken</string>
+</resources>

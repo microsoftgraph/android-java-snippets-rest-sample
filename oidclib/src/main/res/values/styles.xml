@@ -1,0 +1,63 @@
+<resources>
+    <style name="Theme.OidcLib.Button" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:backgroundTint">@color/primary</item>
+        <item name="colorButtonNormal">@color/primary</item>
+        <item name="android:textColor">@color/primary_text_inv</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:padding">10pt</item>
+        <item name="android:layout_marginTop">20dp</item>
+    </style>
+
+    <style name="Theme.OidcLib.Switch" parent="Widget.AppCompat.CompoundButton.Switch">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:padding">20dp</item>
+        <item name="android:layout_marginTop">20dp</item>
+    </style>
+
+    <style name="Theme.OidcLib.EditText" parent="Widget.AppCompat.EditText">
+        <item name="android:backgroundTint">@color/primary</item>
+        <item name="android:background">@color/primary</item>
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColorHint">@color/secondary_text</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">20dp</item>
+        <item name="android:layout_marginTop">15dp</item>
+    </style>
+
+    <style name="Theme.OidcLib.SpinnerDropdown" parent="Widget.AppCompat.TextView.SpinnerItem">
+        <item name="android:backgroundTint">@color/primary</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:textColor">@color/primary_text_inv_sel</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:minHeight">50dp</item>
+    </style>
+
+    <style name="Theme.OidcLib.SpinnerItem" parent="Theme.OidcLib.SpinnerDropdown">
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:textColor">@color/primary_text_sel</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="Theme.OidcLib.SpinnerStyle" parent="Widget.AppCompat.Spinner">
+        <item name="android:backgroundTint">@color/primary</item>
+    </style>
+
+    <style name="Theme.OidcLib.TextInputLayout" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/accent</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+</resources>

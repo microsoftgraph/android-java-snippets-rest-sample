@@ -1,0 +1,7 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <item name="primary_text_disabled_alpha" type="dimen" format="float">0.26</item>
+    <item name="primary_text_inv_disabled_alpha" type="dimen" format="float">0.30</item>
+    <item name="secondary_text_disabled_alpha" type="dimen" format="float">0.30</item>
+    <item name="secondary_text_inv_disabled_alpha" type="dimen" format="float">0.30</item>
+</resources>

@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">OIDC Android Client</string>
+
+    <string name="OIDCuserOAuth2OptionHint">Use OAuth2 only</string>
+    <string name="OIDCClientIdOptionHint">Client Id</string>
+    <string name="OIDCSecretOptionHint">Client Password</string>
+    <string name="OIDCRedirectOptionHint">Redirect URL</string>
+    <string name="OIDCIssuerOptionHint">Issuer</string>
+    <string name="OIDCScopesOptionHint">Scopes (separed by space)</string>
+    <string name="OIDCFlowTypeOptionHint">Flow Type %1$s</string>
+    <string name="OIDCSetOptionsButton">SAVE CHANCES</string>
+
+    <string name="OIDCUserNameOptionHint">Username</string>
+    <string name="OIDCUserPwdOptionHint">Password</string>
+    <string name="OIDCLoginnHint">LOG IN</string>
+
+    <string name="OIDCOptionsMandatoryError">Mandatory</string>
+</resources>

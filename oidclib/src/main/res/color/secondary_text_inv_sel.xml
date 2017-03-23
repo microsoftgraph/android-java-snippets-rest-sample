@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_enabled="false" android:alpha="@dimen/secondary_text_inv_disabled_alpha" android:color="@color/secondary_text_inv_disabled" />
+    <item android:color="@color/secondary_text_inv" />
+</selector>

@@ -1,0 +1,68 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/authenticatorActivityLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.lnikkila.oidcsample.oidc.authenticator.AuthenticatorActivity">
+
+    <!-- see http://stackoverflow.com/q/3130654/665823 of why we shouldn't create a WebView via XML layout -->
+    <!--<WebView-->
+        <!--android:id="@+id/WebView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" />-->
+
+    <ScrollView
+        android:id="@+id/passwordGrantFormLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/userNameInputLayout"
+                app:hintTextAppearance="@style/Theme.OidcLib.TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.lnikkila.oidc.minsdkcompat.CompatEditText
+                    android:id="@+id/userNameEditText"
+                    android:theme="@style/Theme.OidcLib.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/OIDCUserNameOptionHint"
+                    android:inputType="textNoSuggestions"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/userPasswordInputLayout"
+                app:hintTextAppearance="@style/Theme.OidcLib.TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <com.lnikkila.oidc.minsdkcompat.CompatEditText
+                    android:id="@+id/userPasswordEditText"
+                    android:theme="@style/Theme.OidcLib.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:hint="@string/OIDCUserPwdOptionHint"
+                    android:singleLine="true" />
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/validateFormButton"
+                android:theme="@style/Theme.OidcLib.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/OIDCLoginnHint"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp" />
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

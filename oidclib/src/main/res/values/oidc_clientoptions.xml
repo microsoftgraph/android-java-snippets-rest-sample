@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Stores other (usually optional) library configuration. -->
+<resources>
+    <!-- Stores OpenID Connect OPTIONAL Authentication Request parameters as described in
+    http://openid.net/specs/openid-connect-core-1_0.html#AuthRequest
+    Note: Set this values as needed for your use case. The following configuration is given as example
+    and is not to be taken as default configuration. See your OIDC provider manuel to know which are
+    implemented and how they impact the authentication request. -->
+    <string-array name="oidc_authextras">
+        <!-- Specifies whether the Authorization Server prompts the End-User for reauthentication and consent -->
+        <item>prompt|login</item> <!-- other possible values : none, login, select_account -->
+        <!-- Specifies whether the access token will be use when the End-User is not present.
+        If an access token is being requested, the client does not receive a refresh token unless offline is specified -->
+        <item>access_type|offline</item>
+    </string-array>
+
+    <!-- The name use to store the encryption key store on the Android Keystore when using post M devices.
+     For pre M devices there is no Keystore so the key is store on the private app storage on the device (less secure ofc). -->
+    <string name="oidc_encryptKeyAlias">oidcEncryptionKey</string>
+
+    <!-- Sets whether this key is authorized to be used only if the user has been authenticated. See
+      http://developer.android.com/reference/android/security/keystore/KeyGenParameterSpec.Builder.html#setUserAuthenticationRequired(boolean)
+      for more info.-->
+    <bool name="oidc_encryptKeyAskPin">false</bool>
+
+    <!-- Sets the duration of time (seconds) for which this key is authorized to be used after the
+    user is successfully authenticated. See http://developer.android.com/reference/android/security/keystore/KeyGenParameterSpec.Builder.html#setUserAuthenticationValidityDurationSeconds(int)
+    for more info. -->
+    <integer name="oidc_encryptKeyPinDuration">0</integer>
+
+    <!-- Tells the WebView to enable JavaScript execution. Using setJavaScriptEnabled can introduce XSS
+    vulnerabilities into you application, review carefully. More info see WebSettings#setJavaScriptEnabled(bool) -->
+    <bool name="webview_allow_js">true</bool>
+</resources>

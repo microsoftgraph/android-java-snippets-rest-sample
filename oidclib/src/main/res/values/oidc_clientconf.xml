@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Stores OpenID Connect client configuration. This should not be used in production.
+ If you want to hide your keys, you should obfuscate them using ProGuard
+ (with added manual obfuscation), DexGuard or something else.
+-->
+<resources>
+    <!-- Set to true when using an OAuth2 limited provider instead of an OIDC provider. The lib will
+    adapt it's requests to match oauth2 protocol only instead of OIDC (no idToken) -->
+    <bool name="oidc_oauth2only">true</bool>
+
+    <!-- OIDC client information you received from your OIDC provider -->
+    <string name="oidc_clientId">7de59867-868d-44c3-ad29-c035bc3a680d</string>
+    <string name="oidc_clientSecret"></string>
+
+    <!-- This URL doesn't really have a use with native apps and basically just signifies the end of
+     the authorisation process. It doesn't have to be a real URL, but it does have to be the same
+     URL that is registered with your provider. -->
+    <string name="oidc_redirectUrl">https://login.microsoftonline.com/common/oauth2/nativeclient</string>
+
+    <!-- The `offline_access` scope enables us to request Refresh Tokens, so we don't have to ask
+    the user to authorise us again every time the tokens expire. Some providers might have an
+    `offline` scope instead. If you get an `invalid_scope` error when trying to authorise the app,
+    try changing it to `offline`. -->
+    <string-array name="oidc_scopes">
+        <item>openid</item>
+        <item>profile</item>
+        <item>User.Read</item>
+        <item>Mail.Send</item>
+        <item>https://graph.microsoft.com/User.ReadBasic.All</item>
+        <item>offline_access</item>
+    </string-array>
+
+    <!-- The authorization flow type that determine the response_type authorization request should
+    use. It should be one of the supported flows Code, Implicit or Hybrid. Password is supported but
+    is not suppose to be an oidc flow.
+    For more info see http://openid.net/specs/openid-connect-core-1_0.html#Authentication -->
+    <string name="oidc_flowType">Code</string>
+
+    <!-- Verifiable Identifier for an Issuer. An Issuer Identifier is a case sensitive URL using the
+     https scheme that contains scheme, host, and optionally, port number and path components and no
+     query or fragment components. -->
+    <string name="oidc_issuerId">https://example.com</string>
+</resources>

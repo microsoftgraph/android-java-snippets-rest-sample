@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    The strings in this file are not to be translated.
+-->
+<resources>
+
+    <!-- An identifier for the account type that this app provides -->
+    <string name="account_authenticator_type">com.lnikkila.oidclib.account</string>
+
+    <!-- An name for the account that this app provides -->
+    <string name="account_authenticator_label">OIDC Android Client</string>
+
+</resources>
