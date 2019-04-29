@@ -1,12 +1,11 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 23
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
     }
@@ -19,12 +18,18 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:24.1.1'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+
+    // Dagger compiler for DI annotation support
+    compileOnly('com.squareup.dagger:dagger-compiler:1.2.5') {
+        exclude group: 'com.google.guava'
+    }
+
 
     // Dependency injection
-    compile 'com.squareup.dagger:dagger:1.2.5'
-    provided 'com.squareup.dagger:dagger-compiler:1.2.5'
-
+    implementation 'com.squareup.dagger:dagger:1.2.5'
+    api 'com.squareup.dagger:dagger-compiler:1.2.5'
+    annotationProcessor 'com.squareup.dagger:dagger-compiler:1.2.5'
     // Azure AD
-    compile 'com.microsoft.aad:adal:1.1.13'
+    implementation 'com.microsoft.aad:adal:1.1.13'
 }
