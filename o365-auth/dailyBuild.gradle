@@ -26,5 +26,6 @@ dependencies {
     provided 'com.squareup.dagger:dagger-compiler:+'
 
     // Azure AD
-    compile 'com.microsoft.aad:adal:1.1.13'
+//    compile 'com.microsoft.aad:adal:1.1.13'
+    implementation 'com.microsoft.identity.client:msal:0.3.1-alpha'
 }

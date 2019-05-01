@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.microsoft.aad.adal.AuthenticationCallback;
-import com.microsoft.aad.adal.AuthenticationResult;
+import com.microsoft.identity.client.AuthenticationCallback;
+import com.microsoft.identity.client.AuthenticationResult;
 import com.microsoft.office365.msgraphsnippetapp.util.SharedPrefsUtil;
 
 import java.net.URI;
@@ -32,7 +32,7 @@ import static com.microsoft.office365.msgraphsnippetapp.R.string.warning_clienti
 
 public class SignInActivity
         extends BaseActivity
-        implements AuthenticationCallback<AuthenticationResult> {
+        implements MSALAuthenticationCallback {
 
     @InjectView(layout_diagnostics)
     protected View mDiagnosticsLayout;

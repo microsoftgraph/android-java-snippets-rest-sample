@@ -31,5 +31,6 @@ dependencies {
     api 'com.squareup.dagger:dagger-compiler:1.2.5'
     annotationProcessor 'com.squareup.dagger:dagger-compiler:1.2.5'
     // Azure AD
-    implementation 'com.microsoft.aad:adal:1.1.13'
+  //  implementation 'com.microsoft.aad:adal:1.1.13'
+    implementation 'com.microsoft.identity.client:msal:0.3.1-alpha'
 }

@@ -8,12 +8,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.microsoft.aad.adal.ADALError;
-import com.microsoft.aad.adal.AuthenticationCallback;
-import com.microsoft.aad.adal.AuthenticationContext;
-import com.microsoft.aad.adal.AuthenticationException;
-import com.microsoft.aad.adal.AuthenticationResult;
-import com.microsoft.aad.adal.PromptBehavior;
+import com.microsoft.identity.client.AuthenticationCallback;
+import com.microsoft.identity.client.AuthenticationResult;
+import com.microsoft.identity.client.IAccount;
+import com.microsoft.identity.client.exception.MsalException;
+import com.microsoft.identity.client.PublicClientApplication;
+
 
 import static com.microsoft.aad.adal.AuthenticationResult.AuthenticationStatus.Succeeded;
 
