@@ -27,5 +27,7 @@ dependencies {
 
     // Azure AD
 //    compile 'com.microsoft.aad:adal:1.1.13'
+    implementation 'com.microsoft.graph:microsoft-graph:1.2.0'
     implementation 'com.microsoft.identity.client:msal:0.3.1-alpha'
+    implementation 'com.microsoft.graph:microsoft-graph-android-auth:0.1.0-SNAPSHOT'
 }
