@@ -3,15 +3,16 @@
  * See LICENSE in the project root for license information.
  */
 package com.microsoft.office365.msgraphsnippetapp;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.microsoft.identity.client.AuthenticationCallback;
+//import com.microsoft.graph.models.extensions.User;
+import com.microsoft.office365.auth.AuthenticationManager;
+import com.microsoft.office365.auth.MSALAuthenticationCallback;
+import com.microsoft.office365.msgraphsnippetapp.util.SharedPrefsUtil;
 import com.microsoft.identity.client.AuthenticationResult;
 import com.microsoft.identity.client.IAccount;
 import com.microsoft.identity.client.Logger;
@@ -19,17 +20,12 @@ import com.microsoft.identity.client.exception.MsalClientException;
 import com.microsoft.identity.client.exception.MsalException;
 import com.microsoft.identity.client.exception.MsalServiceException;
 import com.microsoft.identity.client.exception.MsalUiRequiredException;
-import com.microsoft.office365.auth.AuthenticationManager;
-import com.microsoft.office365.msgraphsnippetapp.util.SharedPrefsUtil;
-
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
-
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
-
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 import static com.microsoft.office365.msgraphsnippetapp.R.id.layout_diagnostics;
@@ -46,18 +42,18 @@ public class SignInActivity
     private boolean mEnablePiiLogging = false;
     private static final String TAG = "SignInActivity";
 
-    @InjectView(layout_diagnostics)
+    @BindView(layout_diagnostics)
     protected View mDiagnosticsLayout;
 
-    @InjectView(view_diagnosticsdata)
+    @BindView(view_diagnosticsdata)
     protected TextView mDiagnosticsTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(activity_signin);
-
-        ButterKnife.inject(this);
+        setTitle(R.string.app_name);
+        ButterKnife.bind(this);
     }
 
     @OnClick(o365_signin)
