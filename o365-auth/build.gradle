@@ -33,4 +33,6 @@ dependencies {
     // Azure AD
   //  implementation 'com.microsoft.aad:adal:1.1.13'
     implementation 'com.microsoft.identity.client:msal:0.3.1-alpha'
+    implementation project(path: ':microsoftgraphapi')
+    implementation 'com.microsoft.graph:microsoft-graph:1.2.0'
 }

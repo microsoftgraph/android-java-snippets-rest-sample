@@ -4,28 +4,37 @@
  */
 package com.microsoft.office365.auth;
 
+import android.accounts.AuthenticatorException;
+import android.accounts.OperationCanceledException;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
+import com.microsoft.graph.authentication.IAuthenticationProvider;
+import com.microsoft.graph.http.IHttpRequest;
 import com.microsoft.identity.client.AuthenticationCallback;
 import com.microsoft.identity.client.AuthenticationResult;
 import com.microsoft.identity.client.IAccount;
 import com.microsoft.identity.client.exception.MsalException;
 import com.microsoft.identity.client.PublicClientApplication;
 
+import java.io.IOException;
 
-import static com.microsoft.aad.adal.AuthenticationResult.AuthenticationStatus.Succeeded;
-
-public class AuthenticationManager {
+public class AuthenticationManager{
 
     private static final String USER_ID_VAR_NAME = "userId";
-
+    private static final String TAG = "AuthenticationManager";
     private static final int PREFERENCES_MODE = Context.MODE_PRIVATE;
 
     private final Activity mActivity;
 
-    private final AuthenticationContext mAuthenticationContext;
+    private static AuthenticationManager INSTANCE;
+    private static PublicClientApplication mPublicClientApplication;
+    private AuthenticationResult mAuthResult;
+    private MSALAuthenticationCallback mActivityCallback;
+    public static  MSALAuthenticationProvider msalAuthenticationProvider;
+
 
     private final String
             mAuthenticationResourceId,
@@ -145,5 +154,4 @@ public class AuthenticationManager {
         editor.remove(USER_ID_VAR_NAME);
         editor.apply();
     }
-
 }
