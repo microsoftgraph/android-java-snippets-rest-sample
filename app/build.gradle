@@ -46,10 +46,15 @@ dependencies {
         exclude group: 'com.google.guava'
     }
 
-    annotationProcessor 'com.squareup.dagger:dagger-compiler:1.2.5'
+    //annotationProcessor 'com.squareup.dagger:dagger-compiler:1.2.5'
 
     // Butterknife
-    implementation 'com.jakewharton:butterknife:6.1.0'
+    //implementation 'com.jakewharton:butterknife:6.1.0'
+
+    // Butterknife
+    implementation 'com.jakewharton:butterknife:8.4.0'
+
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 
     // Timber
     implementation 'com.jakewharton.timber:timber:4.1.2'
@@ -58,6 +63,8 @@ dependencies {
     implementation 'commons-io:commons-io:2.5'
 
     implementation 'com.google.guava:guava:19.0'
+
+   // implementation 'com.microsoft.office365.auth'
 
     // Test
     testImplementation 'junit:junit:4.12'
