@@ -24,5 +24,8 @@ allprojects {
             url 'https://maven.google.com/'
             name 'Google'
         }
+        jcenter{
+            url 'http://oss.jfrog.org/oss-snapshot-local'
+        }
     }
 }
