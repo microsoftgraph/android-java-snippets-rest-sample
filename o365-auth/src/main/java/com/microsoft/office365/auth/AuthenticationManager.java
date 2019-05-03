@@ -3,53 +3,73 @@
  * See LICENSE in the project root for license information.
  */
 package com.microsoft.office365.auth;
+
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
+
 import com.microsoft.graph.authentication.IAuthenticationProvider;
 import com.microsoft.graph.authentication.MSALAuthenticationProvider;
 import com.microsoft.graph.http.IHttpRequest;
-import com.microsoft.graph.snippets.application.SnippetApp;
-
 import com.microsoft.identity.client.AuthenticationCallback;
 import com.microsoft.identity.client.AuthenticationResult;
 import com.microsoft.identity.client.IAccount;
 import com.microsoft.identity.client.PublicClientApplication;
 import com.microsoft.identity.client.exception.MsalException;
 
-
 import java.io.IOException;
 
-/**
- * Handles setup of OAuth library in API clients.
- */
-public class AuthenticationManager implements IAuthenticationProvider {
+//import static com.microsoft.aad.adal.AuthenticationResult.AuthenticationStatus.Succeeded;
+
+
+public class AuthenticationManager implements IAuthenticationProvider{
+
+    private static final String USER_ID_VAR_NAME = "userId";
+
+    private static final int PREFERENCES_MODE = Context.MODE_PRIVATE;
+
+    private final Activity mActivity;
+
+    private final PublicClientApplication mPublicClientApplication;
+
     private static final String TAG = "AuthenticationManager";
-    private static AuthenticationManager INSTANCE;
-    private static PublicClientApplication mPublicClientApplication;
+
     private AuthenticationResult mAuthResult;
+
     private MSALAuthenticationCallback mActivityCallback;
+
     public static  MSALAuthenticationProvider msalAuthenticationProvider;
 
-    public AuthenticationManager() {
+    private final String
+            mAuthenticationResourceId,
+            mSharedPreferencesFilename,
+            mClientId,
+            mRedirectUri;
+     private final String[] mScopes;
+
+    AuthenticationManager(
+            Activity activity,
+            PublicClientApplication publicClientApplication,
+            String authenticationResourceId,
+            String sharedPreferencesFilename,
+            String clientId,
+            String redirectUri,
+            String[] scopes) {
+        mActivity = activity;
+        mPublicClientApplication = publicClientApplication;
+        mAuthenticationResourceId = authenticationResourceId;
+        mSharedPreferencesFilename = sharedPreferencesFilename;
+        mClientId = clientId;
+        mRedirectUri = redirectUri;
+        mScopes = scopes;
     }
 
-    public static synchronized AuthenticationManager getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new AuthenticationManager();
-            if (mPublicClientApplication == null) {
-                mPublicClientApplication = new PublicClientApplication(SnippetApp.getContext(), "");
-            }
-        }
-        return INSTANCE;
+    private SharedPreferences getSharedPreferences() {
+        return mActivity.getSharedPreferences(mSharedPreferencesFilename, PREFERENCES_MODE);
     }
-
-    public static synchronized void resetInstance() {
-        INSTANCE = null;
-    }
-
 
     /**
      * Returns the access token obtained in authentication
@@ -70,41 +90,36 @@ public class AuthenticationManager implements IAuthenticationProvider {
      */
     public void disconnect() {
         mPublicClientApplication.removeAccount(mAuthResult.getAccount());
-        // Reset the AuthenticationManager object
-        AuthenticationManager.resetInstance();
+
+        // Forget the user
+        removeUserId();
     }
 
     /**
      * Authenticates the user and lets the user authorize the app for the requested permissions.
-     * An authentication token is returned via the getAuthInteractiveCalback method
-     * @param activity
+     * An authentication token is returned via the getAuthInteractiveCallback method
      * @param authenticationCallback
      */
-    public void callAcquireToken(Activity activity, final MSALAuthenticationCallback authenticationCallback) {
+    public void callAcquireToken(final MSALAuthenticationCallback authenticationCallback) {
         mActivityCallback = authenticationCallback;
         mPublicClientApplication.acquireToken(
-                activity, ServiceConstants.SCOPES, getAuthInteractiveCallback());
+                mActivity, mScopes, getAuthInteractiveCallback());
     }
     public void callAcquireTokenSilent(IAccount user, boolean forceRefresh, MSALAuthenticationCallback msalAuthenticationCallback) {
         mActivityCallback = msalAuthenticationCallback;
-        mPublicClientApplication.acquireTokenSilentAsync(ServiceConstants.SCOPES, user, null, forceRefresh, getAuthSilentCallback());
+        mPublicClientApplication.acquireTokenSilentAsync(mScopes, user, null, forceRefresh, getAuthSilentCallback());
     }
-//
+
 // App callbacks for MSAL
 // ======================
-// getActivity() - returns activity so we can acquireToken within a callback
 // getAuthSilentCallback() - callback defined to handle acquireTokenSilent() case
 // getAuthInteractiveCallback() - callback defined to handle acquireToken() case
-//
-
-    public Context getActivity() {
-        return SnippetApp.getContext();
-    }
 
     /* Callback method for acquireTokenSilent calls
      * Looks if tokens are in the cache (refreshes if necessary and if we don't forceRefresh)
      * else errors that we need to do an interactive request.
      */
+
     private AuthenticationCallback getAuthSilentCallback() {
         return new AuthenticationCallback() {
             @Override
@@ -135,7 +150,6 @@ public class AuthenticationManager implements IAuthenticationProvider {
             }
         };
     }
-
 
     /* Callback used for interactive request.  If succeeds we use the access
      * token to call the Microsoft Graph. Does not check cache
@@ -176,11 +190,11 @@ public class AuthenticationManager implements IAuthenticationProvider {
     public void authenticateRequest(IHttpRequest request) {
         try {
             request.addHeader("Authorization", "Bearer "
-                    + AuthenticationManager.getInstance()
+                    + this
                     .getAccessToken());
             // This header has been added to identify this sample in the Microsoft Graph service.
             // If you're using this code for your project please remove the following line.
-            request.addHeader("SampleID", "android-java-connect-sample");
+            request.addHeader("SampleID", "android-java-snippets-rest-sample");
 
             Log.i("Connect","Request: " + request.toString());
         } catch (AuthenticatorException e) {
@@ -194,4 +208,25 @@ public class AuthenticationManager implements IAuthenticationProvider {
         }
 
     }
+
+    private boolean isConnected() {
+        return getSharedPreferences().contains(USER_ID_VAR_NAME);
+    }
+
+    private String getUserId() {
+        return getSharedPreferences().getString(USER_ID_VAR_NAME, "");
+    }
+
+    private void setUserId(String value) {
+        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        editor.putString(USER_ID_VAR_NAME, value);
+        editor.apply();
+    }
+
+    private void removeUserId() {
+        SharedPreferences.Editor editor = getSharedPreferences().edit();
+        editor.remove(USER_ID_VAR_NAME);
+        editor.apply();
+    }
+
 }
