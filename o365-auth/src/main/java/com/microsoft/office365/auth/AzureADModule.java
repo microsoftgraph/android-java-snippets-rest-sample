@@ -6,7 +6,7 @@ package com.microsoft.office365.auth;
 
 import android.app.Activity;
 
-import com.microsoft.aad.adal.AuthenticationContext;
+import com.microsoft.identity.client.PublicClientApplication;
 import com.microsoft.aad.adal.AuthenticationSettings;
 
 import java.security.NoSuchAlgorithmException;
@@ -31,28 +31,24 @@ public class AzureADModule {
 
     @Provides
     @SuppressWarnings("unused") // not actually unused -- used by Dagger
-    public AuthenticationContext providesAuthenticationContext() {
-        try {
-            return new AuthenticationContext(
-                    mBuilder.mActivity,
-                    mBuilder.mAuthorityUrl,
-                    mBuilder.mValidateAuthority);
-        } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
-            throw new RuntimeException(e);
-        }
+    public PublicClientApplication providesAuthenticationContext() {
+        return new PublicClientApplication(
+                mBuilder.mActivity,
+                mBuilder.mClientId);
     }
 
     @Provides
     @SuppressWarnings("unused") // not actually unused -- used by Dagger
     public AuthenticationManager providesAuthenticationManager(
-            AuthenticationContext authenticationContext) {
+            PublicClientApplication publicClientApplication) {
         return new AuthenticationManager(
                 mBuilder.mActivity,
-                authenticationContext,
+                publicClientApplication,
                 mBuilder.mAuthenticationResourceId,
                 mBuilder.mSharedPreferencesFilename,
                 mBuilder.mClientId,
-                mBuilder.mRedirectUri);
+                mBuilder.mRedirectUri,
+                mBuilder.mScopes);
     }
 
     public static class Builder {
@@ -67,6 +63,7 @@ public class AzureADModule {
                 mSharedPreferencesFilename = SHARED_PREFS_DEFAULT_NAME,
                 mClientId,
                 mRedirectUri;
+        private String[] mScopes;
 
         private boolean mValidateAuthority = true;
 
@@ -109,6 +106,11 @@ public class AzureADModule {
             return this;
         }
 
+        public Builder scopes(String[] scopes){
+            mScopes = scopes;
+            return this;
+        }
+
         public AzureADModule build() {
             if (null == mAuthorityUrl) {
                 throw new IllegalStateException("authorityUrl() is unset");
@@ -124,6 +126,9 @@ public class AzureADModule {
             }
             if (null == mRedirectUri) {
                 throw new IllegalStateException("redirectUri() is unset");
+            }
+            if(null == mScopes){
+                throw new IllegalStateException("scopes() is unset");
             }
             return new AzureADModule(this);
         }
