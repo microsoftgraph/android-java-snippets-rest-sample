@@ -24,7 +24,8 @@ public abstract class BaseActivity
                 .authenticationResourceId(ServiceConstants.AUTHENTICATION_RESOURCE_ID)
                 .authorityUrl(ServiceConstants.AUTHORITY_URL)
                 .redirectUri(ServiceConstants.REDIRECT_URI)
-                .clientId(ServiceConstants.CLIENT_ID);
+                .clientId(ServiceConstants.CLIENT_ID)
+                .scopes(ServiceConstants.SCOPES);
         return builder.build();
     }
 
