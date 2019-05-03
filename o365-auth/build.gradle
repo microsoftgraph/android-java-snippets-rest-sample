@@ -31,4 +31,5 @@ dependencies {
     annotationProcessor 'com.squareup.dagger:dagger-compiler:1.2.5'
     // Azure AD
     implementation 'com.microsoft.identity.client:msal:0.3.1-alpha'
+    implementation 'com.microsoft.graph:microsoft-graph-android-auth:0.1.0-SNAPSHOT'
 }
