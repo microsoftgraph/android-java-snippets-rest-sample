@@ -7,7 +7,6 @@ package com.microsoft.office365.auth;
 import android.app.Activity;
 
 import com.microsoft.identity.client.PublicClientApplication;
-import com.microsoft.aad.adal.AuthenticationSettings;
 
 import java.security.NoSuchAlgorithmException;
 
@@ -25,13 +24,13 @@ public class AzureADModule {
         mBuilder = builder;
     }
 
-    public static void skipBroker(boolean shouldSkip) {
-        AuthenticationSettings.INSTANCE.setSkipBroker(shouldSkip);
-    }
+//    public static void skipBroker(boolean shouldSkip) {
+//        AuthenticationSettings.INSTANCE.setSkipBroker(shouldSkip);
+//    }
 
     @Provides
     @SuppressWarnings("unused") // not actually unused -- used by Dagger
-    public PublicClientApplication providesAuthenticationContext() {
+    public PublicClientApplication providesPublicClientApplication() {
         return new PublicClientApplication(
                 mBuilder.mActivity,
                 mBuilder.mClientId);
@@ -86,10 +85,10 @@ public class AzureADModule {
             return this;
         }
 
-        public Builder skipBroker(boolean shouldSkip) {
-            AzureADModule.skipBroker(shouldSkip);
-            return this;
-        }
+//        public Builder skipBroker(boolean shouldSkip) {
+//            AzureADModule.skipBroker(shouldSkip);
+//            return this;
+//        }
 
         public Builder sharedPreferencesFilename(String filename) {
             mSharedPreferencesFilename = filename;
