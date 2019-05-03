@@ -22,9 +22,6 @@ import com.microsoft.identity.client.exception.MsalException;
 
 import java.io.IOException;
 
-//import static com.microsoft.aad.adal.AuthenticationResult.AuthenticationStatus.Succeeded;
-
-
 public class AuthenticationManager implements IAuthenticationProvider{
 
     private static final String USER_ID_VAR_NAME = "userId";
