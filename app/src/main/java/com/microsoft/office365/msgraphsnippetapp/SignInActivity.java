@@ -3,16 +3,14 @@
  * See LICENSE in the project root for license information.
  */
 package com.microsoft.office365.msgraphsnippetapp;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-//import com.microsoft.graph.models.extensions.User;
-import com.microsoft.office365.auth.AuthenticationManager;
-import com.microsoft.office365.auth.MSALAuthenticationCallback;
-import com.microsoft.office365.msgraphsnippetapp.util.SharedPrefsUtil;
+
 import com.microsoft.identity.client.AuthenticationResult;
 import com.microsoft.identity.client.IAccount;
 import com.microsoft.identity.client.Logger;
@@ -20,12 +18,17 @@ import com.microsoft.identity.client.exception.MsalClientException;
 import com.microsoft.identity.client.exception.MsalException;
 import com.microsoft.identity.client.exception.MsalServiceException;
 import com.microsoft.identity.client.exception.MsalUiRequiredException;
+import com.microsoft.office365.auth.MSALAuthenticationCallback;
+import com.microsoft.office365.msgraphsnippetapp.util.SharedPrefsUtil;
+
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
-import butterknife.BindView;
+
+import butterknife.InjectView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
 import static com.microsoft.office365.msgraphsnippetapp.R.id.layout_diagnostics;
@@ -42,18 +45,18 @@ public class SignInActivity
     private boolean mEnablePiiLogging = false;
     private static final String TAG = "SignInActivity";
 
-    @BindView(layout_diagnostics)
+    @InjectView(layout_diagnostics)
     protected View mDiagnosticsLayout;
 
-    @BindView(view_diagnosticsdata)
+    @InjectView(view_diagnosticsdata)
     protected TextView mDiagnosticsTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(activity_signin);
-        setTitle(R.string.app_name);
-        ButterKnife.bind(this);
+
+        ButterKnife.inject(this);
     }
 
     @OnClick(o365_signin)
@@ -111,7 +114,6 @@ public class SignInActivity
             mDiagnosticsTxt.setText(msg);
             mDiagnosticsLayout.setVisibility(VISIBLE);
         }
-
         if (e instanceof MsalClientException) {
             // This means errors happened in the sdk itself, could be network, Json parse, etc. Check MsalError.java
             // for detailed list of the errors.
@@ -126,8 +128,10 @@ public class SignInActivity
         } else if (e instanceof MsalUiRequiredException) {
             // This explicitly indicates that developer needs to prompt the user, it could be refresh token is expired, revoked
             // or user changes the password; or it could be that no token was found in the token cache.
-            AuthenticationManager mgr = AuthenticationManager.getInstance();
-            mgr.callAcquireToken(SignInActivity.this, this);
+
+//            AuthenticationManager mgr = AuthenticationManager.getInstance();
+
+            mAuthenticationManager.callAcquireToken( this);
         }
     }
 
@@ -141,7 +145,9 @@ public class SignInActivity
     private void authenticate() throws IllegalArgumentException {
         validateOrganizationArgs();
         connect();
-        AuthenticationManager.getInstance();
+
+//        AuthenticationManager.getInstance();
+
     }
 
     private void connect() {
@@ -154,7 +160,7 @@ public class SignInActivity
             Logger.getInstance().setEnablePII(false);
         }
 
-        AuthenticationManager mgr = AuthenticationManager.getInstance();
+       // AuthenticationManager mgr = mAuthenticationManager;
 
         /* Attempt to get a user and acquireTokenSilent
          * If this fails we do an interactive request
@@ -162,12 +168,12 @@ public class SignInActivity
         List<IAccount> users = null;
 
         try {
-            users = mgr.getPublicClient().getAccounts();
+            users = mAuthenticationManager.getPublicClient().getAccounts();
 
             if (users != null && users.size() == 1) {
                 /* We have 1 user */
                 mUser = users.get(0);
-                mgr.callAcquireTokenSilent(
+                mAuthenticationManager.callAcquireTokenSilent(
                         mUser,
                         true,
                         this);
@@ -175,8 +181,7 @@ public class SignInActivity
                 /* We have no user */
 
                 /* Let's do an interactive request */
-                mgr.callAcquireToken(
-                        this,
+                mAuthenticationManager.callAcquireToken(
                         this);
             }
         }
@@ -228,11 +233,9 @@ public class SignInActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (AuthenticationManager
-                .getInstance()
+        if (mAuthenticationManager
                 .getPublicClient() != null) {
-            AuthenticationManager
-                    .getInstance()
+            mAuthenticationManager
                     .getPublicClient()
                     .handleInteractiveRequestRedirect(requestCode, resultCode, data);
         }
