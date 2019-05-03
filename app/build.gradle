@@ -46,13 +46,13 @@ dependencies {
         exclude group: 'com.google.guava'
     }
 
-    //annotationProcessor 'com.squareup.dagger:dagger-compiler:1.2.5'
+    annotationProcessor 'com.squareup.dagger:dagger-compiler:1.2.5'
 
     // Butterknife
-    //implementation 'com.jakewharton:butterknife:6.1.0'
+    implementation 'com.jakewharton:butterknife:6.1.0'
 
     // Butterknife
-    implementation 'com.jakewharton:butterknife:8.4.0'
+   // implementation 'com.jakewharton:butterknife:8.4.0'
 
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 
