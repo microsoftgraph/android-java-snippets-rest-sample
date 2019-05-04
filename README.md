@@ -89,7 +89,7 @@ To use the Microsoft Graph API REST snippets project, you need the following:
 
 1. Select **Azure Active Directory** in the left-hand navigation, then select **App registrations** under **Manage**.
 
-   ![A screenshot of the App registrations ](./readme-images/aad-portal-app-registrations.PNG)
+   ![A screenshot of the App registrations ](./readme-images/aad-portal-app-registrations.png)
 
 1. Select **New registration**. On the **Register an application** page, set the values as follows.
 
@@ -113,8 +113,7 @@ To learn about authenticating with MSAL for Android to make calls to Microsoft G
 1. Download or clone the [Android Microsoft Graph Snippets sample](../../).
 2. Start Android Studio.
 3. From the **Welcome to Android Studio** dialog box, choose **Import project (Eclipse ADT, Gradle, etc)**.
-4. Select the **settings.gradle** file in the **
-O365-Android-Unified-API-Snippets** folder, and then click **OK**.
+4. Select the **settings.gradle** file in the **O365-Android-Unified-API-Snippets** folder, and then click **OK**.
 5. Respond to the dialog box ("Gradle Sync: Gradle settings for this project are not configured yet. Would you like the project to use the Gradle wrapper? ") by clicking the **OK** button to use the Gradle wrapper. 
 6. Open the ServiceConstants.java file in the folder **java** > **com.microsoft.office365.msgraphsnippetapp**.
 7. Find the **CLIENT_ID** string and replace the value *ENTER_YOUR_CLIENT_ID* with the Application (client) ID that you copied in the previous step.
