@@ -27,7 +27,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="msalEnter_ClientId_Here"
+                <data android:scheme="msalENTER_YOUR_CLIENT_ID"
                     android:host="auth" />
             </intent-filter>
         </activity>
