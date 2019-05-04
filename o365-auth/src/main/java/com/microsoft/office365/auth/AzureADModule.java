@@ -24,10 +24,6 @@ public class AzureADModule {
         mBuilder = builder;
     }
 
-//    public static void skipBroker(boolean shouldSkip) {
-//        AuthenticationSettings.INSTANCE.setSkipBroker(shouldSkip);
-//    }
-
     @Provides
     @SuppressWarnings("unused") // not actually unused -- used by Dagger
     public PublicClientApplication providesPublicClientApplication() {
@@ -85,11 +81,6 @@ public class AzureADModule {
             return this;
         }
 
-//        public Builder skipBroker(boolean shouldSkip) {
-//            AzureADModule.skipBroker(shouldSkip);
-//            return this;
-//        }
-
         public Builder sharedPreferencesFilename(String filename) {
             mSharedPreferencesFilename = filename;
             return this;
@@ -131,7 +122,5 @@ public class AzureADModule {
             }
             return new AzureADModule(this);
         }
-
     }
-
 }
