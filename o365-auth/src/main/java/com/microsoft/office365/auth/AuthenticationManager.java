@@ -34,7 +34,7 @@ public class AuthenticationManager implements IAuthenticationProvider{
 
     private static final String TAG = "AuthenticationManager";
 
-    private AuthenticationResult mAuthResult;
+    private static AuthenticationResult mAuthResult;
 
     private MSALAuthenticationCallback mActivityCallback;
 
@@ -83,11 +83,12 @@ public class AuthenticationManager implements IAuthenticationProvider{
 
     /**
      * Disconnects the app from Office 365 by clearing the token cache, setting the client objects
-     * to null, and removing the user id from shred preferences.
+     * to null, and removing the user id from shared preferences.
      */
     public void disconnect() {
-        mPublicClientApplication.removeAccount(mAuthResult.getAccount());
-
+        if(mAuthResult != null ){
+            mPublicClientApplication.removeAccount(mAuthResult.getAccount());
+        }
         // Forget the user
         removeUserId();
     }
@@ -203,7 +204,6 @@ public class AuthenticationManager implements IAuthenticationProvider{
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
-
     }
 
     private boolean isConnected() {
