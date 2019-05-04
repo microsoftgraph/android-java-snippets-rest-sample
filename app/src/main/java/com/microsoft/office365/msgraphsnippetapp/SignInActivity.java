@@ -25,7 +25,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
-import butterknife.InjectView;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -45,10 +45,10 @@ public class SignInActivity
     private boolean mEnablePiiLogging = false;
     private static final String TAG = "SignInActivity";
 
-    @InjectView(layout_diagnostics)
+    @BindView(layout_diagnostics)
     protected View mDiagnosticsLayout;
 
-    @InjectView(view_diagnosticsdata)
+    @BindView(view_diagnosticsdata)
     protected TextView mDiagnosticsTxt;
 
     @Override
@@ -56,7 +56,7 @@ public class SignInActivity
         super.onCreate(savedInstanceState);
         setContentView(activity_signin);
 
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
     }
 
     @OnClick(o365_signin)

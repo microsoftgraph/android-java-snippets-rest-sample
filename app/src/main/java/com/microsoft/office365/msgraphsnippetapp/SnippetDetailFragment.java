@@ -33,7 +33,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import butterknife.ButterKnife;
-import butterknife.InjectView;
+import butterknife.BindView;
 import butterknife.OnClick;
 import okhttp3.Headers;
 import okhttp3.ResponseBody;
@@ -79,49 +79,49 @@ public class SnippetDetailFragment<T, Result>
     /**
      * Displays the status code of the service call
      */
-    @InjectView(txt_status_code)
+    @BindView(txt_status_code)
     protected TextView mStatusCode;
 
     /**
      * Displays the status code as color 'stoplight'
      */
-    @InjectView(txt_status_color)
+    @BindView(txt_status_color)
     protected View mStatusColor;
 
     /**
      * On-screen description of the current snippet
      */
-    @InjectView(txt_desc)
+    @BindView(txt_desc)
     protected TextView mSnippetDescription;
 
     /**
      * The request url of the current snippet
      */
-    @InjectView(txt_request_url)
+    @BindView(txt_request_url)
     protected TextView mRequestUrl;
 
     /**
      * The response headers of the current snippet's request
      */
-    @InjectView(txt_response_headers)
+    @BindView(txt_response_headers)
     protected TextView mResponseHeaders;
 
     /**
      * The response body of the snippet's request
      */
-    @InjectView(txt_response_body)
+    @BindView(txt_response_body)
     protected TextView mResponseBody;
 
     /**
      * Barber's pole progress bar (indeterminate)
      */
-    @InjectView(progressbar)
+    @BindView(progressbar)
     protected ProgressBar mProgressbar;
 
     /**
      * The 'run-snippet' button
      */
-    @InjectView(btn_run)
+    @BindView(btn_run)
     protected Button mRunButton;
 
     /**
@@ -200,7 +200,7 @@ public class SnippetDetailFragment<T, Result>
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_snippet_detail, container, false);
-        ButterKnife.inject(this, rootView);
+        ButterKnife.bind(this, rootView);
         mSnippetDescription.setText(mItem.getDescription());
         return rootView;
     }
