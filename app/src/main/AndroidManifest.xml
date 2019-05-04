@@ -18,8 +18,19 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity android:name="com.microsoft.office365.msgraphsnippetapp.SnippetListActivity" />
+        <activity
+            android:name="com.microsoft.identity.client.BrowserTabActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="msalEnter_ClientId_Here"
+                    android:host="auth" />
+            </intent-filter>
+        </activity>
         <activity
             android:name="com.microsoft.office365.msgraphsnippetapp.SnippetDetailActivity"
             android:label="@string/title_activity_snippet_detail" />
