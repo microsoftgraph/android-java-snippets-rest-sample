@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
     buildToolsVersion "23.0.3"
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
     }
@@ -19,15 +19,12 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:+'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
 
     // Dependency injection
     compile 'com.squareup.dagger:dagger:+'
     provided 'com.squareup.dagger:dagger-compiler:+'
 
-    // Azure AD
-//   compile 'com.microsoft.aad:adal:1.1.13'
-   // implementation 'com.microsoft.graph:microsoft-graph:1.2.0'
-   // implementation 'com.microsoft.identity.client:msal:0.3.1-alpha'
+    // Android Auth wrapper
     implementation 'com.microsoft.graph:microsoft-graph-android-auth:0.1.0-SNAPSHOT'
 }

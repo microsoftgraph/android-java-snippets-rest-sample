@@ -1,11 +1,11 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
     }
@@ -18,7 +18,7 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
 
     // Dagger compiler for DI annotation support
     compileOnly('com.squareup.dagger:dagger-compiler:1.2.5') {
@@ -29,7 +29,6 @@ dependencies {
     implementation 'com.squareup.dagger:dagger:1.2.5'
     api 'com.squareup.dagger:dagger-compiler:1.2.5'
     annotationProcessor 'com.squareup.dagger:dagger-compiler:1.2.5'
-    // Azure AD
-   // implementation 'com.microsoft.identity.client:msal:0.3.1-alpha'
+    // Android Auth Wrapper
     implementation 'com.microsoft.graph:microsoft-graph-android-auth:0.1.0-SNAPSHOT'
 }
