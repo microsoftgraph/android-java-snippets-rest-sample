@@ -145,9 +145,6 @@ public class SignInActivity
     private void authenticate() throws IllegalArgumentException {
         validateOrganizationArgs();
         connect();
-
-//        AuthenticationManager.getInstance();
-
     }
 
     private void connect() {
@@ -159,8 +156,6 @@ public class SignInActivity
         } else {
             Logger.getInstance().setEnablePII(false);
         }
-
-       // AuthenticationManager mgr = mAuthenticationManager;
 
         /* Attempt to get a user and acquireTokenSilent
          * If this fails we do an interactive request
