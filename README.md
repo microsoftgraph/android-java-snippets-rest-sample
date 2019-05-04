@@ -73,39 +73,40 @@ You can explore the following operations for Office 365:
 
 ## Device requirement
 To run the Microsoft Graph API REST snippets project, your device must meet the following requirement:
-* Android API level 16 or newer
+* Android API level 21 or newer
 
 ### Prerequisites
 To use the Microsoft Graph API REST snippets project, you need the following:
 * The latest version of [Android Studio](http://developer.android.com/sdk/index.html).
-* The [Gradle](http://www.gradle.org) build automation system version 2.2.1 or later.
+* The [Gradle](http://www.gradle.org) build automation system version 5.1.1 or later.
 * An Office 365 account. You can sign up for [an Office 365 Developer subscription](https://portal.office.com/Signup/Signup.aspx?OfferId=C69E7747-2566-4897-8CBA-B998ED3BAB88&DL=DEVELOPERPACK&ali=1#0) that includes the resources you need to start building Office 365 apps.
 * [Java Development Kit (JDK) 7](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html).
 * A registered Azure application with a client id and redirect URI value. See [Grant permissions to the Snippets application in Azure](../../wiki/Grant-permissions-for-the-Snippet-application-in-Azure) for details about how to create the correct permissions.
 
 ## Azure client application registration
-1. Sign in to the [Azure Management Portal](https://manage.windowsazure.com), using your Azure AD credentials.
-2.	Click **Active Directory** on the left menu, then select the directory for your Office 365 developer site.
-3.	On the top menu, click **Applications**.
-4.	Click **Add** from the bottom menu.
-5.	On the **What do you want to do page**, click **Add an application my organization is developing**.
-6.	On the **Tell us about your application page**, specify **Android Snippet Sample** for the application name and select **NATIVE CLIENT APPLICATION** for type.
-7.	Click the arrow button on the bottom-right corner of the page.
-8.	On the **Application information** page, specify a **Redirect URI** for example `http://localhost/androidsnippets`, and then select the check box in the lower-right corner of the page.
-9.	After the application has been successfully added, you will be taken to the **Quick Start** page for the application. From there, select **Configure** in the top menu.
-10. In the permissions to other applications section, add the Microsoft Graph application.
-11. For the Microsoft Graph application, add the following permissions:
-   * Sign in and read user profile
-   * Have full access to user files and files shared with user
-   * Have full access to user calendars
-   * Read and write access to user mail 
-   * Send mail as a user
-   * Read user mail
-   * Read and write directory data
-   * Read all users' basic profiles
-   * Read and write all groups
-13. Click **Save** in the bottom menu.
-14. Note the values specified for **Client ID** on the **Configure** page. You will need these later when you configure the project.
+
+1. Open a browser and navigate to the [Azure Active Directory admin center](https://aad.portal.azure.com). Login using a **Work or School Account**.
+
+1. Select **Azure Active Directory** in the left-hand navigation, then select **App registrations** under **Manage**.
+
+   ![A screenshot of the App registrations ](./readme-images/aad-portal-app-registrations.PNG)
+
+1. Select **New registration**. On the **Register an application** page, set the values as follows.
+
+    - Set a preferred **Name** e.g. `AndroidSnippets`
+    - Set **Supported account types** to **Accounts in any organizational directory**.
+
+    ![A screenshot of the Register an application page](./readme-images/aad-register-an-app.PNG)
+
+1. Choose **Register**. On the **AndroidSnippets** app page, select **Overview** and copy the value of the **Application (client) ID** and save it, you will need it in the next step.
+
+    ![A screenshot of Application Id](./readme-images/aad-application-id.PNG)
+
+1. Still on the app page, select **Authentication**. Locate the section **Redirect URIs**. In the _Suggested Redirect URIs for public clients(mobile,desktop)_, check the second box so that the app can work with the MSAL libraries used in the application. (The box should contain the option _msal<YOUR_CLIENT_ID>://auth_). Choose **Save**.
+
+    ![A screenshot of Suggested Redirect URIs for Public Client](./readme-images/aad-redirect-uri-public-client.PNG)
+  
+To learn about authenticating with MSAL for Android to make calls to Microsoft Graph, see [Call the Microsoft Graph API from an Android app](https://docs.microsoft.com/en-us/azure/active-directory/develop/guidedsetups/active-directory-android).
 
 ## Configure the project
 
@@ -115,9 +116,10 @@ To use the Microsoft Graph API REST snippets project, you need the following:
 4. Select the **settings.gradle** file in the **
 O365-Android-Unified-API-Snippets** folder, and then click **OK**.
 5. Respond to the dialog box ("Gradle Sync: Gradle settings for this project are not configured yet. Would you like the project to use the Gradle wrapper? ") by clicking the **OK** button to use the Gradle wrapper. 
-6. Open the ServiceConstants.java file in the com.microsoft.o365_android_unified_api_snippets.snippet package.
-7. Find the [`CLIENT_ID`](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/ServiceConstants.java#L10) string and set its value to the client id you registered in Azure.
-8. Find the [`REDIRECT_URI`](app/src/main/java/com/microsoft/office365/unifiedsnippetapp/ServiceConstants.java#L9) string and set its value to the redirect URI you registered in Azure.
+6. Open the ServiceConstants.java file in the folder **java** > **com.microsoft.office365.msgraphsnippetapp**.
+7. Find the **CLIENT_ID** string and replace the value *ENTER_YOUR_CLIENT_ID* with the Application (client) ID that you copied in the previous step.
+8. Open the AndroidManifest.xml file in the **app** > **manifests** folder. 
+1. Replace the *ENTER_YOUR_CLIENT_ID* with the Application (client) ID that you copied in the previous step.
 
 ## Run the project
 After you've built the project you can run it on an emulator or device.
@@ -186,4 +188,4 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 
 
 ## Copyright
-Copyright (c) 2015 Microsoft. All rights reserved.
+Copyright (c) 2019 Microsoft. All rights reserved.
