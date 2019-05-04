@@ -5,7 +5,7 @@
     <string name="org_acct">Organizational Account</string>
     <string name="signin_err">An error signing in has occurred. Check LogCat for details.</string>
     <string name="o365_hint">Sign in with the account provided by your work or school to use with Office 365 or other Microsoft services</string>
-    <string name="warning_clientid_redirecturi_incorrect">The client ID or redirect URI is not valid. Enter a valid client ID and redirect URI in the ServiceConstants.java file and run again</string>
+    <string name="warning_clientid_redirecturi_incorrect">The client ID is not valid. Enter a valid client ID in the ServiceConstants.java file and run again</string>
     <string name="title_activity_snippet_detail">SnippetDetailActivity</string>
     <string name="docs"><u>Documentation</u></string>
     <string name="run">Run</string>
