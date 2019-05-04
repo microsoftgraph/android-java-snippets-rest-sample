@@ -20,9 +20,7 @@ public abstract class BaseActivity
     protected AzureADModule getAzureADModule() {
         AzureADModule.Builder builder = new AzureADModule.Builder(this);
         builder.validateAuthority(true)
-                .authenticationResourceId(ServiceConstants.AUTHENTICATION_RESOURCE_ID)
                 .authorityUrl(ServiceConstants.AUTHORITY_URL)
-                .redirectUri(ServiceConstants.REDIRECT_URI)
                 .clientId(ServiceConstants.CLIENT_ID)
                 .scopes(ServiceConstants.SCOPES);
         return builder.build();

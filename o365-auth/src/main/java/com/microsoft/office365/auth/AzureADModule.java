@@ -8,10 +8,6 @@ import android.app.Activity;
 
 import com.microsoft.identity.client.PublicClientApplication;
 
-import java.security.NoSuchAlgorithmException;
-
-import javax.crypto.NoSuchPaddingException;
-
 import dagger.Module;
 import dagger.Provides;
 
@@ -39,10 +35,7 @@ public class AzureADModule {
         return new AuthenticationManager(
                 mBuilder.mActivity,
                 publicClientApplication,
-                mBuilder.mAuthenticationResourceId,
-                mBuilder.mSharedPreferencesFilename,
                 mBuilder.mClientId,
-                mBuilder.mRedirectUri,
                 mBuilder.mScopes);
     }
 
@@ -53,11 +46,8 @@ public class AzureADModule {
         private Activity mActivity;
 
         private String
-                mAuthorityUrl, // the authority used to authenticate
-                mAuthenticationResourceId, // the resource id used to authenticate
-                mSharedPreferencesFilename = SHARED_PREFS_DEFAULT_NAME,
-                mClientId,
-                mRedirectUri;
+                mAuthorityUrl,
+                mClientId;
         private String[] mScopes;
 
         private boolean mValidateAuthority = true;
@@ -71,28 +61,13 @@ public class AzureADModule {
             return this;
         }
 
-        public Builder authenticationResourceId(String authenticationResourceId) {
-            mAuthenticationResourceId = authenticationResourceId;
-            return this;
-        }
-
         public Builder validateAuthority(boolean shouldEvaluate) {
             mValidateAuthority = shouldEvaluate;
             return this;
         }
 
-        public Builder sharedPreferencesFilename(String filename) {
-            mSharedPreferencesFilename = filename;
-            return this;
-        }
-
         public Builder clientId(String clientId) {
             mClientId = clientId;
-            return this;
-        }
-
-        public Builder redirectUri(String redirectUri) {
-            mRedirectUri = redirectUri;
             return this;
         }
 
@@ -105,17 +80,8 @@ public class AzureADModule {
             if (null == mAuthorityUrl) {
                 throw new IllegalStateException("authorityUrl() is unset");
             }
-            if (null == mAuthenticationResourceId) {
-                throw new IllegalStateException("authenticationResourceId() is unset");
-            }
-            if (null == mSharedPreferencesFilename) {
-                mSharedPreferencesFilename = SHARED_PREFS_DEFAULT_NAME;
-            }
             if (null == mClientId) {
                 throw new IllegalStateException("clientId() is unset");
-            }
-            if (null == mRedirectUri) {
-                throw new IllegalStateException("redirectUri() is unset");
             }
             if(null == mScopes){
                 throw new IllegalStateException("scopes() is unset");

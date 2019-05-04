@@ -21,7 +21,6 @@ import com.microsoft.identity.client.exception.MsalUiRequiredException;
 import com.microsoft.office365.auth.MSALAuthenticationCallback;
 import com.microsoft.office365.msgraphsnippetapp.util.SharedPrefsUtil;
 
-import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
@@ -129,8 +128,6 @@ public class SignInActivity
             // This explicitly indicates that developer needs to prompt the user, it could be refresh token is expired, revoked
             // or user changes the password; or it could be that no token was found in the token cache.
 
-//            AuthenticationManager mgr = AuthenticationManager.getInstance();
-
             mAuthenticationManager.callAcquireToken( this);
         }
     }
@@ -198,7 +195,6 @@ public class SignInActivity
 
     private void validateOrganizationArgs() throws IllegalArgumentException {
         UUID.fromString(ServiceConstants.CLIENT_ID);
-        URI.create(ServiceConstants.REDIRECT_URI);
     }
 
     private void start() {

@@ -7,12 +7,9 @@ package com.microsoft.office365.auth;
 import android.accounts.AuthenticatorException;
 import android.accounts.OperationCanceledException;
 import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.microsoft.graph.authentication.IAuthenticationProvider;
-import com.microsoft.graph.authentication.MSALAuthenticationProvider;
 import com.microsoft.graph.http.IHttpRequest;
 import com.microsoft.identity.client.AuthenticationCallback;
 import com.microsoft.identity.client.AuthenticationResult;
@@ -24,13 +21,13 @@ import java.io.IOException;
 
 public class AuthenticationManager implements IAuthenticationProvider{
 
-    private static final String USER_ID_VAR_NAME = "userId";
-
-    private static final int PREFERENCES_MODE = Context.MODE_PRIVATE;
-
     private final Activity mActivity;
 
     private final PublicClientApplication mPublicClientApplication;
+
+    private final String mClientId;
+
+    private final String[] mScopes;
 
     private static final String TAG = "AuthenticationManager";
 
@@ -38,34 +35,16 @@ public class AuthenticationManager implements IAuthenticationProvider{
 
     private MSALAuthenticationCallback mActivityCallback;
 
-    public static  MSALAuthenticationProvider msalAuthenticationProvider;
-
-    private final String
-            mAuthenticationResourceId,
-            mSharedPreferencesFilename,
-            mClientId,
-            mRedirectUri;
-     private final String[] mScopes;
 
     AuthenticationManager(
             Activity activity,
             PublicClientApplication publicClientApplication,
-            String authenticationResourceId,
-            String sharedPreferencesFilename,
             String clientId,
-            String redirectUri,
             String[] scopes) {
         mActivity = activity;
         mPublicClientApplication = publicClientApplication;
-        mAuthenticationResourceId = authenticationResourceId;
-        mSharedPreferencesFilename = sharedPreferencesFilename;
         mClientId = clientId;
-        mRedirectUri = redirectUri;
         mScopes = scopes;
-    }
-
-    private SharedPreferences getSharedPreferences() {
-        return mActivity.getSharedPreferences(mSharedPreferencesFilename, PREFERENCES_MODE);
     }
 
     /**
@@ -89,8 +68,6 @@ public class AuthenticationManager implements IAuthenticationProvider{
         if(mAuthResult != null ){
             mPublicClientApplication.removeAccount(mAuthResult.getAccount());
         }
-        // Forget the user
-        removeUserId();
     }
 
     /**
@@ -205,25 +182,4 @@ public class AuthenticationManager implements IAuthenticationProvider{
             e.printStackTrace();
         }
     }
-
-    private boolean isConnected() {
-        return getSharedPreferences().contains(USER_ID_VAR_NAME);
-    }
-
-    private String getUserId() {
-        return getSharedPreferences().getString(USER_ID_VAR_NAME, "");
-    }
-
-    private void setUserId(String value) {
-        SharedPreferences.Editor editor = getSharedPreferences().edit();
-        editor.putString(USER_ID_VAR_NAME, value);
-        editor.apply();
-    }
-
-    private void removeUserId() {
-        SharedPreferences.Editor editor = getSharedPreferences().edit();
-        editor.remove(USER_ID_VAR_NAME);
-        editor.apply();
-    }
-
 }
