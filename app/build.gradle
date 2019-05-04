@@ -35,25 +35,15 @@ dependencies {
     // Project modules
     implementation(project(':o365-auth'))
     implementation(project(':microsoftgraphapi'))
-    implementation(project(':microsoftgraphvos'))
 
-    // Android Auth wrapper
-    implementation 'com.microsoft.graph:microsoft-graph-android-auth:0.1.0-SNAPSHOT'
-
-    implementation 'com.squareup.retrofit2:retrofit:2.1.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'joda-time:joda-time:+'
     // Dagger compiler for DI annotation support
     compileOnly('com.squareup.dagger:dagger-compiler:1.2.5') {
         exclude group: 'com.google.guava'
     }
-
     annotationProcessor 'com.squareup.dagger:dagger-compiler:1.2.5'
 
     // Butterknife
     implementation 'com.jakewharton:butterknife:8.4.0'
-
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 
     // Timber

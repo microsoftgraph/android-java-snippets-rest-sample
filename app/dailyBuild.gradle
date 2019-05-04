@@ -29,28 +29,30 @@ android {
 
 dependencies {
     // Azure AD
-    compile(project(':o365-auth'))
-    compile(project(':microsoftgraphapi'))
+    implementation(project(':o365-auth'))
+    implementation(project(':microsoftgraphapi'))
 
     // Dagger compiler for DI annotation support
-    provided('com.squareup.dagger:dagger-compiler:+') {
+    compileOnly('com.squareup.dagger:dagger-compiler:+') {
         exclude group: 'com.google.guava'
     }
+    annotationProcessor 'com.squareup.dagger:dagger-compiler:1.2.5'
 
     // Butterknife
-    compile 'com.jakewharton:butterknife:6.+'
+    implementation 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 
     // Timber
-    compile 'com.jakewharton.timber:timber:+'
+    implementation 'com.jakewharton.timber:timber:+'
 
     // Apache Commons
-    compile 'commons-io:commons-io:+'
+    implementation 'commons-io:commons-io:+'
 
-    compile 'com.google.guava:guava:+'
+    implementation 'com.google.guava:guava:+'
 
     // Test
-    testCompile 'junit:junit:4.12'
+    testimplementation 'junit:junit:4.12'
     // Retrofit + custom HTTP
-    compile 'com.squareup.okhttp3:okhttp:+'
-    compile 'com.squareup.okhttp3:logging-interceptor:+'
+    implementation 'com.squareup.okhttp3:okhttp:+'
+    implementation 'com.squareup.okhttp3:logging-interceptor:+'
 }

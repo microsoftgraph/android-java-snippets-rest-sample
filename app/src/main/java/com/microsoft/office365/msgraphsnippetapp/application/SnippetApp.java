@@ -5,7 +5,6 @@
 package com.microsoft.office365.msgraphsnippetapp.application;
 
 import android.app.Application;
-import android.content.Context;
 
 import com.microsoft.office365.msgraphsnippetapp.BuildConfig;
 import com.microsoft.office365.msgraphsnippetapp.inject.AppModule;
@@ -53,10 +52,6 @@ public class SnippetApp extends Application {
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
         }
-    }
-
-    public static Context getContext(){
-        return sSnippetApp;
     }
 
     public Retrofit getRetrofit() {

@@ -18,17 +18,13 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-
-    // Dagger compiler for DI annotation support
-    compileOnly('com.squareup.dagger:dagger-compiler:1.2.5') {
-        exclude group: 'com.google.guava'
-    }
+    api 'com.android.support:appcompat-v7:27.1.1'
 
     // Dependency injection
     implementation 'com.squareup.dagger:dagger:1.2.5'
-    api 'com.squareup.dagger:dagger-compiler:1.2.5'
+    compileOnly 'com.squareup.dagger:dagger-compiler:1.2.5'
     annotationProcessor 'com.squareup.dagger:dagger-compiler:1.2.5'
+
     // Android Auth Wrapper
-    implementation 'com.microsoft.graph:microsoft-graph-android-auth:0.1.0-SNAPSHOT'
+    api 'com.microsoft.graph:microsoft-graph-android-auth:0.1.0-SNAPSHOT'
 }
