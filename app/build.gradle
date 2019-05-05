@@ -1,15 +1,19 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    compileSdkVersion 27
 
     defaultConfig {
         applicationId "com.microsoft.o365_android_microsoft_graph_snippets"
-        minSdkVersion 16
-        targetSdkVersion 23
+        minSdkVersion 21
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath true
+            }
+        }
     }
     buildTypes {
         release {
@@ -20,6 +24,7 @@ android {
     packagingOptions {
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/jersey-module-version'
     }
     testOptions {
         unitTests.returnDefaultValues = true
@@ -27,29 +32,31 @@ android {
 }
 
 dependencies {
-    // Azure AD
-    compile(project(':o365-auth'))
-    compile(project(':microsoftgraphapi'))
+    // Project modules
+    implementation(project(':o365-auth'))
+    implementation(project(':microsoftgraphapi'))
 
     // Dagger compiler for DI annotation support
-    provided('com.squareup.dagger:dagger-compiler:1.2.5') {
+    compileOnly('com.squareup.dagger:dagger-compiler:1.2.5') {
         exclude group: 'com.google.guava'
     }
+    annotationProcessor 'com.squareup.dagger:dagger-compiler:1.2.5'
 
     // Butterknife
-    compile 'com.jakewharton:butterknife:6.1.0'
+    implementation 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 
     // Timber
-    compile 'com.jakewharton.timber:timber:4.1.2'
+    implementation 'com.jakewharton.timber:timber:4.1.2'
 
     // Apache Commons
-    compile 'commons-io:commons-io:2.5'
+    implementation 'commons-io:commons-io:2.5'
 
-    compile 'com.google.guava:guava:19.0'
+    implementation 'com.google.guava:guava:19.0'
 
     // Test
-    testCompile 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
     // Retrofit + custom HTTP
-    compile 'com.squareup.okhttp3:okhttp:3.4.1'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.4.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
 }

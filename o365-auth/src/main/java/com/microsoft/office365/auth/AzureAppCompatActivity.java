@@ -7,7 +7,7 @@ package com.microsoft.office365.auth;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.microsoft.aad.adal.AuthenticationContext;
+import com.microsoft.identity.client.PublicClientApplication;
 
 import javax.inject.Inject;
 
@@ -21,7 +21,7 @@ public abstract class AzureAppCompatActivity extends AppCompatActivity {
     protected AuthenticationManager mAuthenticationManager;
 
     @Inject
-    protected AuthenticationContext mAuthenticationContext;
+    protected PublicClientApplication mPublicClientApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
