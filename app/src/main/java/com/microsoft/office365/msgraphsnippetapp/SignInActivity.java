@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.microsoft.identity.client.AuthenticationResult;
 import com.microsoft.identity.client.IAccount;
 import com.microsoft.identity.client.Logger;
+import com.microsoft.identity.client.PublicClientApplication;
 import com.microsoft.identity.client.exception.MsalClientException;
 import com.microsoft.identity.client.exception.MsalException;
 import com.microsoft.identity.client.exception.MsalServiceException;
@@ -177,17 +178,14 @@ public class SignInActivity
                         this);
             }
         }
-
         catch (IndexOutOfBoundsException e) {
             Log.d(TAG, "User at this position does not exist: " + e.toString());
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
 
-
         } catch (IllegalStateException e) {
             Log.d(TAG, "MSAL Exception Generated: " + e.toString());
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
-
-
+            
         } catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -219,8 +217,9 @@ public class SignInActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (mAuthenticationManager
-                .getPublicClient() != null) {
+
+        PublicClientApplication client = mAuthenticationManager.getPublicClient();
+        if (client != null) {
             mAuthenticationManager
                     .getPublicClient()
                     .handleInteractiveRequestRedirect(requestCode, resultCode, data);
