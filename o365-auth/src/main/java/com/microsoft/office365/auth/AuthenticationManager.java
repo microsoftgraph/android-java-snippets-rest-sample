@@ -33,7 +33,7 @@ public class AuthenticationManager implements IAuthenticationProvider{
 
     private static AuthenticationResult mAuthResult;
 
-    private MSALAuthenticationCallback mActivityCallback;
+    private AuthenticationCallback mActivityCallback;
 
 
     AuthenticationManager(
@@ -75,13 +75,13 @@ public class AuthenticationManager implements IAuthenticationProvider{
      * An authentication token is returned via the getAuthInteractiveCallback method
      * @param authenticationCallback
      */
-    public void callAcquireToken(final MSALAuthenticationCallback authenticationCallback) {
+    public void callAcquireToken(final AuthenticationCallback authenticationCallback) {
         mActivityCallback = authenticationCallback;
         mPublicClientApplication.acquireToken(
                 mActivity, mScopes, getAuthInteractiveCallback());
     }
-    public void callAcquireTokenSilent(IAccount user, boolean forceRefresh, MSALAuthenticationCallback msalAuthenticationCallback) {
-        mActivityCallback = msalAuthenticationCallback;
+    public void callAcquireTokenSilent(IAccount user, boolean forceRefresh, AuthenticationCallback authenticationCallback) {
+        mActivityCallback = authenticationCallback;
         mPublicClientApplication.acquireTokenSilentAsync(mScopes, user, null, forceRefresh, getAuthSilentCallback());
     }
 

@@ -18,7 +18,7 @@ import com.microsoft.identity.client.exception.MsalClientException;
 import com.microsoft.identity.client.exception.MsalException;
 import com.microsoft.identity.client.exception.MsalServiceException;
 import com.microsoft.identity.client.exception.MsalUiRequiredException;
-import com.microsoft.office365.auth.MSALAuthenticationCallback;
+import com.microsoft.identity.client.AuthenticationCallback;
 import com.microsoft.office365.msgraphsnippetapp.util.SharedPrefsUtil;
 
 import java.util.List;
@@ -39,7 +39,7 @@ import static com.microsoft.office365.msgraphsnippetapp.R.string.warning_clienti
 
 public class SignInActivity
         extends BaseActivity
-        implements MSALAuthenticationCallback {
+        implements AuthenticationCallback {
 
     private boolean mEnablePiiLogging = false;
     private static final String TAG = "SignInActivity";
@@ -203,11 +203,6 @@ public class SignInActivity
     }
 
     public IAccount mUser;
-
-    @Override
-    public void onError(Exception exception) {
-        Toast.makeText(this, exception.getMessage(), Toast.LENGTH_SHORT).show();
-    }
 
     @Override
     public void onCancel() {
