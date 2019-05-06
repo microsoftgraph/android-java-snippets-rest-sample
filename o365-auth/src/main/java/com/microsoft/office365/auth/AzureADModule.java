@@ -35,7 +35,6 @@ public class AzureADModule {
         return new AuthenticationManager(
                 mBuilder.mActivity,
                 publicClientApplication,
-                mBuilder.mClientId,
                 mBuilder.mScopes);
     }
 

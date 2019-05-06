@@ -25,8 +25,6 @@ public class AuthenticationManager implements IAuthenticationProvider{
 
     private final PublicClientApplication mPublicClientApplication;
 
-    private final String mClientId;
-
     private final String[] mScopes;
 
     private static final String TAG = "AuthenticationManager";
@@ -39,11 +37,9 @@ public class AuthenticationManager implements IAuthenticationProvider{
     AuthenticationManager(
             Activity activity,
             PublicClientApplication publicClientApplication,
-            String clientId,
             String[] scopes) {
         mActivity = activity;
         mPublicClientApplication = publicClientApplication;
-        mClientId = clientId;
         mScopes = scopes;
     }
 
