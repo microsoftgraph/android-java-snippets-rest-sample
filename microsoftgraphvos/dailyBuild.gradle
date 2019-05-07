@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 27
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        minSdkVersion 7
-        targetSdkVersion 23
+        minSdkVersion 21
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
     }
@@ -24,7 +24,7 @@ android {
 }
 
 dependencies {
-    compile 'com.squareup.retrofit2:retrofit:+'
-    compile 'com.squareup.retrofit2:converter-gson:+'
-    compile 'joda-time:joda-time:+'
+    api 'com.squareup.retrofit2:retrofit:+'
+    api 'com.squareup.retrofit2:converter-gson:+'
+    api 'joda-time:joda-time:+'
 }
