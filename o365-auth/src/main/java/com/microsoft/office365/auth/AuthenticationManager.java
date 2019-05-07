@@ -122,7 +122,7 @@ public class AuthenticationManager implements IAuthenticationProvider{
         };
     }
 
-    /* Callback used for interactive request.  If succeeds we use the access
+    /* Callback used for interactive request. If succeeds we use the access
      * token to call the Microsoft Graph. Does not check cache
      */
     private AuthenticationCallback getAuthInteractiveCallback() {
@@ -168,14 +168,14 @@ public class AuthenticationManager implements IAuthenticationProvider{
             request.addHeader("SampleID", "android-java-snippets-rest-sample");
 
             Log.i("Connect","Request: " + request.toString());
-        } catch (AuthenticatorException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }  catch (OperationCanceledException e) {
-            e.printStackTrace();
-        } catch (NullPointerException e) {
-            e.printStackTrace();
+        } catch (AuthenticatorException exception) {
+            exception.printStackTrace();
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }  catch (OperationCanceledException exception) {
+            exception.printStackTrace();
+        } catch (NullPointerException exception) {
+            exception.printStackTrace();
         }
     }
 }

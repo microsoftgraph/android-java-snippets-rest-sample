@@ -63,7 +63,7 @@ public class SignInActivity
     public void onSignInO365Clicked() {
         try {
             authenticate();
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException exception) {
             warnBadClient();
         }
     }
@@ -100,32 +100,32 @@ public class SignInActivity
     }
 
     @Override
-    public void onError(MsalException e) {
-        e.printStackTrace();
+    public void onError(MsalException exception) {
+        exception.printStackTrace();
 
         //Show the localized message supplied with the exception or
         //or a default message from the string resources if a
         //localized message cannot be obtained
         String msg;
-        if (null == (msg = e.getLocalizedMessage())) {
+        if (null == (msg = exception.getLocalizedMessage())) {
             msg = getString(signin_err);
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         } else {
             mDiagnosticsTxt.setText(msg);
             mDiagnosticsLayout.setVisibility(VISIBLE);
         }
-        if (e instanceof MsalClientException) {
+        if (exception instanceof MsalClientException) {
             // This means errors happened in the sdk itself, could be network, Json parse, etc. Check MsalError.java
             // for detailed list of the errors.
 
-            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, exception.getMessage(), Toast.LENGTH_SHORT).show();
 
-        } else if (e instanceof MsalServiceException) {
+        } else if (exception instanceof MsalServiceException) {
             // This means something is wrong when the sdk is communication to the service, mostly likely it's the client
             // configuration.
-            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, exception.getMessage(), Toast.LENGTH_SHORT).show();
 
-        } else if (e instanceof MsalUiRequiredException) {
+        } else if (exception instanceof MsalUiRequiredException) {
             // This explicitly indicates that developer needs to prompt the user, it could be refresh token is expired, revoked
             // or user changes the password; or it could be that no token was found in the token cache.
 
@@ -148,7 +148,7 @@ public class SignInActivity
     private void connect() {
 
         // The sample app is having the PII enable setting on the MainActivity. Ideally, app should decide to enable Pii or not,
-        // if it's enabled, it should be  the setting when the application is onCreate.
+        // if it's enabled, it should be the setting when the application is onCreate.
         if (mEnablePiiLogging) {
             Logger.getInstance().setEnablePII(true);
         } else {
@@ -178,16 +178,16 @@ public class SignInActivity
                         this);
             }
         }
-        catch (IndexOutOfBoundsException e) {
-            Log.d(TAG, "User at this position does not exist: " + e.toString());
-            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        catch (IndexOutOfBoundsException exception) {
+            Log.d(TAG, "User at this position does not exist: " + exception.toString());
+            Toast.makeText(this, exception.getMessage(), Toast.LENGTH_SHORT).show();
 
-        } catch (IllegalStateException e) {
-            Log.d(TAG, "MSAL Exception Generated: " + e.toString());
-            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            
-        } catch (Exception e) {
-            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        } catch (IllegalStateException exception) {
+            Log.d(TAG, "MSAL Exception Generated: " + exception.toString());
+            Toast.makeText(this, exception.getMessage(), Toast.LENGTH_SHORT).show();
+
+        } catch (Exception exception) {
+            Toast.makeText(this, exception.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
