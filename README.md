@@ -1,3 +1,24 @@
+---
+page_type: sample
+products:
+- office-365
+- office-outlook
+- ms-graph
+languages:
+- java
+extensions:
+  contentType: samples
+  technologies:
+  - Microsoft Graph
+  - Azure AD
+  services:
+  - Office 365
+  - Outlook
+  - Groups
+  platforms:
+  - Android
+  createdDate: 9/8/2015 3:57:51 PM
+---
 # Office 365 Android Microsoft Graph Snippets
 
 
